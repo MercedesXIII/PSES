@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response, Headers,URLSearchParams } from '@angular/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -15,19 +15,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnChanges {
   data;
-  num = 1;
   @Input() PositionId : Number;
 
-  constructor(private router : Router, public http:Http) {this.callService();}
-  ngOnInit() {
+  constructor(private router : Router, public http:Http) {}
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    for (let propName in changes) {
+       this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId).subscribe(res => this.data = res.json());
+    }
   }
-  callService()
-  {
-  	console.log(this.num);
-  	this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.num++).subscribe(res => this.data = res.json());
-
-  }
-
 }

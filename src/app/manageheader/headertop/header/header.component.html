@@ -1,0 +1,15 @@
+<ngx-datatable
+          class="material mt-1"
+          [columnMode]="'flex'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="auto"
+          [scrollbarV]="false"
+          [scrollbarH]="true"
+          [rows]="data"
+          [limit]="10">
+          <ngx-datatable-column name="Id" [flexGrow]="1" prop="H1_ID"></ngx-datatable-column>
+          <ngx-datatable-column name="Text" [flexGrow]="3" prop="Text"></ngx-datatable-column>
+          <ngx-datatable-column name="Text_Eng" [flexGrow]="1" prop="Text_Eng"></ngx-datatable-column>
+          <ngx-datatable-column name="Alias" [flexGrow]="1" prop="Alias"></ngx-datatable-column>
+</ngx-datatable>

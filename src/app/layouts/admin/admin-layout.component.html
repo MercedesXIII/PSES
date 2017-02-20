@@ -1,0 +1,123 @@
+<div class="app" #root="$implicit" dir="ltr" [ngClass]="{'app-dark': dark}">
+  <md-toolbar class="main-header" color="primary">
+    <button (click)="sidemenu.toggle()" md-icon-button>
+      <md-icon>menu</md-icon>
+    </button>
+    <div class="branding">
+      <div>Project Staff Evaluation System</div>
+    </div>
+    <div fxFlex>
+    </div>
+    <button appToggleFullscreen md-icon-button>
+      <md-icon>fullscreen</md-icon>
+    </button>
+    <button md-icon-button class="ml-xs overflow-visible">
+      <md-icon>notifications</md-icon>
+    </button>
+    <button [md-menu-trigger-for]="user" md-icon-button class="ml-xs">
+      <md-icon>person</md-icon>
+    </button>
+    <md-menu #user="mdMenu" x-position="before">
+      <label md-menu-item>
+        <div fxLayout="column"  fxLayoutWrap="wrap">
+          <div>
+            {{LoginResultJson.EmployeeID}}
+          </div>
+          <div>
+            {{LoginResultJson.EmployeeName}}
+          </div>
+        </div>
+      </label>
+      <button md-menu-item>
+        <md-icon>settings</md-icon>
+        Settings
+      </button>
+      <button md-menu-item>
+        <md-icon>account_box</md-icon>
+        Profile
+      </button>
+      <button md-menu-item>
+        <md-icon>notifications_off</md-icon>
+        Disable notifications
+      </button>
+      <button md-menu-item (click)="LogOut()">
+        <md-icon>exit_to_app</md-icon>
+        Sign Out
+      </button>
+    </md-menu>
+  </md-toolbar>
+
+  <md-sidenav-layout class="app-inner">
+    <md-sidenav #sidemenu class="sidebar-panel" [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()">
+      <md-nav-list class="navigation accordion">
+        <md-list-item class="accordion-link" *ngFor="let menuitem of menuItems.getAll()" group="{{menuitem.state}}">
+          <a class="accordion-toggle relative" md-ripple [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+            <md-icon>{{ menuitem.icon }}</md-icon>
+            <span>{{ menuitem.name | translate }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge md-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a class="accordion-toggle relative" md-ripple href="{{menuitem.state}}" *ngIf="menuitem.type === 'extLink'">
+            <md-icon>{{ menuitem.icon }}</md-icon>
+            <span>{{ menuitem.name | translate }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge md-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a class="accordion-toggle relative" md-ripple href="{{menuitem.state}}" target="_blank" *ngIf="menuitem.type === 'extTabLink'">
+            <md-icon>{{ menuitem.icon }}</md-icon>
+            <span>{{ menuitem.name | translate }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge md-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a class="accordion-toggle relative" md-ripple href="javascript:;" *ngIf="menuitem.type === 'sub'">
+            <md-icon>{{ menuitem.icon }}</md-icon>
+            <span>{{ menuitem.name | translate }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge md-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+            <md-icon class="menu-caret">arrow_drop_down</md-icon>
+          </a>
+          <md-nav-list class="sub-menu" *ngIf="menuitem.type === 'sub'">
+            <md-list-item *ngFor="let childitem of menuitem.children" routerLinkActive="open">
+              <a [routerLink]="['/', menuitem.state, childitem.state ]" class="relative" md-ripple>{{ childitem.name | translate }}</a>
+            </md-list-item>
+          </md-nav-list>
+        </md-list-item>
+        
+      </md-nav-list>
+    </md-sidenav>
+    
+    <router-outlet></router-outlet>
+  </md-sidenav-layout>
+
+   <!--<button md-fab color="warn" class="md-fab-bottom-right" (click)="showSettings = true">
+    <md-icon class="md-24">add</md-icon>
+  </button>-->
+<!-- Demo Purposes Only -->
+  <button md-fab color="warn" class="md-fab-bottom-right" (click)="showSettings = true">
+    <md-icon class="md-24">settings</md-icon>
+  </button>
+  <md-card class="settings-panel" *ngIf="showSettings">
+    <md-toolbar color="warn">
+      <span fxFlex>Options</span>
+      <button md-icon-button (click)="showSettings = false">
+        <md-icon>close</md-icon>
+      </button>
+    </md-toolbar>
+    <md-card-content>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex>Dark Mode</span>
+        <md-slide-toggle (change)="dark = (dark == true ? false : true)"></md-slide-toggle>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex>RTL</span>
+        <md-slide-toggle (change)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')"></md-slide-toggle>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <md-select placeholder="Language" class="mt-1" [(ngModel)]="currentLang" #langSelect="ngModel" (ngModelChange)="translate.use(currentLang)">
+          <md-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</md-option>
+        </md-select>
+     </div>
+    </md-card-content>
+  </md-card>
+  <!-- /Demo Purposes Only -->
+</div>

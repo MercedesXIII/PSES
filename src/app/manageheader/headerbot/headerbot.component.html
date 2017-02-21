@@ -1,3 +1,18 @@
-<p>
-  headerbot works!
-</p>
+<ngx-datatable
+          class="material mt-1"
+          [columnMode]="'flex'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="auto"
+          [scrollbarV]="false"
+          [scrollbarH]="true"
+          [rows]="data"
+          [limit]="10">
+          <ngx-datatable-column name="Id" [flexGrow]="1" prop="H3_ID"></ngx-datatable-column>
+          <ngx-datatable-column name="Text" [flexGrow]="3" prop="Text"></ngx-datatable-column>
+          <ngx-datatable-column name="Action" [flexGrow]="1">
+          <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <!-- <button md-raised-button color="primary" class="mr-1" (click)="passId($event,value,row)">Detail</button> -->
+          </template>
+          </ngx-datatable-column>
+</ngx-datatable>

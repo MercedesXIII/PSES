@@ -18,6 +18,7 @@ export class HeadermidComponent implements OnChanges {
   constructor(private router : Router, public http:Http) { }
   @Input() HeadTopId : Number;
   @Input() PositionId : Number;
+  @Output() HeadMidId = new EventEmitter();
   data;
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     for (let propName in changes) {
@@ -27,6 +28,10 @@ export class HeadermidComponent implements OnChanges {
        .subscribe(res => this.data = res.json());
       }
    }
+  }
+  passId($event,row,value)
+  {
+    this.HeadMidId.emit(value["H2_ID"]); 
   }
 
 }

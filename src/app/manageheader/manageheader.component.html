@@ -9,16 +9,23 @@
 	      <hr>
 	</md-card>
 </div>
-<div *ngIf="headmid == false">
+<div *ngIf="headmid == true">
 	<md-card>
 	      <md-card-title style="font-size : 36px">Header2</md-card-title>
 	      <hr>
 	      <md-card-content>
-		       <app-headermid [HeadTopId] = "HeadTopId" [PositionId] = "PositionId"></app-headermid>
+		       <app-headermid [HeadTopId] = "HeadTopId" [PositionId] = "PositionId" (HeadMidId) = getHeadMidId($event)></app-headermid>
 	      </md-card-content>
 	      <hr>
 	</md-card>
 </div>
 <div *ngIf="headbot == true">
-	<app-headerbot></app-headerbot>
+	<md-card>
+	      <md-card-title style="font-size : 36px">Header3</md-card-title>
+	      <hr>
+	      <md-card-content>
+		       <app-headerbot [HeadMidId] = "HeadMidId"></app-headerbot>
+	      </md-card-content>
+	      <hr>
+	</md-card>
 </div>

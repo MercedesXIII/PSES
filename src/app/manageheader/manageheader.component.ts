@@ -34,5 +34,20 @@ export class ManageheaderComponent implements OnInit {
     this.headmid = false;
     this.headbot = true;
   }
+  back(page : Number)
+  {
+    if(page == 1)
+    {
+        this.headtop = true;
+        this.headmid = false;
+        this.headbot = false;
+    }
+    else if(page == 2)
+    {
+        this.headtop = false;
+        this.headmid = true;
+        this.headbot = false;
+    }
+  }
 
 }

@@ -17,6 +17,7 @@ export class HeaderComponent implements OnChanges {
   data;
   @Input() PositionId : Number;
   @Output() HeadTopId = new EventEmitter();
+  editing = {};
   constructor(private router : Router, public http:Http) {}
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     for (let propName in changes) {

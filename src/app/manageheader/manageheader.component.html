@@ -14,6 +14,7 @@
 	      <md-card-title style="font-size : 36px">Header2</md-card-title>
 	      <hr>
 	      <md-card-content>
+	      	   <button md-raised-button color="primary" class="ml-1" (click)="back(1)">Back</button>
 		       <app-headermid [HeadTopId] = "HeadTopId" [PositionId] = "PositionId" (HeadMidId) = getHeadMidId($event)></app-headermid>
 	      </md-card-content>
 	      <hr>
@@ -24,6 +25,7 @@
 	      <md-card-title style="font-size : 36px">Header3</md-card-title>
 	      <hr>
 	      <md-card-content>
+	      	   <button md-raised-button color="primary" class="ml-1" (click)="back(2)">Back</button>
 		       <app-headerbot [HeadMidId] = "HeadMidId"></app-headerbot>
 	      </md-card-content>
 	      <hr>

@@ -25,6 +25,10 @@ export class SelectjobComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(Id : MdSelect){
+    try{
   		this.out.emit(Id.selected.value); 
+    }
+    catch(e)
+    {}
 	}
 }

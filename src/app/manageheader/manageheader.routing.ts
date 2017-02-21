@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import{ Routes, RouterModule} from '@angular/router'
 
-import{ HeadertopComponent } from './headertop/headertop.component'
+import{ ManageheaderComponent } from './manageheader.component'
 
 export const ManageheaderRoutes: Routes = [
-    {path:'',component:HeadertopComponent}, 
+    {path:'',component:ManageheaderComponent}, 
 ]

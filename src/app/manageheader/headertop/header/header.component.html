@@ -12,4 +12,9 @@
           <ngx-datatable-column name="Text" [flexGrow]="3" prop="Text"></ngx-datatable-column>
           <ngx-datatable-column name="Text_Eng" [flexGrow]="1" prop="Text_Eng"></ngx-datatable-column>
           <ngx-datatable-column name="Alias" [flexGrow]="1" prop="Alias"></ngx-datatable-column>
+          <ngx-datatable-column name="Action" [flexGrow]="2">
+          <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <button md-raised-button color="primary" class="mr-1" (click)="passId($event, value, row)">Detail</button>
+          </template>
+          </ngx-datatable-column>
 </ngx-datatable>

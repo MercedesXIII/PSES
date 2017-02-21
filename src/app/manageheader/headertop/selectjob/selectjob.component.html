@@ -1,6 +1,5 @@
-
 	 <md-select class="ml-1" placeholder="Role" style="margin-top:3%; width: 20%;" #Id>
-		     <md-option *ngFor="let role of data" [value]="role.PositionNo" >
+		     <md-option *ngFor="let role of data" [value]="role.PositionNo" ng-selected="$first">
 		       	 {{ role.PositionName }}
 			</md-option>
 	</md-select>

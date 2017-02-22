@@ -1,4 +1,33 @@
-<button md-icon-button><md-icon>add_circle_outline</md-icon></button> 
+<button *ngIf="flagCreate == 1" md-icon-button (click)=create(true) [md-tooltip]="message"
+        [tooltip-position]="position"><md-icon>add_circle_outline</md-icon></button>
+<button *ngIf="flagCreate == 2" md-icon-button (click)=create(false)><md-icon>remove_circle_outline</md-icon></button>
+  <div *ngIf="flagCreate == 2" fxLayout="column" fxFlex="60" fxLayoutAlign="center" class="mt-1">
+    <md-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
+      <md-card-content>
+              <div class="mb-1">
+                <md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" 
+                style="width: 100%" #TextThai></md-input>
+                <small  *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small> 
+              </div>
+              <div class="mb-1">
+                <md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" 
+                style="width: 100%" #TextEng></md-input>
+                <small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small> 
+              </div>
+              <div class="mb-1">
+                <md-input placeholder="TextAlias" [formControl]="form.controls['TextAlias']" 
+                style="width: 100%" #TextAlias></md-input>
+                <small *ngIf="form.controls['TextAlias'].hasError('required') && form.controls['TextAlias'].touched" class="md-text-warn">You must include a TextAlias.</small> 
+              </div>
+      </md-card-content>
+      <md-card-actions>
+            <button md-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button>
+            <button md-raised-button color="accent" (click)=create(1)>Cancel</button>
+      </md-card-actions>
+    </form>
+    </md-card>
+  </div>
 <ngx-datatable
           class="material mt-1"
           [columnMode]="'flex'"
@@ -9,14 +38,62 @@
           [scrollbarH]="true"
           [rows]="data"
           [limit]="10">
-          <ngx-datatable-column name="Id" [flexGrow]="1" prop="H1_ID"></ngx-datatable-column>
-          <ngx-datatable-column name="Text" [flexGrow]="2" prop="Text"></ngx-datatable-column>
-          <ngx-datatable-column name="Text_Eng" [flexGrow]="2" prop="Text_Eng"></ngx-datatable-column>
-          <ngx-datatable-column name="Alias" [flexGrow]="1" prop="Alias"></ngx-datatable-column>
-          <ngx-datatable-column name="Action" [flexGrow]="1">
-          <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <button md-icon-button><md-icon>create</md-icon></button>
-            <button md-icon-button (click)="passId($event, value, row)"><md-icon>details</md-icon></button>     
-          </template>
+
+          <ngx-datatable-column [flexGrow]="1">
+              <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold">No</div>
+              </template>
+               <template ngx-datatable-cell-template let-row="row" let-value="value">
+                 <div style="text-align: center;">
+                    {{row.$$index+1}}
+                 </div>
+              </template>
           </ngx-datatable-column>
+
+          <ngx-datatable-column [flexGrow]="6" prop="Text">
+              <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold;">Text</div>
+              </template>
+              <template ngx-datatable-cell-template let-row="row" let-value="value">
+                 <div style="text-align: left;">
+                    {{value}}
+                 </div>
+              </template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column [flexGrow]="6" prop="Text_Eng">
+              <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold">Text_Eng</div>
+              </template>
+              <template ngx-datatable-cell-template let-row="row" let-value="value">
+                 <div style="text-align: left;">
+                    {{value}}
+                 </div>
+              </template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Alias" [flexGrow]="2" prop="Alias">
+              <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold">Alias</div>
+              </template>
+              <template ngx-datatable-cell-template let-row="row" let-value="value">
+                 <div style="text-align: center;">
+                    {{value}}
+                 </div>
+              </template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column [flexGrow]="4">
+              <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold">Action</div>
+              </template>
+              <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center;">
+                   <button md-icon-button (click)="passId($event, value, row)"><md-icon>description</md-icon></button>
+                   <button md-icon-button><md-icon>create</md-icon></button>
+                   <button md-icon-button (click)="delete($event, value, row)"><md-icon>delete_forever</md-icon></button>
+                </div>
+              </template>
+          </ngx-datatable-column>
+
 </ngx-datatable>  

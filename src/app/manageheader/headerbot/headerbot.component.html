@@ -1,3 +1,4 @@
+<button md-icon-button><md-icon>add_circle_outline</md-icon></button> 
 <ngx-datatable
           class="material mt-1"
           [columnMode]="'flex'"
@@ -8,11 +9,18 @@
           [scrollbarH]="true"
           [rows]="data"
           [limit]="10">
-          <ngx-datatable-column name="Id" [flexGrow]="1" prop="H3_ID"></ngx-datatable-column>
-          <ngx-datatable-column name="Text" [flexGrow]="3" prop="Text"></ngx-datatable-column>
-          <ngx-datatable-column name="Action" [flexGrow]="1">
+          <ngx-datatable-column name="No." [flexGrow]="1">
+               <template ngx-datatable-cell-template let-row="row" let-value="value">
+                 <div fxLayout="row" fxLayoutAlign=" center" >
+                    {{row.$$index+1}}
+                 </div>
+               </template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Text" [flexGrow]="5" prop="Text"></ngx-datatable-column>
+          <ngx-datatable-column name="Action" [flexGrow]="2">
           <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <!-- <button md-raised-button color="primary" class="mr-1" (click)="passId($event,value,row)">Detail</button> -->
+            <button md-icon-button><md-icon>create</md-icon></button>
+            <button md-icon-button ><md-icon>delete_forever</md-icon></button>
           </template>
           </ngx-datatable-column>
 </ngx-datatable>

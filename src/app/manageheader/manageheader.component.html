@@ -1,31 +1,32 @@
 <div *ngIf="headtop == true">
 	<md-card>
-	      <md-card-title style="font-size : 36px">Header1</md-card-title>
+	      <md-card-title style="font-size : 24px">หัวข้อการประเมิน</md-card-title>
 	      <hr>
 	      <md-card-content>
 		       <app-selectjob (out) = getJobId($event)></app-selectjob>
-	  		   <app-header [PositionId] = "PositionId" (HeadTopId) = getHeadTopId($event)></app-header>
+	  		   <app-header [PositionId] = "PositionId" (HeadTopId) = getHeadTopId($event) 
+	  		   (HeadTopName) = getHeadTopName($event)></app-header>
 	      </md-card-content>
 	      <hr>
 	</md-card>
 </div>
 <div *ngIf="headmid == true">
 	<md-card>
-	      <md-card-title style="font-size : 36px">Header2</md-card-title>
+	      <md-card-title style="font-size : 24px">{{HeadTopName}}</md-card-title>
 	      <hr>
 	      <md-card-content>
-	      	   <button md-raised-button color="primary" class="ml-1" (click)="back(1)">Back</button>
-		       <app-headermid [HeadTopId] = "HeadTopId" [PositionId] = "PositionId" (HeadMidId) = getHeadMidId($event)></app-headermid>
+	      	   <button md-icon-button (click)="back(1)"><md-icon>arrow_back</md-icon></button> 
+		       <app-headermid [HeadTopId] = "HeadTopId" [PositionId] = "PositionId" (HeadMidId) = getHeadMidId($event) (HeadMidName) = getHeadMidName($event)></app-headermid>
 	      </md-card-content>
 	      <hr>
 	</md-card>
 </div>
 <div *ngIf="headbot == true">
 	<md-card>
-	      <md-card-title style="font-size : 36px">Header3</md-card-title>
+	      <md-card-title style="font-size : 24px">{{HeadMidName}}</md-card-title>
 	      <hr>
 	      <md-card-content>
-	      	   <button md-raised-button color="primary" class="ml-1" (click)="back(2)">Back</button>
+	      	   <button md-icon-button (click)="back(2)"><md-icon>arrow_back</md-icon></button>
 		       <app-headerbot [HeadMidId] = "HeadMidId"></app-headerbot>
 	      </md-card-content>
 	      <hr>

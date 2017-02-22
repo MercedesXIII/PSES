@@ -15,17 +15,28 @@ export class ManageheaderComponent implements OnInit {
   }
   PositionId : Number;
   HeadTopId : Number;
+  HeadTopName: String;
+  HeadMidName: String;
   HeadMidId : Number;
   getJobId(Id :Number)
   {
     this.PositionId = Id;
   }
-  getHeadTopId(Id :Number)
+  getHeadTopId(Id :Number, Name: String)
   {
     this.HeadTopId = Id;
+    this.HeadTopName = Name
     this.headtop = false;
     this.headmid = true;
     this.headbot = false;
+  }
+  getHeadTopName(Name: String)
+  {
+    this.HeadTopName = Name
+  }
+  getHeadMidName(Name: String)
+  {
+    this.HeadMidName = Name
   }
   getHeadMidId(Id :Number)
   {

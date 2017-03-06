@@ -15,7 +15,7 @@ import { MdSelect } from '@angular/material';
 })
 export class HeaderbotComponent implements OnChanges {
 
-  @Input() HeadMidId : Number;
+  @Input() HeadMidId : number;
   data;
   constructor(private router : Router, public http:Http){}
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
@@ -41,6 +41,7 @@ export function createTranslateLoader(http: Http) {
     }),
     MaterialModule.forRoot(),
     FlexLayoutModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [AuthGuard],
   entryComponents: [ JazzDialog ],

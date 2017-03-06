@@ -16,8 +16,8 @@ import { MdSelect } from '@angular/material';
 export class HeadermidComponent implements OnChanges {
 
   constructor(private router : Router, public http:Http) { }
-  @Input() HeadTopId : Number;
-  @Input() PositionId : Number;
+  @Input() HeadTopId : number;
+  @Input() PositionId : number;
   @Output() HeadMidId = new EventEmitter();
   @Output() HeadMidName = new EventEmitter();
   data;

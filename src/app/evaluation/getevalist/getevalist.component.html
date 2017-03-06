@@ -1,0 +1,74 @@
+<!-- Data Table #Start-->
+<button md-raised-button color="primary" type="submit" class="md-24" (click)=onSubmit()>Submit</button>
+<ngx-datatable class="material " [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false " [scrollbarH]="true " [rows]="listeva" [limit]="10 " [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+    <ngx-datatable-column [flexGrow]="1" [checkboxable]="true">
+        <template ngx-datatable-header-template>
+            <div style="margin-left: -5px; font-weight: bold ">
+                <button (click)="all(true)">
+                    ✔
+                </button>
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="1">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold ">#</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <div style="text-align: center; ">
+                {{row.$$index+1}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="4" prop="EmployeeFirstName">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row " let-value="value">
+            <div style="text-align: left; ">
+                {{value+" "+row.EmployeeLastName}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="4 " prop="ProjectCode">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold; ">{{'Project Code' | translate}}</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <div style="text-align: center; ">
+                {{value}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="4 " prop="Role">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row " let-value="value ">
+            <div style="text-align: center; ">
+                {{value}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="4 " prop="PlanFinishDate">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold; ">{{'Duration' | translate}}</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <div style="text-align: center; ">
+                {{value}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+</ngx-datatable>
+<!-- Data Table #End-->
+<!-- <div class='selected-column'>
+    <h4>Selections <small>({{selected?.length}})</small></h4>
+    <ul>
+        <li *ngFor='let sel of selected'>
+            {{sel.ProjectID }}
+        </li>
+        <li *ngIf="!selected?.length">No Selections</li>
+    </ul>
+</div>
+ -->

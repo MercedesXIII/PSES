@@ -48,30 +48,30 @@ const MENUITEMS = [
     type: 'link',
     icon: 'https'
   },
-  {
-    state: 'approval',
-    name: 'Approval',
-    type: 'link',
-    icon: 'assignment'
-  },
-  {
-    state: 'inprogress',
-    name: 'In Progress',
-    type: 'link',
-    icon: 'queue'
-  },
-  {
-    state: 'approved',
-    name: 'Approved',
-    type: 'link',
-    icon: 'assignment_turned_in'
-  },
-  {
-    state: 'rejected',
-    name: 'Rejected',
-    type: 'link',
-    icon: 'assignment_returned'
-  }
+  // {
+  //   state: 'approval',
+  //   name: 'Approval',
+  //   type: 'link',
+  //   icon: 'assignment'
+  // },
+  // {
+  //   state: 'inprogress',
+  //   name: 'In Progress',
+  //   type: 'link',
+  //   icon: 'queue'
+  // },
+  // {
+  //   state: 'approved',
+  //   name: 'Approved',
+  //   type: 'link',
+  //   icon: 'assignment_turned_in'
+  // },
+  // {
+  //   state: 'rejected',
+  //   name: 'Rejected',
+  //   type: 'link',
+  //   icon: 'assignment_returned'
+  // }
 ];
 
 @Injectable()

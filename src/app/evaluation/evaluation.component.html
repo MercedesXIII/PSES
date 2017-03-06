@@ -1,32 +1,30 @@
-<md-card>
-      <md-card-title style="font-size : 36px">Evaluation</md-card-title>
-      <hr>
-      <md-card-content>
-        <ngx-datatable
-          class="material"
-          [columnMode]="'flex'"
-          [headerHeight]="50"
-          [footerHeight]="50"
-          [rowHeight]="auto"
-          [scrollbarV]="false"
-          [scrollbarH]="true"
-          [rows]="rows"
-          [limit]="10">
-          <ngx-datatable-column name="Evaluator"[flexGrow]="3">
-          	<template ngx-datatable-cell-template let-row="row" let-value="value">{{LoginResultJson['EmployeeName']}}</template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Id" [flexGrow]="1"></ngx-datatable-column>
-          <ngx-datatable-column name="Name" [flexGrow]="3"></ngx-datatable-column>
-          <ngx-datatable-column name="Gender" [flexGrow]="1"></ngx-datatable-column>
-          <ngx-datatable-column name="Age" [flexGrow]="1"></ngx-datatable-column>
-          <ngx-datatable-column name="City" [flexGrow]="2" prop="address.city"></ngx-datatable-column>
-          <ngx-datatable-column name="State" [flexGrow]="2" prop="address.state"></ngx-datatable-column>
-          <ngx-datatable-column name="Action" [flexGrow]="2">
-          <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <button md-raised-button color="primary" class="mr-1" routerLink='/home' routerLinkActive='active'>Evaluate</button>
-          </template>
-          </ngx-datatable-column>
-        </ngx-datatable>
-      </md-card-content>
-      <hr>
+<md-card *ngIf="showList == 1">
+    <md-card-title style="font-size : 24px ">{{'Evaluation' | translate}}</md-card-title>
+    <hr>
+    <md-card-content>
+        <app-evalist (outPeriodId)=getPeriodId($event) (outPeriodId2)=passPeriodId($event) (outEvaId)=getEvaId($event) [PeriodId]="PeriodId"></app-evalist>
+    </md-card-content>
+    <hr>
+</md-card>
+<md-card *ngIf="showList == 2">
+    <md-card-title style="font-size : 24px ">Employee List</md-card-title>
+    <hr>
+    <md-card-content>
+        <button md-icon-button (click)="back(true) ">
+            <md-icon>arrow_back</md-icon>
+        </button>
+        <app-getevalist [PeriodId]="PeriodId" (back)=backEva($event)></app-getevalist>
+    </md-card-content>
+    <hr>
+</md-card>
+<md-card *ngIf="showList == 3">
+    <md-card-title style="font-size : 24px ">Evaluation Form</md-card-title>
+    <hr>
+    <md-card-content>
+        <button md-icon-button (click)="back(true) ">
+            <md-icon>arrow_back</md-icon>
+        </button>
+        <app-evaform [EvaId]="EvaId" [PeriodId]="PeriodId" (back)=backEva($event)></app-evaform>
+    </md-card-content>
+    <hr>
 </md-card>

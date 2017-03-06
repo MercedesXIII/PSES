@@ -1,0 +1,133 @@
+<!-- head data -->
+<md-grid-list *ngFor="let data of getEva" [cols]="fixedCols" [rowHeight]="fixedRowHeight" class="ml-1 mr-1">
+    <md-grid-tile [colspan]="2" [rowspan]="1" [style.background]="color ">
+        <div class="header">First Name</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.EmployeeFirstName}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Last Name</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.EmployeeLastName}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Group of Staff</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.GroupOfStaff}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Customer</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2">
+        <div class="detail">{{data.CustomerCompanyAlias}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Project Code</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.ProjectCode}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Project Type</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.ProjectType}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Evalute Term</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.EvaTerm}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Proj.Duration</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.StartDatePlan+"-"+data.FinishDatePlan}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Role & Responsible</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.Function}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Evaluator</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="9" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">{{data.EvaluatorFirstName+" "+data.EvaluatorLastName}}</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+        <div class="header">Filter By</div>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+        <div class="detail">Mercedes</div>
+    </md-grid-tile>
+</md-grid-list>
+<!-- end head data -->
+<div fxLayout="row" fxLayoutAlign="start center" class="mb-1 mt-1">
+    <div fxLayout="row" fxFlex="93" fxLayoutAlign="start center">
+        <md-select class="ml-1" placeholder="Period" [(ngModel)]="currentPosition" style="width: 23%;">
+            <md-option *ngFor="let role of position" [value]="role.Part2ID">
+                {{ role.Function }}
+            </md-option>
+        </md-select>
+        <button md-raised-button type="button" color="primary" type="button" class="ml-1 mb-1" (click)="onSubmit(currentPosition) ">OK</button>
+    </div>
+</div>
+<!-- Table -->
+<ngx-datatable class="material mt-1" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="30" [scrollbarV]="false" [scrollbarH]="true" [rows]="header">
+    <ngx-datatable-column name="Alias" [flexGrow]="2" prop="H_Level">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold">Level</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <div style="text-align: center;">
+                {{value}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="1">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold">No</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <div style="text-align: center;">
+                {{row.$$index+1}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="6" prop="Text">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold;">Text</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <div style="text-align: left;">
+                {{value}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="6" prop="Text_Eng">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold">Text_Eng</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <div style="text-align: left;">
+                {{value}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Alias" [flexGrow]="2" prop="Alias">
+        <template ngx-datatable-header-template>
+            <div style="text-align: center; font-weight: bold">Alias</div>
+        </template>
+        <template ngx-datatable-cell-template let-row="row" let-value="value">
+            <div style="text-align: center;">
+                {{value}}
+            </div>
+        </template>
+    </ngx-datatable-column>
+</ngx-datatable>

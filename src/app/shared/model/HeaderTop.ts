@@ -1,11 +1,11 @@
 export class HeaderTop{
-	PositionId: Number
+	PositionId: number
 	Text: string;
 	Text_Eng: string;
 	Alias: string;
 
 	constructor(
-		PositionId: Number,
+		PositionId: number,
 		Text: string,
 		Text_Eng: string,
 		Alias: string,){

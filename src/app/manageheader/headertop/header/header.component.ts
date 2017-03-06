@@ -18,11 +18,14 @@ import { HeaderTop } from '../../../shared/model/HeaderTop';
 })
 export class HeaderComponent implements OnChanges {
   position: TooltipPosition = 'below';
-  message: string = 'New HeaderTop';
+  new: string = 'New HeaderTop';
+  edit : string = 'Edit'
+  remove: string = 'Delete';
+  detail: string = 'Detail'
   data;
-  count : Number = 0;
-  flagCreate : Number = 0;
-  @Input() PositionId : Number;
+  count : number = 0;
+  flagCreate : number = 0;
+  @Input() PositionId : number;
   @Output() HeadTopId = new EventEmitter();
   @Output() HeadTopName = new EventEmitter();
   editing = {};
@@ -43,6 +46,7 @@ export class HeaderComponent implements OnChanges {
       {
        this.flagCreate = 1
        this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId)
+       this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId)
        .subscribe(res => this.data = res.json());
       }
     }
@@ -58,25 +62,40 @@ export class HeaderComponent implements OnChanges {
       }).subscribe((res: Response) => {
         let result = res.json();
       });
+      this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId)
+       .subscribe(res => this.data = res.json());
+       this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId)
+       .subscribe(res => this.data = res.json());
+       this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId)
+       .subscribe(res => this.data = res.json());
+       this.form.reset();
   }
   passId(event,row,value){
       this.HeadTopId.emit(value["H1_ID"]);
       this.HeadTopName.emit(value["Text"]); 
   }
   delete(event,row,value){
+      
       let del;
-      this.http.delete(GlobalServiceRef.URLService+"/Header/HeaderTop/Delete/"+value["H1_ID"]+"/"+this.PositionId)
-       .subscribe(res => del = res.json());
+      if(confirm("Confirm Delete") == true)
+      {
+        this.http.delete(GlobalServiceRef.URLService+"/Header/HeaderTop/Delete/"+value["H1_ID"]+"/"+this.PositionId)
+         .subscribe(res => del = res.json());
 
-       this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId)
-       .subscribe(res => this.data = res.json());
-       this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId)
-       .subscribe(res => this.data = res.json());
+        this.data.splice(value.$$index, 1);
+      }
+     else
+     {
+       return 0;
+     }
   }
-  create(flag : Boolean)
+  create(flag : number)
   {
-    if(flag == true)
+    if(flag == 1)
+    {
       this.flagCreate = 2;
+      this.form.reset();
+    }
     else
     {
       this.flagCreate = 1;

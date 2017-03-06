@@ -13,16 +13,16 @@ export class ManageheaderComponent implements OnInit {
 
   ngOnInit() {
   }
-  PositionId : Number;
-  HeadTopId : Number;
-  HeadTopName: String;
-  HeadMidName: String;
-  HeadMidId : Number;
-  getJobId(Id :Number)
+  PositionId : number;
+  HeadTopId : number;
+  HeadTopName: string;
+  HeadMidName: string;
+  HeadMidId : number;
+  getJobId(Id :number)
   {
     this.PositionId = Id;
   }
-  getHeadTopId(Id :Number, Name: String)
+  getHeadTopId(Id :number, Name: string)
   {
     this.HeadTopId = Id;
     this.HeadTopName = Name
@@ -30,22 +30,22 @@ export class ManageheaderComponent implements OnInit {
     this.headmid = true;
     this.headbot = false;
   }
-  getHeadTopName(Name: String)
+  getHeadTopName(Name: string)
   {
     this.HeadTopName = Name
   }
-  getHeadMidName(Name: String)
+  getHeadMidName(Name: string)
   {
     this.HeadMidName = Name
   }
-  getHeadMidId(Id :Number)
+  getHeadMidId(Id :number)
   {
     this.HeadMidId = Id;
     this.headtop = false;
     this.headmid = false;
     this.headbot = true;
   }
-  back(page : Number)
+  back(page : number)
   {
     if(page == 1)
     {

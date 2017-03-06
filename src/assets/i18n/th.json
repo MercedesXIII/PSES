@@ -1,0 +1,19 @@
+{
+    "Username": "ชื่อผู้ใช้",
+    "Password": "รหัสผ่าน",
+    "Login": "ล็อกอิน",
+    "Forgot password": "ลืมรหัสผ่าน",
+
+    "HOME": "หน้าแรก",
+    "Evaluation": "การประเมิน",
+    "Manage Header": "จัดการหัวข้อประเมิน",
+
+    "Name": "ชื่อ",
+    "Project Code": "รหัสโครงการ",
+    "Role": "หน้าที่",
+    "Duration": "ระยะเวลา",
+
+    "Project Manager": "ผู้จัดการโครงการ",
+    "Evaluate": "ประเมิน"
+
+}

@@ -18,6 +18,7 @@ export class GetevalistComponent implements OnChanges {
 
     //ToolTlip
     position: TooltipPosition = 'below';
+    chb:boolean = true;
     @Input() PeriodId : number;
     ngOnInit() {
     }
@@ -44,13 +45,17 @@ export class GetevalistComponent implements OnChanges {
     {
         if(flag == true)
         {
+            this.chb = false;
             for(let data of this.listeva)
             {
                  this.selected.push(data)
             }
         }
         else
+        {
+            this.chb = true;
             this.selected = [];
+        }
     }
     onSubmit()
     {

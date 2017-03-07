@@ -12,35 +12,73 @@ import { AccordionModule } from 'ng2-accordion';
   templateUrl: './request.component.html',
 })
 export class RequestComponent {
-  flag:boolean = false;
+  flag = [];
   header = [{
-      "Id":"1",
-      "Text":"A"
+    "Id":"1",
+    "Text":"A",
+    "Level":"1",
+    "Parent":"0"
   },
   {
-      "Id":"2",
-      "Text":"B"
+    "Id":"11",
+    "Text":"AA",
+    "Level":"2",
+    "Parent":"1"
   },
   {
-      "Id":"3",
-      "Text":"C"
+    "Id":"111",
+    "Text":"AAA",
+    "Level":"3",
+    "Parent":"11"
+
+  },{
+    "Id":"2",
+    "Text":"B",
+    "Level":"1",
+    "Parent":"0"
+  },
+  {
+    "Id":"22",
+    "Text":"BB",
+    "Level":"2",
+    "Parent":"2"
+  },
+  {
+    "Id":"222",
+    "Text":"BBB",
+    "Level":"3",
+    "Parent":"22"
+  },{
+    "Id":"3",
+    "Text":"C",
+    "Level":"1",
+    "Parent":"0"
+  },
+  {
+    "Id":"33",
+    "Text":"CC",
+    "Level":"2",
+    "Parent":"3"
+  },
+  {
+    "Id":"333",
+    "Text":"CCC",
+    "Level":"3",
+    "Parent":"33"
   }]
-  detail = [{
-      "Id":"4",
-      "Text":"D"
-  },
+  callflag(get : number)
   {
-      "Id":"5",
-      "Text":"E"
-  },
-  {
-      "Id":"6",
-      "Text":"F"
-  }]
-  callflag(get : boolean)
-  {
-      this.flag = get;
+    console.log(get);
+    if(this.flag[get] == true)
+      this.flag[get] = false;
+    else
+      this.flag[get] = true;
+
   }
   constructor() {
+    for(let data in this.header)
+    {
+      this.flag[data] = false;
+    }
   }
 }

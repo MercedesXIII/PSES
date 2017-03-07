@@ -3,13 +3,13 @@
 <ngx-datatable class="material " [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false " [scrollbarH]="true " [rows]="listeva" [limit]="10 " [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
     <ngx-datatable-column [flexGrow]="1" [checkboxable]="true">
         <template ngx-datatable-header-template>
-            <div style="margin-left: -3px; font-weight: bold ">
-                <a *ngIf="chb == true" style="font-size: 23px; background: white; color:#f2f2f2;" (click)="all(true)">
-                    ☐
-                </a>
-                <a *ngIf="chb == false" style="font-size: 23px; background: white; color:#f2f2f2;" (click)="all(false)">
-                    ☑
-                </a>
+            <div style="margin-left:-6px; font-weight: bold ">
+                <button *ngIf="chb == true" style="font-size: 15px; background: white;color: white;" (click)="all(true)">
+                    ✔
+                </button>
+                <button *ngIf="chb == false" style="font-size: 15px; background: white; color: #009688;" (click)="all(false)">
+                    ✔
+                </button>
             </div>
         </template>
     </ngx-datatable-column>

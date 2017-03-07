@@ -1,1 +1,29 @@
-
+$gray1-color: #cbcbcb;
+$gray2-color: #e0e0e0;
+$dark-gray1-color: #2d3e50;
+$green1-color: #18d8a9;
+$red1-color: #da4453;
+$white-color: #fff;
+$black-color: #000;
+$border-style: 1px solid $gray1-color;
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: $border-style;
+    td,
+    th {
+        border-left: $border-style;
+        border-width: 0 0 0 1px;
+        font-size: inherit;
+        margin: 0;
+        overflow: visible;
+        padding: 0.5rem 1rem;
+    }
+    thead {
+        background-color: $gray2-color;
+        color: $black-color;
+        text-align: left;
+        vertical-align: bottom;
+    }
+}

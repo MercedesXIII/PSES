@@ -79,55 +79,90 @@
     </div>
 </div>
 <!-- Table -->
-<ngx-datatable class="material mt-1" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="30" [scrollbarV]="false" [scrollbarH]="true" [rows]="header">
-    <ngx-datatable-column name="Alias" [flexGrow]="2" prop="H_Level">
+<md-tab-group>
+    <div *ngFor="let head of header">
+        <div *ngIf="head.H_Level==1">
+            <md-tab>
+                <template md-tab-label>{{head.Text}}</template>
+                <md-card-content>
+                    <div *ngFor="let head2 of header; let j=index " fxFlex="100">
+                        <div *ngIf=" head2.H_Level==2 && head2.Parent==head.H_ID ">
+                            <div fxLayout="row " fxLayoutAlign="start center " fxFlex="80">
+                                <div>
+                                    <button *ngIf="flag[j]==false" (click)="callflag(j)" md-icon-button>
+                                        <md-icon>add_circle_outline</md-icon>
+                                    </button>
+                                    <button *ngIf="flag[j]==true" (click)="callflag(j)" md-icon-button>
+                                        <md-icon>remove_circle_outline</md-icon>
+                                    </button>
+                                </div>
+                                <div>{{head2.Text+"("+head2.Text_Eng+")"}}</div>
+                            </div>
+                            <div fxLayout="row " fxLayoutAlign="start center " style="margin-left: 5%" fxFlex="80">
+                                <div *ngIf="flag[j]==true">
+                                    <div *ngFor="let head3 of header ">
+                                        <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxLayout="row " fxLayoutAlign="start center ">
+                                            <div style="margin-top: 10px;">{{head3.Text}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-tab>
+        </div>
+    </div>
+</md-tab-group>
+<!-- <ngx-datatable class="material mt-1 " [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="30 " [scrollbarV]="false " [scrollbarH]="true " [rows]="header">
+    <ngx-datatable-column name="Alias " [flexGrow]="2 " prop="H_Level">
         <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold">Level</div>
+            <div style="text-align: center; font-weight: bold ">Level</div>
         </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: center;">
+        <template ngx-datatable-cell-template let-row="row " let-value="value ">
+            <div style="text-align: center; ">
                 {{value}}
             </div>
         </template>
     </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="1">
+    <ngx-datatable-column [flexGrow]="1 ">
         <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold">No</div>
+            <div style="text-align: center; font-weight: bold ">No</div>
         </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: center;">
+        <template ngx-datatable-cell-template let-row="row " let-value="value ">
+            <div style="text-align: center; ">
                 {{row.$$index+1}}
             </div>
         </template>
     </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="6" prop="Text">
+    <ngx-datatable-column [flexGrow]="6 " prop="Text">
         <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold;">Text</div>
+            <div style="text-align: center; font-weight: bold; ">Text</div>
         </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: left;">
+        <template ngx-datatable-cell-template let-row="row " let-value="value ">
+            <div style="text-align: left; ">
                 {{value}}
             </div>
         </template>
     </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="6" prop="Text_Eng">
+    <ngx-datatable-column [flexGrow]="6 " prop="Text_Eng">
         <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold">Text_Eng</div>
+            <div style="text-align: center; font-weight: bold ">Text_Eng</div>
         </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: left;">
+        <template ngx-datatable-cell-template let-row="row " let-value="value ">
+            <div style="text-align: left; ">
                 {{value}}
             </div>
         </template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Alias" [flexGrow]="2" prop="Alias">
+    <ngx-datatable-column name="Alias " [flexGrow]="2 " prop="Alias">
         <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold">Alias</div>
+            <div style="text-align: center; font-weight: bold ">Alias</div>
         </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: center;">
+        <template ngx-datatable-cell-template let-row="row " let-value="value ">
+            <div style="text-align: center; ">
                 {{value}}
             </div>
         </template>
     </ngx-datatable-column>
-</ngx-datatable>
+</ngx-datatable> -->

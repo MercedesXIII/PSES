@@ -1,11 +1,59 @@
-<accordion>
-    <accordion-group heading="Static Header, initially expanded" [panelClass]="customClass" [isOpen]="isFirstOpen">
-        This content is straight in the template.
-    </accordion-group>
-    <accordion-group heading="Content 1">
-        <p>accordion 1</p>
-    </accordion-group>
-    <accordion-group heading="Content 2" panelClass="customClass">
-        <p>accordion 2</p>
-    </accordion-group>
-</accordion>
+<div *ngFor="let head of header;let i = index">
+    <div *ngIf="head.Level==1" fxLayout="row" fxLayoutAlign="start center">
+        <div>
+            <button *ngIf="flag[i]==false" (click)="callflag(i)">add</button>
+            <button *ngIf="flag[i]==true" (click)="callflag(i)">sub</button>
+        </div>
+        <div>{{i}}</div>
+        <div>{{head.Id}}</div>
+        <div>{{head.Text}}</div>
+    </div>
+    <div *ngIf="flag[i]==true">
+        <div *ngFor="let head2 of header; let j = index" fxLayout="row" fxLayoutAlign="start center">
+            <div *ngIf=" head2.Level==2 && head2.Parent==head.Id">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div>
+                        <button *ngIf="flag[j]==false " (click)="callflag(j) ">add</button>
+                        <button *ngIf="flag[j]==true " (click)="callflag(j) ">sub</button>
+                    </div>
+                    <div>{{head2.Id}}</div>
+                    <div>{{head2.Text}}</div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div *ngIf="flag[j]==true && flag[i]==true">
+                        <div *ngFor="let head3 of header">
+                            <div *ngIf=" head3.Level==3 && head3.Parent==head2.Id" fxLayout="row" fxLayoutAlign="start center">
+                                <div>{{head3.Id}}</div>
+                                <div>{{head3.Text}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <table class='table' *ngFor="let head of header;let i = index">
+    <tr *ngIf="head.Level==1">
+        <td>
+            <button *ngIf="flag[i]==false" (click)="callflag(i)">add</button>
+            <button *ngIf="flag[i]==true" (click)="callflag(i)">sub</button>
+        </td>
+        <td>{{i}}</td>
+        <td>{{head.Id}}</td>
+        <td>{{head.Text}}</td>
+    </tr>
+    <div *ngIf="flag[i]==true">
+        <div *ngFor="let head2 of header; let j = index">
+            <tr *ngIf=" head2.Level==2 && head2.Parent==head.Id">
+                <td>
+                    <button *ngIf="flag[j]==false " (click)="callflag(j) ">add</button>
+                    <button *ngIf="flag[j]==true " (click)="callflag(j) ">sub</button>
+                </td>
+                <td>{{head2.Id}}</td>
+                <td>{{head2.Text}}</td>
+            </tr>
+        </div>
+    </div>
+</table>
+ -->

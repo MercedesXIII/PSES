@@ -37,71 +37,98 @@
 </div>
 <!-- Period #End-->
 <!-- Data Table #Start-->
-<ngx-datatable class="material" [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false " [scrollbarH]="true " [rows]="listeva" [limit]="10 ">
-    <ngx-datatable-column [flexGrow]="1">
-        <template ngx-datatable-header-template>
-            <div class="header">#</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: center; ">
-                {{row.$$index+1}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="4" prop="EmployeeFirstName">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row " let-value="value ">
-            <div style="text-align: left; ">
-                {{value+" "+row.EmployeeLastName}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="4" prop="ProjectCode">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold; ">{{'Project Code' | translate}}</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: center; ">
-                {{value}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="4" prop="Function">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row " let-value="value ">
-            <div style="text-align: center; ">
-                {{value | translate}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="4" prop="StartDatePlan">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold; ">{{'Duration' | translate}}</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: center; ">
-                {{value+"-"+row.FinishDatePlan}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="3">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold ">Action</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row" let-value="value">
-            <div style="text-align: center; ">
-                <button md-icon-button [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
-                    <md-icon>description</md-icon>
-                </button>
-                <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">
-                    <md-icon>delete_forever</md-icon>
-                </button>
-            </div>
-        </template>
-    </ngx-datatable-column>
-</ngx-datatable>
-<!-- Data Table #End-->
+<div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.xs="100" fxHide="false" fxHide.xs>
+    <ngx-datatable class="material" [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false " [scrollbarH]="true " [rows]="listeva" [limit]="10 ">
+        <ngx-datatable-column [flexGrow]="1">
+            <template ngx-datatable-header-template>
+                <div class="header">#</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    {{row.$$index+1}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="4" prop="EmployeeFirstName">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row " let-value="value ">
+                <div style="text-align: left; ">
+                    {{value+" "+row.EmployeeLastName}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="4" prop="ProjectCode">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Project Code' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    {{value}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="4" prop="Function">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row " let-value="value ">
+                <div style="text-align: center; ">
+                    {{value | translate}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="4" prop="StartDatePlan">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Duration' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    {{value+"-"+row.FinishDatePlan}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="3">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold ">Action</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    <button md-icon-button [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
+                        <md-icon>description</md-icon>
+                    </button>
+                    <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">
+                        <md-icon>delete_forever</md-icon>
+                    </button>
+                </div>
+            </template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>
+<div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.xs="100" fxShow="false" fxShow.xs>
+    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="50" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="10" [rows]='listeva'>
+        <ngx-datatable-column [width]="150" [minWidth]="150">
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div fxLayout="column" fxLayoutAlign="start">
+                    <span><b>{{'Name' | translate}}</b> {{listeva[row.$$index]['EmployeeFirstName']+listeva[row.$$index]['EmployeeLastName']}}</span>
+                    <span><b>{{'Project Code' | translate}}</b> {{listeva[row.$$index]['ProjectCode']}}</span>
+                    <span><b>{{'Role' | translate}}</b> {{listeva[row.$$index]['Function']}}</span>
+                    <span><b>{{'Duration' | translate}}</b> {{listeva[row.$$index]['StartDatePlan']+"-"+listeva[row.$$index]['FinishDatePlan']}}</span>
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="40" [minWidth]="40">
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; " div fxLayout="column" fxLayoutAlign="start">
+                    <button md-icon-button [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
+                        <md-icon>description</md-icon>
+                    </button>
+                    <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">
+                        <md-icon>delete_forever</md-icon>
+                    </button>
+                </div>
+            </template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+    <!-- Data Table #End-->

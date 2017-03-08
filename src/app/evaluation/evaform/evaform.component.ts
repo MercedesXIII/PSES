@@ -24,14 +24,17 @@ export class EvaformComponent implements OnInit {
     header = [];
     detail = [];
     flag = [];
-
+    score = [1,2,3,4,5];
     currentPosition;
+    currentScore = [];
+    activeTabIndex = 0;
     PositionNo;
     fixedCols = 18;
     fixedRowHeight = 30;
     ratioGutter = 1;
     color = '#3f51b5'
     color2 = '#fafafa'
+    countHeader : number = 0;
     constructor(private router : Router, public http:Http) { }
     ngOnInit() {
         this.http.get(GlobalServiceRef.URLService+"/Eva/EvaData/"+this.EvaId)
@@ -41,9 +44,12 @@ export class EvaformComponent implements OnInit {
             .subscribe(res => {
                 this.header = res.json();
                 this.currentPosition = this.getEva[0].Part2ID;
+                this.countHeader = 0;
                 for(let data in this.header)
                 {
                     this.flag[data] = false;
+                    if(this.header[data].H_Level == 1)
+                        this.countHeader++;
                 }
             });
             this.currentPosition = this.getEva[0].Part2ID;
@@ -53,27 +59,34 @@ export class EvaformComponent implements OnInit {
     onSubmit(Id : MdSelect){
         this.http.get(GlobalServiceRef.URLService+"/Header/All/"+Id)
         .subscribe(res => {this.header = res.json();
+                            this.countHeader = 0;
                             for(let data in this.header)
                             {
                                 this.flag[data] = false;
+                                if(this.header[data].H_Level == 1)
+                                this.countHeader++;
                             }
                         });
         //this.back.emit(this.PeriodId);
     }
     callflag(get : number)
     {
-        console.log(get);
         if(this.flag[get] == true)
             this.flag[get] = false;
         else
             this.flag[get] = true;
 
     }
-    show(ID : number)
+    passScore(pass : boolean)
     {
-        console.log(ID+":"+this.currentPosition)
-        // this.http.get(GlobalServiceRef.URLService+"/Header/HeaderMid/"+ID+"/"+this.PositionId)
-        //     .subscribe(res => this.detail = res.json());
+        for(let data in this.currentScore)
+        {
+            console.log(this.currentScore[data])
+        }
+        if(pass == true)
+            this.activeTabIndex++;
+        else
+            this.activeTabIndex--;
     }
 
 }

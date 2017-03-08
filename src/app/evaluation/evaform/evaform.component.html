@@ -79,43 +79,85 @@
     </div>
 </div>
 <!-- Table -->
-<md-tab-group>
-    <div *ngFor="let head of header">
-        <div *ngIf="head.H_Level==1">
-            <md-tab>
-                <template md-tab-label>{{head.Text}}</template>
-                <md-card-content>
-                    <div *ngFor="let head2 of header; let j=index " fxFlex="100">
-                        <div *ngIf=" head2.H_Level==2 && head2.Parent==head.H_ID ">
-                            <div fxLayout="row " fxLayoutAlign="start center " fxFlex="80">
-                                <div>
-                                    <button *ngIf="flag[j]==false" (click)="callflag(j)" md-icon-button>
-                                        <md-icon>add_circle_outline</md-icon>
-                                    </button>
-                                    <button *ngIf="flag[j]==true" (click)="callflag(j)" md-icon-button>
-                                        <md-icon>remove_circle_outline</md-icon>
-                                    </button>
+<md-card>
+    <md-tab-group [(selectedIndex)]="activeTabIndex">
+        <div *ngFor="let head of header">
+            <div *ngIf="head.H_Level==1">
+                <md-tab>
+                    <template md-tab-label>{{head.Alias}}</template>
+                    <md-card-content>
+                        <div fxLayout="row " fxLayoutAlign="start center" class="ml-1">
+                            <p style="font-size: 19px;">{{head.Text+"("+head.Text_Eng+")"}}</p>
+                            <input class="ml-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" value="N/A">
+                        </div>
+                        <hr>
+                        <div fxLayoutAlign="start center" fxFlex="100" style="margin-top: 7px; margin-bottom: 7px;">
+                            <div fxFlex="70" align="center" style="font-weight: bold;">Topic</div>
+                            <div fxFlex="15"></div>
+                            <div align="center" style="font-weight: bold;">Score</div>
+                        </div>
+                        <hr>
+                        <div *ngFor="let head2 of header; let i=index ">
+                            <div *ngIf=" head2.H_Level==2 && head2.Parent==head.H_ID " fxFlex="100">
+                                <div fxLayout="row " fxLayoutAlign="start center " fxFlex="100">
+                                    <div fxFlex="3"></div>
+                                    <div fxFlex="5">
+                                        <button *ngIf="flag[i]==false" (click)="callflag(i)" md-icon-button>
+                                            <md-icon>add_circle_outline</md-icon>
+                                        </button>
+                                        <button *ngIf="flag[i]==true" (click)="callflag(i)" md-icon-button>
+                                            <md-icon>remove_circle_outline</md-icon>
+                                        </button>
+                                    </div>
+                                    <div fxFlex="76">{{head2.Text+"("+head2.Text_Eng+")"}}</div>
+                                    <div align="center">
+                                        <input style="width: 50px; text-align: center;" disabled="disabled" value="N/A">
+                                    </div>
                                 </div>
-                                <div>{{head2.Text+"("+head2.Text_Eng+")"}}</div>
-                            </div>
-                            <div fxLayout="row " fxLayoutAlign="start center " style="margin-left: 5%" fxFlex="80">
-                                <div *ngIf="flag[j]==true">
-                                    <div *ngFor="let head3 of header ">
-                                        <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxLayout="row " fxLayoutAlign="start center ">
-                                            <div style="margin-top: 10px;">{{head3.Text}}</div>
+                                <div fxLayout="row" fxLayoutAlign="start center " fxFlex="100" style="margin-left: 5%">
+                                    <div *ngIf="flag[i]==true" fxFlex="100">
+                                        <div *ngFor="let head3 of header; let j=index;" fxLayout="row" fxFlex="100">
+                                            <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxLayout="row " fxFlex="100">
+                                                <div fxFlex="83" style="margin-top: 10px;">{{head3.Text}}</div>
+                                                <div style="margin-top: 10px;">
+                                                    <select [(ngModel)]="currentScore[j]" style="text-align: center; width: 55px ; margin-left: 1px">
+                                                        <option [selected] [value]=0>
+                                                            N/A
+                                                        </option>
+                                                        <option *ngFor="let val of score " [value]="val">
+                                                            {{val}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </md-card-content>
-            </md-tab>
+                        <div div fxLayout="row" fxLayoutAlign="space-between end">
+                            <div>
+                                <button *ngIf="activeTabIndex >= 1" md-icon-button class="ml-1 mb-1 " (click)="passScore(false)">
+                                    <md-icon>arrow_back</md-icon>
+                                </button>
+                            </div>
+                            <div style="margin-right: 3%;">
+                                <button *ngIf="activeTabIndex < countHeader-1" md-icon-button class="ml-1 mb-1 " (click)="passScore(true)">
+                                    <md-icon>arrow_forward</md-icon>
+                                </button>
+                                <button *ngIf="activeTabIndex == countHeader-1" md-raised-button class="ml-1 mb-1 mr-2" color="primary">
+                                    Subbmit
+                                </button>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </md-tab>
+            </div>
         </div>
-    </div>
-</md-tab-group>
-<!-- <ngx-datatable class="material mt-1 " [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="30 " [scrollbarV]="false " [scrollbarH]="true " [rows]="header">
-    <ngx-datatable-column name="Alias " [flexGrow]="2 " prop="H_Level">
+    </md-tab-group>
+</md-card>
+<!-- <ngx-datatable class="material mt-1 " [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="30 " [scrollbarV]="false " [scrollbarH]="true " [rows]="header ">
+    <ngx-datatable-column name="Alias " [flexGrow]="2 " prop="H_Level ">
         <template ngx-datatable-header-template>
             <div style="text-align: center; font-weight: bold ">Level</div>
         </template>
@@ -135,7 +177,7 @@
             </div>
         </template>
     </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="6 " prop="Text">
+    <ngx-datatable-column [flexGrow]="6 " prop="Text ">
         <template ngx-datatable-header-template>
             <div style="text-align: center; font-weight: bold; ">Text</div>
         </template>
@@ -145,7 +187,7 @@
             </div>
         </template>
     </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="6 " prop="Text_Eng">
+    <ngx-datatable-column [flexGrow]="6 " prop="Text_Eng ">
         <template ngx-datatable-header-template>
             <div style="text-align: center; font-weight: bold ">Text_Eng</div>
         </template>
@@ -155,7 +197,7 @@
             </div>
         </template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Alias " [flexGrow]="2 " prop="Alias">
+    <ngx-datatable-column name="Alias " [flexGrow]="2 " prop="Alias ">
         <template ngx-datatable-header-template>
             <div style="text-align: center; font-weight: bold ">Alias</div>
         </template>

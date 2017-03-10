@@ -24,8 +24,9 @@ export class EvaformComponent implements OnInit {
     header = [];
     detail = [];
     flag = [];
+    flagAdd = [];
     score = [1,2,3,4,5];
-    currentPosition;
+    currentPosition : number;
     currentScore = [];
     subTotalScore = [];
     activeTabIndex = 0;
@@ -40,21 +41,24 @@ export class EvaformComponent implements OnInit {
     countHead3full : number =0;
     flagCreate : number = 1;
     headdata
-    public form: FormGroup;
+    public form2: FormGroup;
+    public form3: FormGroup;
     constructor(private router : Router, public http:Http ,private fb: FormBuilder) { }
     ngOnInit() {
+        this.http.get(GlobalServiceRef.URLService+"/Header/position")
+        .subscribe(res => this.position = res.json());
         this.http.get(GlobalServiceRef.URLService+"/Eva/EvaData/"+this.EvaId)
         .subscribe(res => {this.getEva = res.json();
             this.currentPosition = this.getEva[0].Part2ID;
             this.http.get(GlobalServiceRef.URLService+"/Header/All/"+this.currentPosition+"/"+this.EvaId)
             .subscribe(res => {
                 this.header = res.json();
-                this.currentPosition = this.getEva[0].Part2ID;
                 this.countHeader = 0;
                 this.countHead3full = 0;
                 for(let data in this.header)
                 {
                     this.flag[data] = false;
+                    this.flagAdd[data] =false;
                     if(this.header[data].H_Level == 1)
                         this.countHeader++;
                     else if(this.header[data].H_Level == 2)
@@ -65,30 +69,28 @@ export class EvaformComponent implements OnInit {
                     else if(this.header[data].H_Level == 3)
                     {
                         //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
-                        this.currentScore[data] = 0//this.header[data].point;
+                        this.currentScore[data] = this.header[data].point;
                         this.countHead3full++;
                     }
                 }
             });
-            this.currentPosition = this.getEva[0].Part2ID;
         });
-        this.http.get(GlobalServiceRef.URLService+"/Header/position")
-        .subscribe(res => this.position = res.json());
-
-        this.form = this.fb.group({
-            TextThai: [null, Validators.required],
-            TextEng: [null, Validators.required],
-            TextAlias: [null, Validators.required] 
+        this.form2 = this.fb.group({
+            TextThai2: [null, Validators.required],
+            TextEng2: [null, Validators.required]
+        })
+        this.form3 = this.fb.group({
+            TextThai3: [null, Validators.required]
         })
     }
-    onSubmit(Id : MdSelect){
-        this.http.get(GlobalServiceRef.URLService+"/Header/All/"+Id+"/"+this.EvaId)
+    callHeader(id)
+    {
+        this.http.get(GlobalServiceRef.URLService+"/Header/All/"+id+"/"+this.EvaId)
         .subscribe(res => {this.header = res.json();
             this.countHeader = 0;
             this.countHead3full = 0;
             for(let data in this.header)
             {
-                this.flag[data] = false;
                 if(this.header[data].H_Level == 1)
                     this.countHeader++;
                 else if(this.header[data].H_Level == 2)
@@ -104,35 +106,38 @@ export class EvaformComponent implements OnInit {
                 }
             }
         });
+    }
+    onSubmit(Id : MdSelect){
+            this.callHeader(Id);
         //this.back.emit(this.PeriodId);
     }
-    insertHeader(HeadId:number, PositionNo:number,EvaId:number ,TextThai: HTMLInputElement,TextEng: HTMLInputElement,TextAlias: HTMLInputElement)
+    insertHeader2(i:number,HeadId:number, PositionNo:number,EvaId:number ,TextThai: HTMLInputElement,TextEng: HTMLInputElement)
     {
-        this.flagCreate = 1;
-        console.log(HeadId+" "+PositionNo+" "+EvaId+" "+TextThai.value+" "+TextEng.value+" "+TextAlias.value)
-        //this.Header = new HeaderTop(this.PositionId,TextThai.value,TextEng.value,TextAlias.value)
-        // let headers = new Headers({ 'Content-Type': 'application/json' });
-        // let body : string = JSON.stringify({Text:TextThai.value,Text_Eng:TextEng.value,Alias:TextAlias.value});
-        // this.http.put(GlobalServiceRef.URLService+"/Header/HeaderTop/Insert",body,{
-        //     headers: headers
-        // }).subscribe((res: Response) => {
-        //     let result = res.json();
-        // });
-        // this.http.get(GlobalServiceRef.URLService+"/Header/HeaderTop/Job/"+this.PositionId)
-        // .subscribe(res => this.data = res.json());
-        // this.form.reset();
+        this.callflagAdd(i);
+        console.log(HeadId+" "+PositionNo+" "+EvaId+" "+TextThai.value+" "+TextEng.value)
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:EvaId,Text:TextThai.value,Text_Eng:TextEng.value,Alias:"-"});
+        this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
+            headers: headers
+        }).subscribe((res: Response) => {
+            let result = res.json();
+        });
+        this.callHeader(PositionNo);
+        this.form2.reset();
     }
-    create(flag : number)
+    insertHeader3(i:number,HeadId:number, PositionNo:number,EvaId:number ,TextThai: HTMLInputElement)
     {
-        if(flag == 1)
-        {
-            this.flagCreate = 2;
-            this.form.reset();
-        }
-        else
-        {
-            this.flagCreate = 1;
-        }
+        this.callflagAdd(i);
+        console.log(HeadId+" "+PositionNo+" "+EvaId+" "+TextThai.value+" 3")
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:EvaId,Text:TextThai.value,Text_Eng:"-",Alias:"-"});
+        this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
+            headers: headers
+        }).subscribe((res: Response) => {
+            let result = res.json();
+        });
+        this.callHeader(PositionNo);
+        this.form3.reset();
     }
     callflag(get : number)
     {
@@ -140,6 +145,18 @@ export class EvaformComponent implements OnInit {
             this.flag[get] = false;
         else
             this.flag[get] = true;
+
+    }
+    callflagAdd(get : number)
+    {
+        if(this.flagAdd[get] == true)
+            this.flagAdd[get] = false;
+        else
+        {
+            this.flagAdd[get] = true;
+            this.form2.reset();
+            this.form3.reset();
+        }
 
     }
     passScore(pass : boolean)

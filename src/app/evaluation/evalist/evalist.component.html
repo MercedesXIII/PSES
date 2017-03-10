@@ -21,7 +21,7 @@
  -->
 <div fxLayout="row" fxLayoutAlign="start center" class="mb-1 mt-1">
     <div fxLayout="row" fxFlex="93" fxLayoutAlign="start center">
-        <md-select class="ml-1" placeholder="Period" [(ngModel)]="currentPeriod" style="width: 23%;">
+        <md-select class="ml-1" placeholder="Period" [(ngModel)]="currentPeriod" style="width: 200px;">
             <md-option [value]="'all'">
                 All
             </md-option>
@@ -107,14 +107,14 @@
     </ngx-datatable>
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.xs="100" fxShow="false" fxShow.xs>
-    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="50" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="10" [rows]='listeva'>
+    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="50" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="3" [rows]='listeva'>
         <ngx-datatable-column [width]="150" [minWidth]="150">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="column" fxLayoutAlign="start">
-                    <span><b>{{'Name' | translate}}</b> {{listeva[row.$$index]['EmployeeFirstName']+listeva[row.$$index]['EmployeeLastName']}}</span>
+                    <span><b>{{'Name' | translate}}</b> {{listeva[row.$$index]['EmployeeFirstName']+" "+listeva[row.$$index]['EmployeeLastName']}}</span>
                     <span><b>{{'Project Code' | translate}}</b> {{listeva[row.$$index]['ProjectCode']}}</span>
                     <span><b>{{'Role' | translate}}</b> {{listeva[row.$$index]['Function']}}</span>
-                    <span><b>{{'Duration' | translate}}</b> {{listeva[row.$$index]['StartDatePlan']+"-"+listeva[row.$$index]['FinishDatePlan']}}</span>
+                    <span><b>{{'Duration' | translate}}</b><br> {{listeva[row.$$index]['StartDatePlan']+"-"+listeva[row.$$index]['FinishDatePlan']}}</span>
                 </div>
             </template>
         </ngx-datatable-column>

@@ -94,6 +94,9 @@ export class EvaformComponent implements OnInit {
     }
     callHeader(id)
     {
+        this.currentScore = [];
+        this.currentId = [];
+        this.getScoreAndId = [];
         this.http.get(GlobalServiceRef.URLService+"/Header/All/"+id+"/"+this.EvaId)
         .subscribe(res => {this.header = res.json();
             this.countHeader = 0;
@@ -115,6 +118,7 @@ export class EvaformComponent implements OnInit {
                     this.currentScore[data] = this.header[data].point;
                     this.currentId[data] = this.header[data].H_ID;
                     this.countHead3full++;
+                    console.log("Score:"+this.currentScore[data]+" Id:"+this.currentId[data]+" H3Full:"+this.countHead3full)
                 }
             }
         });
@@ -152,6 +156,9 @@ export class EvaformComponent implements OnInit {
     }
     insertHeader3(i:number,HeadId:number, PositionNo:number,EvaId:number ,TextThai: HTMLInputElement)
     {
+        this.currentScore = [];
+        this.currentId = [];
+        this.getScoreAndId = [];
         this.callflagAdd(i);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:EvaId,Text:TextThai.value,Text_Eng:"-",Alias:"-"});
@@ -179,7 +186,6 @@ export class EvaformComponent implements OnInit {
                     //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
                     this.currentScore[data] = this.header[data].point;
                     this.currentId[data] = this.header[data].H_ID;
-                    //เพิ่มarray อาทิตหน้า
                     this.countHead3full++;
                 }
             }
@@ -232,6 +238,8 @@ export class EvaformComponent implements OnInit {
             console.log("Complete")
         });
         console.log(body)
+        this.currentScore = [];
+        this.currentId = [];
         this.getScoreAndId = [];
     }
     ngOnChanges(changes: {[propKey: string]: SimpleChange}) {

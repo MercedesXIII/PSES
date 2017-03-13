@@ -13,6 +13,7 @@ import { EvaluationRoutes } from './evaluation.routing';
 import { EvalistComponent } from './evalist/evalist.component';
 import { GetevalistComponent } from './getevalist/getevalist.component';
 import { EvaformComponent } from './evaform/evaform.component';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 @NgModule({
 
@@ -25,7 +26,8 @@ import { EvaformComponent } from './evaform/evaform.component';
   MaterialModule,
   FormsModule,
   ReactiveFormsModule,
-  TranslateModule],
+  TranslateModule,
+  Ng2AutoCompleteModule],
 
   declarations: [EvaluationComponent, EvalistComponent, GetevalistComponent, EvaformComponent]
 })

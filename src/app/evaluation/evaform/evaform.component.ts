@@ -118,7 +118,7 @@ export class EvaformComponent implements OnInit {
                     this.currentScore[data] = this.header[data].point;
                     this.currentId[data] = this.header[data].H_ID;
                     this.countHead3full++;
-                    console.log("Score:"+this.currentScore[data]+" Id:"+this.currentId[data]+" H3Full:"+this.countHead3full)
+                    //console.log("Score:"+this.currentScore[data]+" Id:"+this.currentId[data]+" H3Full:"+this.countHead3full)
                 }
             }
         });
@@ -241,6 +241,7 @@ export class EvaformComponent implements OnInit {
         this.currentScore = [];
         this.currentId = [];
         this.getScoreAndId = [];
+        this.back.emit(this.PeriodId);
     }
     ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
         for (let propName in changes) {

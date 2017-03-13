@@ -1,23 +1,16 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { MdCardModule, MdInputModule, MaterialModule} from "@angular/material";
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from 'ng2-translate';
-import { HttpModule } from '@angular/http';
-import { AccordionModule } from 'ng2-accordion';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MaterialModule} from '@angular/material';
 
 import { RequestComponent } from './request.component';
-import { RequestRoutes } from './request.routing';
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(RequestRoutes), 
-  			MdCardModule, FlexLayoutModule,NgxDatatableModule,
-  			FormsModule,ReactiveFormsModule,HttpModule,TranslateModule
-  			,MdInputModule,MaterialModule,AccordionModule],
   declarations: [RequestComponent],
+  bootstrap: [RequestComponent],
+  providers: []
 })
 
 export class RequestModule {}
+//platformBrowserDynamic().bootstrapModule(RequestModule);

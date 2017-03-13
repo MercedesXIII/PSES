@@ -4,6 +4,8 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthGuard } from '../_guards/auth.guard';
 
+import { RequestComponent } from './request/request.component'
+
 export const AppRoutes: Routes = [{
     path: '',
     redirectTo: 'evaluation',
@@ -22,7 +24,7 @@ export const AppRoutes: Routes = [{
     loadChildren: './manageheader/manageheader.module#ManageheaderModule'
   }, {
     path: 'request',
-    loadChildren: './request/request.module#RequestModule'
+    component: RequestComponent
   },]
 }, {
   path: '',

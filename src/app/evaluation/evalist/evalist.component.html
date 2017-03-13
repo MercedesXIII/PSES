@@ -19,16 +19,17 @@
     </div>
 </div>
  -->
-<div fxLayout="row" fxLayoutAlign="start center" class="mb-1 mt-1">
+<div fxLayout="row" fxLayoutAlign="start center" class="ml-1 mb-1 mt-1">
     <div fxLayout="row" fxFlex="93" fxLayoutAlign="start center">
-        <md-select class="ml-1" placeholder="Period" [(ngModel)]="currentPeriod" style="width: 170px;">
+        <!-- <md-select class="ml-1" placeholder="Period" [(ngModel)]="currentPeriod" style="width: 170px;">
             <md-option [value]="'all'">
                 All
             </md-option>
             <md-option *ngFor="let data of period" [value]="data.Period_Id">
                 {{ data.StartDate }}-{{data.FinishDate}}
             </md-option>
-        </md-select>
+        </md-select> -->
+        <input ng2-auto-complete style="font-size: 14px; height: 20px; width: 170px;" placeholder="Period" [source]="Duration" [ngModel]="currentPeriod" [value]="DurationId">
         <button md-raised-button type="button" color="primary" type="button" class="ml-1" (click)="getDataPeriod(currentPeriod) ">OK</button>
     </div>
     <button *ngIf="showPeriod == true" (click)="getPeriod(currentPeriod)" md-icon-button [md-tooltip]="add" [tooltip-position]="position">

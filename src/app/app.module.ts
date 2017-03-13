@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +20,8 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { SharedModule }       from './shared/shared.module';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { RequestComponent } from './request/request.component';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -32,7 +35,8 @@ export function createTranslateLoader(http: Http) {
     JazzDialog,
     DialogComponent,
     ConfirmDialog,
-    NormalDialog
+    NormalDialog,
+    RequestComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,7 @@ export function createTranslateLoader(http: Http) {
     MaterialModule.forRoot(),
     FlexLayoutModule.forRoot(),
     ReactiveFormsModule,
+    Ng2AutoCompleteModule,
   ],
   providers: [AuthGuard],
   entryComponents: [ JazzDialog,DialogComponent,ConfirmDialog,NormalDialog ],

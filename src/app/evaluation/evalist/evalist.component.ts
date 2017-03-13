@@ -2,6 +2,7 @@ import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit
 import { Router, ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'ng2-validation';
 import { Http, Response, Headers,URLSearchParams } from '@angular/http';
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdDialog, MdDialogRef } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
@@ -28,7 +29,8 @@ export class EvalistComponent implements OnInit {
     currentPeriod;
     listeva = [];
     period = [];
-
+    Duration = [];
+    DurationId = [];
     @Input() PeriodId :string;
     @Output() outPeriodId = new EventEmitter();
     @Output() outPeriodId2 = new EventEmitter();
@@ -39,6 +41,11 @@ export class EvalistComponent implements OnInit {
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
         this.http.get(GlobalServiceRef.URLService+"/Eva/Period").subscribe(res => {
             this.period = res.json();
+            for(let data in this.period)
+            {
+                this.Duration[data] = this.period[data].StartDate+"-"+this.period[data].FinishDate
+                this.DurationId[data] = this.period[data].Period_Id
+            }
             if(this.PeriodId != undefined && this.PeriodId != 'all')
             {
                 this.showPeriod = true;
@@ -78,6 +85,7 @@ export class EvalistComponent implements OnInit {
     {
         try
         {
+            console.log(Id);
             if(Id != undefined){
                 this.http.get(GlobalServiceRef.URLService+"/Eva/Eva/"+this.LoginResultJson['EmployeeID']+"/"+Id)
                 .subscribe(res => {
@@ -105,7 +113,7 @@ export class EvalistComponent implements OnInit {
                 this.http.delete(GlobalServiceRef.URLService+"/Eva/Delete/"+value["Eva_ID"])
                 .subscribe((res: Response) => {
                     if(res.ok){
-                           return 0;
+                        return 0;
                     }
                 });
                 this.listeva.splice(value.$$index, 1);
@@ -114,6 +122,9 @@ export class EvalistComponent implements OnInit {
     }
     passEvaId(event,row,value,period){
         this.outEvaId.emit(value["Eva_ID"]);
+    }
+    valueChanged(newVal) {
+        console.log("Case 2: value is changed to ", newVal);
     }
 
 }

@@ -222,7 +222,7 @@ export class EvaformComponent implements OnInit {
     {
         for(let data in this.currentScore)
         {
-            this.getScoreAndId.push({Id:this.currentId[data],Score:this.currentScore[data]})
+            this.getScoreAndId.push({Id:this.currentId[data],Score:this.currentScore[data],EvaId:this.EvaId})
         }
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify(this.getScoreAndId);
@@ -231,6 +231,7 @@ export class EvaformComponent implements OnInit {
         }).subscribe((res: Response) => {
             console.log("Complete")
         });
+        console.log(body)
         this.getScoreAndId = [];
     }
     ngOnChanges(changes: {[propKey: string]: SimpleChange}) {

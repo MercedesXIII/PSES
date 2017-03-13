@@ -9,6 +9,9 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { JazzDialog } from './material/dialog/dialog.component';
+import { DialogComponent } from './shared/dialog/dialog.component';
+import { ConfirmDialog } from './shared/dialog/dialog.component';
+import { NormalDialog } from './shared/dialog/dialog.component';
 
 import { AuthGuard } from '../_guards/auth.guard';
 import { AppRoutes } from './app.routing';
@@ -27,6 +30,9 @@ export function createTranslateLoader(http: Http) {
     AdminLayoutComponent,
     AuthLayoutComponent,
     JazzDialog,
+    DialogComponent,
+    ConfirmDialog,
+    NormalDialog
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,7 @@ export function createTranslateLoader(http: Http) {
     ReactiveFormsModule,
   ],
   providers: [AuthGuard],
-  entryComponents: [ JazzDialog ],
+  entryComponents: [ JazzDialog,DialogComponent,ConfirmDialog,NormalDialog ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

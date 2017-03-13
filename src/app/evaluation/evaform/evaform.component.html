@@ -69,15 +69,36 @@
         </md-grid-tile>
     </md-grid-list>
     <!-- end head data -->
-    <div fxLayout="row" fxLayoutAlign="start center" class="mb-1 mt-1">
-        <div fxLayout="row" fxFlex="93" fxLayoutAlign="start center">
-            <md-select class="ml-1" placeholder="Period" [(ngModel)]="currentPosition" style="width: 23%;">
-                <md-option *ngFor="let role of position" [value]="role.Part2ID">
-                    {{ role.Function }}
-                </md-option>
-            </md-select>
-            <button md-raised-button type="button" color="primary" type="button" class="ml-1 mb-1" (click)="onSubmit(currentPosition) ">OK</button>
-        </div>
+    <div fxLayout="row" fxLayoutAlign="start center" class="mb-1">
+        <md-select class="ml-1 mt-1" placeholder="Period" [(ngModel)]="currentPosition" style="width: 23%;">
+            <md-option *ngFor="let role of position" [value]="role.Part2ID">
+                {{ role.Function }}
+            </md-option>
+        </md-select>
+        <button md-raised-button type="button" color="primary" type="button" class="mt-1 ml-1 mb-1" (click)="onSubmit(currentPosition) ">OK</button>
+        <button *ngIf="flagCreate==false" (click)="callflagHead1()" md-icon-button>
+            <md-icon>add</md-icon>
+        </button>
+    </div>
+    <div *ngIf="flagCreate==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
+        <form style="width: 90%;" [formGroup]="form1" (ngSubmit)="insertHeader1(0,currentPosition,TextThai1,TextEng1,TextAlias1)">
+            <div class="mb-1">
+                <md-input placeholder="TextThai" [formControl]="form1.controls['TextThai1']" style="width: 100%" #TextThai1></md-input>
+                <small *ngIf="form1.controls['TextThai1'].hasError('required') && form1.controls['TextThai1'].touched" class="md-text-warn">You must include a TextThai.</small>
+            </div>
+            <div class="mb-1">
+                <md-input placeholder="TextEng" [formControl]="form1.controls['TextEng1']" style="width: 100%" #TextEng1></md-input>
+                <small *ngIf="form1.controls['TextEng1'].hasError('required') && form1.controls['TextEng1'].touched" class="md-text-warn">You must include a TextEng.</small>
+            </div>
+            <div class="mb-1">
+                <md-input placeholder="TextAlias" [maxlength]="1" [formControl]="form1.controls['TextAlias1']" style="width: 100%" #TextAlias1></md-input>
+                <small *ngIf="form1.controls['TextAlias1'].hasError('required') && form1.controls['TextAlias1'].touched" class="md-text-warn">You must include a TextAlias.</small>
+            </div>
+            <md-card-actions>
+                <button md-raised-button color="primary" type="submit" [disabled]="!form1.valid">Submit</button>
+                <button md-raised-button color="accent" type="button" (click)="callflagHead1()">Cancel</button>
+            </md-card-actions>
+        </form>
     </div>
 </div>
 <!-- Table -->
@@ -151,7 +172,7 @@
                                                         <option [selected] [value]=0>
                                                             N/A
                                                         </option>
-                                                        <option *ngFor=" let val of score " [value]="val ">
+                                                        <option *ngFor=" let val of score " [value]="val">
                                                             {{val}}
                                                         </option>
                                                     </select>

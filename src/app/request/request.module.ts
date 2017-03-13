@@ -17,7 +17,7 @@ import { RequestRoutes } from './request.routing';
   			MdCardModule, FlexLayoutModule,NgxDatatableModule,
   			FormsModule,ReactiveFormsModule,HttpModule,TranslateModule
   			,MdInputModule,MaterialModule,AccordionModule],
-  declarations: [RequestComponent]
+  declarations: [RequestComponent],
 })
 
 export class RequestModule {}

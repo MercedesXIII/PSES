@@ -21,7 +21,7 @@
  -->
 <div fxLayout="row" fxLayoutAlign="start center" class="mb-1 mt-1">
     <div fxLayout="row" fxFlex="93" fxLayoutAlign="start center">
-        <md-select class="ml-1" placeholder="Period" [(ngModel)]="currentPeriod" style="width: 200px;">
+        <md-select class="ml-1" placeholder="Period" [(ngModel)]="currentPeriod" style="width: 170px;">
             <md-option [value]="'all'">
                 All
             </md-option>
@@ -107,20 +107,20 @@
     </ngx-datatable>
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.xs="100" fxShow="false" fxShow.xs>
-    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="50" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="3" [rows]='listeva'>
-        <ngx-datatable-column [width]="150" [minWidth]="150">
+    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="70" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="4" [rows]='listeva'>
+        <ngx-datatable-column [width]="230" [minWidth]="230">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="column" fxLayoutAlign="start">
                     <span><b>{{'Name' | translate}}</b> {{listeva[row.$$index]['EmployeeFirstName']+" "+listeva[row.$$index]['EmployeeLastName']}}</span>
                     <span><b>{{'Project Code' | translate}}</b> {{listeva[row.$$index]['ProjectCode']}}</span>
                     <span><b>{{'Role' | translate}}</b> {{listeva[row.$$index]['Function']}}</span>
-                    <span><b>{{'Duration' | translate}}</b><br> {{listeva[row.$$index]['StartDatePlan']+"-"+listeva[row.$$index]['FinishDatePlan']}}</span>
+                    <span><b>{{'Duration' | translate}}</b> {{listeva[row.$$index]['StartDatePlan']+"-"+listeva[row.$$index]['FinishDatePlan']}}</span>
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [width]="40" [minWidth]="40">
+        <ngx-datatable-column [width]="50" [minWidth]="50">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
-                <div style="text-align: center; " div fxLayout="column" fxLayoutAlign="start">
+                <div style="float: left; " fxLayout="column" fxLayoutAlign="end">
                     <button md-icon-button [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
@@ -131,4 +131,5 @@
             </template>
         </ngx-datatable-column>
     </ngx-datatable>
-    <!-- Data Table #End-->
+</div>
+<!-- Data Table #End-->

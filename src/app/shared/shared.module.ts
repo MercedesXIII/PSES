@@ -5,7 +5,7 @@ import { AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective } 
 import { ToggleFullscreenDirective } from './fullscreen/toggle-fullscreen.directive';
 
 @NgModule({
-  declarations: [ AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective, ToggleFullscreenDirective ],
+  declarations: [ AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective, ToggleFullscreenDirective],
   exports:      [ AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective, ToggleFullscreenDirective ],
   providers: 	[ MenuItems ]
 })

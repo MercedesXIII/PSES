@@ -3,11 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'ng2-validation';
 import { Http, Response, Headers,URLSearchParams } from '@angular/http';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput } from '@angular/material';
+import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdDialog, MdDialogRef } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
 import 'rxjs/add/operator/startWith';
 
 import { GlobalServiceRef} from '../../shared/GlobalServiceRef'
+import { ConfirmDialog } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-evalist',
@@ -32,7 +33,7 @@ export class EvalistComponent implements OnInit {
     @Output() outPeriodId = new EventEmitter();
     @Output() outPeriodId2 = new EventEmitter();
     @Output() outEvaId = new EventEmitter();
-    constructor(private router : Router, public http:Http,public ngzone :NgZone) {}
+    constructor(private router : Router, public http:Http,public ngzone :NgZone, public dialog: MdDialog) {}
     
     ngOnInit() {
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
@@ -96,23 +97,20 @@ export class EvalistComponent implements OnInit {
         catch(ee){}
     }
     delete(event,row,value){
-
-        let del;
-        if(confirm("Confirm Delete") == true)
-        {
-            this.http.delete(GlobalServiceRef.URLService+"/Eva/Delete/"+value["Eva_ID"])
-            .subscribe((res: Response) => {
-                if(res.ok){
-                    console.log("ok");
-                }
-            });
-
-            this.listeva.splice(value.$$index, 1);
-        }
-        else
-        {
-            return 0;
-        }
+        let dialogRef = this.dialog.open(ConfirmDialog);
+        dialogRef.componentInstance.SetDialogType("delete");
+        dialogRef.afterClosed().subscribe(result => {
+            if(result === "ok")
+            {
+                this.http.delete(GlobalServiceRef.URLService+"/Eva/Delete/"+value["Eva_ID"])
+                .subscribe((res: Response) => {
+                    if(res.ok){
+                           return 0;
+                    }
+                });
+                this.listeva.splice(value.$$index, 1);
+            }
+        });
     }
     passEvaId(event,row,value,period){
         this.outEvaId.emit(value["Eva_ID"]);

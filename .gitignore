@@ -33,3 +33,10 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+#ignore of service
+*.cache
+/applicationhost.config
+*.dll
+*.pdb
+*.txt

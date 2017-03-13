@@ -1,28 +1,20 @@
 import {Component} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
+import { ConfirmDialog } from '../shared/dialog/dialog.component';
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
 })
 export class RequestComponent {
-   myControl = new FormControl();
-   options = [
-    'One',
-    'Two',
-    'Three'
-   ];
-   filteredOptions: Observable<string[]>;
+   lastCloseResult: string;
 
-   ngOnInit() {
-      this.filteredOptions = this.myControl.valueChanges
-         .startWith(null)
-         .map(val => val ? this.filter(val) : this.options.slice());
-   }
+  constructor(public dialog: MdDialog) {}
 
-   filter(val: string): string[] {
-      return this.options.filter(option => new RegExp(val, 'gi').test(option)); 
-   }
+  openDialog() {
+    let dialogRef = this.dialog.open(ConfirmDialog);
+    dialogRef.componentInstance.SetDialogType("delete");
+    dialogRef.afterClosed().subscribe(result => {
+    this.lastCloseResult = result });
+  }
 }

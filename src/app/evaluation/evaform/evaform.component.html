@@ -76,11 +76,11 @@
             </md-option>
         </md-select>
         <button md-raised-button type="button" color="primary" type="button" class="mt-1 ml-1 mb-1" (click)="onSubmit(currentPosition) ">OK</button>
-        <button *ngIf="flagCreate==false" (click)="callflagHead1()" md-icon-button>
+        <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button>
             <md-icon>add</md-icon>
         </button>
     </div>
-    <div *ngIf="flagCreate==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
+    <!-- <div *ngIf="flagCreate==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
         <form style="width: 90%;" [formGroup]="form1" (ngSubmit)="insertHeader1(0,currentPosition,TextThai1,TextEng1,TextAlias1)">
             <div class="mb-1">
                 <md-input placeholder="TextThai" [formControl]="form1.controls['TextThai1']" style="width: 100%" #TextThai1></md-input>
@@ -99,7 +99,7 @@
                 <button md-raised-button color="accent" type="button" (click)="callflagHead1()">Cancel</button>
             </md-card-actions>
         </form>
-    </div>
+    </div> -->
 </div>
 <!-- Table -->
 <md-card>
@@ -112,11 +112,11 @@
                         <div fxLayout="row " fxLayoutAlign="start center" class="ml-1">
                             <p style="font-size: 19px;">{{head.Text+"("+head.Text_Eng+")"}}</p>
                             <input class="ml-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" value="N/A">
-                            <button md-icon-button *ngIf="flagAdd[k]==false" (click)="callflagAdd(k)">
+                            <button md-icon-button *ngIf="flagAdd[k]==false" (click)="openDialogHead(head.H_ID,currentPosition,2,k)">
                                 <md-icon>add</md-icon>
                             </button>
                         </div>
-                        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                        <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
                             <div fxFlex="10"></div>
                             <div *ngIf="flagAdd[k]==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
                                 <form style="width: 90%;" [formGroup]="form2" (ngSubmit)="insertHeader2(k,head.H_ID,head.PositionNO,head.Eva_ID,TextThai2,TextEng2)">
@@ -134,7 +134,7 @@
                                     </md-card-actions>
                                 </form>
                             </div>
-                        </div>
+                        </div> -->
                         <hr>
                         <div fxLayoutAlign="start center" fxFlex="100" style="margin-top: 8px; margin-bottom: 8px;">
                             <div fxFlex="70" align="center" style="font-weight: bold;">Topic</div>
@@ -180,12 +180,12 @@
                                             </div>
                                         </div>
                                         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
-                                            <div *ngIf="flagAdd[i]==false" (click)="callflagAdd(i)" fxFlex="10">
+                                            <div *ngIf="flagAdd[i]==false" (click)="openDialogHead(head2.H_ID,currentPosition,3,i)" fxFlex="10">
                                                 <button md-icon-button>
                                                     <md-icon>add</md-icon>
                                                 </button>
                                             </div>
-                                            <div *ngIf="flagAdd[i]==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
+                                            <!-- <div *ngIf="flagAdd[i]==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
                                                 <form style="width: 90%;" [formGroup]="form3" (ngSubmit)="insertHeader3(i,head2.H_ID,head2.PositionNO,head2.Eva_ID,TextThai3)">
                                                     <div class="mb-1">
                                                         <md-input placeholder="TextThai" [formControl]="form3.controls['TextThai3']" style="width: 100%" #TextThai3></md-input>
@@ -196,7 +196,7 @@
                                                         <button md-raised-button color="accent" type="button" (click)="callflagAdd(i)">Cancel</button>
                                                     </md-card-actions>
                                                 </form>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div>
                                             <md-textarea placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>

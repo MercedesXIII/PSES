@@ -41,10 +41,12 @@ export class EvalistComponent implements OnInit {
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
         this.http.get(GlobalServiceRef.URLService+"/Eva/Period").subscribe(res => {
             this.period = res.json();
+            this.Duration[0] = 'all'
+            this.DurationId[0] = 'all'
             for(let data in this.period)
             {
-                this.Duration[data] = this.period[data].StartDate+"-"+this.period[data].FinishDate
-                this.DurationId[data] = this.period[data].Period_Id
+                this.Duration[data+1] = this.period[data].StartDate+"-"+this.period[data].FinishDate
+                this.DurationId[data+1] = this.period[data].Period_Id
             }
             if(this.PeriodId != undefined && this.PeriodId != 'all')
             {
@@ -85,7 +87,7 @@ export class EvalistComponent implements OnInit {
     {
         try
         {
-            console.log(Id);
+            console.log(Id+" "+this.currentPeriod);
             if(Id != undefined){
                 this.http.get(GlobalServiceRef.URLService+"/Eva/Eva/"+this.LoginResultJson['EmployeeID']+"/"+Id)
                 .subscribe(res => {
@@ -122,9 +124,6 @@ export class EvalistComponent implements OnInit {
     }
     passEvaId(event,row,value,period){
         this.outEvaId.emit(value["Eva_ID"]);
-    }
-    valueChanged(newVal) {
-        console.log("Case 2: value is changed to ", newVal);
     }
 
 }

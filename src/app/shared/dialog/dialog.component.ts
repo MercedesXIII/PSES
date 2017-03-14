@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
+import { MdDialog, MdDialogRef, MdDialogConfig, MdInputDirective } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'app-dialog',
@@ -114,4 +115,142 @@ export class NormalDialog {
 		}
 	}
 
+}
+
+@Component({
+	selector: 'insert-dialog',
+	template: `
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 300; width: 430px;" fxHide.xs>
+	<h5 md-dialog-title>{{TitleText| translate}}</h5>
+	<md-dialog-content>
+			<div class="mb-1">
+                <md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+                <small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
+            </div>
+            <div class="mb-1">
+                <md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
+                <small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
+            </div>
+            <div class="mb-1">
+                <md-input placeholder="TextAlias" [maxlength]="1" [formControl]="form.controls['TextAlias']" style="width: 100%" #TextAlias></md-input>
+                <small *ngIf="form.controls['TextAlias'].hasError('required') && form.controls['TextAlias'].touched" class="md-text-warn">You must include a TextAlias.</small>
+            </div>
+	</md-dialog-content>
+	<hr>
+	<div fxLayout="row" fxLayoutAlign="end end" >
+	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
+	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+	</div></div>`
+})
+export class InsertDialog {;
+	TitleText: string = "Add Toppic";
+	OkBtnText: string = "ok";
+	OkBtnColor: string = "primary";
+	CancelBtnText: string = "cancel";
+
+	PassValue = [];
+
+	public form: FormGroup;
+	constructor(public dialogRef: MdDialogRef <ConfirmDialog>,private translate: TranslateService,private fb: FormBuilder ) 
+	{
+		this.form = this.fb.group({
+            TextThai: [null, Validators.required],
+            TextEng: [null, Validators.required],
+            TextAlias: [null,Validators.required]
+        })
+	}
+	onSubmit(TextThai:MdInputDirective,TextEng:MdInputDirective,TextAlias:MdInputDirective)
+	{
+		this.PassValue.push(TextThai.value)
+		this.PassValue.push(TextEng.value)
+		this.PassValue.push(TextAlias.value)
+		this.dialogRef.close(this.PassValue)
+		this.form.reset();
+	}
+}
+
+@Component({
+	selector: 'insert-dialog',
+	template: `
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 300; width: 430px;" fxHide.xs>
+	<h5 md-dialog-title>{{TitleText| translate}}</h5>
+	<md-dialog-content>
+			<div class="mb-1">
+                <md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+                <small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
+            </div>
+            <div class="mb-1">
+                <md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
+                <small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
+            </div>
+	</md-dialog-content>
+	<hr>
+	<div fxLayout="row" fxLayoutAlign="end end" >
+	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
+	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+	</div></div>`
+})
+export class InsertDialog2 {
+	TitleText: string = "Add Toppic";
+	OkBtnText: string = "ok";
+	OkBtnColor: string = "primary";
+	CancelBtnText: string = "cancel";
+
+	PassValue = [];
+
+	public form: FormGroup;
+	constructor(public dialogRef: MdDialogRef <ConfirmDialog>,private translate: TranslateService,private fb: FormBuilder ) 
+	{
+		this.form = this.fb.group({
+            TextThai: [null, Validators.required],
+            TextEng: [null, Validators.required]
+        })
+	}
+	onSubmit(TextThai:MdInputDirective,TextEng:MdInputDirective)
+	{
+		this.PassValue.push(TextThai.value)
+		this.PassValue.push(TextEng.value)
+		this.dialogRef.close(this.PassValue)
+		this.form.reset();
+	}
+}
+
+@Component({
+	selector: 'insert-dialog',
+	template: `
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 300; width: 430px;" fxHide.xs>
+	<h5 md-dialog-title>{{TitleText| translate}}</h5>
+	<md-dialog-content>
+			<div class="mb-1">
+                <md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+                <small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
+            </div>
+	</md-dialog-content>
+	<hr>
+	<div fxLayout="row" fxLayoutAlign="end end" >
+	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
+	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+	</div></div>`
+})
+export class InsertDialog3 {
+	TitleText: string = "Add Toppic";
+	OkBtnText: string = "ok";
+	OkBtnColor: string = "primary";
+	CancelBtnText: string = "cancel";
+
+	PassValue = [];
+
+	public form: FormGroup;
+	constructor(public dialogRef: MdDialogRef <ConfirmDialog>,private translate: TranslateService,private fb: FormBuilder ) 
+	{
+		this.form = this.fb.group({
+            TextThai: [null, Validators.required]
+        })
+	}
+	onSubmit(TextThai:MdInputDirective)
+	{
+		this.PassValue.push(TextThai.value)
+		this.dialogRef.close(this.PassValue)
+		this.form.reset();
+	}
 }

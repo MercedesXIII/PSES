@@ -104,6 +104,13 @@
 <!-- Table -->
 <md-card>
     <md-tab-group [(selectedIndex)]="activeTabIndex">
+        <!-- <md-tab>
+            <template md-tab-label>
+                <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button>
+                    <md-icon>add</md-icon>
+                </button>
+            </template>
+        </md-tab> -->
         <div *ngFor="let head of header; let k = index">
             <div *ngIf="head.H_Level==1">
                 <md-tab>

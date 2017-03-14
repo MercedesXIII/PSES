@@ -82,7 +82,6 @@ export class ManageheaderComponent implements OnInit {
                         let TextThai = res[0];
                         let TextEng = res[1];
                         let TextAlias = res[2];
-                        console.log(HeadId+" "+PositionNo+" "+TextThai+" "+TextEng+" "+TextAlias)
                         this.insertHeader1(HeadId,PositionNo,TextThai,TextEng,TextAlias);
                     }
                 }
@@ -133,29 +132,30 @@ export class ManageheaderComponent implements OnInit {
     insertHeader1(HeadId:number, PositionNo:number ,TextThai: string,TextEng: string,TextAlias : string)
     {
         this.callflagHead1(true);
+        console.log(HeadId+" "+PositionNo+" "+TextThai+" "+TextEng+" "+TextAlias)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Text:TextThai,Text_Eng:TextEng,Alias:TextAlias});
         this.http.put(GlobalServiceRef.URLService+"/Header/InsertHeader",body,{
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
+            this.callHeader(PositionNo);
         });
-        this.callHeader(PositionNo);
     }
     insertHeader2(i:number,HeadId:number, PositionNo:number,TextThai: string,TextEng: string)
     {
         this.callflagAdd(i);
-        console.log(PositionNo)
+        console.log(HeadId+" "+PositionNo+" "+TextThai+" "+TextEng)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Text:TextThai,Text_Eng:TextEng,Alias:"-"});
         this.http.put(GlobalServiceRef.URLService+"/Header/InsertHeader",body,{
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
+            this.callHeader(PositionNo);
         });
-        this.callHeader(PositionNo);
     }
-    insertHeader3(i:number,HeadId:number, PositionNo:number,TextThai: string)
+    insertHeader3(i:number,HeadId:number, PositionNo:number ,TextThai: string)
     {
         this.callflagAdd(i);
         let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -164,17 +164,18 @@ export class ManageheaderComponent implements OnInit {
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
+            this.http.get(GlobalServiceRef.URLService+"/Header/GetHeader/"+PositionNo)
+            .subscribe(res => {this.header = res.json();
+                this.countHeader = 0;
+                for(let data in this.header)
+                {
+                    this.flagAdd[data] =false;
+                    if(this.header[data].H_Level == 1)
+                        this.countHeader++;
+                }
+            });
         });
-        this.http.get(GlobalServiceRef.URLService+"/Header/GetHeader/"+PositionNo)
-        .subscribe(res => {this.header = res.json();
-            this.countHeader = 0;
-            for(let data in this.header)
-            {
-                this.flagAdd[data] =false;
-                if(this.header[data].H_Level == 1)
-                    this.countHeader++;
-            }
-        });
+        
     }
     callflag(get : number)
     {

@@ -79,13 +79,6 @@ export class EvaformComponent implements OnInit {
                 }
             });
         });
-        this.form2 = this.fb.group({
-            TextThai2: [null, Validators.required],
-            TextEng2: [null, Validators.required]
-        })
-        this.form3 = this.fb.group({
-            TextThai3: [null, Validators.required]
-        })
     }
     callHeader(id)
     {
@@ -190,8 +183,8 @@ export class EvaformComponent implements OnInit {
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
+            this.callHeader(PositionNo);
         });
-        this.callHeader(PositionNo);
     }
     // insertHeader1(HeadId:number, PositionNo:number ,TextThai: string,TextEng: string,TextAlias : string)
     // {
@@ -210,14 +203,15 @@ export class EvaformComponent implements OnInit {
                 insertHeader2(i:number,HeadId:number, PositionNo:number,TextThai: string,TextEng: string)
                 {
                     this.callflagAdd(i);
+                    console.log(HeadId+" "+PositionNo+" "+this.EvaId+" "+TextThai+" "+TextEng)
                     let headers = new Headers({ 'Content-Type': 'application/json' });
                     let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:this.EvaId,Text:TextThai,Text_Eng:TextEng,Alias:"-"});
                     this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
                         headers: headers
                     }).subscribe((res: Response) => {
                         let result = res.json();
+                        this.callHeader(PositionNo);
                     });
-                    this.callHeader(PositionNo);
                 }
                 insertHeader3(i:number,HeadId:number, PositionNo:number ,TextThai: string)
                 {
@@ -231,29 +225,29 @@ export class EvaformComponent implements OnInit {
                         headers: headers
                     }).subscribe((res: Response) => {
                         let result = res.json();
-                    });
-                    this.http.get(GlobalServiceRef.URLService+"/Header/All/"+PositionNo+"/"+this.EvaId)
-                    .subscribe(res => {this.header = res.json();
-                        this.countHeader = 0;
-                        this.countHead3full = 0;
-                        for(let data in this.header)
-                        {
-                            this.flagAdd[data] =false;
-                            if(this.header[data].H_Level == 1)
-                                this.countHeader++;
-                            else if(this.header[data].H_Level == 2)
+                        this.http.get(GlobalServiceRef.URLService+"/Header/All/"+PositionNo+"/"+this.EvaId)
+                        .subscribe(res => {this.header = res.json();
+                            this.countHeader = 0;
+                            this.countHead3full = 0;
+                            for(let data in this.header)
                             {
-                                //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                                this.subTotalScore[data] = "N/A";
+                                this.flagAdd[data] =false;
+                                if(this.header[data].H_Level == 1)
+                                    this.countHeader++;
+                                else if(this.header[data].H_Level == 2)
+                                {
+                                    //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
+                                    this.subTotalScore[data] = "N/A";
+                                }
+                                else if(this.header[data].H_Level == 3)
+                                {
+                                    //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
+                                    this.currentScore[data] = this.header[data].point;
+                                    this.currentId[data] = this.header[data].H_ID;
+                                    this.countHead3full++;
+                                }
                             }
-                            else if(this.header[data].H_Level == 3)
-                            {
-                                //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
-                                this.currentScore[data] = this.header[data].point;
-                                this.currentId[data] = this.header[data].H_ID;
-                                this.countHead3full++;
-                            }
-                        }
+                        });
                     });
                 }
                 callflag(get : number)

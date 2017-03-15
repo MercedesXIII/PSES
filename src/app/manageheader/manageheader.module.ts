@@ -9,10 +9,6 @@ import { TranslateModule } from 'ng2-translate';
 
 import { ManageheaderComponent } from './manageheader.component';
 import { ManageheaderRoutes } from './manageheader.routing';
-import { HeadermidComponent } from './headermid/headermid.component';
-import { HeaderbotComponent } from './headerbot/headerbot.component';
-import { SelectjobComponent } from './headertop/selectjob/selectjob.component';
-import { HeaderComponent } from './headertop/header/header.component';
 
 @NgModule({
 
@@ -27,11 +23,7 @@ import { HeaderComponent } from './headertop/header/header.component';
     ReactiveFormsModule,
     TranslateModule],
 
-    declarations: [ManageheaderComponent, 
-    HeadermidComponent, 
-    HeaderbotComponent,
-    SelectjobComponent,
-    HeaderComponent,]
+    declarations: [ManageheaderComponent]
 })
 
 export class ManageheaderModule {}

@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit, ViewChild,NgZone } from '@angular/core';
+import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit, ViewChild,NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'ng2-validation';
 import { Http, Response, Headers,URLSearchParams } from '@angular/http';
@@ -35,9 +35,10 @@ export class EvalistComponent implements OnInit {
     @Output() outPeriodId = new EventEmitter();
     @Output() outPeriodId2 = new EventEmitter();
     @Output() outEvaId = new EventEmitter();
-    constructor(private router : Router, public http:Http,public ngzone :NgZone, public dialog: MdDialog) {}
+    constructor(private router : Router, public http:Http,public ngzone :NgZone, public dialog: MdDialog, public ref : ChangeDetectorRef) {}
     
     ngOnInit() {
+        this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
         this.http.get(GlobalServiceRef.URLService+"/Eva/Period").subscribe(res => {
             this.period = res.json();

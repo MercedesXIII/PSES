@@ -75,35 +75,16 @@
                 {{ role.Function }}
             </md-option>
         </md-select>
-        <button md-raised-button type="button" color="primary" type="button" class="mt-1 ml-1 mb-1" (click)="onSubmit(currentPosition) ">OK</button>
-        <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button>
+        <button md-raised-button type="button" color="primary" type="button" class="mt-1 ml-1 mb-1 mr-1" (click)="onSubmit(currentPosition) ">OK</button>
+        <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button [md-tooltip]="addtopic " [tooltip-position]="point ">
             <md-icon>add</md-icon>
         </button>
     </div>
-    <!-- <div *ngIf="flagCreate==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
-        <form style="width: 90%;" [formGroup]="form1" (ngSubmit)="insertHeader1(0,currentPosition,TextThai1,TextEng1,TextAlias1)">
-            <div class="mb-1">
-                <md-input placeholder="TextThai" [formControl]="form1.controls['TextThai1']" style="width: 100%" #TextThai1></md-input>
-                <small *ngIf="form1.controls['TextThai1'].hasError('required') && form1.controls['TextThai1'].touched" class="md-text-warn">You must include a TextThai.</small>
-            </div>
-            <div class="mb-1">
-                <md-input placeholder="TextEng" [formControl]="form1.controls['TextEng1']" style="width: 100%" #TextEng1></md-input>
-                <small *ngIf="form1.controls['TextEng1'].hasError('required') && form1.controls['TextEng1'].touched" class="md-text-warn">You must include a TextEng.</small>
-            </div>
-            <div class="mb-1">
-                <md-input placeholder="TextAlias" [maxlength]="1" [formControl]="form1.controls['TextAlias1']" style="width: 100%" #TextAlias1></md-input>
-                <small *ngIf="form1.controls['TextAlias1'].hasError('required') && form1.controls['TextAlias1'].touched" class="md-text-warn">You must include a TextAlias.</small>
-            </div>
-            <md-card-actions>
-                <button md-raised-button color="primary" type="submit" [disabled]="!form1.valid">Submit</button>
-                <button md-raised-button color="accent" type="button" (click)="callflagHead1()">Cancel</button>
-            </md-card-actions>
-        </form>
-    </div> -->
 </div>
 <!-- Table -->
 <md-card>
     <md-tab-group [(selectedIndex)]="activeTabIndex">
+        <!-- add in tab -->
         <!-- <md-tab>
             <template md-tab-label>
                 <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button>
@@ -118,30 +99,14 @@
                     <md-card-content>
                         <div fxLayout="row " fxLayoutAlign="start center" class="ml-1">
                             <p style="font-size: 19px;">{{head.Text+"("+head.Text_Eng+")"}}</p>
-                            <input class="ml-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" value="N/A">
-                            <button md-icon-button *ngIf="flagAdd[k]==false" (click)="openDialogHead(head.H_ID,currentPosition,2,k)">
+                            <input class="ml-1 mr-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" value="N/A">
+                            <button md-icon-button (click)="openDialogHead(head.H_ID,currentPosition,2,k)" [md-tooltip]="adddetail " [tooltip-position]="point ">
                                 <md-icon>add</md-icon>
                             </button>
+                            <button *ngIf="head.H_ID < 0" md-icon-button (click)=" delete(head.H_ID,0)" [md-tooltip]="remove " [tooltip-position]="point ">
+                                <md-icon>delete_forever</md-icon>
+                            </button>
                         </div>
-                        <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
-                            <div fxFlex="10"></div>
-                            <div *ngIf="flagAdd[k]==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
-                                <form style="width: 90%;" [formGroup]="form2" (ngSubmit)="insertHeader2(k,head.H_ID,head.PositionNO,head.Eva_ID,TextThai2,TextEng2)">
-                                    <div class="mb-1">
-                                        <md-input placeholder="TextThai" [formControl]="form2.controls['TextThai2']" style="width: 100%" #TextThai2></md-input>
-                                        <small *ngIf="form2.controls['TextThai2'].hasError('required') && form2.controls['TextThai2'].touched" class="md-text-warn">You must include a TextThai.</small>
-                                    </div>
-                                    <div class="mb-1">
-                                        <md-input placeholder="TextEng" [formControl]="form2.controls['TextEng2']" style="width: 100%" #TextEng2></md-input>
-                                        <small *ngIf="form2.controls['TextEng2'].hasError('required') && form2.controls['TextEng2'].touched" class="md-text-warn">You must include a TextEng.</small>
-                                    </div>
-                                    <md-card-actions>
-                                        <button md-raised-button color="primary" type="submit" [disabled]="!form2.valid">Submit</button>
-                                        <button md-raised-button color="accent" type="button" (click)="callflagAdd(k)">Cancel</button>
-                                    </md-card-actions>
-                                </form>
-                            </div>
-                        </div> -->
                         <hr>
                         <div fxLayoutAlign="start center" fxFlex="100" style="margin-top: 8px; margin-bottom: 8px;">
                             <div fxFlex="70" align="center" style="font-weight: bold;">Topic</div>
@@ -163,7 +128,10 @@
                                     </div>
                                     <div fxFlex="76">{{head2.Text+"("+head2.Text_Eng+")"}}</div>
                                     <div align="center">
-                                        <input style="width: 50px; text-align: center;" disabled="disabled" [(ngModel)]="subTotalScore[i]">
+                                        <input class="mr-1" style="width: 50px; text-align: center;" disabled="disabled" [(ngModel)]="subTotalScore[i]">
+                                        <button *ngIf="flag[i]==false && head2.H_ID < 0" md-icon-button (click)="delete(head2.H_ID,0)" [md-tooltip]="remove " [tooltip-position]="point ">
+                                            <md-icon>delete_forever</md-icon>
+                                        </button>
                                     </div>
                                 </div>
                                 <div fxLayout="row" fxLayoutAlign="start center " fxFlex="100" style="margin-left: 5%">
@@ -171,11 +139,11 @@
                                         <div *ngFor="let head3 of header; let j=index;" fxLayout="row" fxFlex="100">
                                             <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxLayout="row " fxFlex="100" style="margin-top: 10px;">
                                                 <div fxFlex="3">
-                                                    <b>>></b>
+                                                    <md-icon>play_arrow</md-icon>
                                                 </div>
                                                 <div fxFlex="80">{{head3.Text}}</div>
                                                 <div>
-                                                    <select [(ngModel)]="currentScore[j]" style="text-align: center; width: 55px;">
+                                                    <select class="mr-1" [(ngModel)]="currentScore[j]" style="text-align: center; width: 55px;">
                                                         <option [selected] [value]=0>
                                                             N/A
                                                         </option>
@@ -183,27 +151,18 @@
                                                             {{val}}
                                                         </option>
                                                     </select>
+                                                    <button style="margin-top:-20px;" md-icon-button *ngIf="head3.H_ID < 0" (click)=" delete(head3.H_ID,i)" [md-tooltip]="remove " [tooltip-position]="point " tabindex="-1">
+                                                        <md-icon>delete_forever</md-icon>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
-                                            <div *ngIf="flagAdd[i]==false" (click)="openDialogHead(head2.H_ID,currentPosition,3,i)" fxFlex="10">
+                                            <div (click)="openDialogHead(head2.H_ID,currentPosition,3,i)" fxFlex="10">
                                                 <button md-icon-button>
                                                     <md-icon>add</md-icon>
                                                 </button>
                                             </div>
-                                            <!-- <div *ngIf="flagAdd[i]==true" class="mt-1" fxLayout="row" fxLayoutAlign="start center" fxFlex="90">
-                                                <form style="width: 90%;" [formGroup]="form3" (ngSubmit)="insertHeader3(i,head2.H_ID,head2.PositionNO,head2.Eva_ID,TextThai3)">
-                                                    <div class="mb-1">
-                                                        <md-input placeholder="TextThai" [formControl]="form3.controls['TextThai3']" style="width: 100%" #TextThai3></md-input>
-                                                        <small *ngIf="form3.controls['TextThai3'].hasError('required') && form3.controls        ['TextThai3'].touched" class="md-text-warn">You must include a TextThai.</small>
-                                                    </div>
-                                                    <md-card-actions>
-                                                        <button md-raised-button color="primary" type="submit" [disabled]="!form3.valid">Submit</button>
-                                                        <button md-raised-button color="accent" type="button" (click)="callflagAdd(i)">Cancel</button>
-                                                    </md-card-actions>
-                                                </form>
-                                            </div> -->
                                         </div>
                                         <div>
                                             <md-textarea placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
@@ -218,14 +177,13 @@
                                     <md-icon>arrow_back</md-icon>
                                 </button>
                             </div>
-                            <button md-raised-button (click)=call()>Calculate</button>
                             <div style="margin-right: 10%;">
                                 <div style="margin-left: 100%;">
                                     <button *ngIf="activeTabIndex < countHeader-1" md-icon-button class="ml-1" (click)="passScore(true)">
                                         <md-icon>arrow_forward</md-icon>
                                     </button>
                                 </div>
-                                <div>
+                                <div *ngIf="countHead3full != 0">
                                     <button *ngIf="activeTabIndex == countHeader-1" md-raised-button [disabled]="countHead3!=countHead3full" color="primary" (click)="finishEvaluate()">
                                         Confirm
                                     </button>
@@ -238,55 +196,3 @@
         </div>
     </md-tab-group>
 </md-card>
-<!-- <ngx-datatable class="material mt-1 " [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="30 " [scrollbarV]="false " [scrollbarH]="true " [rows]="header ">
-    <ngx-datatable-column name="Alias " [flexGrow]="2 " prop="H_Level ">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold ">Level</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row " let-value="value ">
-            <div style="text-align: center; ">
-                {{value}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="1 ">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold ">No</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row " let-value="value ">
-            <div style="text-align: center; ">
-                {{row.$$index+1}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="6 " prop="Text ">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold; ">Text</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row " let-value="value ">
-            <div style="text-align: left; ">
-                {{value}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column [flexGrow]="6 " prop="Text_Eng ">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold ">Text_Eng</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row " let-value="value ">
-            <div style="text-align: left; ">
-                {{value}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Alias " [flexGrow]="2 " prop="Alias ">
-        <template ngx-datatable-header-template>
-            <div style="text-align: center; font-weight: bold ">Alias</div>
-        </template>
-        <template ngx-datatable-cell-template let-row="row " let-value="value ">
-            <div style="text-align: center; ">
-                {{value}}
-            </div>
-        </template>
-    </ngx-datatable-column>
-</ngx-datatable> -->

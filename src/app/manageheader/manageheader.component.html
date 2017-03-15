@@ -8,8 +8,8 @@
                     {{ role.Function }}
                 </md-option>
             </md-select>
-            <button md-raised-button type="button" color="primary" type="button" class="mt-1 ml-1 mb-1" (click)="onSubmit(currentPosition) ">OK</button>
-            <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button>
+            <button md-raised-button type="button" color="primary" type="button" class="mt-1 ml-1 mb-1 mr-1" (click)="onSubmit(currentPosition) ">OK</button>
+            <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button [md-tooltip]="addtopic " [tooltip-position]="point ">
                 <md-icon>add</md-icon>
             </button>
         </div>
@@ -22,9 +22,12 @@
                             <template md-tab-label>{{head.Alias}}</template>
                             <md-card-content>
                                 <div fxLayout="row " fxLayoutAlign="start center" class="ml-1">
-                                    <p style="font-size: 19px;">{{head.Text+"("+head.Text_Eng+")"}}</p>
-                                    <button md-icon-button *ngIf="flagAdd[k]==false" (click)="openDialogHead(head.H_ID,currentPosition,2,k)">
+                                    <p class="mr-1" style="font-size: 19px;">{{head.Text+"("+head.Text_Eng+")"}}</p>
+                                    <button md-icon-button (click)="openDialogHead(head.H_ID,currentPosition,2,k)" [md-tooltip]="adddetail " [tooltip-position]="point ">
                                         <md-icon>add</md-icon>
+                                    </button>
+                                    <button md-icon-button (click)="delete(head.H_ID,0)" [md-tooltip]="remove " [tooltip-position]="point ">
+                                        <md-icon>delete_forever</md-icon>
                                     </button>
                                 </div>
                                 <hr>
@@ -46,19 +49,29 @@
                                                 </button>
                                             </div>
                                             <div fxFlex="76">{{head2.Text+"("+head2.Text_Eng+")"}}</div>
+                                            <div *ngIf="flag[i]==false" align="center">
+                                                <button md-icon-button (click)=" delete(head2.H_ID,0)" [md-tooltip]="remove " [tooltip-position]="point ">
+                                                    <md-icon>delete_forever</md-icon>
+                                                </button>
+                                            </div>
                                         </div>
                                         <div fxLayout="row" fxLayoutAlign="start center " fxFlex="100" style="margin-left: 5%">
                                             <div *ngIf="flag[i]==true" fxFlex="100">
                                                 <div *ngFor="let head3 of header; let j=index;" fxLayout="row" fxFlex="100">
                                                     <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxLayout="row " fxFlex="100" style="margin-top: 10px;">
                                                         <div fxFlex="3">
-                                                            <b>>></b>
+                                                            <md-icon>play_arrow</md-icon>
                                                         </div>
                                                         <div fxFlex="80">{{head3.Text}}</div>
+                                                        <div style="margin-top:-10px;">
+                                                            <button md-icon-button (click)=" delete(head3.H_ID,i)" [md-tooltip]="remove " [tooltip-position]="point ">
+                                                                <md-icon>delete_forever</md-icon>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
-                                                    <div *ngIf="flagAdd[i]==false" (click)="openDialogHead(head2.H_ID,currentPosition,3,i)" fxFlex="10">
+                                                    <div (click)="openDialogHead(head2.H_ID,currentPosition,3,i)" fxFlex="10">
                                                         <button md-icon-button>
                                                             <md-icon>add</md-icon>
                                                         </button>

@@ -7,7 +7,7 @@ import { CustomValidators } from 'ng2-validation';
 import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput,MdInputDirective, MdDialog, MdDialogRef } from '@angular/material';
 import { GlobalServiceRef} from '../../shared/GlobalServiceRef'
 
-import { InsertDialog,InsertDialog2,InsertDialog3 } from '../../shared/dialog/dialog.component';
+import {ConfirmDialog, InsertDialog,InsertDialog2,InsertDialog3 } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-evaform',
@@ -20,12 +20,17 @@ export class EvaformComponent implements OnInit {
     @Input() EvaId : number;
     @Input() PeriodId : number;
     @Output() back = new EventEmitter();
+    //tooltip
+    point: TooltipPosition = 'below';
+    remove: string = 'Delete';
+    adddetail : string = 'Add Detail';
+    addtopic : string = 'Add Topic';
+
     getEva = [];
     position = [];
     header = [];
     detail = [];
     flag = [];
-    flagAdd = [];
     score = [1,2,3,4,5];
     currentPosition : number;
     currentScore = [];
@@ -42,8 +47,7 @@ export class EvaformComponent implements OnInit {
     countHeader : number = 0;
     countHead3 : number;
     countHead3full : number =0;
-    flagCreate : boolean = false;
-    headdata
+    openDelete : boolean = true;
     public form2: FormGroup;
     public form3: FormGroup;
     constructor(private router : Router, public http:Http ,private fb: FormBuilder, public dialog: MdDialog) { }
@@ -61,7 +65,6 @@ export class EvaformComponent implements OnInit {
                 for(let data in this.header)
                 {
                     this.flag[data] = false;
-                    this.flagAdd[data] =false;
                     if(this.header[data].H_Level == 1)
                         this.countHeader++;
                     else if(this.header[data].H_Level == 2)
@@ -92,7 +95,6 @@ export class EvaformComponent implements OnInit {
             for(let data in this.header)
             {
                 this.flag[data] = false;
-                this.flagAdd[data] =false;
                 if(this.header[data].H_Level == 1)
                     this.countHeader++;
                 else if(this.header[data].H_Level == 2)
@@ -113,7 +115,6 @@ export class EvaformComponent implements OnInit {
     }
     onSubmit(Id : MdSelect){
         this.callHeader(Id);
-        //this.back.emit(this.PeriodId);
     }
     openDialogHead(HeadId:number, PositionNo:number, Level:number, i:number) {
         if(Level == 1)
@@ -144,10 +145,6 @@ export class EvaformComponent implements OnInit {
                         let TextEng = res[1];
                         this.insertHeader2(i,HeadId,PositionNo,TextThai,TextEng);
                     }
-                    else
-                    {
-                        this.callflagAdd(i)
-                    }
                 }
                 catch(ee)
                 {}
@@ -163,10 +160,6 @@ export class EvaformComponent implements OnInit {
                         let TextThai = res[0];
                         this.insertHeader3(i,HeadId,PositionNo,TextThai);
                     }
-                    else
-                    {
-                        this.callflagAdd(i)
-                    }
                 }
                 catch(ee)
                 {}
@@ -175,7 +168,6 @@ export class EvaformComponent implements OnInit {
     }
     insertHeader1(HeadId:number, PositionNo:number ,TextThai: string,TextEng: string,TextAlias : string)
     {
-        this.callflagHead1(true);
         console.log(HeadId+" "+PositionNo+" "+this.EvaId+" "+TextThai+" "+TextEng+" "+TextAlias)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:this.EvaId,Text:TextThai,Text_Eng:TextEng,Alias:TextAlias});
@@ -186,141 +178,141 @@ export class EvaformComponent implements OnInit {
             this.callHeader(PositionNo);
         });
     }
-    // insertHeader1(HeadId:number, PositionNo:number ,TextThai: string,TextEng: string,TextAlias : string)
-    // {
-        //     this.callflagHead1(true);
-        //     console.log(HeadId+" "+PositionNo+" "+this.EvaId+" "+TextThai.value+" "+TextEng.value+" "+TextAlias.value)
-        //     let headers = new Headers({ 'Content-Type': 'application/json' });
-        //     let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:this.EvaId,Text:TextThai.value,Text_Eng:TextEng.value,Alias:TextAlias.value});
-        //     this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
-            //         headers: headers
-            //     }).subscribe((res: Response) => {
-                //         let result = res.json();
-                //     });
-                //     this.callHeader(PositionNo);
-                //     this.form1.reset();
-                // }
-                insertHeader2(i:number,HeadId:number, PositionNo:number,TextThai: string,TextEng: string)
+    insertHeader2(i:number,HeadId:number, PositionNo:number,TextThai: string,TextEng: string)
+    {
+        console.log(HeadId+" "+PositionNo+" "+this.EvaId+" "+TextThai+" "+TextEng)
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:this.EvaId,Text:TextThai,Text_Eng:TextEng,Alias:"-"});
+        this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
+            headers: headers
+        }).subscribe((res: Response) => {
+            let result = res.json();
+            this.callHeader(PositionNo);
+        });
+    }
+    insertHeader3(i:number,HeadId:number, PositionNo:number ,TextThai: string)
+    {
+        this.currentScore = [];
+        this.currentId = [];
+        this.getScoreAndId = [];
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:this.EvaId,Text:TextThai,Text_Eng:"-",Alias:"-"});
+        this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
+            headers: headers
+        }).subscribe((res: Response) => {
+            let result = res.json();
+            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+PositionNo+"/"+this.EvaId)
+            .subscribe(res => {this.header = res.json();
+                this.countHeader = 0;
+                this.countHead3full = 0;
+                for(let data in this.header)
                 {
-                    this.callflagAdd(i);
-                    console.log(HeadId+" "+PositionNo+" "+this.EvaId+" "+TextThai+" "+TextEng)
-                    let headers = new Headers({ 'Content-Type': 'application/json' });
-                    let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:this.EvaId,Text:TextThai,Text_Eng:TextEng,Alias:"-"});
-                    this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
-                        headers: headers
-                    }).subscribe((res: Response) => {
-                        let result = res.json();
-                        this.callHeader(PositionNo);
-                    });
-                }
-                insertHeader3(i:number,HeadId:number, PositionNo:number ,TextThai: string)
-                {
-                    this.currentScore = [];
-                    this.currentId = [];
-                    this.getScoreAndId = [];
-                    this.callflagAdd(i);
-                    let headers = new Headers({ 'Content-Type': 'application/json' });
-                    let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:this.EvaId,Text:TextThai,Text_Eng:"-",Alias:"-"});
-                    this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
-                        headers: headers
-                    }).subscribe((res: Response) => {
-                        let result = res.json();
-                        this.http.get(GlobalServiceRef.URLService+"/Header/All/"+PositionNo+"/"+this.EvaId)
-                        .subscribe(res => {this.header = res.json();
-                            this.countHeader = 0;
-                            this.countHead3full = 0;
-                            for(let data in this.header)
-                            {
-                                this.flagAdd[data] =false;
-                                if(this.header[data].H_Level == 1)
-                                    this.countHeader++;
-                                else if(this.header[data].H_Level == 2)
-                                {
-                                    //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                                    this.subTotalScore[data] = "N/A";
-                                }
-                                else if(this.header[data].H_Level == 3)
-                                {
-                                    //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
-                                    this.currentScore[data] = this.header[data].point;
-                                    this.currentId[data] = this.header[data].H_ID;
-                                    this.countHead3full++;
-                                }
-                            }
-                        });
-                    });
-                }
-                callflag(get : number)
-                {
-                    if(this.flag[get] == true)
-                        this.flag[get] = false;
-                    else
-                        this.flag[get] = true;
-
-                }
-                callflagHead1(flag : boolean)
-                {
-                    if(this.flagCreate == true)
-                        this.flagCreate = false;
-                    else
-                        this.flagCreate = true;
-                }
-                callflagAdd(get : number)
-                {
-                    if(this.flagAdd[get] == true)
-                        this.flagAdd[get] = false;
-                    else
+                    this.flag[data] = false;
+                    this.flag[i] = true;
+                    if(this.header[data].H_Level == 1)
+                        this.countHeader++;
+                    else if(this.header[data].H_Level == 2)
                     {
-                        this.flagAdd[get] = true;
+                        //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
+                        this.subTotalScore[data] = "N/A";
                     }
-
-                }
-                passScore(pass : boolean)
-                {
-                    if(pass == true)
-                        this.activeTabIndex++;
-                    else
-                        this.activeTabIndex--;
-                }
-                finishEvaluate()
-                {
-                    for(let data in this.currentScore)
+                    else if(this.header[data].H_Level == 3)
                     {
-                        this.getScoreAndId.push({Id:this.currentId[data],Score:this.currentScore[data],EvaId:this.EvaId})
+                        //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
+                        this.currentScore[data] = this.header[data].point;
+                        this.currentId[data] = this.header[data].H_ID;
+                        this.countHead3full++;
                     }
-                    let headers = new Headers({ 'Content-Type': 'application/json' });
-                    let body : string = JSON.stringify(this.getScoreAndId);
-                    this.http.put(GlobalServiceRef.URLService+"/Header/Update",body,{
-                        headers: headers
-                    }).subscribe((res: Response) => {
-                        console.log("Complete")
-                    });
-                    console.log(body)
-                    this.currentScore = [];
-                    this.currentId = [];
-                    this.getScoreAndId = [];
-                    this.back.emit(this.PeriodId);
                 }
-                ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-                    for (let propName in changes) {
-                        this.countHead3 = 0;
-                        for(let data in this.currentScore)
+            });
+        });
+    }
+    delete(H_Id : number, indexHead : number){
+        let dialogRef = this.dialog.open(ConfirmDialog);
+        dialogRef.componentInstance.SetDialogType("delete");
+        dialogRef.afterClosed().subscribe(result => {
+            if(result === "ok")
+            {
+                this.http.delete(GlobalServiceRef.URLService+"/Header/Delete/"+H_Id)
+                .subscribe((res: Response) => {
+                    if(res.ok){
+                        if(indexHead != 0)
                         {
-                            if(this.currentScore[data] != 0)
-                                this.countHead3++;
+                            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+this.currentPosition+"/"+this.EvaId)
+                            .subscribe(res => {this.header = res.json();
+                                this.countHeader = 0;
+                                for(let data in this.header)
+                                {
+                                    this.flag[data] = false;
+                                    this.flag[indexHead] = true;
+                                    if(this.header[data].H_Level == 1)
+                                        this.countHeader++;
+                                }
+                            });
                         }
-                        console.log(this.countHead3+" "+this.countHead3full)
+                        else
+                        {
+                             this.callHeader(this.currentPosition);
+                        }
                     }
-                }
-                call()
-                {
-                    this.countHead3 = 0;
-                    for(let data in this.currentScore)
-                    {
-                        if(this.currentScore[data] != 0)
-                            this.countHead3++;
-                    }
-                    console.log(this.countHead3+" "+this.countHead3full)
-                }
-
+                });
             }
+        });
+    }
+    callflag(get : number)
+    {
+        if(this.flag[get] == false)
+            this.flag[get] = true;
+        else
+            this.flag[get] = false;
+
+    }
+    passScore(pass : boolean)
+    {
+        if(pass == true)
+            this.activeTabIndex++;
+        else
+            this.activeTabIndex--;
+    }
+    finishEvaluate()
+    {
+        for(let data in this.currentScore)
+        {
+            this.getScoreAndId.push({Id:this.currentId[data],Score:this.currentScore[data],EvaId:this.EvaId})
+        }
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body : string = JSON.stringify(this.getScoreAndId);
+        this.http.put(GlobalServiceRef.URLService+"/Header/Update",body,{
+            headers: headers
+        }).subscribe((res: Response) => {
+            console.log("Complete")
+        });
+        console.log(body)
+        this.currentScore = [];
+        this.currentId = [];
+        this.getScoreAndId = [];
+        this.back.emit(this.PeriodId);
+    }
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+        for (let propName in changes) {
+            this.countHead3 = 0;
+            for(let data in this.currentScore)
+            {
+                if(this.currentScore[data] != 0)
+                    this.countHead3++;
+            }
+            console.log(this.countHead3+" "+this.countHead3full)
+        }
+    }
+    call()
+    {
+        this.countHead3 = 0;
+        for(let data in this.currentScore)
+        {
+            if(this.currentScore[data] != 0)
+                this.countHead3++;
+        }
+        console.log(this.countHead3+" "+this.countHead3full)
+    }
+
+}

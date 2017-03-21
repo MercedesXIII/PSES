@@ -1,0 +1,132 @@
+<!-- head data -->
+<div>
+    <md-grid-list *ngFor="let data of getEva" [cols]="fixedCols" [rowHeight]="fixedRowHeight">
+        <md-grid-tile [colspan]="3" [rowspan]="1" [style.background]="color ">
+            <div class="header">First Name</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.EmployeeFirstName}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Last Name</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.EmployeeLastName}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Group of Staff</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.GroupOfStaff}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Customer</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2">
+            <div class="detail">{{data.CustomerCompanyAlias}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Project Code</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.ProjectCode}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Project Type</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.ProjectType}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Evalute Term</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.EvaTerm}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Proj.Duration</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.StartDatePlan+"-"+data.FinishDatePlan}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Role & Responsible</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.Function}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Evaluator</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="9" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">{{data.EvaluatorFirstName+" "+data.EvaluatorLastName}}</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
+            <div class="header">Filter By</div>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
+            <div class="detail">Mercedes</div>
+        </md-grid-tile>
+    </md-grid-list>
+    <!-- end head data -->
+</div>
+<!-- Table -->
+<md-card>
+    <hr>
+    <div fxLayoutAlign="start center" fxFlex="100" style="margin-top: 8px; margin-bottom: 8px;">
+        <div fxFlex="70" align="center" style="font-weight: bold;">Topic</div>
+        <div fxFlex="15"></div>
+        <div align="center" style="font-weight: bold;">Score</div>
+    </div>
+    <hr>
+    <div *ngFor="let head of header; let k = index">
+        <div *ngIf="head.H_Level==1" fxFlex="100">
+            <div fxLayout="row " fxLayoutAlign="start center" class="ml-1" fxFlex="100">
+                <div fxFlex="3"></div>
+                <div fxFlex="79">
+                    <p style="font-size: 19px;">{{head.Text+"("+head.Text_Eng+")"}}</p>
+                </div>
+                <div>
+                    <input class="ml-1 mr-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" [(ngModel)]="finalTotalScore[k]">
+                </div>
+            </div>
+            <div *ngFor="let head2 of header; let i=index ">
+                <div *ngIf=" head2.H_Level==2 && head2.Parent==head.H_ID " fxFlex="100">
+                    <div fxLayout="row " fxLayoutAlign="start center " fxFlex="100">
+                        <div fxFlex="3"></div>
+                        <div fxFlex="5">
+                            <button *ngIf="flag[i]==false" (click)="callflag(i)" md-icon-button>
+                                <md-icon>add_circle_outline</md-icon>
+                            </button>
+                            <button *ngIf="flag[i]==true" (click)="callflag(i)" md-icon-button>
+                                <md-icon>remove_circle_outline</md-icon>
+                            </button>
+                        </div>
+                        <div fxFlex="76">{{head2.Text+"("+head2.Text_Eng+")"}}</div>
+                        <div align="center">
+                            <input class="mr-1" style="width: 50px; text-align: center;" disabled="disabled" [(ngModel)]="subTotalScore[i]">
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center " fxFlex="100" style="margin-left: 6%">
+                        <div *ngIf="flag[i]==true" fxFlex="100">
+                            <div *ngFor="let head3 of header; let j=index;" fxLayout="row" fxFlex="100">
+                                <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxLayout="row " fxFlex="100" style="margin-top: 10px;">
+                                    <div fxFlex="3">
+                                        <md-icon>play_arrow</md-icon>
+                                    </div>
+                                    <div fxFlex="80">{{head3.Text}}</div>
+                                    <div>
+                                        <input class="mr-1" style="width: 50px; text-align: center;" disabled="disabled" [(ngModel)]="currentScore[j]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <md-textarea placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</md-card>

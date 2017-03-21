@@ -8,7 +8,7 @@ import { RequestComponent } from './request/request.component'
 
 export const AppRoutes: Routes = [{
     path: '',
-    redirectTo: 'evaluation',
+    redirectTo: 'home',
     pathMatch: 'full',
   },{
   path: '',
@@ -16,6 +16,9 @@ export const AppRoutes: Routes = [{
   children: [{
     path: 'home',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },{
+    path: 'history',
+    loadChildren: './history/history.module#HistoryModule'
   },{
     path: 'evaluation',
     loadChildren: './evaluation/evaluation.module#EvaluationModule'

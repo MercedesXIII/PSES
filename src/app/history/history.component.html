@@ -1,0 +1,20 @@
+<md-card *ngIf="showList == 1">
+    <md-card-title style="font-size : 24px ">{{'History' | translate}}</md-card-title>
+    <hr>
+    <md-card-content>
+        <app-historylist (outEvaId)=getEvaId($event)></app-historylist>
+    </md-card-content>
+    <hr>
+</md-card>
+<!-- <app-historydetail></app-historydetail> -->
+<md-card *ngIf="showList == 2">
+    <md-card-title style="font-size : 24px ">Detail</md-card-title>
+    <hr>
+    <md-card-content>
+        <button md-icon-button (click)="back(true) ">
+            <md-icon>arrow_back</md-icon>
+        </button>
+        <app-historydetail [EvaId]="EvaId"></app-historydetail>
+    </md-card-content>
+    <hr>
+</md-card>

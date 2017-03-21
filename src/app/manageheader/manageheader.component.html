@@ -3,7 +3,7 @@
     <hr>
     <md-card-content>
         <div fxLayout="row" fxLayoutAlign="start center" class="mb-1">
-            <md-select class="ml-1 mt-1" placeholder="Period" [(ngModel)]="currentPosition" style="width: 23%;">
+            <md-select class="ml-1 mt-1" placeholder="Role" [(ngModel)]="currentPosition" style="width: 23%;">
                 <md-option *ngFor="let role of position" [value]="role.Part2ID">
                     {{ role.Function }}
                 </md-option>
@@ -19,14 +19,14 @@
                 <div *ngFor="let head of header; let k = index">
                     <div *ngIf="head.H_Level==1">
                         <md-tab>
-                            <template md-tab-label>{{head.Alias}}</template>
+                            <template md-tab-label>{{head.Text}}</template>
                             <md-card-content>
                                 <div fxLayout="row " fxLayoutAlign="start center" class="ml-1">
                                     <p class="mr-1" style="font-size: 19px;">{{head.Text+"("+head.Text_Eng+")"}}</p>
                                     <button md-icon-button (click)="openDialogHead(head.H_ID,currentPosition,2,k)" [md-tooltip]="adddetail " [tooltip-position]="point ">
                                         <md-icon>add</md-icon>
                                     </button>
-                                    <button md-icon-button (click)="delete(head.H_ID,0)" [md-tooltip]="remove " [tooltip-position]="point ">
+                                    <button md-icon-button (click)="delete(head.H_ID,k)" [md-tooltip]="remove " [tooltip-position]="point ">
                                         <md-icon>delete_forever</md-icon>
                                     </button>
                                 </div>
@@ -50,7 +50,7 @@
                                             </div>
                                             <div fxFlex="76">{{head2.Text+"("+head2.Text_Eng+")"}}</div>
                                             <div *ngIf="flag[i]==false" align="center">
-                                                <button md-icon-button (click)=" delete(head2.H_ID,0)" [md-tooltip]="remove " [tooltip-position]="point ">
+                                                <button md-icon-button (click)=" delete(head2.H_ID,i)" [md-tooltip]="remove " [tooltip-position]="point ">
                                                     <md-icon>delete_forever</md-icon>
                                                 </button>
                                             </div>
@@ -71,7 +71,7 @@
                                                     </div>
                                                 </div>
                                                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
-                                                    <div (click)="openDialogHead(head2.H_ID,currentPosition,3,i)" fxFlex="10">
+                                                    <div (click)="openDialogHead(head2.H_ID,currentPosition,3,j)" fxFlex="10">
                                                         <button md-icon-button>
                                                             <md-icon>add</md-icon>
                                                         </button>

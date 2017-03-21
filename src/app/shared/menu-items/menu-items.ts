@@ -29,6 +29,13 @@ const MENUITEMS = [
   },
 
   {
+    state: 'history',
+    name: 'History',
+    type: 'link',
+    icon: 'history'
+  },
+
+  {
     state: 'evaluation',
     name: 'Evaluation',
     type: 'link',

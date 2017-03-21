@@ -179,24 +179,7 @@ export class ManageheaderComponent implements OnInit {
                 this.http.delete(GlobalServiceRef.URLService+"/Header/Delete/"+H_Id)
                 .subscribe((res: Response) => {
                     if(res.ok){
-                        if(indexHead != 0)
-                        {
-                            this.http.get(GlobalServiceRef.URLService+"/Header/GetHeader/"+this.currentPosition)
-                            .subscribe(res => {this.header = res.json();
-                                this.countHeader = 0;
-                                for(let data in this.header)
-                                {
-                                    this.flag[data] = false;
-                                    this.flag[indexHead] = true;
-                                    if(this.header[data].H_Level == 1)
-                                        this.countHeader++;
-                                }
-                            });
-                        }
-                        else
-                        {
-                             this.callHeader(this.currentPosition);
-                        }
+                        this.header.splice(indexHead, 1);
                     }
                 });
             }

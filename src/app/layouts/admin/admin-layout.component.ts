@@ -26,7 +26,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 
   constructor(public menuItems: MenuItems, private router: Router, private translate: TranslateService , public http: Http) {
     let browserLang: string = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+    translate.use(browserLang.match(/en|en/) ? browserLang : 'en');
     //translate.use('fr');
     this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'));
   }
@@ -43,7 +43,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   }
 
   isOver(): boolean {
-    if(this.url === '/apps/messages' || this.url === '/apps/calendar' || this.url === '/apps/media') {
+    if(this.url === '/evaluation' || this.url === '/manageheader' || this.url === '/history' ) {
       return true;
     } else {
       return window.matchMedia(`(max-width: 960px)`).matches;

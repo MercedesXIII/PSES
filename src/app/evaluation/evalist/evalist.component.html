@@ -49,7 +49,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="7" prop="EmployeeFirstName">
+        <ngx-datatable-column [flexGrow]="6" prop="EmployeeFirstName">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
@@ -69,7 +69,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="7" prop="Function">
+        <ngx-datatable-column [flexGrow]="6" prop="Function">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
             </template>
@@ -89,16 +89,25 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="4">
+        <ngx-datatable-column [flexGrow]="5">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">Action</div>
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
-                    <button md-icon-button [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
+                    <button *ngIf="success==0" disabled="success==0" md-icon-button [md-tooltip]="wait" [tooltip-position]="position">
+                        <md-icon>radio_button_checked</md-icon>
+                    </button>
+                    <button *ngIf="success==1" md-icon-button style="color: green" [md-tooltip]="finished" [tooltip-position]="position">
+                        <md-icon>radio_button_checked</md-icon>
+                    </button>
+                    <button *ngIf="success==2" md-icon-button style="color: red" [md-tooltip]="unfinished" [tooltip-position]="position">
+                        <md-icon>radio_button_checked</md-icon>
+                    </button>
+                    <button md-icon-button style="color: blue" [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
-                    <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">
+                    <button md-icon-button style="color: red" (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">
                         <md-icon>delete_forever</md-icon>
                     </button>
                 </div>

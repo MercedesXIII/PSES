@@ -34,7 +34,6 @@ export class EvaformComponent implements OnInit {
     score = [1,2,3,4,5,6,7,8,9,10];
     currentPosition : number;
     currentScore = [];
-    currentId = [];
     currentScoreId = [];
     curentParent = [];
     getScoreAndId = [];
@@ -61,7 +60,7 @@ export class EvaformComponent implements OnInit {
         this.http.get(GlobalServiceRef.URLService+"/Eva/EvaData/"+this.EvaId)
         .subscribe(res => {this.getEva = res.json();
             this.currentPosition = this.getEva[0].Part2ID;
-            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+this.currentPosition+"/"+this.EvaId)
+            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+this.currentPosition+"/"+this.EvaId+"/1")
             .subscribe(res => {
                 this.header = res.json();
                 this.countHeader = 0;
@@ -83,21 +82,20 @@ export class EvaformComponent implements OnInit {
                     {
                         //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
                         this.currentScore[data] = this.header[data].point;
-                        this.currentId[data] = this.header[data].H_ID;
                         this.curentParent[data] = this.header[data].Parent;
                         this.currentScoreId[data] = this.header[data].Score_ID;
                         this.countHead3full++;
                     }
                 }
+                this.call()
             });
         });
     }
     callHeader(id)
     {
         //this.currentScore = [];
-        this.currentId = [];
-        this.getScoreAndId = [];
-        this.http.get(GlobalServiceRef.URLService+"/Header/All/"+id+"/"+this.EvaId)
+        //this.getScoreAndId = [];
+        this.http.get(GlobalServiceRef.URLService+"/Header/All/"+id+"/"+this.EvaId+"/2")
         .subscribe(res => {this.header = res.json();
             this.countHeader = 0;
             this.countHead3full = 0;
@@ -118,7 +116,6 @@ export class EvaformComponent implements OnInit {
                 {
                     //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
                     this.currentScore[data] = this.header[data].point;
-                    this.currentId[data] = this.header[data].H_ID;
                     this.curentParent[data] = this.header[data].Parent;
                     this.currentScoreId[data] = this.header[data].Score_ID;
                     this.countHead3full++;
@@ -207,15 +204,14 @@ export class EvaformComponent implements OnInit {
     insertHeader3(i:number,HeadId:number, PositionNo:number ,TextThai: string)
     {
         //this.currentScore = [];
-        this.currentId = [];
-        this.getScoreAndId = [];
+        //this.getScoreAndId = [];
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Eva_Id:this.EvaId,Text:TextThai,Text_Eng:"-",Alias:"-"});
         this.http.put(GlobalServiceRef.URLService+"/Header/Insert",body,{
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
-            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+PositionNo+"/"+this.EvaId)
+            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+PositionNo+"/"+this.EvaId+"/2")
             .subscribe(res => {this.header = res.json();
                 this.countHeader = 0;
                 this.countHead3full = 0;
@@ -237,7 +233,6 @@ export class EvaformComponent implements OnInit {
                     {
                         //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
                         this.currentScore[data] = this.header[data].point;
-                        this.currentId[data] = this.header[data].H_ID;
                         this.curentParent[data] = this.header[data].Parent;
                         this.currentScoreId[data] = this.header[data].Score_ID;
                         this.countHead3full++;
@@ -278,9 +273,21 @@ export class EvaformComponent implements OnInit {
     }
     finishEvaluate()
     {
-        for(let data in this.currentScore)
+        for(let data in this.header)
         {
-            this.getScoreAndId.push({Id:this.currentId[data],Score:this.currentScore[data],EvaId:this.EvaId})
+            if(this.header[data].H_Level == 1)
+            {
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.finalTotalScore[data],EvaId:this.EvaId})
+            }
+            else if(this.header[data].H_Level == 2)
+            {
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.subTotalScore[data],EvaId:this.EvaId})
+            }
+            else if(this.header[data].H_Level == 3)
+            {
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.currentScore[data],EvaId:this.EvaId})
+            }
+
         }
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify(this.getScoreAndId);
@@ -291,7 +298,6 @@ export class EvaformComponent implements OnInit {
         });
         console.log(body)
         this.currentScore = [];
-        this.currentId = [];
         this.getScoreAndId = [];
         this.back.emit(this.PeriodId);
     }

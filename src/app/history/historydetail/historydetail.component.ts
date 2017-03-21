@@ -58,7 +58,7 @@ export class HistorydetailComponent implements OnInit {
         this.http.get(GlobalServiceRef.URLService+"/Eva/EvaData/"+this.EvaId)
         .subscribe(res => {this.getEva = res.json();
             this.currentPosition = this.getEva[0].Part2ID;
-            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+this.currentPosition+"/"+this.EvaId)
+            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+this.currentPosition+"/"+this.EvaId+"/1")
             .subscribe(res => {
                 this.header = res.json();
                 this.countHeader = 0;
@@ -159,7 +159,7 @@ export class HistorydetailComponent implements OnInit {
         this.currentScore = [];
         this.currentId = [];
         this.getScoreAndId = [];
-        this.back.emit(this.PeriodId);
+        //this.back.emit(this.PeriodId);
     }
     ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
         for (let propName in changes) {

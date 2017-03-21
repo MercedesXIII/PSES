@@ -23,14 +23,20 @@ export class EvalistComponent implements OnInit {
     //ToolTlip
     position: TooltipPosition = 'below';
     evaluate: string = 'Evaluate';
-    add: string = 'Add New Evaluate'
+    add: string = 'Add New Evaluate';
     remove: string = 'Delete';
+    finished: string = 'Finished';
+    unfinished: string = 'Unfinished';
+    wait : string = 'Wait';
+
+
     showPeriod : boolean = false;
     currentPeriod;
     listeva = [];
     period = [];
     Duration = [];
     DurationId = [];
+    success = 1;
     @Input() PeriodId :string;
     @Output() outPeriodId = new EventEmitter();
     @Output() outPeriodId2 = new EventEmitter();

@@ -294,12 +294,12 @@ export class EvaformComponent implements OnInit {
         this.http.put(GlobalServiceRef.URLService+"/Header/Update",body,{
             headers: headers
         }).subscribe((res: Response) => {
-            console.log("Complete")
+            console.log("Complete");
+            this.back.emit(this.PeriodId);
         });
         console.log(body)
         this.currentScore = [];
         this.getScoreAndId = [];
-        this.back.emit(this.PeriodId);
     }
     call()
     {

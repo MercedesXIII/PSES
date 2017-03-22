@@ -102,8 +102,8 @@ export class GetevalistComponent implements OnChanges {
                     if(res.ok){
                         console.log("done");
                     }
+                    this.back.emit(this.PeriodId);
                 });
             }
-            this.back.emit(this.PeriodId);
         }
     }

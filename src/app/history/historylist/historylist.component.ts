@@ -34,7 +34,13 @@ export class HistorylistComponent implements OnInit {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
                 this.http.get(GlobalServiceRef.URLService+"/Eva/Eva/"+this.LoginResultJson['EmployeeID']+"/all")
-                .subscribe(res => this.listeva = res.json());
+                .subscribe(res => {for(let data of res.json())
+                    {
+                        if(data.EvaStatus == 1)
+                        {
+                            this.listeva.push(data)
+                        }
+                    }});
     }
     create(flag : boolean)
     {

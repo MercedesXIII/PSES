@@ -60,7 +60,8 @@ export class EvalistComponent implements OnInit {
                 this.showPeriod = true;
                 this.currentPeriod=this.PeriodId;
                 this.http.get(GlobalServiceRef.URLService+"/Eva/Eva/"+this.LoginResultJson['EmployeeID']+"/"+this.PeriodId)
-                .subscribe(res => this.listeva = res.json());
+                .subscribe(res => {this.listeva = res.json();
+                    console.log(JSON.stringify(this.listeva))});
             }
             else
             {
@@ -131,6 +132,20 @@ export class EvalistComponent implements OnInit {
     }
     passEvaId(event,row,value,period){
         this.outEvaId.emit(value["Eva_ID"]);
+    }
+    changeStatus(event,row,value)
+    {
+        console.log(value["EvaStatus"]);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body : string = JSON.stringify(value["Eva_ID"]);
+        this.http.put(GlobalServiceRef.URLService+"/Header/EvaStatus",body,{
+            headers: headers
+        }).subscribe(res => {console.log("complete")
+        if(value["EvaStatus"] == 1)
+            value["EvaStatus"] = 2
+        else
+            value["EvaStatus"] = 1})
+        
     }
 
 }

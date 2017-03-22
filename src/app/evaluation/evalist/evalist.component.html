@@ -95,19 +95,20 @@
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
-                    <button *ngIf="success==0" disabled="success==0" md-icon-button [md-tooltip]="wait" [tooltip-position]="position">
+                    <button *ngIf="row.EvaStatus==null" [disabled]="row.EvaStatus==null" md-icon-button [md-tooltip]="wait" [tooltip-position]="position">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
-                    <button *ngIf="success==1" md-icon-button style="color: green" [md-tooltip]="finished" [tooltip-position]="position">
+                    <button *ngIf="row.EvaStatus==1" md-icon-button style="color: green" [md-tooltip]="finished" [tooltip-position]="position" (click)="changeStatus
+($event, value, row)">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
-                    <button *ngIf="success==2" md-icon-button style="color: red" [md-tooltip]="unfinished" [tooltip-position]="position">
+                    <button *ngIf="row.EvaStatus==2" md-icon-button style="color: red" [md-tooltip]="unfinished" [tooltip-position]="position" (click)="changeStatus($event, value, row)">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
-                    <button md-icon-button style="color: blue" [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
+                    <button md-icon-button [disabled]="row.EvaStatus==1" [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
-                    <button md-icon-button style="color: red" (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">
+                    <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">
                         <md-icon>delete_forever</md-icon>
                     </button>
                 </div>
@@ -130,7 +131,17 @@
         <ngx-datatable-column [width]="50" [minWidth]="50">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="float: left; " fxLayout="column" fxLayoutAlign="end">
-                    <button md-icon-button [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
+                    <button *ngIf="row.EvaStatus==null" [disabled]="row.EvaStatus==null" md-icon-button [md-tooltip]="wait" [tooltip-position]="position">
+                        <md-icon>radio_button_checked</md-icon>
+                    </button>
+                    <button *ngIf="row.EvaStatus==1" md-icon-button style="color: green" [md-tooltip]="finished" [tooltip-position]="position" (click)="changeStatus
+($event, value, row)">
+                        <md-icon>radio_button_checked</md-icon>
+                    </button>
+                    <button *ngIf="row.EvaStatus==2" md-icon-button style="color: red" [md-tooltip]="unfinished" [tooltip-position]="position" (click)="changeStatus($event, value, row)">
+                        <md-icon>radio_button_checked</md-icon>
+                    </button>
+                    <button md-icon-button [disabled]="row.EvaStatus==1" [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
                     <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">

@@ -42,7 +42,7 @@ export function createTranslateLoader(http: Http) {
   imports: [
     BrowserModule,
     SharedModule,
-    RouterModule.forRoot(AppRoutes),
+    RouterModule.forRoot(AppRoutes,{useHash:true}),
     FormsModule,
     HttpModule,
     TranslateModule.forRoot({

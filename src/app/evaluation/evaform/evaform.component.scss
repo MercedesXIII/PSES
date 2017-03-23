@@ -1,12 +1,17 @@
 .header {
-    color: whitesmoke;
-    position: absolute;
-    left: 5px;
+    background-color: #faffff;
+    border: solid #fafafa 1px;
+    height: 45px;
 }
 
 .detail {
-    position: absolute;
-    left: 5px;
+    background-color: #95E86B;
+    border: solid #fafafa 1px;
+    height: 45px;
+}
+
+.all {
+    border: solid #fafafa 1px;
 }
 
 input {

@@ -17,6 +17,9 @@ export const AppRoutes: Routes = [{
     path: 'home',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },{
+    path: 'approve',
+    loadChildren: './approve/approve.module#ApproveModule'
+  },{
     path: 'history',
     loadChildren: './history/history.module#HistoryModule'
   },{

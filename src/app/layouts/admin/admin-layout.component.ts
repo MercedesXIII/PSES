@@ -43,11 +43,11 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   }
 
   isOver(): boolean {
-    if(this.url === '/evaluation' || this.url === '/manageheader' || this.url === '/history' ) {
-      return true;
-    } else {
+    // if(this.url === '/evaluation' || this.url === '/manageheader' || this.url === '/history' || this.url === '/approve') {
+    //   return true;
+    // } else {
       return window.matchMedia(`(max-width: 960px)`).matches;
-    }
+    //}
   }
 
   addMenuItem(): void {

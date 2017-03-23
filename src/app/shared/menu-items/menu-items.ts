@@ -27,7 +27,12 @@ const MENUITEMS = [
     type: 'link',
     icon: 'home'
   },
-
+  {
+    state: 'approve',
+    name: 'Approve',
+    type: 'link',
+    icon: 'visibility'
+  },
   {
     state: 'history',
     name: 'History',

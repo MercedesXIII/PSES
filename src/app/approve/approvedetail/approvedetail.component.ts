@@ -7,16 +7,14 @@ import { CustomValidators } from 'ng2-validation';
 import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput,MdInputDirective, MdDialog, MdDialogRef } from '@angular/material';
 import { GlobalServiceRef} from '../../shared/GlobalServiceRef'
 
-
-
 @Component({
-  selector: 'app-historydetail',
-  templateUrl: './historydetail.component.html',
-  styleUrls: ['./historydetail.component.scss']
+  selector: 'app-approvedetail',
+  templateUrl: './approvedetail.component.html',
+  styleUrls: ['./approvedetail.component.scss']
 })
-export class HistorydetailComponent implements OnInit {
+export class ApprovedetailComponent implements OnInit {
 
-    @Input() EvaId : number;
+  @Input() EvaId : number;
     @Output() back = new EventEmitter();
     //tooltip
     point: TooltipPosition = 'below';
@@ -181,5 +179,6 @@ export class HistorydetailComponent implements OnInit {
         }
         console.log(this.countHead3+" "+this.countHead3full)
     }
+
 
 }

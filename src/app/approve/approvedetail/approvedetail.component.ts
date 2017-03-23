@@ -14,7 +14,8 @@ import { GlobalServiceRef} from '../../shared/GlobalServiceRef'
 })
 export class ApprovedetailComponent implements OnInit {
 
-  @Input() EvaId : number;
+    public LoginResultJson: Object;
+    @Input() EvaId : number;
     @Output() back = new EventEmitter();
     //tooltip
     point: TooltipPosition = 'below';
@@ -139,25 +140,6 @@ export class ApprovedetailComponent implements OnInit {
         else
             this.activeTabIndex--;
     }
-    finishEvaluate()
-    {
-        for(let data in this.currentScore)
-        {
-            this.getScoreAndId.push({Id:this.currentId[data],Score:this.currentScore[data],EvaId:this.EvaId})
-        }
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let body : string = JSON.stringify(this.getScoreAndId);
-        this.http.put(GlobalServiceRef.URLService+"/Header/Update",body,{
-            headers: headers
-        }).subscribe((res: Response) => {
-            console.log("Complete")
-        });
-        console.log(body)
-        this.currentScore = [];
-        this.currentId = [];
-        this.getScoreAndId = [];
-        //this.back.emit(this.PeriodId);
-    }
     ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
         for (let propName in changes) {
             this.countHead3 = 0;
@@ -168,6 +150,19 @@ export class ApprovedetailComponent implements OnInit {
             }
             console.log(this.countHead3+" "+this.countHead3full)
         }
+    }
+    approve()
+    {
+        this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
+        console.log(this.LoginResultJson['EmployeeID']+" "+this.EvaId)
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body : string = JSON.stringify({EmpID:this.LoginResultJson['EmployeeID'],EvaID:this.EvaId});
+        this.http.put(GlobalServiceRef.URLService+"/Eva/ApproveStatus",body,{
+            headers: headers
+        }).subscribe(() => {
+            console.log("Complete");
+            //this.back.emit(this.PeriodId);
+        });
     }
     call()
     {

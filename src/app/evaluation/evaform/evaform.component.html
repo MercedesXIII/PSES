@@ -90,24 +90,40 @@
     </div>
 </div>
 <!-- end head data -->
-<div fxLayout="row" fxLayoutAlign="start center" class="mb-1">
-    <md-select class="ml-1 mt-1" placeholder="Role" [(ngModel)]="currentPosition" style="width: 23%;">
-        <md-option *ngFor="let role of position" [value]="role.Part2ID">
-            {{ role.Function }}
-        </md-option>
-    </md-select>
-    <button md-raised-button type="button" color="primary" type="button" class="mt-1 ml-1 mb-1 mr-1" (click)="onSubmit(currentPosition) ">OK</button>
-    <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button [md-tooltip]="addtopic " [tooltip-position]="point ">
-        <md-icon>add</md-icon>
-    </button>
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="27" fxFlex.gt-xs="30" fxFlex="100" fxLayout="row">
+        <div fxFlex="100">
+            <div fxLayoutWrap="wrap" fxLayout="row">
+                <md-select class="ml-1 mr-1 mt-2" placeholder="Role" [(ngModel)]="currentPosition" style="width: 100%;">
+                    <md-option *ngFor="let role of position" [value]="role.Part2ID">
+                        {{ role.Function }}
+                    </md-option>
+                </md-select>
+            </div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" fxLayout="row">
+        <div fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row">
+                <button class="ml-1 mt-1" md-raised-button type="button" color="primary" type="button" (click)="onSubmit(currentPosition) ">OK</button>
+            </div>
+        </div>
+        <div fxFlex="50" style="margin-top: 5%;">
+            <div fxLayoutWrap="wrap" fxLayout="row">
+                <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button [md-tooltip]="addtopic " [tooltip-position]="point ">
+                    <md-icon>add</md-icon>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 <md-card>
     <md-tab-group [(selectedIndex)]="activeTabIndex">
         <div *ngFor="let head of header; let k = index">
             <div *ngIf="head.H_Level==1">
                 <md-tab>
-                    <template md-tab-label>{{head.Text}}</template>
-                    <div fxLayout="row " fxLayoutAlign="start center" class="ml-1">
+                    <template md-tab-label>{{head.Alias}}</template>
+                    <div fxLayout="row " fxLayoutAlign="start center" class="ml-2 mt-1">
                         <div fxLayout.gt-xs="row" fxLayout.gt-sm="column">
                             <div style="font-size: 19px; ">{{head.Text}}</div>
                             <!-- <div style="font-size: 19px; ">{{"("+head.Text_Eng+")"}}</div> -->
@@ -130,7 +146,7 @@
                             </div>
                         </div>
                         <div fxFlex="30">
-                            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 50%">
+                            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 40%">
                                 <b>Score</b>
                             </div>
                         </div>
@@ -138,72 +154,78 @@
                     <hr>
                     <md-card-content>
                         <div *ngFor="let head2 of header; let i=index">
-                            <div *ngIf=" head2.H_Level==2 && head2.Parent==head.H_ID " fxFlex="100 " fxLayout="row " fxLayoutAlign="start start ">
-                                <div fxFlex="5">
-                                    <div fxLayoutWrap="wrap " fxLayout="row " style="margin-top: -3px;">
-                                        <button *ngIf="flag[i]==false " (click)="callflag(i) " md-icon-button md-button-sm>
-                                            <md-icon>add_circle_outline</md-icon>
-                                        </button>
-                                        <button *ngIf="flag[i]==true " (click)="callflag(i) " md-icon-button md-button-sm>
-                                            <md-icon>remove_circle_outline</md-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div fxFlex="64">
-                                    <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 20px">
-                                        {{head2.Text+"( "+head2.Text_Eng+") "}}
-                                    </div>
-                                </div>
-                                <div fxFlex="30">
-                                    <div fxLayout="row " style="margin-left: 50%" fxLayout.gt-xs="row" fxLayout.gt-sm="column">
-                                        <div>
-                                            <input class="mr-1 " style="width: 50px; text-align: center; " disabled="disabled " [(ngModel)]="subTotalScore[i] ">
-                                        </div>
-                                        <div style="margin-top: -3px;">
-                                            <button *ngIf="flag[i]==false && head2.H_ID < 0 " md-icon-button md-button-sm (click)="delete(head2.H_ID,i) " [md-tooltip]="remove " [tooltip-position]="point ">
-                                                <md-icon>delete_forever</md-icon>
+                            <div *ngIf=" head2.H_Level==2 && head2.Parent==head.H_ID">
+                                <div fxFlex="100" fxLayout="row" fxLayoutAlign="start start">
+                                    <div fxFlex="5">
+                                        <div fxLayoutWrap="wrap " fxLayout="row " style="margin-top: -3px; ">
+                                            <button *ngIf="flag[i]==false " (click)="callflag(i) " md-icon-button md-button-sm>
+                                                <md-icon>add_circle_outline</md-icon>
+                                            </button>
+                                            <button *ngIf="flag[i]==true " (click)="callflag(i) " md-icon-button md-button-sm>
+                                                <md-icon>remove_circle_outline</md-icon>
                                             </button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div *ngIf="flag[i]==true ">
-                                <div *ngFor="let head3 of header; let j=index;">
-                                    <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID" fxFlex="100 " fxLayout="row " fxLayoutAlign="start start " class="ml-1">
-                                        <div fxFlex="5">
-                                            <md-icon>play_arrow</md-icon>
+                                    <div fxFlex="64 ">
+                                        <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px; ">
+                                            {{head2.Text+"( "+head2.Text_Eng+") "}}
                                         </div>
-                                        <div fxFlex="64">
-                                            <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 20px">
-                                                {{head3.Text}}
+                                    </div>
+                                    <div fxFlex="30">
+                                        <div fxLayout="row " fxLayoutWrap="wrap" style="margin-left: 40% " fxLayout.xs="column ">
+                                            <div>
+                                                <input class="mr-1 " style="width: 50px; text-align: center; " disabled="disabled " [(ngModel)]="subTotalScore[i] ">
                                             </div>
-                                        </div>
-                                        <div fxFlex="30">
-                                            <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 50%">
-                                                <select class="mr-1 " [(ngModel)]="currentScore[j] " (ngModelChange)="call()" style="width: 50px;">
-                                                    <option [selected] [value]=0>
-                                                        N/A
-                                                    </option>
-                                                    <option *ngFor=" let val of score " [value]="val ">
-                                                        {{val}}
-                                                    </option>
-                                                </select>
-                                                <button style="margin-top:-20px; " md-icon-button md-button-sm *ngIf="head3.H_ID < 0 " (click)=" delete(head3.H_ID,j) " [md-tooltip]="remove " [tooltip-position]="point " tabindex="-1 ">
+                                            <div style="margin-top: -3px; ">
+                                                <button *ngIf="flag[i]==false && head2.H_ID < 0 " md-icon-button md-button-sm (click)="delete(head2.H_ID,i) " [md-tooltip]="remove " [tooltip-position]="point ">
                                                     <md-icon>delete_forever</md-icon>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div fxLayout="row " fxLayoutAlign="start center " fxFlex="100 ">
-                                    <div fxFlex="10 ">
-                                        <button md-icon-button (click)="openDialogHead(head2.H_ID,currentPosition,3,i) ">
-                                            <md-icon>add</md-icon>
-                                        </button>
+                                <div *ngIf="flag[i]==true ">
+                                    <div *ngFor="let head3 of header; let j=index;">
+                                        <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxFlex="100" fxLayout="row " fxLayoutAlign="start start " class="ml-1">
+                                            <div fxFlex="5" style="margin-top: -2px; ">
+                                                <md-icon>play_arrow</md-icon>
+                                            </div>
+                                            <div fxFlex="64">
+                                                <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px ">
+                                                    {{head3.Text}}
+                                                </div>
+                                            </div>
+                                            <div fxFlex="30">
+                                                <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 43% ">
+                                                    <div>
+                                                        <select class="mr-1 " [(ngModel)]="currentScore[j] " (ngModelChange)="call() " style="width: 50px; ">
+                                                            <option [selected] [value]=0>
+                                                                N/A
+                                                            </option>
+                                                            <option *ngFor=" let val of score " [value]="val ">
+                                                                {{val}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <button md-icon-button md-button-sm *ngIf="head3.H_ID < 0 " (click)=" delete(head3.H_ID,j) " [md-tooltip]="remove " [tooltip-position]="point " tabindex="-1 ">
+                                                            <md-icon>delete_forever</md-icon>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <md-textarea placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
+                                    <div fxLayout="row " fxLayoutAlign="start center " fxFlex="100 ">
+                                        <div fxFlex="10 " class="ml-1">
+                                            <button md-icon-button md-button-sm (click)="openDialogHead(head2.H_ID,currentPosition,3,i) ">
+                                                <md-icon>add</md-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <md-textarea placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +245,7 @@
                                     <button *ngIf="activeTabIndex == countHeader-1" md-raised-button color="accent" (click)="call()">
                                         Calculate
                                     </button>
-                                    <button *ngIf="activeTabIndex == countHeader-1" md-raised-button [disabled]="countHead3!=countHead3full" color="primary" (click)="finishEvaluate()">
+                                    <button tyle="margin-top: -3px;" *ngIf="activeTabIndex == countHeader-1" md-raised-button [disabled]="countHead3!=countHead3full" color="primary" (click)="finishEvaluate()">
                                         Confirm
                                     </button>
                                 </div>

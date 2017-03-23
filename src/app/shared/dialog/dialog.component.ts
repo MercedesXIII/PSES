@@ -120,7 +120,7 @@ export class NormalDialog {
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 300; width: 430px;" fxHide.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch"  style="width: 60vw;" >
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -143,7 +143,7 @@ export class NormalDialog {
 	</div></div>`
 })
 export class InsertDialog {;
-	TitleText: string = "Add Toppic";
+	TitleText: string = "Add Topic";
 	OkBtnText: string = "ok";
 	OkBtnColor: string = "primary";
 	CancelBtnText: string = "cancel";
@@ -172,7 +172,7 @@ export class InsertDialog {;
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 300; width: 430px;" fxHide.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 60vw;">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -191,7 +191,7 @@ export class InsertDialog {;
 	</div></div>`
 })
 export class InsertDialog2 {
-	TitleText: string = "Add Toppic";
+	TitleText: string = "Add Topic";
 	OkBtnText: string = "ok";
 	OkBtnColor: string = "primary";
 	CancelBtnText: string = "cancel";
@@ -218,7 +218,7 @@ export class InsertDialog2 {
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 300; width: 430px;" fxHide.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 60vw;">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -233,7 +233,7 @@ export class InsertDialog2 {
 	</div></div>`
 })
 export class InsertDialog3 {
-	TitleText: string = "Add Toppic";
+	TitleText: string = "Add Topic";
 	OkBtnText: string = "ok";
 	OkBtnColor: string = "primary";
 	CancelBtnText: string = "cancel";

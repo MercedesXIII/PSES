@@ -18,8 +18,9 @@ export class ApproveComponent implements OnInit {
 		this.EvaId = Id;
 		this.showList = 2;
 	}
-	back(flag)
+	back(flag:boolean)
 	{
+		if(flag == true)
 		this.showList = 1;
 	}
 

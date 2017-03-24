@@ -129,6 +129,7 @@ export class ManageheaderComponent implements OnInit {
         console.log(HeadId+" "+PositionNo+" "+TextThai+" "+TextEng+" "+TextAlias)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Text:TextThai,Text_Eng:TextEng,Alias:TextAlias});
+
         this.http.put(GlobalServiceRef.URLService+"/Header/InsertHeader",body,{
             headers: headers
         }).subscribe((res: Response) => {
@@ -138,14 +139,13 @@ export class ManageheaderComponent implements OnInit {
     }
     insertHeader2(i:number,HeadId:number, PositionNo:number,TextThai: string,TextEng: string)
     {
-        console.log(HeadId+" "+PositionNo+" "+TextThai+" "+TextEng)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body : string = JSON.stringify({H_ID:HeadId,PositionNo:PositionNo,Text:TextThai,Text_Eng:TextEng,Alias:"-"});
         this.http.put(GlobalServiceRef.URLService+"/Header/InsertHeader",body,{
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
-            this.callHeader(PositionNo);
+            // this.callHeader(PositionNo);
         });
     }
     insertHeader3(i:number,HeadId:number, PositionNo:number ,TextThai: string)

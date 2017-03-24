@@ -161,8 +161,12 @@ export class ApprovedetailComponent implements OnInit {
             headers: headers
         }).subscribe(() => {
             console.log("Complete");
-            //this.back.emit(this.PeriodId);
+            this.back.emit(true);
         });
+    }
+    backpage()
+    {
+        this.back.emit(true);
     }
     call()
     {

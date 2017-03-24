@@ -1,132 +1,202 @@
 <!-- head data -->
-<button (click)=approve()>submit</button>
-<div>
-    <md-grid-list *ngFor="let data of getEva" [cols]="fixedCols" [rowHeight]="fixedRowHeight">
-        <md-grid-tile [colspan]="3" [rowspan]="1" [style.background]="color ">
-            <div class="header">First Name</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.EmployeeFirstName}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Last Name</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.EmployeeLastName}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Group of Staff</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.GroupOfStaff}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Customer</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2">
-            <div class="detail">{{data.CustomerCompanyAlias}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Project Code</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.ProjectCode}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Project Type</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.ProjectType}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Evalute Term</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.EvaTerm}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="2" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Proj.Duration</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="4" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.StartDatePlan+"-"+data.FinishDatePlan}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Role & Responsible</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.Function}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Evaluator</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="9" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">{{data.EvaluatorFirstName+" "+data.EvaluatorLastName}}</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color ">
-            <div class="header">Filter By</div>
-        </md-grid-tile>
-        <md-grid-tile [colspan]="3" [rowspan]="1 " [style.background]="color2 ">
-            <div class="detail">Mercedes</div>
-        </md-grid-tile>
-    </md-grid-list>
-    <!-- end head data -->
+<div div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <button md-icon-button (click)="backpage()">
+            <md-icon>arrow_back</md-icon>
+        </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <button (click)="approve()" style="width: 100%; background-color: green; color:white;" md-raised-button>Approve</button>
+    </div>
+</div>
+<div *ngFor="let data of getEva" fxLayout="row" fxLayoutWrap="wrap" class="all">
+    <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">First Name</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EmployeeFirstName}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Last Name</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EmployeeLastName}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Group of Staff</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.GroupOfStaff}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Customer</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.CustomerCompanyAlias}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Project Code</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.ProjectCode}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Project Type</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.ProjectType}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Evalute Term</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EvaTerm}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Proj.Duration</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.StartDatePlan+"-"+data.FinishDatePlan}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Role & Responsible</div>
+        </div>
+        <div class="detail" fxFlex="50">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.Function}}</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex.gt-xs="50" fxFlex.gt-sm="50" fxFlex="100">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Filter By</div>
+        </div>
+        <div class="detail" fxFlex.gt-xs="50" fxFlex.gt-sm="50" fxFlex="100">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Filter By</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="66" fxFlex.gt-xs="100" fxFlex="100" fxLayout="row">
+        <div class="header" fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex="100">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Evaluator</div>
+        </div>
+        <div class="detail" fxFlex.gt-xs="75" fxFlex.gt-sm="75" fxFlex="100">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EvaluatorFirstName+" "+data.EvaluatorLastName}}</div>
+        </div>
+    </div>
 </div>
 <!-- Table -->
 <md-card>
     <hr>
-    <div fxLayoutAlign="start center" fxFlex="100" style="margin-top: 8px; margin-bottom: 8px;">
-        <div fxFlex="70" align="center" style="font-weight: bold;">Topic</div>
-        <div fxFlex="15"></div>
-        <div align="center" style="font-weight: bold;">Score</div>
+    <div fxFlex="100" fxLayout="row" class="mt-1 mb-1">
+        <div fxFlex="70">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 50%">
+                <b>Topic</b>
+            </div>
+        </div>
+        <div fxFlex="30">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 50%">
+                <b>Score</b>
+            </div>
+        </div>
     </div>
     <hr>
-    <div *ngFor="let head of header; let k = index">
-        <div *ngIf="head.H_Level==1" fxFlex="100">
-            <div fxLayout="row " fxLayoutAlign="start center" class="ml-1" fxFlex="100">
-                <div fxFlex="3"></div>
-                <div fxFlex="79">
-                    <p style="font-size: 19px;">{{head.Text+"("+head.Text_Eng+")"}}</p>
-                </div>
-                <div>
-                    <input class="ml-1 mr-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" [(ngModel)]="finalTotalScore[k]">
-                </div>
-            </div>
-            <div *ngFor="let head2 of header; let i=index ">
-                <div *ngIf=" head2.H_Level==2 && head2.Parent==head.H_ID " fxFlex="100">
-                    <div fxLayout="row " fxLayoutAlign="start center " fxFlex="100">
-                        <div fxFlex="3"></div>
-                        <div fxFlex="5">
-                            <button *ngIf="flag[i]==false" (click)="callflag(i)" md-icon-button>
-                                <md-icon>add_circle_outline</md-icon>
-                            </button>
-                            <button *ngIf="flag[i]==true" (click)="callflag(i)" md-icon-button>
-                                <md-icon>remove_circle_outline</md-icon>
-                            </button>
-                        </div>
-                        <div fxFlex="76">{{head2.Text+"("+head2.Text_Eng+")"}}</div>
-                        <div align="center">
-                            <input class="mr-1" style="width: 50px; text-align: center;" disabled="disabled" [(ngModel)]="subTotalScore[i]">
+    <md-card-content>
+        <div *ngFor="let head of header; let k = index">
+            <div *ngIf="head.H_Level==1">
+                <div fxLayout="row " fxLayoutAlign="start center" class="ml-1 mb-1" fxFlex="100">
+                    <div fxFlex="5">
+                        <div fxLayoutWrap="wrap " fxLayout="row " style="margin-top: -3px; ">
+                            <md-icon>star_rate</md-icon>
                         </div>
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="start center " fxFlex="100" style="margin-left: 6%">
-                        <div *ngIf="flag[i]==true" fxFlex="100">
-                            <div *ngFor="let head3 of header; let j=index;" fxLayout="row" fxFlex="100">
-                                <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxLayout="row " fxFlex="100" style="margin-top: 10px;">
-                                    <div fxFlex="3">
+                    <div fxFlex="65" fxLayout.gt-xs="row" fxLayout.gt-sm="column">
+                        <div style="font-size: 19px; ">{{head.Text}}</div>
+                    </div>
+                    <div fxFlex="30">
+                        <div fxLayout="row " fxLayoutWrap="wrap" style="margin-left: 43% ">
+                            <input class="ml-1 mr-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" [(ngModel)]="finalTotalScore[k]">
+                        </div>
+                    </div>
+                </div>
+                <div *ngFor="let head2 of header; let i=index">
+                    <div *ngIf=" head2.H_Level==2 && head2.Parent==head.H_ID">
+                        <div fxFlex="100" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="5">
+                                <div fxLayoutWrap="wrap " fxLayout="row " style="margin-top: -3px; ">
+                                    <button *ngIf="flag[i]==false " (click)="callflag(i) " md-icon-button md-button-sm>
+                                        <md-icon>add_circle_outline</md-icon>
+                                    </button>
+                                    <button *ngIf="flag[i]==true " (click)="callflag(i) " md-icon-button md-button-sm>
+                                        <md-icon>remove_circle_outline</md-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <div fxFlex="64 ">
+                                <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px; ">
+                                    {{head2.Text+"( "+head2.Text_Eng+") "}}
+                                </div>
+                            </div>
+                            <div fxFlex="30">
+                                <div fxLayout="row " fxLayoutWrap="wrap" style="margin-left: 51% " fxLayout.xs="column ">
+                                    <div style="margin-top: -3px; ">
+                                        <input class="mr-1" style="width: 50px; font-size: 15px; text-align: center;" disabled="disabled" [(ngModel)]="subTotalScore[i]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="flag[i]==true ">
+                            <div *ngFor="let head3 of header; let j=index;">
+                                <div *ngIf=" head3.H_Level==3 && head3.Parent==head2.H_ID " fxFlex="100" fxLayout="row " fxLayoutAlign="start start " class="ml-1">
+                                    <div fxFlex="5" style="margin-top: -2px; ">
                                         <md-icon>play_arrow</md-icon>
                                     </div>
-                                    <div fxFlex="80">{{head3.Text}}</div>
-                                    <div>
-                                        <input class="mr-1" style="width: 50px; text-align: center;" disabled="disabled" [(ngModel)]="currentScore[j]">
+                                    <div fxFlex="64">
+                                        <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px ">
+                                            {{head3.Text}}
+                                        </div>
+                                    </div>
+                                    <div fxFlex="30">
+                                        <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 53% ">
+                                            <div>
+                                                <input class="mr-1" style="width: 50px; text-align: center;" disabled="disabled" [(ngModel)]="currentScore[j]">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div fxLayout="row " fxLayoutAlign="space-between end ">
+                    <div>
+                        <button *ngIf="activeTabIndex>= 1" md-icon-button class="ml-1" (click)="passScore(false)">
+                            <md-icon>arrow_back</md-icon>
+                        </button>
+                    </div>
+                    <div style="margin-right: 10%;">
+                        <div style="margin-left: 100%;">
+                            <button *ngIf="activeTabIndex < countHeader-1" md-icon-button class="ml-1" (click)="passScore(true)">
+                                <md-icon>arrow_forward</md-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <br>
-    <br>
+    </md-card-content>
 </md-card>

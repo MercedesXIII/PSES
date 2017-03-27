@@ -41,6 +41,7 @@ export class EvaformComponent implements OnInit {
     finalTotalScore = [];
     passFinalTotalScore = [];
     passSubTotalScore = [];
+    CommentH2 = [];
     activeTabIndex = 0;
     PositionNo;
     fixedCols = 18;
@@ -79,6 +80,7 @@ export class EvaformComponent implements OnInit {
                     }
                     else if(this.header[data].H_Level == 2)
                     {
+                        this.CommentH2[data] = this.header[data].Comment;
                         console.log(this.header[data].point)
                         this.passSubTotalScore[data] = this.header[data].point;
                         this.subTotalScore[data] = this.calScore(this.header[data].point)
@@ -116,6 +118,7 @@ export class EvaformComponent implements OnInit {
                 else if(this.header[data].H_Level == 2)
                 {
                     
+                    this.CommentH2[data] = this.header[data].Comment;
                     this.passSubTotalScore[data] = this.header[data].point;
                     this.subTotalScore[data] = this.calScore(this.header[data].point)
                 }
@@ -249,6 +252,7 @@ export class EvaformComponent implements OnInit {
                     }
                     else if(this.header[data].H_Level == 2)
                     {
+                        this.CommentH2[data] = this.header[data].Comment;
                         //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
                         this.passSubTotalScore[data] = this.header[data].point;
                         this.subTotalScore[data] = this.calScore(this.header[data].point)
@@ -305,7 +309,8 @@ export class EvaformComponent implements OnInit {
             }
             else if(this.header[data].H_Level == 2)
             {
-                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.passSubTotalScore[data],EvaId:this.EvaId})
+                console.log(this.CommentH2[data])
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.passSubTotalScore[data],EvaId:this.EvaId,Comment:this.CommentH2[data]})
             }
             else if(this.header[data].H_Level == 3)
             {

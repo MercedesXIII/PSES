@@ -145,7 +145,7 @@ export class ManageheaderComponent implements OnInit {
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
-            // this.callHeader(PositionNo);
+            this.callHeader(PositionNo);
         });
     }
     insertHeader3(i:number,HeadId:number, PositionNo:number ,TextThai: string)

@@ -8,9 +8,9 @@ import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput,MdInpu
 import { GlobalServiceRef} from '../../shared/GlobalServiceRef'
 
 @Component({
-  selector: 'app-approvedetail',
-  templateUrl: './approvedetail.component.html',
-  styleUrls: ['./approvedetail.component.scss']
+    selector: 'app-approvedetail',
+    templateUrl: './approvedetail.component.html',
+    styleUrls: ['./approvedetail.component.scss']
 })
 export class ApprovedetailComponent implements OnInit {
 
@@ -36,6 +36,8 @@ export class ApprovedetailComponent implements OnInit {
     getScoreAndId = [];
     subTotalScore = [];
     finalTotalScore = [];
+    passFinalTotalScore = [];
+    passSubTotalScore = [];
     activeTabIndex = 0;
     PositionNo;
     fixedCols = 18;
@@ -67,12 +69,14 @@ export class ApprovedetailComponent implements OnInit {
                     if(this.header[data].H_Level == 1)
                     {
                         this.countHeader++;
-                        this.finalTotalScore[data] = "N/A";
+                        this.passFinalTotalScore[data] = this.header[data].point;
+                        this.finalTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if(this.header[data].H_Level == 2)
                     {
                         //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                        this.subTotalScore[data] = "N/A";
+                        this.passSubTotalScore[data] = this.header[data].point;
+                        this.subTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if(this.header[data].H_Level == 3)
                     {
@@ -102,12 +106,14 @@ export class ApprovedetailComponent implements OnInit {
                 if(this.header[data].H_Level == 1)
                 {
                     this.countHeader++;
-                    this.finalTotalScore[data] = "N/A";
+                    this.passFinalTotalScore[data] = this.header[data].point;
+                    this.finalTotalScore[data] = this.calScore(this.header[data].point)
                 }
                 else if(this.header[data].H_Level == 2)
                 {
                     //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                    this.subTotalScore[data] = "N/A";
+                    this.passSubTotalScore[data] = this.header[data].point;
+                    this.subTotalScore[data] = this.calScore(this.header[data].point)
                 }
                 else if(this.header[data].H_Level == 3)
                 {
@@ -121,6 +127,21 @@ export class ApprovedetailComponent implements OnInit {
                 }
             }
         });
+    }
+    calScore(score:number)
+    {
+        if(score < 1)
+            return "N/A"
+        else if(score < 3)
+            return "UNA"
+        else if(score < 5)
+            return "NIM"
+        else if(score < 7)
+            return "STD"
+        else if(score < 9)
+            return "AST"
+        else
+            return "OUT"
     }
     onSubmit(Id : MdSelect){
         this.callHeader(Id);
@@ -156,7 +177,10 @@ export class ApprovedetailComponent implements OnInit {
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
         console.log(this.LoginResultJson['EmployeeID']+" "+this.EvaId)
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        let body : string = JSON.stringify({EmpID:this.LoginResultJson['EmployeeID'],EvaID:this.EvaId});
+        // let body : string = JSON.stringify({EmpID:this.LoginResultJson['EmployeeID'],EvaID:this.EvaId});
+         let body : string = JSON.stringify({EmpID:890148,EvaID:this.EvaId});
+        // let body : string = JSON.stringify({EmpID:430045,EvaID:this.EvaId});
+        // let body : string = JSON.stringify({EmpID:460143,EvaID:this.EvaId});
         this.http.put(GlobalServiceRef.URLService+"/Eva/ApproveStatus",body,{
             headers: headers
         }).subscribe(() => {

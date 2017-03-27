@@ -47,7 +47,7 @@
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
-                    <button *ngIf="row.ST == 1" md-icon-button md-button-sm style="color: green" [md-tooltip]="st" [tooltip-position]="position">
+                    <!-- <button *ngIf="row.ST == 1" md-icon-button md-button-sm style="color: green" [md-tooltip]="st" [tooltip-position]="position">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
                     <button *ngIf="row.ST == 0" md-icon-button md-button-sm style="color: red" [md-tooltip]="st" [tooltip-position]="position">
@@ -70,7 +70,8 @@
                     </button>
                     <button *ngIf="row.HR == 0" md-icon-button md-button-sm style="color: red" [md-tooltip]="hrd" [tooltip-position]="position">
                         <md-icon>radio_button_checked</md-icon>
-                    </button>
+                    </button> -->
+                    <md-progress-bar mode="determinate" [(ngModel)]="progress[row.$$index]" color="primary" class="mb-1"></md-progress-bar>
                 </div>
             </template>
         </ngx-datatable-column>

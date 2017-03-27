@@ -6,100 +6,197 @@
         </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="end center">
+        <button class="mr-1" color="warn" style="width: 100%; color:white;" md-raised-button>Reject</button>
         <button (click)="approve()" style="width: 100%; background-color: green; color:white;" md-raised-button>Approve</button>
     </div>
 </div>
 <div *ngFor="let data of getEva" fxLayout="row" fxLayoutWrap="wrap" class="all">
     <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">First Name</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EmployeeFirstName}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Last Name</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EmployeeLastName}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Group of Staff</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.GroupOfStaff}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Customer</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.CustomerCompanyAlias}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Project Code</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.ProjectCode}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Project Type</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.ProjectType}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Evalute Term</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EvaTerm}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Proj.Duration</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.StartDatePlan+"-"+data.FinishDatePlan}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex="50">
+        <div class="header" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Role & Responsible</div>
         </div>
-        <div class="detail" fxFlex="50">
+        <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.Function}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex.gt-xs="50" fxFlex.gt-sm="50" fxFlex="100">
+        <div class="header" fxFlex.gt-xs="50" fxFlex.gt-sm="50" fxFlex="100" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Filter By</div>
         </div>
-        <div class="detail" fxFlex.gt-xs="50" fxFlex.gt-sm="50" fxFlex="100">
+        <div class="detail" fxFlex.gt-xs="50" fxFlex.gt-sm="50" fxFlex="100" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Filter By</div>
         </div>
     </div>
     <div fxFlex.gt-sm="66" fxFlex.gt-xs="100" fxFlex="100" fxLayout="row">
-        <div class="header" fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex="100">
+        <div class="header" fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex="100" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Evaluator</div>
         </div>
-        <div class="detail" fxFlex.gt-xs="75" fxFlex.gt-sm="75" fxFlex="100">
+        <div class="detail" fxFlex.gt-xs="75" fxFlex.gt-sm="75" fxFlex="100" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EvaluatorFirstName+" "+data.EvaluatorLastName}}</div>
         </div>
     </div>
 </div>
-<!-- Table -->
+<!-- TableScore -->
+<div *ngFor="let data of getEva" fxLayout="row" fxLayoutWrap="wrap" class="all mt-1">
+    <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
+        <div class="header" fxFlex="100" fxLayoutAlign="center center">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Not Available</div>
+        </div>
+        <div class="header" fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">N/A</div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
+        <div class="header" fxFlex="100" fxLayoutAlign="center center">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Unacceptable</div>
+        </div>
+        <div fxFlex="100" fxLayout="row">
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">1</div>
+            </div>
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">2</div>
+            </div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
+        <div class="header" fxFlex="100" fxLayoutAlign="center center">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Need Improve</div>
+        </div>
+        <div fxFlex="100" fxLayout="row">
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">3</div>
+            </div>
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">4</div>
+            </div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
+        <div class="header" fxFlex="100" fxLayoutAlign="center center">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Standard</div>
+        </div>
+        <div fxFlex="100" fxLayout="row">
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">5</div>
+            </div>
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">6</div>
+            </div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="16" fxFlex.gt-xs="16" fxFlex="50" fxLayout="column">
+        <div class="header" fxFlex="100" fxLayoutAlign="center center">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Abrove Standard</div>
+        </div>
+        <div fxFlex="100" fxLayout="row">
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">7</div>
+            </div>
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">8</div>
+            </div>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="16" fxFlex.gt-xs="16" fxFlex="50" fxLayout="column">
+        <div class="header" fxFlex="100" fxLayoutAlign="center center">
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Outstanding</div>
+        </div>
+        <div fxFlex="100" fxLayout="row">
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">9</div>
+            </div>
+            <div class="header" fxFlex="50" fxLayoutAlign="center center">
+                <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">10</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TotalScore -->
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="54" fxFlex.gt-xs="54" fxFlex="100" fxLayout="column" fxLayoutAlign.gt-sm="start center" fxLayoutAlign.gt-xs="start center" class="mt-1" fxLayout.gt-sm="row" fxLayout.gt-xs="row" fxLayoutAlign="none">
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxLayout="row" fxFlex="100">
+            <div class="header" fxLayoutWrap="wrap" fxLayout="row" fxFlex="75" style="font-size: 15px; " fxLayoutAlign="center center">
+                Final Score & Grade
+            </div>
+            <div class="detail" fxLayoutWrap="wrap" fxLayout="row" fxFlex="25" style="font-size: 15px; " fxLayoutAlign="center center">
+                7.00
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxLayout="row" fxFlex="100">
+            <div class="header" fxLayoutWrap="wrap" fxLayout="row" fxFlex="25" style="font-size: 15px; " fxLayoutAlign="center center">
+                Level
+            </div>
+            <div class="detail" fxLayoutWrap="wrap" fxLayout="row" fxFlex="75" style="font-size: 15px; " fxLayoutAlign="center center">
+                Above Standard
+            </div>
+        </div>
+    </div>
+</div>
 <md-card>
     <hr>
     <div fxFlex="100" fxLayout="row" class="mt-1 mb-1">

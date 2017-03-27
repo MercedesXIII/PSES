@@ -39,6 +39,8 @@ export class EvaformComponent implements OnInit {
     getScoreAndId = [];
     subTotalScore = [];
     finalTotalScore = [];
+    passFinalTotalScore = [];
+    passSubTotalScore = [];
     activeTabIndex = 0;
     PositionNo;
     fixedCols = 18;
@@ -70,13 +72,16 @@ export class EvaformComponent implements OnInit {
                     this.flag[data] = false;
                     if(this.header[data].H_Level == 1)
                     {
+                        console.log(this.header[data].point)
                         this.countHeader++;
-                        this.finalTotalScore[data] = "N/A";
+                        this.passFinalTotalScore[data] = this.header[data].point;
+                        this.finalTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if(this.header[data].H_Level == 2)
                     {
-                        //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                        this.subTotalScore[data] = "N/A";
+                        console.log(this.header[data].point)
+                        this.passSubTotalScore[data] = this.header[data].point;
+                        this.subTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if(this.header[data].H_Level == 3)
                     {
@@ -105,12 +110,14 @@ export class EvaformComponent implements OnInit {
                 if(this.header[data].H_Level == 1)
                 {
                     this.countHeader++;
-                    this.finalTotalScore[data] = "N/A";
+                    this.passFinalTotalScore[data] = this.header[data].point;
+                    this.finalTotalScore[data] = this.calScore(this.header[data].point)
                 }
                 else if(this.header[data].H_Level == 2)
                 {
-                    //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                    this.subTotalScore[data] = "N/A";
+                    
+                    this.passSubTotalScore[data] = this.header[data].point;
+                    this.subTotalScore[data] = this.calScore(this.header[data].point)
                 }
                 else if(this.header[data].H_Level == 3)
                 {
@@ -177,6 +184,21 @@ export class EvaformComponent implements OnInit {
             });
         }
     }
+    calScore(score:number)
+    {
+        if(score < 1)
+            return "N/A"
+        else if(score < 3)
+             return "UNA"
+        else if(score < 5)
+            return "NIM"
+        else if(score < 7)
+            return "STD"
+        else if(score < 9)
+            return "AST"
+        else
+            return "OUT"
+    }
     insertHeader1(HeadId:number, PositionNo:number ,TextThai: string,TextEng: string,TextAlias : string)
     {
         console.log(HeadId+" "+PositionNo+" "+this.EvaId+" "+TextThai+" "+TextEng+" "+TextAlias)
@@ -222,12 +244,14 @@ export class EvaformComponent implements OnInit {
                     if(this.header[data].H_Level == 1)
                     {
                         this.countHeader++;
-                        this.finalTotalScore[data] = "N/A";
+                        this.passFinalTotalScore[data] = this.header[data].point;
+                        this.finalTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if(this.header[data].H_Level == 2)
                     {
                         //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                        this.subTotalScore[data] = "N/A";
+                        this.passSubTotalScore[data] = this.header[data].point;
+                        this.subTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if(this.header[data].H_Level == 3)
                     {
@@ -277,11 +301,11 @@ export class EvaformComponent implements OnInit {
         {
             if(this.header[data].H_Level == 1)
             {
-                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.finalTotalScore[data],EvaId:this.EvaId})
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.passFinalTotalScore[data],EvaId:this.EvaId})
             }
             else if(this.header[data].H_Level == 2)
             {
-                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.subTotalScore[data],EvaId:this.EvaId})
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.passSubTotalScore[data],EvaId:this.EvaId})
             }
             else if(this.header[data].H_Level == 3)
             {
@@ -297,7 +321,6 @@ export class EvaformComponent implements OnInit {
             console.log("Complete");
             this.back.emit(this.PeriodId);
         });
-        console.log(body)
         this.currentScore = [];
         this.getScoreAndId = [];
     }
@@ -310,6 +333,34 @@ export class EvaformComponent implements OnInit {
                 this.countHead3++;
         }
         console.log(this.countHead3+" "+this.countHead3full)
+    }
+    calculate()
+    {
+        for(let data in this.header)
+        {
+            if(this.header[data].H_Level == 1)
+            {
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.passFinalTotalScore[data],EvaId:this.EvaId})
+            }
+            else if(this.header[data].H_Level == 2)
+            {
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.passSubTotalScore[data],EvaId:this.EvaId})
+            }
+            else if(this.header[data].H_Level == 3)
+            {
+                this.getScoreAndId.push({Id:this.header[data].H_ID,Score:this.currentScore[data],EvaId:this.EvaId})
+            }
+
+        }
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body : string = JSON.stringify(this.getScoreAndId);
+        this.http.put(GlobalServiceRef.URLService+"/Header/Update",body,{
+            headers: headers
+        }).subscribe((res: Response) => {
+            this.callHeader(this.currentPosition);
+        });
+        this.currentScore = [];
+        this.getScoreAndId = [];
     }
 
 }

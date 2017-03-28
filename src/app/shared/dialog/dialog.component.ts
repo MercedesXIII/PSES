@@ -166,7 +166,7 @@ export class InsertDialog {
 	PassValue = [];
 
 	public form: FormGroup;
-	constructor(public dialogRef: MdDialogRef<ConfirmDialog>, private translate: TranslateService, private fb: FormBuilder) {
+	constructor(public dialogRef: MdDialogRef<InsertDialog>, private translate: TranslateService, private fb: FormBuilder) {
 		this.form = this.fb.group({
 			TextThai: [null, Validators.required],
 			TextEng: [null, Validators.required],
@@ -212,7 +212,7 @@ export class InsertDialog2 {
 	PassValue = [];
 
 	public form: FormGroup;
-	constructor(public dialogRef: MdDialogRef<ConfirmDialog>, private translate: TranslateService, private fb: FormBuilder) {
+	constructor(public dialogRef: MdDialogRef<InsertDialog2>, private translate: TranslateService, private fb: FormBuilder) {
 		this.form = this.fb.group({
 			TextThai: [null, Validators.required],
 			TextEng: [null, Validators.required]
@@ -252,7 +252,7 @@ export class InsertDialog3 {
 	PassValue = [];
 
 	public form: FormGroup;
-	constructor(public dialogRef: MdDialogRef<ConfirmDialog>, private translate: TranslateService, private fb: FormBuilder) {
+	constructor(public dialogRef: MdDialogRef<InsertDialog3>, private translate: TranslateService, private fb: FormBuilder) {
 		this.form = this.fb.group({
 			TextThai: [null, Validators.required]
 		})
@@ -262,4 +262,16 @@ export class InsertDialog3 {
 		this.dialogRef.close(this.PassValue)
 		this.form.reset();
 	}
+}
+
+@Component({
+	selector: 'loading-dialog',
+	template: `
+	<body>
+		<md-progress-circle mode="indeterminate" class="md-primary"></md-progress-circle>
+	</body>`,
+	styles: ['body { background-color : transparent; }']
+})
+export class Loading {
+	constructor(public dialogRef: MdDialogRef<Loading>, private translate: TranslateService) { }
 }

@@ -67,11 +67,11 @@ export class HistorydetailComponent implements OnInit {
                             this.flag[data] = false;
                             if (this.header[data].H_Level == 1) {
                                 this.countHeader++;
-                                this.finalTotalScore[data] = "N/A";
+                                this.finalTotalScore[data] = this.calScore(this.header[data].point)
                             }
                             else if (this.header[data].H_Level == 2) {
                                 //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                                this.subTotalScore[data] = "N/A";
+                                this.subTotalScore[data] = this.calScore(this.header[data].point)
                             }
                             else if (this.header[data].H_Level == 3) {
                                 //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
@@ -98,11 +98,11 @@ export class HistorydetailComponent implements OnInit {
                     this.flag[data] = false;
                     if (this.header[data].H_Level == 1) {
                         this.countHeader++;
-                        this.finalTotalScore[data] = "N/A";
+                        this.finalTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if (this.header[data].H_Level == 2) {
                         //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                        this.subTotalScore[data] = "N/A";
+                        this.subTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if (this.header[data].H_Level == 3) {
                         //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
@@ -116,31 +116,25 @@ export class HistorydetailComponent implements OnInit {
                 }
             });
     }
-    onSubmit(Id: MdSelect) {
-        this.callHeader(Id);
-    }
     callflag(get: number) {
         if (this.flag[get] == false)
             this.flag[get] = true;
         else
             this.flag[get] = false;
     }
-    finishEvaluate() {
-        for (let data in this.currentScore) {
-            this.getScoreAndId.push({ Id: this.currentId[data], Score: this.currentScore[data], EvaId: this.EvaId })
-        }
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let body: string = JSON.stringify(this.getScoreAndId);
-        this.http.put(GlobalServiceRef.URLService + "/Header/Update", body, {
-            headers: headers
-        }).subscribe((res: Response) => {
-            console.log("Complete")
-        });
-        console.log(body)
-        this.currentScore = [];
-        this.currentId = [];
-        this.getScoreAndId = [];
-        //this.back.emit(this.PeriodId);
+    calScore(score: number) {
+        if (score < 1)
+            return "N/A"
+        else if (score < 3)
+            return "UNA"
+        else if (score < 5)
+            return "NIM"
+        else if (score < 7)
+            return "STD"
+        else if (score < 9)
+            return "AST"
+        else
+            return "OUT"
     }
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         for (let propName in changes) {

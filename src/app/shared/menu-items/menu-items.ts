@@ -21,17 +21,17 @@ export interface Menu {
 }
 //https://klarsys.github.io/angular-material-icons/
 const MENUITEMS = [
+  // {
+  //   state: 'home',
+  //   name: 'HOME',
+  //   type: 'link',
+  //   icon: 'home'
+  // },
   {
-    state: 'home',
-    name: 'HOME',
+    state: 'evaluation',
+    name: 'Evaluation',
     type: 'link',
-    icon: 'home'
-  },
-  {
-    state: 'approve',
-    name: 'Approve',
-    type: 'link',
-    icon: 'visibility'
+    icon: 'accessibility'
   },
   {
     state: 'history',
@@ -39,21 +39,20 @@ const MENUITEMS = [
     type: 'link',
     icon: 'history'
   },
-
   {
-    state: 'evaluation',
-    name: 'Evaluation',
+    state: 'approve',
+    name: 'Approve',
     type: 'link',
-    icon: 'accessibility'
+    icon: 'visibility'
   },
-  
+
   {
     state: 'manageheader',
     name: 'Manage Header',
     type: 'link',
     icon: 'playlist_add'
   },
-  
+
   {
     state: 'request',
     name: 'Request',

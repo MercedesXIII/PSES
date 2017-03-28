@@ -1,6 +1,7 @@
 <!-- Data Table #Start-->
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxHide="false" fxHide.xs>
-    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false " [scrollbarH]="true " [rows]="listhistory" [limit]="10 ">
+    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
+        [scrollbarH]="true " [rows]="listhistory" [limit]="10 ">
         <ngx-datatable-column [flexGrow]="1">
             <template ngx-datatable-header-template>
                 <div class="header">#</div>
@@ -46,11 +47,12 @@
                 <div style="text-align: center; font-weight: bold ">State</div>
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
-                <div style="text-align: center; ">
+                <div fxLayout="row" fxLayoutAlign="center center">
                     <button *ngIf="row.ApproveState == 0" md-raised-button md-button-sm color="primary"> Approved </button>
                     <button *ngIf="row.ApproveState == -1" md-raised-button md-button-sm color="warn"> Rejected </button>
-                    <div fxLayoutAlign="center center" fxLayout="row">
-                        <md-progress-bar *ngIf="row.ApproveState == 1" mode="determinate" [value]="progress[row.$$index]" color="primary" class="mb-1"></md-progress-bar>
+                    <div>
+                        <md-progress-bar style="width: 90px; height:30px; margin-top: 20%; border-radius: 5px" *ngIf="row.ApproveState == 1" mode="determinate"
+                            [value]="progress[row.$$index]" color="primary" class="mb-1"></md-progress-bar>
                     </div>
                 </div>
             </template>
@@ -70,7 +72,8 @@
     </ngx-datatable>
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxShow="false" fxShow.xs>
-    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="70" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="4" [rows]='listhistory'>
+    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="70" [rowHeight]="'auto'" [scrollbarH]="true"
+        [limit]="4" [rows]='listhistory'>
         <ngx-datatable-column [width]="230" [minWidth]="230">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="column" fxLayoutAlign="start">

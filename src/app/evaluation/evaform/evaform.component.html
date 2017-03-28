@@ -321,35 +321,39 @@
                                         </div>
                                     </div>
                                     <div class="ml-1">
-                                        <md-textarea [(ngModel)]="CommentH2[i]" placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
+                                        <md-textarea [(ngModel)]="Comment[i]" placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div fxLayout="row " fxLayoutAlign="space-between end ">
-                            <div>
-                                <button *ngIf="activeTabIndex>= 1" md-icon-button class="ml-1" (click)="passScore(false)">
+                    </md-card-content>
+                    <hr>
+                    <div class="ml-1 mt-1">
+                        <md-textarea [(ngModel)]="Comment[k]" placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
+                    </div>
+                    <div fxLayout="row " fxLayoutAlign="space-between end" class="mb-1">
+                        <div class="ml-1">
+                            <button *ngIf="activeTabIndex>= 1" md-icon-button (click)="passScore(false)">
                                     <md-icon>arrow_back</md-icon>
                                 </button>
-                            </div>
-                            <div style="margin-right: 10%;">
-                                <div style="margin-left: 100%;">
-                                    <button *ngIf="activeTabIndex < countHeader-1" md-icon-button class="ml-1" (click)="passScore(true)">
+                        </div>
+                        <div class="mr-1">
+                            <div>
+                                <button *ngIf="activeTabIndex < countHeader-1" md-icon-button (click)="passScore(true)">
                                         <md-icon>arrow_forward</md-icon>
                                     </button>
-                                </div>
-                                <div *ngIf="countHead3full != 0">
-                                    <button *ngIf="activeTabIndex == countHeader-1" md-raised-button color="accent" (click)="calculate()">
-                                        Calculate
-                                    </button>
-                                    <button tyle="margin-top: -3px;" *ngIf="activeTabIndex == countHeader-1" md-raised-button [disabled]="countHead3!=countHead3full"
-                                        color="primary" (click)="finishEvaluate()">
+                            </div>
+                            <div *ngIf="countHead3full != 0" class="mr-1">
+                                <!--<button *ngIf="activeTabIndex == countHeader-1" class="mr-1" md-raised-button color="accent" (click)="calculate()">
+                                        Save
+                                </button>-->
+                                <button tyle="margin-top: -3px;" *ngIf="activeTabIndex == countHeader-1" md-raised-button [disabled]="countHead3!=countHead3full"
+                                    color="primary" (click)="finishEvaluate()">
                                         Confirm
-                                        </button>
-                                </div>
+                                </button>
                             </div>
                         </div>
-                    </md-card-content>
+                    </div>
                 </md-tab>
             </div>
         </div>

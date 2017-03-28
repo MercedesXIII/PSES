@@ -38,8 +38,6 @@ export class ApprovedetailComponent implements OnInit {
     getScoreAndId = [];
     subTotalScore = [];
     finalTotalScore = [];
-    passFinalTotalScore = [];
-    passSubTotalScore = [];
     PositionNo;
     fixedCols = 18;
     fixedRowHeight = 40;
@@ -69,12 +67,10 @@ export class ApprovedetailComponent implements OnInit {
                             this.flag[data] = false;
                             if (this.header[data].H_Level == 1) {
                                 this.countHeader++;
-                                this.passFinalTotalScore[data] = this.header[data].point;
                                 this.finalTotalScore[data] = this.calScore(this.header[data].point)
                             }
                             else if (this.header[data].H_Level == 2) {
                                 //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                                this.passSubTotalScore[data] = this.header[data].point;
                                 this.subTotalScore[data] = this.calScore(this.header[data].point)
                             }
                             else if (this.header[data].H_Level == 3) {
@@ -102,12 +98,10 @@ export class ApprovedetailComponent implements OnInit {
                     this.flag[data] = false;
                     if (this.header[data].H_Level == 1) {
                         this.countHeader++;
-                        this.passFinalTotalScore[data] = this.header[data].point;
                         this.finalTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if (this.header[data].H_Level == 2) {
                         //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                        this.passSubTotalScore[data] = this.header[data].point;
                         this.subTotalScore[data] = this.calScore(this.header[data].point)
                     }
                     else if (this.header[data].H_Level == 3) {
@@ -135,9 +129,6 @@ export class ApprovedetailComponent implements OnInit {
             return "AST"
         else
             return "OUT"
-    }
-    onSubmit(Id: MdSelect) {
-        this.callHeader(Id);
     }
     callflag(get: number) {
         if (this.flag[get] == false)
@@ -167,9 +158,12 @@ export class ApprovedetailComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if (result === "ok") {
                 let headers = new Headers({ 'Content-Type': 'application/json' });
-                // let body : string = JSON.stringify({EmpID:this.LoginResultJson['EmployeeID'],EvaID:this.EvaId,Status:status});
-                let body: string = JSON.stringify({ EmpID: 890148, EvaID: this.EvaId, Status: status });
-                //let body : string = JSON.stringify({EmpID:430045,EvaID:this.EvaId,Status:status});
+                let body: string = JSON.stringify({ EmpID: this.LoginResultJson['EmployeeID'], EvaID: this.EvaId, Status: status });
+                //programmer
+                //let body: string = JSON.stringify({ EmpID: 490428, EvaID: this.EvaId, Status: status });
+                //bas
+                // let body: string = JSON.stringify({ EmpID: 890148, EvaID: this.EvaId, Status: status });
+                //let body: string = JSON.stringify({ EmpID: 430045, EvaID: this.EvaId, Status: status });
                 //let body : string = JSON.stringify({EmpID:460143,EvaID:this.EvaId,Status:status});
                 this.http.put(GlobalServiceRef.URLService + "/Eva/ApproveStatus", body, {
                     headers: headers

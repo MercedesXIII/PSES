@@ -218,12 +218,12 @@
                             <md-icon>star_rate</md-icon>
                         </div>
                     </div>
-                    <div fxFlex="65" fxLayout.gt-xs="row" fxLayout.gt-sm="column">
+                    <div fxFlex="65" fxLayout.gt-xs="row" fxLayout.gt-sm="column" style="margin-left: 15px;">
                         <div style="font-size: 19px; ">{{head.Text}}</div>
                     </div>
-                    <div fxFlex="30">
-                        <div fxLayout="row " fxLayoutWrap="wrap" style="margin-left: 43% ">
-                            <input class="ml-1 mr-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" [(ngModel)]="finalTotalScore[k]">
+                    <div fxFlex="30" class="mr-1">
+                        <div fxLayout="row " fxLayoutWrap="wrap" style="margin-left: 54% ">
+                            <input style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" [(ngModel)]="finalTotalScore[k]">
                         </div>
                     </div>
                 </div>
@@ -278,6 +278,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="ml-1 mt-1">
+                    <span>Comment : {{head.Comment}}</span>
                 </div>
             </div>
         </div>

@@ -8,6 +8,12 @@
     </div>
     <div fxFlex>
     </div>
+    <button md-icon-button (click)="translate.use('en')">
+      <img src="assets/images/icon_en.png" md-list-avatar style="width: 25px; height: 20px;">
+    </button>
+    <button md-icon-button (click)="translate.use('th')">
+      <img src="assets/images/icon_th.png" md-list-avatar style="width: 25px; height: 20px;">
+    </button>
     <button appToggleFullscreen md-icon-button>
       <md-icon>fullscreen</md-icon>
     </button>
@@ -82,18 +88,18 @@
             </md-list-item>
           </md-nav-list>
         </md-list-item>
-        
+
       </md-nav-list>
     </md-sidenav>
-    
+
     <router-outlet></router-outlet>
   </md-sidenav-layout>
 
-   <!--<button md-fab color="warn" class="md-fab-bottom-right" (click)="showSettings = true">
+  <!--<button md-fab color="warn" class="md-fab-bottom-right" (click)="showSettings = true">
     <md-icon class="md-24">add</md-icon>
   </button>-->
-<!-- Demo Purposes Only -->
-  <button md-fab color="warn" class="md-fab-bottom-right" (click)="showSettings = true">
+  <!-- Demo Purposes Only -->
+  <!--<button md-fab color="warn" class="md-fab-bottom-right" (click)="showSettings = true">
     <md-icon class="md-24">settings</md-icon>
   </button>
   <md-card class="settings-panel" *ngIf="showSettings">
@@ -116,8 +122,8 @@
         <md-select placeholder="Language" class="mt-1" [(ngModel)]="currentLang" #langSelect="ngModel" (ngModelChange)="translate.use(currentLang)">
           <md-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</md-option>
         </md-select>
-     </div>
+      </div>
     </md-card-content>
-  </md-card>
+  </md-card>-->
   <!-- /Demo Purposes Only -->
 </div>

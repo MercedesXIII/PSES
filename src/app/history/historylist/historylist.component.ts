@@ -34,8 +34,9 @@ export class HistorylistComponent implements OnInit {
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/" + this.LoginResultJson['EmployeeID']).subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
-        this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/890148").subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/" + this.LoginResultJson['EmployeeID']).subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/490428").subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/890148").subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/430045").subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/460143").subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
     }

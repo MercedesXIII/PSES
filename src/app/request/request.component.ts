@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit, ViewChild,NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit, ViewChild, NgZone, ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
@@ -6,7 +6,5 @@ import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit
   templateUrl: './request.component.html',
 })
 export class RequestComponent {
-  // data = [{name:"A"},{name:"B"},{name:"C"},{name:"D"}];
-  // progress = []
-  constructor() {}
+  constructor() { }
 }

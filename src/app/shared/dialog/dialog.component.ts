@@ -43,30 +43,44 @@ export class ConfirmDialog {
 	OkBtnText: string = "ok";
 	OkBtnColor: string = "primary";
 	CancelBtnText: string = "cancel";
-	constructor(public dialogRef: MdDialogRef <ConfirmDialog>,private translate: TranslateService ) {}
+	constructor(public dialogRef: MdDialogRef<ConfirmDialog>, private translate: TranslateService) { }
 
-	public SetTitleText(text: string){
+	public SetTitleText(text: string) {
 		this.TitleText = text;
 	}
-	public SetMessagge(_Message: string){
+	public SetMessagge(_Message: string) {
 		this.Message = _Message;
-	} 
-	public SetOkBtnText(text: string){
+	}
+	public SetOkBtnText(text: string) {
 		this.OkBtnText = text;
 	}
-	public SetCancelText(text: string){
+	public SetCancelText(text: string) {
 		this.CancelBtnText = text;
 	}
-	public SetOkbtnColor(colortext: string){
+	public SetOkbtnColor(colortext: string) {
 		this.OkBtnColor = colortext;
 	}
-	public SetDialogType(dialogType: string){
-		if(dialogType === "delete"){
-			this.TitleText = "comfirm delete";
+	public SetDialogType(dialogType: string) {
+		if (dialogType === "delete") {
+			this.TitleText = "Comfirm Delete";
 			this.Message = "do you really want to delete?";
 			this.OkBtnText = "DELETE";
 			this.CancelBtnText = "Cancel";
 			this.OkBtnColor = "warn";
+		}
+		else if (dialogType === "approve") {
+			this.TitleText = "Comfirm Approve";
+			this.Message = "do you really want to approve?";
+			this.OkBtnText = "OK";
+			this.CancelBtnText = "Cancel";
+			this.OkBtnColor = "primary";
+		}
+		else if (dialogType === "reject") {
+			this.TitleText = "Comfirm Reject";
+			this.Message = "do you really want to reject?";
+			this.OkBtnText = "OK";
+			this.CancelBtnText = "Cancel";
+			this.OkBtnColor = "primary";
 		}
 	}
 }
@@ -96,19 +110,19 @@ export class NormalDialog {
 	TitleText: string = "!!";
 	OkBtnText: string = "close";
 
-	constructor(public dialogRef: MdDialogRef <NormalDialog>,private translate: TranslateService ) {}
+	constructor(public dialogRef: MdDialogRef<NormalDialog>, private translate: TranslateService) { }
 
-	public SetMessagge(_Message: string){
+	public SetMessagge(_Message: string) {
 		this.Message = _Message;
 	}
-	public SetOkBtnText(text: string){
+	public SetOkBtnText(text: string) {
 		this.OkBtnText = text;
 	}
-	public SetTitleText(text: string){
+	public SetTitleText(text: string) {
 		this.TitleText = text;
 	}
-	public SetDialogType(dialogType: string){
-		if(dialogType === "error"){
+	public SetDialogType(dialogType: string) {
+		if (dialogType === "error") {
 			this.TitleText = "Error!";
 			this.Message = "something error please try again later or contact admin";
 			this.OkBtnText = "close";
@@ -142,7 +156,8 @@ export class NormalDialog {
 	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 	</div></div>`
 })
-export class InsertDialog {;
+export class InsertDialog {
+	;
 	TitleText: string = "Add Topic";
 	OkBtnText: string = "ok";
 	OkBtnColor: string = "primary";
@@ -151,16 +166,14 @@ export class InsertDialog {;
 	PassValue = [];
 
 	public form: FormGroup;
-	constructor(public dialogRef: MdDialogRef <ConfirmDialog>,private translate: TranslateService,private fb: FormBuilder ) 
-	{
+	constructor(public dialogRef: MdDialogRef<ConfirmDialog>, private translate: TranslateService, private fb: FormBuilder) {
 		this.form = this.fb.group({
-            TextThai: [null, Validators.required],
-            TextEng: [null, Validators.required],
-            TextAlias: [null,Validators.required]
-        })
+			TextThai: [null, Validators.required],
+			TextEng: [null, Validators.required],
+			TextAlias: [null, Validators.required]
+		})
 	}
-	onSubmit(TextThai:MdInputDirective,TextEng:MdInputDirective,TextAlias:MdInputDirective)
-	{
+	onSubmit(TextThai: MdInputDirective, TextEng: MdInputDirective, TextAlias: MdInputDirective) {
 		this.PassValue.push(TextThai.value)
 		this.PassValue.push(TextEng.value)
 		this.PassValue.push(TextAlias.value)
@@ -199,15 +212,13 @@ export class InsertDialog2 {
 	PassValue = [];
 
 	public form: FormGroup;
-	constructor(public dialogRef: MdDialogRef <ConfirmDialog>,private translate: TranslateService,private fb: FormBuilder ) 
-	{
+	constructor(public dialogRef: MdDialogRef<ConfirmDialog>, private translate: TranslateService, private fb: FormBuilder) {
 		this.form = this.fb.group({
-            TextThai: [null, Validators.required],
-            TextEng: [null, Validators.required]
-        })
+			TextThai: [null, Validators.required],
+			TextEng: [null, Validators.required]
+		})
 	}
-	onSubmit(TextThai:MdInputDirective,TextEng:MdInputDirective)
-	{
+	onSubmit(TextThai: MdInputDirective, TextEng: MdInputDirective) {
 		this.PassValue.push(TextThai.value)
 		this.PassValue.push(TextEng.value)
 		this.dialogRef.close(this.PassValue)
@@ -241,14 +252,12 @@ export class InsertDialog3 {
 	PassValue = [];
 
 	public form: FormGroup;
-	constructor(public dialogRef: MdDialogRef <ConfirmDialog>,private translate: TranslateService,private fb: FormBuilder ) 
-	{
+	constructor(public dialogRef: MdDialogRef<ConfirmDialog>, private translate: TranslateService, private fb: FormBuilder) {
 		this.form = this.fb.group({
-            TextThai: [null, Validators.required]
-        })
+			TextThai: [null, Validators.required]
+		})
 	}
-	onSubmit(TextThai:MdInputDirective)
-	{
+	onSubmit(TextThai: MdInputDirective) {
 		this.PassValue.push(TextThai.value)
 		this.dialogRef.close(this.PassValue)
 		this.form.reset();

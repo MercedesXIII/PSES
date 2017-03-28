@@ -6,8 +6,8 @@
         </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="end center">
-        <button class="mr-1" color="warn" style="width: 100%; color:white;" md-raised-button>Reject</button>
-        <button (click)="approve()" style="width: 100%; background-color: green; color:white;" md-raised-button>Approve</button>
+        <button (click)="approve(0)" class="mr-1" color="warn" style="width: 100%; color:white;" md-raised-button>Reject</button>
+        <button (click)="approve(1)" style="width: 100%; background-color: green; color:white;" md-raised-button>Approve</button>
     </div>
 </div>
 <div *ngFor="let data of getEva" fxLayout="row" fxLayoutWrap="wrap" class="all">
@@ -178,7 +178,8 @@
 </div>
 <!-- TotalScore -->
 <div fxLayout="row" fxLayoutWrap="wrap">
-    <div fxFlex.gt-sm="54" fxFlex.gt-xs="54" fxFlex="100" fxLayout="column" fxLayoutAlign.gt-sm="start center" fxLayoutAlign.gt-xs="start center" class="mt-1" fxLayout.gt-sm="row" fxLayout.gt-xs="row" fxLayoutAlign="none">
+    <div fxFlex.gt-sm="54" fxFlex.gt-xs="54" fxFlex="100" fxLayout="column" fxLayoutAlign.gt-sm="start center" fxLayoutAlign.gt-xs="start center"
+        class="mt-1" fxLayout.gt-sm="row" fxLayout.gt-xs="row" fxLayoutAlign="none">
         <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxLayout="row" fxFlex="100">
             <div class="header" fxLayoutWrap="wrap" fxLayout="row" fxFlex="75" style="font-size: 15px; " fxLayoutAlign="center center">
                 Final Score & Grade
@@ -213,7 +214,7 @@
     </div>
     <hr>
     <md-card-content>
-        <div *ngFor="let head of header; let k = index">
+        <div *ngFor="let head of header; let k = index" class="mt-1">
             <div *ngIf="head.H_Level==1">
                 <div fxLayout="row " fxLayoutAlign="start center" class="ml-1 mb-1" fxFlex="100">
                     <div fxFlex="5">
@@ -276,20 +277,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div fxLayout="row " fxLayoutAlign="space-between end ">
-                    <div>
-                        <button *ngIf="activeTabIndex>= 1" md-icon-button class="ml-1" (click)="passScore(false)">
-                            <md-icon>arrow_back</md-icon>
-                        </button>
-                    </div>
-                    <div style="margin-right: 10%;">
-                        <div style="margin-left: 100%;">
-                            <button *ngIf="activeTabIndex < countHeader-1" md-icon-button class="ml-1" (click)="passScore(true)">
-                                <md-icon>arrow_forward</md-icon>
-                            </button>
+                            <div class="ml-1 mb-1">
+                                <span>Comment : {{head2.Comment}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

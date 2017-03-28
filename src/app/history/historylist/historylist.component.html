@@ -1,6 +1,6 @@
 <!-- Data Table #Start-->
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxHide="false" fxHide.xs>
-    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false " [scrollbarH]="true " [rows]="listeva" [limit]="10 ">
+    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false " [scrollbarH]="true " [rows]="listhistory" [limit]="10 ">
         <ngx-datatable-column [flexGrow]="1">
             <template ngx-datatable-header-template>
                 <div class="header">#</div>
@@ -11,13 +11,13 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="7" prop="EmployeeFirstName">
+        <ngx-datatable-column [flexGrow]="7" prop="Name">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
                 <div style="text-align: left; ">
-                    {{value+" "+row.EmployeeLastName}}
+                    {{value}}
                 </div>
             </template>
         </ngx-datatable-column>
@@ -31,23 +31,27 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="8" prop="Function">
+        <ngx-datatable-column [flexGrow]="5" prop="Role">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
                 <div style="text-align: left; ">
-                    {{value | translate}}
+                    {{value}}
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="5" prop="StartDatePlan">
+        <ngx-datatable-column [flexGrow]="5">
             <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'Duration' | translate}}</div>
+                <div style="text-align: center; font-weight: bold ">State</div>
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
-                    {{value+"-"+row.FinishDatePlan}}
+                    <button *ngIf="row.ApproveState == 0" md-raised-button md-button-sm color="primary"> Approved </button>
+                    <button *ngIf="row.ApproveState == -1" md-raised-button md-button-sm color="warn"> Rejected </button>
+                    <div fxLayoutAlign="center center" fxLayout="row">
+                        <md-progress-bar *ngIf="row.ApproveState == 1" mode="determinate" [value]="progress[row.$$index]" color="primary" class="mb-1"></md-progress-bar>
+                    </div>
                 </div>
             </template>
         </ngx-datatable-column>
@@ -66,14 +70,13 @@
     </ngx-datatable>
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxShow="false" fxShow.xs>
-    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="70" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="4" [rows]='listeva'>
+    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="70" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="4" [rows]='listhistory'>
         <ngx-datatable-column [width]="230" [minWidth]="230">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="column" fxLayoutAlign="start">
-                    <span><b>{{'Name' | translate}}</b> {{listeva[row.$$index]['EmployeeFirstName']+" "+listeva[row.$$index]['EmployeeLastName']}}</span>
-                    <span><b>{{'Project Code' | translate}}</b> {{listeva[row.$$index]['ProjectCode']}}</span>
-                    <span><b>{{'Role' | translate}}</b> {{listeva[row.$$index]['Function']}}</span>
-                    <span><b>{{'Duration' | translate}}</b> {{listeva[row.$$index]['StartDatePlan']+"-"+listeva[row.$$index]['FinishDatePlan']}}</span>
+                    <span><b>{{'Name' | translate}}</b> {{listhistory[row.$$index]['Name']}}</span>
+                    <span><b>{{'Project Code' | translate}}</b> {{listhistory[row.$$index]['ProjectCode']}}</span>
+                    <span><b>{{'Role' | translate}}</b> {{listhistory[row.$$index]['Role']}}</span>
                 </div>
             </template>
         </ngx-datatable-column>

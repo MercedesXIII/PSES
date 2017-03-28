@@ -191,7 +191,8 @@
             </div>
         </div>
     </div>
-    <div fxFlex.gt-sm="54" fxFlex.gt-xs="51" fxFlex="100" fxLayout="column" fxLayoutAlign.gt-sm="start center" fxLayoutAlign.gt-xs="start center" class="mt-1" fxLayout.gt-sm="row" fxLayout.gt-xs="row" fxLayoutAlign="none">
+    <div fxFlex.gt-sm="54" fxFlex.gt-xs="51" fxFlex="100" fxLayout="column" fxLayoutAlign.gt-sm="start center" fxLayoutAlign.gt-xs="start center"
+        class="mt-1" fxLayout.gt-sm="row" fxLayout.gt-xs="row" fxLayoutAlign="none">
         <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxLayout="row" fxFlex="100">
             <div class="header" fxLayoutWrap="wrap" fxLayout="row" fxFlex="75" style="font-size: 15px; " fxLayoutAlign="center center">
                 Final Score & Grade
@@ -271,9 +272,10 @@
                                                 <input class="mr-1 " style="width: 50px; text-align: center; " disabled="disabled " [(ngModel)]="subTotalScore[i] ">
                                             </div>
                                             <div style="margin-top: -3px; ">
-                                                <button *ngIf="flag[i]==false && head2.H_ID < 0 " md-icon-button md-button-sm (click)="delete(head2.H_ID,i) " [md-tooltip]="remove " [tooltip-position]="point ">
+                                                <button *ngIf="flag[i]==false && head2.H_ID < 0 " md-icon-button md-button-sm (click)="delete(head2.H_ID,i) " [md-tooltip]="remove "
+                                                    [tooltip-position]="point ">
                                                     <md-icon>delete_forever</md-icon>
-                                                </button>
+                                                    </button>
                                             </div>
                                         </div>
                                     </div>
@@ -302,9 +304,10 @@
                                                         </select>
                                                     </div>
                                                     <div>
-                                                        <button md-icon-button md-button-sm *ngIf="head3.H_ID < 0 " (click)=" delete(head3.H_ID,j) " [md-tooltip]="remove " [tooltip-position]="point " tabindex="-1 ">
+                                                        <button md-icon-button md-button-sm *ngIf="head3.H_ID < 0 " (click)=" delete(head3.H_ID,j) " [md-tooltip]="remove " [tooltip-position]="point "
+                                                            tabindex="-1 ">
                                                             <md-icon>delete_forever</md-icon>
-                                                        </button>
+                                                            </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -317,8 +320,8 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div>
-                                        <md-textarea [(ngModel)]="CommentH2[i] " placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
+                                    <div class="ml-1">
+                                        <md-textarea [(ngModel)]="CommentH2[i]" placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
                                     </div>
                                 </div>
                             </div>
@@ -339,9 +342,10 @@
                                     <button *ngIf="activeTabIndex == countHeader-1" md-raised-button color="accent" (click)="calculate()">
                                         Calculate
                                     </button>
-                                    <button tyle="margin-top: -3px;" *ngIf="activeTabIndex == countHeader-1" md-raised-button [disabled]="countHead3!=countHead3full" color="primary" (click)="finishEvaluate()">
+                                    <button tyle="margin-top: -3px;" *ngIf="activeTabIndex == countHeader-1" md-raised-button [disabled]="countHead3!=countHead3full"
+                                        color="primary" (click)="finishEvaluate()">
                                         Confirm
-                                    </button>
+                                        </button>
                                 </div>
                             </div>
                         </div>

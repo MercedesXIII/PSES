@@ -39,45 +39,22 @@ export class ApprovelistComponent implements OnInit {
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
-            .subscribe(res => {
-                this.listapprove = res.json();
-                this.progressApprove();
-            });
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
         //     .subscribe(res => {
-        //         this.listapprove = res.json()
-        //         this.progressApprove();
+        //         this.listapprove = res.json();
         //     });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
+            .subscribe(res => {
+                this.listapprove = res.json()
+            });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
         //     .subscribe(res => {
         //     this.listapprove = res.json();
-        //         this.progressApprove();
         //     });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
         //     .subscribe(res => {
         //     this.listapprove = res.json()
-        //         this.progressApprove();
         //     });
-    }
-    progressApprove() {
-        for (let index in this.listapprove) {
-            if (this.listapprove[index].HR == 1) {
-                this.progress[index] = 100;
-            }
-            else if (this.listapprove[index].GM == 1) {
-                this.progress[index] = 75;
-            }
-            else if (this.listapprove[index].PM == 1) {
-                this.progress[index] = 50;
-            }
-            else if (this.listapprove[index].ST == 1) {
-                this.progress[index] = 25;
-            }
-            else {
-                this.progress[index] = 0;
-            }
-        }
     }
     create(flag: boolean) {
         if (flag == true) {

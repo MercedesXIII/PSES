@@ -1,11 +1,13 @@
-import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit,ApplicationRef } from '@angular/core';
+import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Http, Response, Headers,URLSearchParams } from '@angular/http';
+import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from 'ng2-translate';
 import { CustomValidators } from 'ng2-validation';
-import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput,MdInputDirective, MdDialog, MdDialogRef } from '@angular/material';
-import { GlobalServiceRef} from '../../shared/GlobalServiceRef'
+import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdInputDirective, MdDialog, MdDialogRef } from '@angular/material';
+import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
+
+import { ConfirmDialog } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-approvedetail',
@@ -15,20 +17,20 @@ import { GlobalServiceRef} from '../../shared/GlobalServiceRef'
 export class ApprovedetailComponent implements OnInit {
 
     public LoginResultJson: Object;
-    @Input() EvaId : number;
+    @Input() EvaId: number;
     @Output() back = new EventEmitter();
     //tooltip
     point: TooltipPosition = 'below';
     remove: string = 'Delete';
-    adddetail : string = 'Add Detail';
-    addtopic : string = 'Add Topic';
+    adddetail: string = 'Add Detail';
+    addtopic: string = 'Add Topic';
 
     getEva = [];
     header = [];
     detail = [];
     flag = [];
-    score = [1,2,3,4,5];
-    currentPosition : number;
+    score = [1, 2, 3, 4, 5];
+    currentPosition: number;
     currentScore = [];
     currentId = [];
     currentScoreId = [];
@@ -38,169 +40,156 @@ export class ApprovedetailComponent implements OnInit {
     finalTotalScore = [];
     passFinalTotalScore = [];
     passSubTotalScore = [];
-    activeTabIndex = 0;
     PositionNo;
     fixedCols = 18;
     fixedRowHeight = 40;
     ratioGutter = 1;
     color = '#3f51b5'
     color2 = '#fafafa'
-    countHeader : number = 0;
-    countHead3 : number;
-    countHead3full : number =0;
-    openDelete : boolean = true;
+    countHeader: number = 0;
+    countHead3: number;
+    countHead3full: number = 0;
+    openDelete: boolean = true;
 
     public form2: FormGroup;
     public form3: FormGroup;
-    constructor(private router : Router, public http:Http ,private fb: FormBuilder, public dialog: MdDialog,public ref : ApplicationRef) { }
+    constructor(private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ApplicationRef) { }
     ngOnInit() {
         console.log(this.EvaId)
-        this.http.get(GlobalServiceRef.URLService+"/Eva/EvaData/"+this.EvaId)
-        .subscribe(res => {this.getEva = res.json();
-            this.currentPosition = this.getEva[0].Part2ID;
-            this.http.get(GlobalServiceRef.URLService+"/Header/All/"+this.currentPosition+"/"+this.EvaId+"/1")
+        this.http.get(GlobalServiceRef.URLService + "/Eva/EvaData/" + this.EvaId)
+            .subscribe(res => {
+                this.getEva = res.json();
+                this.currentPosition = this.getEva[0].Part2ID;
+                this.http.get(GlobalServiceRef.URLService + "/Header/All/" + this.currentPosition + "/" + this.EvaId + "/1")
+                    .subscribe(res => {
+                        this.header = res.json();
+                        this.countHeader = 0;
+                        this.countHead3full = 0;
+                        for (let data in this.header) {
+                            this.flag[data] = false;
+                            if (this.header[data].H_Level == 1) {
+                                this.countHeader++;
+                                this.passFinalTotalScore[data] = this.header[data].point;
+                                this.finalTotalScore[data] = this.calScore(this.header[data].point)
+                            }
+                            else if (this.header[data].H_Level == 2) {
+                                //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
+                                this.passSubTotalScore[data] = this.header[data].point;
+                                this.subTotalScore[data] = this.calScore(this.header[data].point)
+                            }
+                            else if (this.header[data].H_Level == 3) {
+                                //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
+                                this.currentScore[data] = this.header[data].point;
+                                this.currentId[data] = this.header[data].H_ID;
+                                this.curentParent[data] = this.header[data].Parent;
+                                this.currentScoreId[data] = this.header[data].Score_ID;
+                                this.countHead3full++;
+                            }
+                        }
+                    });
+            });
+    }
+    callHeader(id) {
+        this.currentScore = [];
+        this.currentId = [];
+        this.getScoreAndId = [];
+        this.http.get(GlobalServiceRef.URLService + "/Header/All/" + id + "/" + this.EvaId)
             .subscribe(res => {
                 this.header = res.json();
                 this.countHeader = 0;
                 this.countHead3full = 0;
-                for(let data in this.header)
-                {
+                for (let data in this.header) {
                     this.flag[data] = false;
-                    if(this.header[data].H_Level == 1)
-                    {
+                    if (this.header[data].H_Level == 1) {
                         this.countHeader++;
                         this.passFinalTotalScore[data] = this.header[data].point;
                         this.finalTotalScore[data] = this.calScore(this.header[data].point)
                     }
-                    else if(this.header[data].H_Level == 2)
-                    {
+                    else if (this.header[data].H_Level == 2) {
                         //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
                         this.passSubTotalScore[data] = this.header[data].point;
                         this.subTotalScore[data] = this.calScore(this.header[data].point)
                     }
-                    else if(this.header[data].H_Level == 3)
-                    {
+                    else if (this.header[data].H_Level == 3) {
                         //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
                         this.currentScore[data] = this.header[data].point;
                         this.currentId[data] = this.header[data].H_ID;
                         this.curentParent[data] = this.header[data].Parent;
                         this.currentScoreId[data] = this.header[data].Score_ID;
                         this.countHead3full++;
+                        //console.log("Score:"+this.currentScore[data]+" Id:"+this.currentId[data]+" H3Full:"+this.countHead3full)
                     }
                 }
             });
-        });
     }
-    callHeader(id)
-    {
-        this.currentScore = [];
-        this.currentId = [];
-        this.getScoreAndId = [];
-        this.http.get(GlobalServiceRef.URLService+"/Header/All/"+id+"/"+this.EvaId)
-        .subscribe(res => {this.header = res.json();
-            this.countHeader = 0;
-            this.countHead3full = 0;
-            for(let data in this.header)
-            {
-                this.flag[data] = false;
-                if(this.header[data].H_Level == 1)
-                {
-                    this.countHeader++;
-                    this.passFinalTotalScore[data] = this.header[data].point;
-                    this.finalTotalScore[data] = this.calScore(this.header[data].point)
-                }
-                else if(this.header[data].H_Level == 2)
-                {
-                    //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                    this.passSubTotalScore[data] = this.header[data].point;
-                    this.subTotalScore[data] = this.calScore(this.header[data].point)
-                }
-                else if(this.header[data].H_Level == 3)
-                {
-                    //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
-                    this.currentScore[data] = this.header[data].point;
-                    this.currentId[data] = this.header[data].H_ID;
-                    this.curentParent[data] = this.header[data].Parent;
-                    this.currentScoreId[data] = this.header[data].Score_ID;
-                    this.countHead3full++;
-                    //console.log("Score:"+this.currentScore[data]+" Id:"+this.currentId[data]+" H3Full:"+this.countHead3full)
-                }
-            }
-        });
-    }
-    calScore(score:number)
-    {
-        if(score < 1)
+    calScore(score: number) {
+        if (score < 1)
             return "N/A"
-        else if(score < 3)
+        else if (score < 3)
             return "UNA"
-        else if(score < 5)
+        else if (score < 5)
             return "NIM"
-        else if(score < 7)
+        else if (score < 7)
             return "STD"
-        else if(score < 9)
+        else if (score < 9)
             return "AST"
         else
             return "OUT"
     }
-    onSubmit(Id : MdSelect){
+    onSubmit(Id: MdSelect) {
         this.callHeader(Id);
     }
-    callflag(get : number)
-    {
-        if(this.flag[get] == false)
+    callflag(get: number) {
+        if (this.flag[get] == false)
             this.flag[get] = true;
         else
             this.flag[get] = false;
+    }
 
-    }
-    passScore(pass : boolean)
-    {
-        if(pass == true)
-            this.activeTabIndex++;
-        else
-            this.activeTabIndex--;
-    }
-    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         for (let propName in changes) {
             this.countHead3 = 0;
-            for(let data in this.currentScore)
-            {
-                if(this.currentScore[data] != 0)
+            for (let data in this.currentScore) {
+                if (this.currentScore[data] != 0)
                     this.countHead3++;
             }
-            console.log(this.countHead3+" "+this.countHead3full)
+            console.log(this.countHead3 + " " + this.countHead3full)
         }
     }
-    approve()
-    {
+    approve(status: number) {
+
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        console.log(this.LoginResultJson['EmployeeID']+" "+this.EvaId)
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        // let body : string = JSON.stringify({EmpID:this.LoginResultJson['EmployeeID'],EvaID:this.EvaId});
-         let body : string = JSON.stringify({EmpID:890148,EvaID:this.EvaId});
-        // let body : string = JSON.stringify({EmpID:430045,EvaID:this.EvaId});
-        // let body : string = JSON.stringify({EmpID:460143,EvaID:this.EvaId});
-        this.http.put(GlobalServiceRef.URLService+"/Eva/ApproveStatus",body,{
-            headers: headers
-        }).subscribe(() => {
-            console.log("Complete");
-            this.back.emit(true);
+        let dialogRef = this.dialog.open(ConfirmDialog);
+        if (status == 1)
+            dialogRef.componentInstance.SetDialogType("approve");
+        else
+            dialogRef.componentInstance.SetDialogType("reject");
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === "ok") {
+                let headers = new Headers({ 'Content-Type': 'application/json' });
+                // let body : string = JSON.stringify({EmpID:this.LoginResultJson['EmployeeID'],EvaID:this.EvaId,Status:status});
+                let body: string = JSON.stringify({ EmpID: 890148, EvaID: this.EvaId, Status: status });
+                //let body : string = JSON.stringify({EmpID:430045,EvaID:this.EvaId,Status:status});
+                //let body : string = JSON.stringify({EmpID:460143,EvaID:this.EvaId,Status:status});
+                this.http.put(GlobalServiceRef.URLService + "/Eva/ApproveStatus", body, {
+                    headers: headers
+                }).subscribe(() => {
+                    console.log("Complete");
+                    this.back.emit(true);
+                });
+            }
         });
     }
-    backpage()
-    {
+    backpage() {
         this.back.emit(true);
     }
-    call()
-    {
+    call() {
         this.countHead3 = 0;
-        for(let data in this.currentScore)
-        {
-            if(this.currentScore[data] != 0)
+        for (let data in this.currentScore) {
+            if (this.currentScore[data] != 0)
                 this.countHead3++;
         }
-        console.log(this.countHead3+" "+this.countHead3full)
+        console.log(this.countHead3 + " " + this.countHead3full)
     }
 
 

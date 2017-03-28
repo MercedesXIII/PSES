@@ -1,12 +1,20 @@
 .header {
-    color: whitesmoke;
-    position: absolute;
-    left: 5px;
+    background-color: #faffff;
+    border: solid #fafafa 1px;
+    height: 45px;
+    border-radius: 3px;
 }
 
 .detail {
-    position: absolute;
-    left: 5px;
+    background-color: #78C9F1;
+    border: solid #fafafa 1px;
+    height: 45px;
+    border-radius: 3px;
+}
+
+.all {
+    border: solid #fafafa 1px;
+    border-radius: 3px;
 }
 
 input {

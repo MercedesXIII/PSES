@@ -1,6 +1,7 @@
 <!-- Data Table #Start-->
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxHide="false" fxHide.xs>
-    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false " [scrollbarH]="true " [rows]="listapprove" [limit]="10 ">
+    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
+        [scrollbarH]="true " [rows]="listapprove" [limit]="10 ">
         <ngx-datatable-column [flexGrow]="1">
             <template ngx-datatable-header-template>
                 <div class="header">#</div>
@@ -31,7 +32,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <!--<ngx-datatable-column [flexGrow]="4" prop="Role">
+        <ngx-datatable-column [flexGrow]="4" prop="Role">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
             </template>
@@ -41,7 +42,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-         <ngx-datatable-column [flexGrow]="5" prop="StartDatePlan">
+        <!--<ngx-datatable-column [flexGrow]="5" prop="StartDatePlan">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Duration' | translate}}</div>
             </template>
@@ -57,7 +58,8 @@
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
-                     <!--<button *ngIf="row.ST == 1" md-icon-button md-button-sm style="color: green" [md-tooltip]="st" [tooltip-position]="position">
+                    <button md-raised-button md-button-sm color="primary"> Waitting </button>
+                    <!--<button *ngIf="row.ST == 1" md-icon-button md-button-sm style="color: green" [md-tooltip]="st" [tooltip-position]="position">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
                     <button *ngIf="row.ST == 0" md-icon-button md-button-sm style="color: red" [md-tooltip]="st" [tooltip-position]="position">
@@ -81,7 +83,7 @@
                     <button *ngIf="row.HR == 0" md-icon-button md-button-sm style="color: red" [md-tooltip]="hrd" [tooltip-position]="position">
                         <md-icon>radio_button_checked</md-icon>
                     </button> -->
-                    <md-progress-bar mode="determinate" [value]="progress" color="primary" class="mb-1"></md-progress-bar>
+                    <!--<md-progress-bar mode="determinate" [value]="progress" color="primary" class="mb-1"></md-progress-bar>-->
                 </div>
             </template>
         </ngx-datatable-column>
@@ -100,7 +102,8 @@
     </ngx-datatable>
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxShow="false" fxShow.xs>
-    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="70" [rowHeight]="'auto'" [scrollbarH]="true" [limit]="4" [rows]='listapprove'>
+    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="70" [rowHeight]="'auto'" [scrollbarH]="true"
+        [limit]="4" [rows]='listapprove'>
         <ngx-datatable-column [width]="230" [minWidth]="230">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="column" fxLayoutAlign="start">

@@ -56,34 +56,21 @@ export class EvaformComponent implements OnInit {
     countHead3full: number = 0;
     openDelete: boolean = true;
     x = 0;
+    Lang;
+    a;
 
     public form2: FormGroup;
     public form3: FormGroup;
     constructor(public translate: TranslateService, private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ApplicationRef, public snackBar: MdSnackBar) { }
     ngOnInit() {
-        if (this.translate.currentLang == "th") {
-            this.callDataFirstTime("TH")
-        }
-        else {
-            this.callDataFirstTime("EN")
-        }
-        this.translate.onLangChange.subscribe(() => {
-            if (this.translate.currentLang == "th") {
-                this.callDataFirstTime("TH")
-            }
-            else {
-                this.callDataFirstTime("EN")
-            }
-        })
-    }
-    callDataFirstTime(Lang: string) {
+
         this.http.get(GlobalServiceRef.URLService + "/Header/position")
             .subscribe(res => this.position = res.json());
         this.http.get(GlobalServiceRef.URLService + "/Eva/EvaData/" + this.EvaId)
             .subscribe(res => {
                 this.getEva = res.json();
                 this.currentPosition = this.getEva[0].Part2ID;
-                this.http.get(GlobalServiceRef.URLService + "/Header/All/" + this.currentPosition + "/" + this.EvaId + "/1/" + Lang)
+                this.http.get(GlobalServiceRef.URLService + "/Header/All/" + this.currentPosition + "/" + this.EvaId + "/1/EN")
                     .subscribe(res => {
                         this.header = res.json();
                         this.countHeader = 0;
@@ -112,14 +99,31 @@ export class EvaformComponent implements OnInit {
                                 this.countHead3full++;
                             }
                         }
+                        console.log(JSON.stringify(this.header[0].Text_Language))
+                        let a = JSON.stringify(this.header[0].Text_Language)
+                        console.log(JSON.stringify(eval("(" + a['EN'] + ")")))
                         this.call()
                     });
             });
+        if (this.translate.currentLang == "th") {
+            this.Lang = 'TH'
+        }
+        else {
+            this.Lang = 'EN'
+        }
+        this.translate.onLangChange.subscribe(() => {
+            if (this.translate.currentLang == "th") {
+                this.Lang = 'TH'
+            }
+            else {
+                this.Lang = 'EN'
+            }
+        });
     }
-    callHeader(id) {
+    callHeader(id, lang: string) {
         //this.currentScore = [];
         //this.getScoreAndId = [];
-        this.http.get(GlobalServiceRef.URLService + "/Header/All/" + id + "/" + this.EvaId + "/2")
+        this.http.get(GlobalServiceRef.URLService + "/Header/All/" + id + "/" + this.EvaId + "/2/" + lang)
             .subscribe(res => {
                 this.header = res.json();
                 this.countHeader = 0;
@@ -149,8 +153,52 @@ export class EvaformComponent implements OnInit {
                 }
             });
     }
+    callHeader3(i, id, lang: string) {
+        this.http.get(GlobalServiceRef.URLService + "/Header/All/" + id + "/" + this.EvaId + "/2/" + lang)
+            .subscribe(res => {
+                this.header = res.json();
+                this.countHeader = 0;
+                this.countHead3full = 0;
+                for (let data in this.header) {
+                    this.flag[data] = false;
+                    this.flag[i] = true;
+                    if (this.header[data].H_Level == 1) {
+                        this.Comment[data] = this.header[data].Comment;
+                        this.countHeader++;
+                        this.passFinalTotalScore[data] = this.header[data].point;
+                        this.finalTotalScore[data] = this.calScore(this.header[data].point)
+                    }
+                    else if (this.header[data].H_Level == 2) {
+                        this.Comment[data] = this.header[data].Comment;
+                        //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
+                        this.passSubTotalScore[data] = this.header[data].point;
+                        this.subTotalScore[data] = this.calScore(this.header[data].point)
+                    }
+                    else if (this.header[data].H_Level == 3) {
+                        //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
+                        this.currentScore[data] = this.header[data].point;
+                        this.curentParent[data] = this.header[data].Parent;
+                        this.currentScoreId[data] = this.header[data].Score_ID;
+                        this.countHead3full++;
+                    }
+                }
+            });
+    }
     onSubmit(Id: MdSelect) {
-        this.callHeader(Id);
+        if (this.translate.currentLang == "th") {
+            this.callHeader(Id, "TH")
+        }
+        else {
+            this.callHeader(Id, "EN")
+        }
+        this.translate.onLangChange.subscribe(() => {
+            if (this.translate.currentLang == "th") {
+                this.callHeader(Id, "TH")
+            }
+            else {
+                this.callHeader(Id, "EN")
+            }
+        })
     }
     openDialogHead(HeadId: number, PositionNo: number, Level: number, i: number) {
         if (Level == 1) {
@@ -212,64 +260,90 @@ export class EvaformComponent implements OnInit {
     }
     insertHeader1(HeadId: number, PositionNo: number, TextThai: string, TextEng: string, TextAlias: string) {
         //console.log(HeadId + " " + PositionNo + " " + this.EvaId + " " + TextThai + " " + TextEng + " " + TextAlias)
+        let dialogRef = this.dialog.open(Loading, this.config);
+        dialogRef.afterClosed().subscribe(() => {
+            console.log("Loading")
+        });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Eva_Id: this.EvaId, Text: TextThai, Text_Eng: TextEng, Alias: TextAlias });
         this.http.put(GlobalServiceRef.URLService + "/Header/Insert", body, {
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
-            this.callHeader(PositionNo);
+            dialogRef.close();
+            if (this.translate.currentLang == "th") {
+                this.callHeader(PositionNo, "TH")
+            }
+            else {
+                this.callHeader(PositionNo, "EN")
+            }
+            this.translate.onLangChange.subscribe(() => {
+                if (this.translate.currentLang == "th") {
+                    this.callHeader(PositionNo, "TH")
+                }
+                else {
+                    this.callHeader(PositionNo, "EN")
+                }
+            })
         });
     }
     insertHeader2(i: number, HeadId: number, PositionNo: number, TextThai: string, TextEng: string) {
         //console.log(HeadId + " " + PositionNo + " " + this.EvaId + " " + TextThai + " " + TextEng)
+        let dialogRef = this.dialog.open(Loading, this.config);
+        dialogRef.afterClosed().subscribe(() => {
+            console.log("Loading")
+        });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Eva_Id: this.EvaId, Text: TextThai, Text_Eng: TextEng, Alias: "-" });
         this.http.put(GlobalServiceRef.URLService + "/Header/Insert", body, {
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
-            this.callHeader(PositionNo);
+            dialogRef.close();
+            if (this.translate.currentLang == "th") {
+                this.callHeader(PositionNo, "TH")
+            }
+            else {
+                this.callHeader(PositionNo, "EN")
+            }
+            this.translate.onLangChange.subscribe(() => {
+                if (this.translate.currentLang == "th") {
+                    this.callHeader(PositionNo, "TH")
+                }
+                else {
+                    this.callHeader(PositionNo, "EN")
+                }
+            })
         });
     }
     insertHeader3(i: number, HeadId: number, PositionNo: number, TextThai: string) {
         //this.currentScore = [];
         //this.getScoreAndId = [];
+        let dialogRef = this.dialog.open(Loading, this.config);
+        dialogRef.afterClosed().subscribe(() => {
+            console.log("Loading")
+        });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Eva_Id: this.EvaId, Text: TextThai, Text_Eng: "-", Alias: "-" });
         this.http.put(GlobalServiceRef.URLService + "/Header/Insert", body, {
             headers: headers
         }).subscribe((res: Response) => {
             let result = res.json();
-            this.http.get(GlobalServiceRef.URLService + "/Header/All/" + PositionNo + "/" + this.EvaId + "/2")
-                .subscribe(res => {
-                    this.header = res.json();
-                    this.countHeader = 0;
-                    this.countHead3full = 0;
-                    for (let data in this.header) {
-                        this.flag[data] = false;
-                        this.flag[i] = true;
-                        if (this.header[data].H_Level == 1) {
-                            this.Comment[data] = this.header[data].Comment;
-                            this.countHeader++;
-                            this.passFinalTotalScore[data] = this.header[data].point;
-                            this.finalTotalScore[data] = this.calScore(this.header[data].point)
-                        }
-                        else if (this.header[data].H_Level == 2) {
-                            this.Comment[data] = this.header[data].Comment;
-                            //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                            this.passSubTotalScore[data] = this.header[data].point;
-                            this.subTotalScore[data] = this.calScore(this.header[data].point)
-                        }
-                        else if (this.header[data].H_Level == 3) {
-                            //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
-                            this.currentScore[data] = this.header[data].point;
-                            this.curentParent[data] = this.header[data].Parent;
-                            this.currentScoreId[data] = this.header[data].Score_ID;
-                            this.countHead3full++;
-                        }
-                    }
-                });
+            dialogRef.close();
+            if (this.translate.currentLang == "th") {
+                this.callHeader3(i, PositionNo, "TH")
+            }
+            else {
+                this.callHeader3(i, PositionNo, "EN")
+            }
+            this.translate.onLangChange.subscribe(() => {
+                if (this.translate.currentLang == "th") {
+                    this.callHeader3(i, PositionNo, "TH")
+                }
+                else {
+                    this.callHeader3(i, PositionNo, "EN")
+                }
+            })
         });
     }
     delete(H_Id: number, indexHead: number) {

@@ -13,8 +13,8 @@ export class SnackbarComponent {
   setAutoHide: boolean = true;
   autoHide: number = 0;
 
-  constructor(public snackBar: MdSnackBar) {}
-  
+  constructor(public snackBar: MdSnackBar) { }
+
   open() {
     let config = new MdSnackBarConfig();
     config.duration = this.autoHide;

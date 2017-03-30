@@ -20,7 +20,7 @@ export class DialogComponent implements OnInit {
 @Component({
 	selector: 'comfirm-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 150px; width: 430px;" fxHide.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 200px; width: 450px; background-color:white; padding:30px;" fxHide.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content><p>{{Message| translate}}</p></md-dialog-content>
 	<hr>
@@ -28,14 +28,21 @@ export class DialogComponent implements OnInit {
 	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
 	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 	</div></div>
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 150px; width: 200px;" fxShow.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 200px; width: 300px; background-color:white; padding:30px;" fxShow.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content><p> {{Message| translate}} </p></md-dialog-content>
 	<hr>
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
 	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
-	</div></div>`
+	</div></div>`,
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+  `]
 })
 export class ConfirmDialog {
 	Message: string = "Are you sure?";
@@ -88,7 +95,7 @@ export class ConfirmDialog {
 @Component({
 	selector: 'normal-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 150px; width: 430px;" fxHide.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 200px; width: 450px; background-color:white; padding:30px;" fxHide.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content><p> {{Message| translate}} </p></md-dialog-content>
 	<hr>
@@ -96,14 +103,21 @@ export class ConfirmDialog {
 	<md-dialog-actions>
 	<button md-button type="button" (click)="dialogRef.close()">{{OkBtnText | translate}}</button></md-dialog-actions>
 	</div></div>
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 150px; width: 200px;" fxShow.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 200px; width: 300px; background-color:white; padding:30px;" fxShow.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content><p> {{'something error please try again later or contact admin'| translate}} </p></md-dialog-content>
 	<hr>
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions>
 	<button md-button type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button></md-dialog-actions>
-	</div></div>`
+	</div></div>`,
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+  `]
 })
 export class NormalDialog {
 	Message: string = "alert!";
@@ -122,19 +136,19 @@ export class NormalDialog {
 		this.TitleText = text;
 	}
 	public SetDialogType(dialogType: string) {
-		if (dialogType === "error") {
+		if (dialogType === "error")
 			this.TitleText = "Error!";
-			this.Message = "something error please try again later or contact admin";
-			this.OkBtnText = "close";
-		}
+		this.Message = "something error please try again later or contact admin";
+		this.OkBtnText = "close";
 	}
+}
 
 }
 
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch"  style="width: 60vw;" >
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch"  style="width: 70vw; background-color:white; padding:30px;">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -154,7 +168,14 @@ export class NormalDialog {
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
 	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
-	</div></div>`
+	</div></div>`,
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+  `]
 })
 export class InsertDialog {
 	;
@@ -185,7 +206,7 @@ export class InsertDialog {
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 60vw;">
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px;">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -201,7 +222,14 @@ export class InsertDialog {
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
 	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
-	</div></div>`
+	</div></div>`,
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+  `]
 })
 export class InsertDialog2 {
 	TitleText: string = "Add Topic";
@@ -229,7 +257,7 @@ export class InsertDialog2 {
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 60vw;">
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px;">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -241,7 +269,15 @@ export class InsertDialog2 {
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
 	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
-	</div></div>`
+	</div></div>`,
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+  `]
+
 })
 export class InsertDialog3 {
 	TitleText: string = "Add Topic";
@@ -267,10 +303,17 @@ export class InsertDialog3 {
 @Component({
 	selector: 'loading-dialog',
 	template: `
-	<body>
-		<md-progress-circle mode="indeterminate" class="md-primary"></md-progress-circle>
-	</body>`,
-	styles: ['body { background-color : transparent; }']
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+		<img src="assets/images/giphy.gif" md-list-avatar style="width: 300px; height: 200px;">
+	</div>`,
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+  `]
+
 })
 export class Loading {
 	constructor(public dialogRef: MdDialogRef<Loading>, private translate: TranslateService) { }

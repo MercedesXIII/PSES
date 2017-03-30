@@ -3,9 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'ng2-validation';
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdCheckbox } from '@angular/material';
+import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdCheckbox, MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
+import { Loading } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-getevalist',
@@ -21,6 +22,8 @@ export class GetevalistComponent implements OnChanges {
     chb: boolean = true;
     startDate = [];
     finishDate = [];
+
+    config: MdDialogConfig = { disableClose: true };
     @Input() PeriodId: number;
     ngOnInit() {
         if (this.translate.currentLang == "th") {
@@ -41,7 +44,7 @@ export class GetevalistComponent implements OnChanges {
     listeva = [];
     selected = [];
     @Output() back = new EventEmitter();
-    constructor(private router: Router, public http: Http, public translate: TranslateService) {
+    constructor(private router: Router, public http: Http, public translate: TranslateService, public dialog: MdDialog) {
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
 
     }
@@ -80,6 +83,10 @@ export class GetevalistComponent implements OnChanges {
     }
     onSubmit() {
 
+        let dialogRef = this.dialog.open(Loading, this.config);
+        dialogRef.afterClosed().subscribe(() => {
+            console.log("Loading")
+        });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         console.log(this.selected);
         for (let val in this.selected) {
@@ -95,6 +102,7 @@ export class GetevalistComponent implements OnChanges {
                 if (res.ok) {
                     console.log("done");
                 }
+                dialogRef.close();
                 this.back.emit(this.PeriodId);
             });
         }

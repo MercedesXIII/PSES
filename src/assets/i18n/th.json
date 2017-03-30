@@ -4,18 +4,37 @@
     "Login": "ล็อกอิน",
     "Forgot password": "ลืมรหัสผ่าน",
 
+    "Project Staff Evaluation System": "ระบบการประเมินพนักงานของโครงการ",
     "HOME": "หน้าแรก",
     "Evaluation": "การประเมิน",
+    "History": "ประวัติการใช้งาน",
+    "Approve": "การอนุมัติ",
     "Manage Header": "จัดการหัวข้อประเมิน",
+
 
     "Name": "ชื่อ",
     "Project Code": "รหัสโครงการ",
     "Role": "หน้าที่",
-    "Duration": "ระยะเวลา",
-
-    "Project Manager": "ผู้จัดการโครงการ",
+    "Duration": "ระยะเวลาโครงการ",
     "Evaluate": "ประเมิน",
-
-    "Quality Assurance Leader": "ความั่นใจ"
+    "Option": "ตัวเลือก",
+    "Select Period": "เลือกระยะเวลาประเมิน",
+    "All": "เลือกทั้งหมด",
+    "OK": "ตกลง",
+    "Delete": "ลบ",
+    "Evaluate": "ประเมิน",
+    "Finished": "เสร็จสิ้น",
+    "Unfinished": "ยังไม่เสร็จ",
+    "Evaluation Form": "แบบการประเมิน",
+    "First Name": "ชื่อ",
+    "Last Name": "นามสกุล",
+    "Group of Staff": "กลุ่ม",
+    "Customer": "ลูกค้า",
+    "Project Code": "รหัสโครงการ",
+    "Project Type": "ประเภทโครงการ",
+    "Evaluate Term": "ระยะเวลาประเมิน",
+    "Proj.Duration": "ระยะเวลาโครงการ",
+    "Role & Responsible": "บทบาทและความรับผิดชอบ",
+    "Evaluator": "ผู้ประเมิน"
 
 }

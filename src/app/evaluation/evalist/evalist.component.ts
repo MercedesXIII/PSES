@@ -4,7 +4,7 @@ import { CustomValidators } from 'ng2-validation';
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdDialog, MdDialogRef } from '@angular/material';
+import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
 import 'rxjs/add/operator/startWith';
 
@@ -28,6 +28,8 @@ export class EvalistComponent implements OnInit {
     finished: string = 'Finished';
     unfinished: string = 'Unfinished';
     wait: string = 'Wait';
+
+    config: MdDialogConfig = { disableClose: true };
 
 
     showPeriod: boolean = false;
@@ -102,7 +104,7 @@ export class EvalistComponent implements OnInit {
         catch (ee) { }
     }
     delete(event, row, value) {
-        let dialogRef = this.dialog.open(ConfirmDialog);
+        let dialogRef = this.dialog.open(ConfirmDialog, this.config);
         dialogRef.componentInstance.SetDialogType("delete");
         dialogRef.afterClosed().subscribe(result => {
             if (result === "ok") {

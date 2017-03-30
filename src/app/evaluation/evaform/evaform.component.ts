@@ -4,7 +4,7 @@ import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from 'ng2-translate';
 import { CustomValidators } from 'ng2-validation';
-import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdInputDirective, MdDialog, MdDialogRef } from '@angular/material';
+import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdInputDirective, MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
 
 import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading } from '../../shared/dialog/dialog.component';
@@ -20,6 +20,8 @@ export class EvaformComponent implements OnInit {
     @Input() EvaId: number;
     @Input() PeriodId: number;
     @Output() back = new EventEmitter();
+
+    config: MdDialogConfig = { disableClose: true };
     //tooltip
     point: TooltipPosition = 'below';
     remove: string = 'Delete';
@@ -53,18 +55,35 @@ export class EvaformComponent implements OnInit {
     countHead3: number;
     countHead3full: number = 0;
     openDelete: boolean = true;
+    x = 0;
 
     public form2: FormGroup;
     public form3: FormGroup;
-    constructor(private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ApplicationRef) { }
+    constructor(public translate: TranslateService, private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ApplicationRef, public snackBar: MdSnackBar) { }
     ngOnInit() {
+        if (this.translate.currentLang == "th") {
+            this.callDataFirstTime("TH")
+        }
+        else {
+            this.callDataFirstTime("EN")
+        }
+        this.translate.onLangChange.subscribe(() => {
+            if (this.translate.currentLang == "th") {
+                this.callDataFirstTime("TH")
+            }
+            else {
+                this.callDataFirstTime("EN")
+            }
+        })
+    }
+    callDataFirstTime(Lang: string) {
         this.http.get(GlobalServiceRef.URLService + "/Header/position")
             .subscribe(res => this.position = res.json());
         this.http.get(GlobalServiceRef.URLService + "/Eva/EvaData/" + this.EvaId)
             .subscribe(res => {
                 this.getEva = res.json();
                 this.currentPosition = this.getEva[0].Part2ID;
-                this.http.get(GlobalServiceRef.URLService + "/Header/All/" + this.currentPosition + "/" + this.EvaId + "/1")
+                this.http.get(GlobalServiceRef.URLService + "/Header/All/" + this.currentPosition + "/" + this.EvaId + "/1/" + Lang)
                     .subscribe(res => {
                         this.header = res.json();
                         this.countHeader = 0;
@@ -135,7 +154,7 @@ export class EvaformComponent implements OnInit {
     }
     openDialogHead(HeadId: number, PositionNo: number, Level: number, i: number) {
         if (Level == 1) {
-            let dialogRef = this.dialog.open(InsertDialog);
+            let dialogRef = this.dialog.open(InsertDialog, this.config);
             dialogRef.afterClosed().subscribe(res => {
                 try {
                     if (res != 'cancel') {
@@ -150,7 +169,7 @@ export class EvaformComponent implements OnInit {
             });
         }
         else if (Level == 2) {
-            let dialogRef = this.dialog.open(InsertDialog2);
+            let dialogRef = this.dialog.open(InsertDialog2, this.config);
             dialogRef.afterClosed().subscribe(res => {
                 try {
                     if (res != 'cancel') {
@@ -164,7 +183,7 @@ export class EvaformComponent implements OnInit {
             });
         }
         else if (Level == 3) {
-            let dialogRef = this.dialog.open(InsertDialog3);
+            let dialogRef = this.dialog.open(InsertDialog3, this.config);
             dialogRef.afterClosed().subscribe(res => {
                 try {
                     if (res != 'cancel') {
@@ -254,7 +273,7 @@ export class EvaformComponent implements OnInit {
         });
     }
     delete(H_Id: number, indexHead: number) {
-        let dialogRef = this.dialog.open(ConfirmDialog);
+        let dialogRef = this.dialog.open(ConfirmDialog, this.config);
         dialogRef.componentInstance.SetDialogType("delete");
         dialogRef.afterClosed().subscribe(result => {
             if (result === "ok") {
@@ -281,10 +300,14 @@ export class EvaformComponent implements OnInit {
             this.activeTabIndex--;
     }
     finishEvaluate() {
-        let dialogRef = this.dialog.open(Loading);
+        let dialogRef = this.dialog.open(Loading, this.config);
         dialogRef.afterClosed().subscribe(() => {
             console.log("Loading")
         });
+        this.x = 1;
+
+        // let config = new MdSnackBarConfig();
+        // this.snackBar.open("Waitting", "Close", config);
         for (let data in this.header) {
             if (this.header[data].H_Level == 1) {
                 this.getScoreAndId.push({ Id: this.header[data].H_ID, Score: this.passFinalTotalScore[data], EvaId: this.EvaId, Comment: this.Comment[data] })

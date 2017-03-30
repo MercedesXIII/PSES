@@ -39,10 +39,10 @@ export class ApprovelistComponent implements OnInit {
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
-        //     .subscribe(res => {
-        //         this.listapprove = res.json();
-        //     });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
+            .subscribe(res => {
+                this.listapprove = res.json();
+            });
 
         //Programmer
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/490428")
@@ -55,10 +55,10 @@ export class ApprovelistComponent implements OnInit {
         //     .subscribe(res => {
         //         this.listapprove = res.json()
         //     });
-        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
-            .subscribe(res => {
-                this.listapprove = res.json();
-            });
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
+        //     .subscribe(res => {
+        //         this.listapprove = res.json();
+        //     });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
         //     .subscribe(res => {
         //     this.listapprove = res.json()

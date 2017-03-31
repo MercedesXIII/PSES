@@ -39,11 +39,12 @@ export class EvalistComponent implements OnInit {
     Duration = [];
     DurationId = [];
     success = 1;
+    Lang
     @Input() PeriodId: string;
     @Output() outPeriodId = new EventEmitter();
     @Output() outPeriodId2 = new EventEmitter();
     @Output() outEvaId = new EventEmitter();
-    constructor(private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public ref: ChangeDetectorRef) { }
+    constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public ref: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.ref.detectChanges()
@@ -67,6 +68,20 @@ export class EvalistComponent implements OnInit {
                 this.currentPeriod = 'all';
                 this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/" + this.LoginResultJson['EmployeeID'] + "/all")
                     .subscribe(res => this.listeva = res.json());
+            }
+            if (this.translate.currentLang == "th") {
+                this.Lang = 'TH'
+            }
+            else {
+                this.Lang = 'EN'
+            }
+        });
+        this.translate.onLangChange.subscribe(() => {
+            if (this.translate.currentLang == "th") {
+                this.Lang = 'TH'
+            }
+            else {
+                this.Lang = 'EN'
             }
         });
     }
@@ -105,7 +120,8 @@ export class EvalistComponent implements OnInit {
     }
     delete(event, row, value) {
         let dialogRef = this.dialog.open(ConfirmDialog, this.config);
-        dialogRef.componentInstance.SetDialogType("delete");
+        dialogRef.componentInstance.SetDialogType("deleteEva");
+        dialogRef.componentInstance.SetMessagge(value.EmployeeFirstName + " " + value.EmployeeLastName);
         dialogRef.afterClosed().subscribe(result => {
             if (result === "ok") {
                 this.http.delete(GlobalServiceRef.URLService + "/Eva/Delete/" + value["Eva_ID"])

@@ -27,14 +27,32 @@ export class HistorylistComponent implements OnInit {
     showPeriod: boolean = false;
     listhistory = [];
     progress = [];
+    Lang;
+
     @Input() PeriodId: string;
     @Output() outEvaId = new EventEmitter();
-    constructor(private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public ref: ChangeDetectorRef) { }
+    constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public ref: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/" + this.LoginResultJson['EmployeeID']).subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/" + this.LoginResultJson['EmployeeID']).subscribe(res => {
+            this.listhistory = res.json(); this.progressApprove()
+            if (this.translate.currentLang == "th") {
+                this.Lang = 'TH'
+            }
+            else {
+                this.Lang = 'EN'
+            }
+        });
+        this.translate.onLangChange.subscribe(() => {
+            if (this.translate.currentLang == "th") {
+                this.Lang = 'TH'
+            }
+            else {
+                this.Lang = 'EN'
+            }
+        });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/490428").subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/890148").subscribe(res => { this.listhistory = res.json(); this.progressApprove() });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/ApproveHistory/430045").subscribe(res => { this.listhistory = res.json(); this.progressApprove() });

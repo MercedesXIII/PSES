@@ -48,17 +48,18 @@ export class ApprovedetailComponent implements OnInit {
     countHead3: number;
     countHead3full: number = 0;
     openDelete: boolean = true;
+    Lang;
 
     public form2: FormGroup;
     public form3: FormGroup;
-    constructor(private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ApplicationRef) { }
+    constructor(public translate: TranslateService, private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ApplicationRef) { }
     ngOnInit() {
         console.log(this.EvaId)
         this.http.get(GlobalServiceRef.URLService + "/Eva/EvaData/" + this.EvaId)
             .subscribe(res => {
                 this.getEva = res.json();
                 this.currentPosition = this.getEva[0].Part2ID;
-                this.http.get(GlobalServiceRef.URLService + "/Header/All/" + this.currentPosition + "/" + this.EvaId + "/1")
+                this.http.get(GlobalServiceRef.URLService + "/Header/All/" + this.currentPosition + "/" + this.EvaId + "/1/EN")
                     .subscribe(res => {
                         this.header = res.json();
                         this.countHeader = 0;
@@ -83,38 +84,21 @@ export class ApprovedetailComponent implements OnInit {
                             }
                         }
                     });
-            });
-    }
-    callHeader(id) {
-        this.currentScore = [];
-        this.currentId = [];
-        this.getScoreAndId = [];
-        this.http.get(GlobalServiceRef.URLService + "/Header/All/" + id + "/" + this.EvaId)
-            .subscribe(res => {
-                this.header = res.json();
-                this.countHeader = 0;
-                this.countHead3full = 0;
-                for (let data in this.header) {
-                    this.flag[data] = false;
-                    if (this.header[data].H_Level == 1) {
-                        this.countHeader++;
-                        this.finalTotalScore[data] = this.calScore(this.header[data].point)
-                    }
-                    else if (this.header[data].H_Level == 2) {
-                        //console.log(this.header[data].H_Level+" "+this.header[data].Text+" "+this.counthead2)
-                        this.subTotalScore[data] = this.calScore(this.header[data].point)
-                    }
-                    else if (this.header[data].H_Level == 3) {
-                        //console.log(this.header[data].point+" "+this.header[data].Text+" "+this.counthead3)
-                        this.currentScore[data] = this.header[data].point;
-                        this.currentId[data] = this.header[data].H_ID;
-                        this.curentParent[data] = this.header[data].Parent;
-                        this.currentScoreId[data] = this.header[data].Score_ID;
-                        this.countHead3full++;
-                        //console.log("Score:"+this.currentScore[data]+" Id:"+this.currentId[data]+" H3Full:"+this.countHead3full)
-                    }
+                if (this.translate.currentLang == "th") {
+                    this.Lang = 'TH'
+                }
+                else {
+                    this.Lang = 'EN'
                 }
             });
+        this.translate.onLangChange.subscribe(() => {
+            if (this.translate.currentLang == "th") {
+                this.Lang = 'TH'
+            }
+            else {
+                this.Lang = 'EN'
+            }
+        });
     }
     calScore(score: number) {
         if (score < 1)
@@ -151,10 +135,14 @@ export class ApprovedetailComponent implements OnInit {
 
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
         let dialogRef = this.dialog.open(ConfirmDialog);
-        if (status == 1)
+        if (status == 1) {
             dialogRef.componentInstance.SetDialogType("approve");
-        else
+            dialogRef.componentInstance.SetMessagge(this.getEva[0]['name_language'][this.Lang] + " " + this.getEva[0]['lastname_language'][this.Lang]);
+        }
+        else {
             dialogRef.componentInstance.SetDialogType("reject");
+            dialogRef.componentInstance.SetMessagge(this.getEva[0]['name_language'][this.Lang] + " " + this.getEva[0]['lastname_language'][this.Lang]);
+        }
         dialogRef.afterClosed().subscribe(result => {
             if (result === "ok") {
                 let headers = new Headers({ 'Content-Type': 'application/json' });

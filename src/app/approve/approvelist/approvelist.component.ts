@@ -32,37 +32,76 @@ export class ApprovelistComponent implements OnInit {
     progress = [];
     showPeriod: boolean = false;
     listapprove = [];
+    Lang
     @Input() PeriodId: string;
     @Output() outEvaId = new EventEmitter();
-    constructor(private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public ref: ChangeDetectorRef) { }
+    constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public ref: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
-            .subscribe(res => {
-                this.listapprove = res.json();
-            });
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
+        //     .subscribe(res => {
+        //         this.listapprove = res.json();
+        //         if (this.translate.currentLang == "th") {
+        //             this.Lang = 'TH'
+        //         }
+        //         else {
+        //             this.Lang = 'EN'
+        //         }
+        //     });
 
         //Programmer
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/490428")
         //     .subscribe(res => {
         //         this.listapprove = res.json()
+        //         if (this.translate.currentLang == "th") {
+        //             this.Lang = 'TH'
+        //         }
+        //         else {
+        //             this.Lang = 'EN'
+        //         }
         //     });
 
         //Bas//
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
-        //     .subscribe(res => {
-        //         this.listapprove = res.json()
-        //     });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
+            .subscribe(res => {
+                this.listapprove = res.json()
+                if (this.translate.currentLang == "th") {
+                    this.Lang = 'TH'
+                }
+                else {
+                    this.Lang = 'EN'
+                }
+            });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
         //     .subscribe(res => {
         //         this.listapprove = res.json();
+        //         if (this.translate.currentLang == "th") {
+        //             this.Lang = 'TH'
+        //         }
+        //         else {
+        //             this.Lang = 'EN'
+        //         }
         //     });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
         //     .subscribe(res => {
-        //     this.listapprove = res.json()
+        //         this.listapprove = res.json()
+        //         if (this.translate.currentLang == "th") {
+        //             this.Lang = 'TH'
+        //         }
+        //         else {
+        //             this.Lang = 'EN'
+        //         }
         //     });
+        this.translate.onLangChange.subscribe(() => {
+            if (this.translate.currentLang == "th") {
+                this.Lang = 'TH'
+            }
+            else {
+                this.Lang = 'EN'
+            }
+        });
     }
     create(flag: boolean) {
         if (flag == true) {

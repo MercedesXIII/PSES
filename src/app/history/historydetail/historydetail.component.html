@@ -9,23 +9,23 @@
 <div *ngFor="let data of getEva" fxLayout="row" fxLayoutWrap="wrap" class="all">
     <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">First Name</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'First Name' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EmployeeFirstName}}</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data['name_language'][Lang]}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Last Name</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Last Name' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EmployeeLastName}}</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data['lastname_language'][Lang]}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Group of Staff</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Group of Staff' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.GroupOfStaff}}</div>
@@ -33,7 +33,7 @@
     </div>
     <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Customer</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Customer' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.CustomerCompanyAlias}}</div>
@@ -41,7 +41,7 @@
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Project Code</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Project Code' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.ProjectCode}}</div>
@@ -49,7 +49,7 @@
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Project Type</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Project Type' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.ProjectType}}</div>
@@ -57,7 +57,7 @@
     </div>
     <div fxFlex.gt-sm="34" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Evalute Term</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Evaluate Term' | translate }}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EvaTerm}}</div>
@@ -65,7 +65,7 @@
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Proj.Duration</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Proj.Duration' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.StartDatePlan+"-"+data.FinishDatePlan}}</div>
@@ -73,7 +73,7 @@
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Role & Responsible</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Role & Responsible' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.Function}}</div>
@@ -89,10 +89,10 @@
     </div>
     <div fxFlex.gt-sm="66" fxFlex.gt-xs="100" fxFlex="100" fxLayout="row">
         <div class="header" fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex="100" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Evaluator</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Evaluator' | translate}}</div>
         </div>
         <div class="detail" fxFlex.gt-xs="75" fxFlex.gt-sm="75" fxFlex="100" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EvaluatorFirstName+" "+data.EvaluatorLastName}}</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data['Evaluator'][Lang]}}</div>
         </div>
     </div>
 </div>
@@ -100,7 +100,7 @@
 <div *ngFor="let data of getEva" fxLayout="row" fxLayoutWrap="wrap" class="all mt-1">
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Not Available</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Not Available' | translate}}</div>
         </div>
         <div class="header" fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">N/A</div>
@@ -108,7 +108,7 @@
     </div>
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Unacceptable (UNA)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Unacceptable' | translate}} (UNA)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -121,7 +121,7 @@
     </div>
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Need Improve (NIM)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Need Improve'|translate}} (NIM)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -134,7 +134,7 @@
     </div>
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Standard (STD)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Standard'|translate}} (STD)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -147,7 +147,7 @@
     </div>
     <div fxFlex.gt-sm="16" fxFlex.gt-xs="16" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Abrove Standard (AST)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Above Standard' | translate}} (AST)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -160,7 +160,7 @@
     </div>
     <div fxFlex.gt-sm="16" fxFlex.gt-xs="16" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Outstanding (OUT)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Outstanding' | translate}} (OUT)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -178,7 +178,7 @@
         class="mt-1" fxLayout.gt-sm="row" fxLayout.gt-xs="row" fxLayoutAlign="none">
         <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxLayout="row" fxFlex="100">
             <div class="header" fxLayoutWrap="wrap" fxLayout="row" fxFlex="75" style="font-size: 15px; " fxLayoutAlign="center center">
-                Final Score & Grade
+                {{'Final Score & Grade' | translate}}
             </div>
             <div class="detail" fxLayoutWrap="wrap" fxLayout="row" fxFlex="25" style="font-size: 15px; " fxLayoutAlign="center center">
                 7.00
@@ -186,10 +186,10 @@
         </div>
         <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxLayout="row" fxFlex="100">
             <div class="header" fxLayoutWrap="wrap" fxLayout="row" fxFlex="25" style="font-size: 15px; " fxLayoutAlign="center center">
-                Level
+                {{'Level' | translate}}
             </div>
             <div class="detail" fxLayoutWrap="wrap" fxLayout="row" fxFlex="75" style="font-size: 15px; " fxLayoutAlign="center center">
-                Above Standard
+                {{'Above Standard' | translate}}
             </div>
         </div>
     </div>
@@ -199,12 +199,12 @@
     <div fxFlex="100" fxLayout="row" class="mt-1 mb-1">
         <div fxFlex="70">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 50%">
-                <b>Topic</b>
+                <b>{{'Topic' | translate}}</b>
             </div>
         </div>
         <div fxFlex="30">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 50%">
-                <b>Score</b>
+                <b>{{'Score' | translate}}</b>
             </div>
         </div>
     </div>
@@ -219,7 +219,7 @@
                         </div>
                     </div>
                     <div fxFlex="65" fxLayout.gt-xs="row" fxLayout.gt-sm="column" style="margin-left: 15px;">
-                        <div style="font-size: 19px; ">{{head.Text}}</div>
+                        <div style="font-size: 19px; ">{{head['Text_Language'][Lang]}}</div>
                     </div>
                     <div fxFlex="30" class="mr-1">
                         <div fxLayout="row " fxLayoutWrap="wrap" style="margin-left: 54% ">
@@ -242,7 +242,7 @@
                             </div>
                             <div fxFlex="64 ">
                                 <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px; ">
-                                    {{head2.Text+"( "+head2.Text_Eng+") "}}
+                                    {{head2['Text_Language'][Lang]}}
                                 </div>
                             </div>
                             <div fxFlex="30">
@@ -261,7 +261,7 @@
                                     </div>
                                     <div fxFlex="64">
                                         <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px ">
-                                            {{head3.Text}}
+                                            {{head3['Text_Language'][Lang]}}
                                         </div>
                                     </div>
                                     <div fxFlex="30">
@@ -274,13 +274,13 @@
                                 </div>
                             </div>
                             <div class="ml-1 mb-1">
-                                <span>Comment : {{head2.Comment}}</span>
+                                <span>{{'Comment' | translate}} : {{head2.Comment}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="ml-1 mt-1">
-                    <span>Comment : {{head.Comment}}</span>
+                    <span>{{'Comment' | translate}} : {{head.Comment}}</span>
                 </div>
             </div>
         </div>

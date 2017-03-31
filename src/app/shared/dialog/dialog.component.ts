@@ -20,17 +20,17 @@ export class DialogComponent implements OnInit {
 @Component({
 	selector: 'comfirm-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 200px; width: 450px; background-color:white; padding:30px;" fxHide.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 200px; width: 450px; background-color:white; padding:30px; border-radius:5px;" fxHide.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
-	<md-dialog-content><p>{{Message| translate}}</p></md-dialog-content>
+	<md-dialog-content><p>{{Message1| translate}} {{Message2| translate}} {{Message3| translate}}</p></md-dialog-content>
 	<hr>
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
 	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 	</div></div>
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 200px; width: 300px; background-color:white; padding:30px;" fxShow.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 200px; width: 300px; background-color:white; padding:30px; border-radius:5px" fxShow.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
-	<md-dialog-content><p> {{Message| translate}} </p></md-dialog-content>
+	<md-dialog-content><p> {{Message1| translate}} {{Message2| translate}} {{Message3| translate}} </p></md-dialog-content>
 	<hr>
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
@@ -45,7 +45,9 @@ export class DialogComponent implements OnInit {
   `]
 })
 export class ConfirmDialog {
-	Message: string = "Are you sure?";
+	Message1: string;
+	Message2: string;
+	Message3: string;
 	TitleText: string = "Confirm";
 	OkBtnText: string = "ok";
 	OkBtnColor: string = "primary";
@@ -55,8 +57,8 @@ export class ConfirmDialog {
 	public SetTitleText(text: string) {
 		this.TitleText = text;
 	}
-	public SetMessagge(_Message: string) {
-		this.Message = _Message;
+	public SetMessagge(_Message: string, ) {
+		this.Message2 = "\"" + _Message + "\"";
 	}
 	public SetOkBtnText(text: string) {
 		this.OkBtnText = text;
@@ -69,25 +71,40 @@ export class ConfirmDialog {
 	}
 	public SetDialogType(dialogType: string) {
 		if (dialogType === "delete") {
-			this.TitleText = "Comfirm Delete";
-			this.Message = "do you really want to delete?";
-			this.OkBtnText = "DELETE";
+			this.TitleText = "Confirm Delete";
+			this.Message1 = "Do you want to delete";
+			this.Message2 = "Are you sure?";
+			this.Message3 = "?";
+			this.OkBtnText = "Delete";
+			this.CancelBtnText = "Cancel";
+			this.OkBtnColor = "warn";
+		}
+		else if (dialogType === "deleteEva") {
+			this.TitleText = "Confirm Delete";
+			this.Message1 = "Do you want to delete evaluation";
+			this.Message2 = "Are you sure?";
+			this.Message3 = "?";
+			this.OkBtnText = "Delete";
 			this.CancelBtnText = "Cancel";
 			this.OkBtnColor = "warn";
 		}
 		else if (dialogType === "approve") {
-			this.TitleText = "Comfirm Approve";
-			this.Message = "do you really want to approve?";
-			this.OkBtnText = "OK";
+			this.TitleText = "Confirm Approve";
+			this.Message1 = "Do you want to approve evaluation";
+			this.Message2 = "Are you sure?";
+			this.Message3 = "?";
+			this.OkBtnText = "Confirm";
 			this.CancelBtnText = "Cancel";
 			this.OkBtnColor = "primary";
 		}
 		else if (dialogType === "reject") {
-			this.TitleText = "Comfirm Reject";
-			this.Message = "do you really want to reject?";
-			this.OkBtnText = "OK";
+			this.TitleText = "Confirm Reject";
+			this.Message1 = "Do you want to reject evaluation";
+			this.Message2 = "Are you sure?";
+			this.Message3 = "?";
+			this.OkBtnText = "Confirm";
 			this.CancelBtnText = "Cancel";
-			this.OkBtnColor = "primary";
+			this.OkBtnColor = "warn";
 		}
 	}
 }
@@ -95,7 +112,7 @@ export class ConfirmDialog {
 @Component({
 	selector: 'normal-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 200px; width: 450px; background-color:white; padding:30px;" fxHide.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxHide="false" style="height: 200px; width: 450px; background-color:white; padding:30px; border-radius:5px" fxHide.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content><p> {{Message| translate}} </p></md-dialog-content>
 	<hr>
@@ -103,7 +120,7 @@ export class ConfirmDialog {
 	<md-dialog-actions>
 	<button md-button type="button" (click)="dialogRef.close()">{{OkBtnText | translate}}</button></md-dialog-actions>
 	</div></div>
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 200px; width: 300px; background-color:white; padding:30px;" fxShow.xs>
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 200px; width: 300px; background-color:white; padding:30px; border-radius:5px" fxShow.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content><p> {{'something error please try again later or contact admin'| translate}} </p></md-dialog-content>
 	<hr>
@@ -143,12 +160,12 @@ export class NormalDialog {
 	}
 }
 
-}
+
 
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch"  style="width: 70vw; background-color:white; padding:30px;">
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch"  style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -180,9 +197,9 @@ export class NormalDialog {
 export class InsertDialog {
 	;
 	TitleText: string = "Add Topic";
-	OkBtnText: string = "ok";
+	OkBtnText: string = "OK";
 	OkBtnColor: string = "primary";
-	CancelBtnText: string = "cancel";
+	CancelBtnText: string = "Cancel";
 
 	PassValue = [];
 
@@ -206,7 +223,7 @@ export class InsertDialog {
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px;">
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -233,9 +250,9 @@ export class InsertDialog {
 })
 export class InsertDialog2 {
 	TitleText: string = "Add Topic";
-	OkBtnText: string = "ok";
+	OkBtnText: string = "OK";
 	OkBtnColor: string = "primary";
-	CancelBtnText: string = "cancel";
+	CancelBtnText: string = "Cancel";
 
 	PassValue = [];
 
@@ -257,7 +274,7 @@ export class InsertDialog2 {
 @Component({
 	selector: 'insert-dialog',
 	template: `
-	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px;">
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content>
 			<div class="mb-1">
@@ -281,9 +298,9 @@ export class InsertDialog2 {
 })
 export class InsertDialog3 {
 	TitleText: string = "Add Topic";
-	OkBtnText: string = "ok";
+	OkBtnText: string = "OK";
 	OkBtnColor: string = "primary";
-	CancelBtnText: string = "cancel";
+	CancelBtnText: string = "Cancel";
 
 	PassValue = [];
 

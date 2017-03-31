@@ -12,13 +12,13 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="7" prop="Name">
+        <ngx-datatable-column [flexGrow]="7">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
                 <div style="text-align: left; ">
-                    {{value}}
+                    {{row['name_language'][Lang]}}
                 </div>
             </template>
         </ngx-datatable-column>
@@ -44,11 +44,11 @@
         </ngx-datatable-column>
         <ngx-datatable-column [flexGrow]="5">
             <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold ">State</div>
+                <div style="text-align: center; font-weight: bold ">{{'State' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <button *ngIf="row.ApproveState == 0" md-raised-button md-button-sm color="primary"> Approved </button>
+                    <button *ngIf="row.ApproveState == 0" md-raised-button md-button-sm color="primary"> {{'Approved' | translate}} </button>
                     <button *ngIf="row.ApproveState == -1" md-raised-button md-button-sm color="warn"> Rejected </button>
                     <div>
                         <md-progress-bar style="width: 90px; height:30px; margin-top: 20%; border-radius: 5px" *ngIf="row.ApproveState == 1" mode="determinate"
@@ -59,11 +59,11 @@
         </ngx-datatable-column>
         <ngx-datatable-column [flexGrow]="3">
             <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold ">detail</div>
+                <div style="text-align: center; font-weight: bold ">{{'Detail' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
-                    <button md-icon-button md-button-sm [md-tooltip]="detail" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
+                    <button md-icon-button md-button-sm [md-tooltip]="detail|translate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
                 </div>
@@ -86,7 +86,7 @@
         <ngx-datatable-column [width]="50" [minWidth]="50">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="float: left; " fxLayout="column" fxLayoutAlign="end">
-                    <button md-icon-button md-button-sm [md-tooltip]="detail" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
+                    <button md-icon-button md-button-sm [md-tooltip]="detail | translate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
                 </div>

@@ -38,6 +38,7 @@ export class ManageheaderComponent implements OnInit {
     color2 = '#fafafa'
     countHeader: number = 0;
     headdata
+    Lang;
 
     constructor(public translate: TranslateService, private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ChangeDetectorRef) { }
     ngOnInit() {
@@ -69,7 +70,21 @@ export class ManageheaderComponent implements OnInit {
                                 this.countHeader++;
                         }
                     });
+                if (this.translate.currentLang == "th") {
+                    this.Lang = 'TH'
+                }
+                else {
+                    this.Lang = 'EN'
+                }
             });
+        this.translate.onLangChange.subscribe(() => {
+            if (this.translate.currentLang == "th") {
+                this.Lang = 'TH'
+            }
+            else {
+                this.Lang = 'EN'
+            }
+        });
     }
     callHeader(id) {
         this.http.get(GlobalServiceRef.URLService + "/Header/GetHeader/" + id)
@@ -174,9 +189,10 @@ export class ManageheaderComponent implements OnInit {
         });
 
     }
-    delete(H_Id: number, indexHead: number) {
+    delete(H_Id: number, indexHead: number, Text: string) {
         let dialogRef = this.dialog.open(ConfirmDialog);
         dialogRef.componentInstance.SetDialogType("delete");
+        dialogRef.componentInstance.SetMessagge(Text)
         dialogRef.afterClosed().subscribe(result => {
             if (result === "ok") {
                 this.http.delete(GlobalServiceRef.URLService + "/Header/Delete/" + H_Id)

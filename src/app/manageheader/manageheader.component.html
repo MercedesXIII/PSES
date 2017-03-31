@@ -1,12 +1,12 @@
 <md-card>
-    <md-card-title style="font-size : 24px ">{{'Evaluation' | translate}} Manage Header</md-card-title>
+    <md-card-title style="font-size : 24px ">{{'Manage Topic' | translate}}</md-card-title>
     <hr>
     <md-card-content>
         <div fxLayout="row" fxLayoutWrap="wrap">
             <div fxFlex.gt-sm="27" fxFlex.gt-xs="30" fxFlex="100" fxLayout="row">
                 <div fxFlex="100">
                     <div fxLayoutWrap="wrap" fxLayout="row">
-                        <md-select class="ml-1 mr-1 mt-2" placeholder="Role" [(ngModel)]="currentPosition" style="width: 100%;">
+                        <md-select class="ml-1 mr-1 mt-2" placeholder="{{'Role' | translate}}" [(ngModel)]="currentPosition" style="width: 100%;">
                             <md-option *ngFor="let role of position" [value]="role.Part2ID">
                                 {{ role.Function }}
                             </md-option>
@@ -17,10 +17,10 @@
             <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" fxLayout="row">
                 <div fxFlex="50">
                     <div fxLayoutWrap="wrap" fxLayout="row">
-                        <button class="ml-1 mt-1" md-raised-button type="button" color="primary" type="button" (click)="onSubmit(currentPosition) ">OK</button>
+                        <button class="ml-1 mt-2" md-raised-button md-button-sm type="button" color="primary" type="button" (click)="onSubmit(currentPosition) ">{{'OK' | translate}}</button>
                     </div>
                 </div>
-                <div fxFlex="50" style="margin-top: 5%;">
+                <div fxFlex="50" class="mt-1">
                     <div fxLayoutWrap="wrap" fxLayout="row">
                         <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button [md-tooltip]="addtopic " [tooltip-position]="point ">
                             <md-icon>add</md-icon>
@@ -38,13 +38,13 @@
                             <template md-tab-label>{{head.Alias}}</template>
                             <div fxLayout="row " fxLayoutAlign="start center" class="ml-2 mt-1">
                                 <div fxLayout.gt-xs="row" fxLayout.gt-sm="column">
-                                    <div style="font-size: 19px; ">{{head.Text}}</div>
+                                    <div style="font-size: 19px; ">{{head['Text_Language'][Lang]}}</div>
                                 </div>
                                 <div>
                                     <button md-icon-button (click)="openDialogHead(head.H_ID,currentPosition,2,k)" [md-tooltip]="adddetail " [tooltip-position]="point ">
                                         <md-icon>add</md-icon>
                                     </button>
-                                    <button md-icon-button (click)=" delete(head.H_ID,k)" [md-tooltip]="remove " [tooltip-position]="point ">
+                                    <button md-icon-button (click)=" delete(head.H_ID,k,head['Text_Language'][Lang])" [md-tooltip]="remove|translate" [tooltip-position]="point ">
                                         <md-icon>delete_forever</md-icon>
                                     </button>
                                 </div>
@@ -53,7 +53,7 @@
                             <div fxFlex="100" fxLayout="row" class="mt-1 mb-1">
                                 <div fxFlex="70">
                                     <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 50%">
-                                        <b>Topic</b>
+                                        <b>{{'Topic'|translate}}</b>
                                     </div>
                                 </div>
                             </div>
@@ -74,13 +74,14 @@
                                             </div>
                                             <div fxFlex="64 ">
                                                 <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px; ">
-                                                    {{head2.Text+"( "+head2.Text_Eng+") "}}
+                                                    {{head2['Text_Language'][Lang]}}
                                                 </div>
                                             </div>
                                             <div fxFlex="30">
                                                 <div fxLayout="row " fxLayoutWrap="wrap" style="margin-left: 40% " fxLayout.xs="column ">
                                                     <div style="margin-top: -3px; ">
-                                                        <button *ngIf="flag[i]==false" md-icon-button md-button-sm (click)="delete(head2.H_ID,i) " [md-tooltip]="remove " [tooltip-position]="point ">
+                                                        <button *ngIf="flag[i]==false" md-icon-button md-button-sm (click)="delete(head2.H_ID,i,head2['Text_Language'][Lang]) " [md-tooltip]="remove|translate"
+                                                            [tooltip-position]="point ">
                                                             <md-icon>delete_forever</md-icon>
                                                         </button>
                                                     </div>
@@ -95,13 +96,14 @@
                                                     </div>
                                                     <div fxFlex="64">
                                                         <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px ">
-                                                            {{head3.Text}}
+                                                            {{head3['Text_Language'][Lang]}}
                                                         </div>
                                                     </div>
                                                     <div fxFlex="30">
                                                         <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 43% ">
                                                             <div>
-                                                                <button md-icon-button md-button-sm (click)=" delete(head3.H_ID,j) " [md-tooltip]="remove " [tooltip-position]="point " tabindex="-1 ">
+                                                                <button md-icon-button md-button-sm (click)=" delete(head3.H_ID,j,head3['Text_Language'][Lang]) " [md-tooltip]="remove|translate"
+                                                                    [tooltip-position]="point " tabindex="-1 ">
                                                                     <md-icon>delete_forever</md-icon>
                                                                 </button>
                                                             </div>

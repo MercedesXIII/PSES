@@ -48,7 +48,7 @@ const MENUITEMS = [
 
   {
     state: 'manageheader',
-    name: 'Manage Header',
+    name: 'Manage Topic',
     type: 'link',
     icon: 'playlist_add'
   },

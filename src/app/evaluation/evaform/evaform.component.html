@@ -5,7 +5,7 @@
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'First Name' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EmployeeFirstName}}</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data['name_language'][Lang]}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
@@ -13,7 +13,7 @@
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Last Name' | translate}}</div>
         </div>
         <div class="detail" fxFlex="50" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EmployeeLastName}}</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data['lastname_language'][Lang]}}</div>
         </div>
     </div>
     <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="100" fxLayout="row">
@@ -85,7 +85,7 @@
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Evaluator' | translate}}</div>
         </div>
         <div class="detail" fxFlex.gt-xs="75" fxFlex.gt-sm="75" fxFlex="100" fxLayoutAlign="start center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data.EvaluatorFirstName+" "+data.EvaluatorLastName}}</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{data['Evaluator'][Lang]}}</div>
         </div>
     </div>
 </div>
@@ -94,7 +94,7 @@
 <div *ngFor="let data of getEva" fxLayout="row" fxLayoutWrap="wrap" class="all mt-1">
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Not Available</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Not Available' | translate}}</div>
         </div>
         <div class="header" fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">N/A</div>
@@ -102,7 +102,7 @@
     </div>
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Unacceptable (UNA)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Unacceptable' | translate}} (UNA)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -115,7 +115,7 @@
     </div>
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Need Improve (NIM)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Need Improve'|translate}} (NIM)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -128,7 +128,7 @@
     </div>
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Standard (STD)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Standard'|translate}} (STD)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -141,7 +141,7 @@
     </div>
     <div fxFlex.gt-sm="16" fxFlex.gt-xs="16" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Abrove Standard (AST)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Above Standard' | translate}} (AST)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -154,7 +154,7 @@
     </div>
     <div fxFlex.gt-sm="16" fxFlex.gt-xs="16" fxFlex="50" fxLayout="column">
         <div class="header" fxFlex="100" fxLayoutAlign="center center">
-            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">Outstanding (OUT)</div>
+            <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 5px">{{'Outstanding' | translate}} (OUT)</div>
         </div>
         <div fxFlex="100" fxLayout="row">
             <div class="header" fxFlex="50" fxLayoutAlign="center center">
@@ -171,7 +171,7 @@
     <div fxFlex.gt-sm="27" fxFlex.gt-xs="30" fxFlex="100" fxLayout="row">
         <div fxFlex="100">
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center">
-                <md-select class="ml-1 mr-1 mt-2" placeholder="Role" [(ngModel)]="currentPosition" style="width: 100%;">
+                <md-select class="ml-1 mr-1 mt-2" placeholder="{{'Role' | translate}}" [(ngModel)]="currentPosition" style="width: 100%;">
                     <md-option *ngFor="let role of position" [value]="role.Part2ID">
                         {{ role.Function }}
                     </md-option>
@@ -182,7 +182,7 @@
     <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="100" fxLayout="row" class="mr-1">
         <div fxFlex="100" fxLayout="row">
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center">
-                <button class="ml-1 mt-1" md-raised-button type="button" color="primary" type="button" (click)="onSubmit(currentPosition) ">OK</button>
+                <button class="ml-1 mt-1" md-raised-button md-button-sm type="button" color="primary" type="button" (click)="onSubmit(currentPosition) ">{{'OK' | translate}}</button>
             </div>
             <div fxLayoutWrap="wrap" fxLayout="row" class="mt-1">
                 <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button [md-tooltip]="addtopic " [tooltip-position]="point ">
@@ -195,7 +195,7 @@
         class="mt-1" fxLayout.gt-sm="row" fxLayout.gt-xs="row" fxLayoutAlign="none">
         <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxLayout="row" fxFlex="100">
             <div class="header" fxLayoutWrap="wrap" fxLayout="row" fxFlex="75" style="font-size: 15px; " fxLayoutAlign="center center">
-                Final Score & Grade
+                {{'Final Score & Grade' | translate}}
             </div>
             <div class="detail" fxLayoutWrap="wrap" fxLayout="row" fxFlex="25" style="font-size: 15px; " fxLayoutAlign="center center">
                 7.00
@@ -203,10 +203,10 @@
         </div>
         <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxLayout="row" fxFlex="100">
             <div class="header" fxLayoutWrap="wrap" fxLayout="row" fxFlex="25" style="font-size: 15px; " fxLayoutAlign="center center">
-                Level
+                {{'Level' | translate}}
             </div>
             <div class="detail" fxLayoutWrap="wrap" fxLayout="row" fxFlex="75" style="font-size: 15px; " fxLayoutAlign="center center">
-                Above Standard
+                {{'Above Standard' | translate}}
             </div>
         </div>
     </div>
@@ -220,15 +220,17 @@
                     <template md-tab-label>{{head.Alias}}</template>
                     <div fxLayout="row " fxLayoutAlign="start center" class="ml-2 mt-1">
                         <div fxLayout.gt-xs="row" fxLayout.gt-sm="column">
-                            <div style="font-size: 19px; ">{{a}}</div>
+                            <div style="font-size: 19px; ">{{head['Text_Language'][Lang]}}</div>
                             <!-- <div style="font-size: 19px; ">{{"("+head.Text_Eng+")"}}</div> -->
                         </div>
                         <div>
                             <input class="ml-1 mr-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" [(ngModel)]="finalTotalScore[k]">
-                            <button md-icon-button (click)="openDialogHead(head.H_ID,currentPosition,2,k)" [md-tooltip]="adddetail " [tooltip-position]="point ">
+                            <button md-icon-button (click)="openDialogHead(head.H_ID,currentPosition,2,k,head['Text_Language'][Lang])" [md-tooltip]="adddetail "
+                                [tooltip-position]="point ">
                                 <md-icon>add</md-icon>
                             </button>
-                            <button *ngIf="head.H_ID < 0" md-icon-button (click)=" delete(head.H_ID,k)" [md-tooltip]="remove " [tooltip-position]="point ">
+                            <button *ngIf="head.H_ID < 0" md-icon-button (click)=" delete(head.H_ID,k,head['Text_Language'][Lang])" [md-tooltip]="remove "
+                                [tooltip-position]="point ">
                                 <md-icon>delete_forever</md-icon>
                             </button>
                         </div>
@@ -237,12 +239,12 @@
                     <div fxFlex="100" fxLayout="row" class="mt-1 mb-1">
                         <div fxFlex="70">
                             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 50%">
-                                <b>Topic</b>
+                                <b>{{'Topic' | translate}}</b>
                             </div>
                         </div>
                         <div fxFlex="30">
                             <div fxLayoutWrap="wrap" fxLayout="row" style="margin-left: 40%">
-                                <b>Score</b>
+                                <b>{{'Score' | translate}}</b>
                             </div>
                         </div>
                     </div>
@@ -263,7 +265,7 @@
                                     </div>
                                     <div fxFlex="64 ">
                                         <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px; ">
-                                            {{head2.Text}}
+                                            {{head2['Text_Language'][Lang]}}
                                         </div>
                                     </div>
                                     <div fxFlex="30">
@@ -272,8 +274,8 @@
                                                 <input class="mr-1 " style="width: 50px; text-align: center; " disabled="disabled " [(ngModel)]="subTotalScore[i] ">
                                             </div>
                                             <div style="margin-top: -3px; ">
-                                                <button *ngIf="flag[i]==false && head2.H_ID < 0 " md-icon-button md-button-sm (click)="delete(head2.H_ID,i) " [md-tooltip]="remove "
-                                                    [tooltip-position]="point ">
+                                                <button *ngIf="flag[i]==false && head2.H_ID < 0 " md-icon-button md-button-sm (click)="delete(head2.H_ID,i,head2['Text_Language'][Lang]) "
+                                                    [md-tooltip]="remove " [tooltip-position]="point ">
                                                     <md-icon>delete_forever</md-icon>
                                                     </button>
                                             </div>
@@ -288,7 +290,7 @@
                                             </div>
                                             <div fxFlex="64">
                                                 <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px ">
-                                                    {{head3.Text}}
+                                                    {{head3['Text_Language'][Lang]}}
                                                 </div>
                                             </div>
                                             <div fxFlex="30">
@@ -304,8 +306,8 @@
                                                         </select>
                                                     </div>
                                                     <div>
-                                                        <button md-icon-button md-button-sm *ngIf="head3.H_ID < 0 " (click)=" delete(head3.H_ID,j) " [md-tooltip]="remove " [tooltip-position]="point "
-                                                            tabindex="-1 ">
+                                                        <button md-icon-button md-button-sm *ngIf="head3.H_ID < 0 " (click)=" delete(head3.H_ID,j,head3['Text_Language'][Lang]) "
+                                                            [md-tooltip]="remove " [tooltip-position]="point " tabindex="-1 ">
                                                             <md-icon>delete_forever</md-icon>
                                                             </button>
                                                     </div>
@@ -321,7 +323,7 @@
                                         </div>
                                     </div>
                                     <div class="ml-1">
-                                        <md-textarea [(ngModel)]="Comment[i]" placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
+                                        <md-textarea [(ngModel)]="Comment[i]" placeholder="{{'Comment' | translate}} " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
                                     </div>
                                 </div>
                             </div>
@@ -329,7 +331,7 @@
                     </md-card-content>
                     <hr>
                     <div class="ml-1 mt-1">
-                        <md-textarea [(ngModel)]="Comment[k]" placeholder="Comment " class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
+                        <md-textarea [(ngModel)]="Comment[k]" placeholder="{{'Comment' | translate}}" class="ml-xs mr-xs " style="width: 90%; "></md-textarea>
                     </div>
                     <div fxLayout="row " fxLayoutAlign="space-between end" class="mb-1">
                         <div class="ml-1">
@@ -349,7 +351,7 @@
                                 </button>-->
                                 <button tyle="margin-top: -3px;" *ngIf="activeTabIndex == countHeader-1" md-raised-button [disabled]="countHead3!=countHead3full"
                                     color="primary" (click)="finishEvaluate()">
-                                        Confirm
+                                        {{'Confirm' | translate}}
                                 </button>
                             </div>
                         </div>

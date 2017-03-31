@@ -8,8 +8,8 @@
     "HOME": "หน้าแรก",
     "Evaluation": "การประเมิน",
     "History": "ประวัติการใช้งาน",
-    "Approve": "การอนุมัติ",
-    "Manage Header": "จัดการหัวข้อประเมิน",
+    "Approve": "อนุมัติ",
+    "Manage Topic": "จัดการหัวข้อประเมิน",
 
 
     "Name": "ชื่อ",
@@ -35,6 +35,25 @@
     "Evaluate Term": "ระยะเวลาประเมิน",
     "Proj.Duration": "ระยะเวลาโครงการ",
     "Role & Responsible": "บทบาทและความรับผิดชอบ",
-    "Evaluator": "ผู้ประเมิน"
-
+    "Evaluator": "ผู้ประเมิน",
+    "Topic": "หัวข้อ",
+    "Score": "คะแนน",
+    "Role": "บทบาท",
+    "Outstanding": "ดีมาก",
+    "Above Standard": "ดี",
+    "Standard": "ปานกลาง",
+    "Need Improve": "พอใช้",
+    "Unacceptable": "ต้องปรับปรุง",
+    "Level": "ระดับ",
+    "Final Score & Grade": "คะแนนรวม",
+    "Do you want to delete": "คุณต้องการลบ",
+    "Do you want to delete evaluation": "คุณต้องการลบการประเมิน",
+    "?": "หรือไม่",
+    "Confirm Delete": "ยืนยันการลบ",
+    "Cancel": "ยกเลิก",
+    "Comment": "ความคิดเห็น",
+    "State": "สถานะ",
+    "Approved": "อนุมัติแล้ว",
+    "Detail": "รายละเอียด",
+    "Reject": "ปฏิเสธ"
 }

@@ -30,13 +30,13 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="6" prop="EmployeeFirstName">
+        <ngx-datatable-column [flexGrow]="6">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
                 <div style="text-align: left; ">
-                    {{value+" "+row.EmployeeLastName}}
+                    {{row['name_language'][Lang]}}
                 </div>
             </template>
         </ngx-datatable-column>
@@ -92,8 +92,7 @@
                         (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
-                    <button md-icon-button md-button-sm (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove | translate"
-                        [tooltip-position]="position ">
+                    <button md-icon-button md-button-sm (click)=" delete($event, value, row) " [md-tooltip]="remove | translate" [tooltip-position]="position ">
                         <md-icon>delete_forever</md-icon>
                     </button>
                 </div>
@@ -120,19 +119,19 @@
                     <button *ngIf="row.EvaStatus==null" [disabled]="row.EvaStatus==null" md-icon-button [md-tooltip]="wait" [tooltip-position]="position">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
-                    <button *ngIf="row.EvaStatus==1" md-icon-button style="color: green" [md-tooltip]="finished" [tooltip-position]="position"
+                    <button *ngIf="row.EvaStatus==1" md-icon-button style="color: green" [md-tooltip]="finished|translate" [tooltip-position]="position"
                         (click)="changeStatus
 ($event, value, row)">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
-                    <button *ngIf="row.EvaStatus==2" md-icon-button style="color: red" [md-tooltip]="unfinished" [tooltip-position]="position"
+                    <button *ngIf="row.EvaStatus==2" md-icon-button style="color: red" [md-tooltip]="unfinished|translate" [tooltip-position]="position"
                         (click)="changeStatus($event, value, row)">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
-                    <button md-icon-button [disabled]="row.EvaStatus==1" [md-tooltip]="evaluate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
+                    <button md-icon-button [disabled]="row.EvaStatus==1" [md-tooltip]="evaluate|translate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
-                    <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove " [tooltip-position]="position ">
+                    <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove|translate" [tooltip-position]="position ">
                         <md-icon>delete_forever</md-icon>
                     </button>
                 </div>

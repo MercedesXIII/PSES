@@ -167,25 +167,27 @@ export class NormalDialog {
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch"  style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
-	<md-dialog-content>
-			<div class="mb-1">
-                <md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
-                <small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
-            </div>
-            <div class="mb-1">
-                <md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
-                <small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
-            </div>
-            <div class="mb-1">
-                <md-input placeholder="TextAlias" [maxlength]="1" [formControl]="form.controls['TextAlias']" style="width: 100%" #TextAlias></md-input>
-                <small *ngIf="form.controls['TextAlias'].hasError('required') && form.controls['TextAlias'].touched" class="md-text-warn">You must include a TextAlias.</small>
-            </div>
-	</md-dialog-content>
-	<hr>
-	<div fxLayout="row" fxLayoutAlign="end end" >
-	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
-	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
-	</div></div>`,
+	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
+		<md-dialog-content>
+				<div class="mb-1">
+					<md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+					<small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
+				</div>
+				<div class="mb-1">
+					<md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
+					<small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
+				</div>
+				<div class="mb-1">
+					<md-input placeholder="TextAlias" [maxlength]="1" [formControl]="form.controls['TextAlias']" style="width: 100%" #TextAlias></md-input>
+					<small *ngIf="form.controls['TextAlias'].hasError('required') && form.controls['TextAlias'].touched" class="md-text-warn">You must include a TextAlias.</small>
+				</div>
+		</md-dialog-content>
+		<div fxLayout="row" fxLayoutAlign="end end" >
+		<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid">{{OkBtnText | translate}}</button>
+		<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+		</div>
+	</form>
+	</div>`,
 	styles: [`
     /deep/ .md-dialog-container
 	{
@@ -225,21 +227,23 @@ export class InsertDialog {
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
-	<md-dialog-content>
-			<div class="mb-1">
-                <md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
-                <small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
-            </div>
-            <div class="mb-1">
-                <md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
-                <small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
-            </div>
-	</md-dialog-content>
-	<hr>
-	<div fxLayout="row" fxLayoutAlign="end end" >
-	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
-	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
-	</div></div>`,
+	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
+		<md-dialog-content>
+				<div class="mb-1">
+					<md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+					<small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
+				</div>
+				<div class="mb-1">
+					<md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
+					<small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
+				</div>
+		</md-dialog-content>
+		<div fxLayout="row" fxLayoutAlign="end end" >
+		<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid" >{{OkBtnText | translate}}</button>
+		<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+		</div>
+	</form>
+	</div>`,
 	styles: [`
     /deep/ .md-dialog-container
 	{
@@ -276,17 +280,19 @@ export class InsertDialog2 {
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
-	<md-dialog-content>
-			<div class="mb-1">
-                <md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
-                <small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
-            </div>
-	</md-dialog-content>
-	<hr>
-	<div fxLayout="row" fxLayoutAlign="end end" >
-	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" [disabled]="!form.valid" (click)="onSubmit(TextThai,TextEng,TextAlias)">{{OkBtnText | translate}}</button>
-	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
-	</div></div>`,
+	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
+		<md-dialog-content>
+				<div class="mb-1">
+					<md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+					<small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
+				</div>
+		</md-dialog-content>
+		<div fxLayout="row" fxLayoutAlign="end end" >
+		<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid">{{OkBtnText | translate}}</button>
+		<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+		</div>
+	</form>
+	</div>`,
 	styles: [`
     /deep/ .md-dialog-container
 	{

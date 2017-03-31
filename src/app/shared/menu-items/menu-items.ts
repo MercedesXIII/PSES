@@ -53,12 +53,12 @@ const MENUITEMS = [
     icon: 'playlist_add'
   },
 
-  {
-    state: 'request',
-    name: 'Request',
-    type: 'link',
-    icon: 'https'
-  },
+  // {
+  //   state: 'request',
+  //   name: 'Request',
+  //   type: 'link',
+  //   icon: 'https'
+  // },
   // {
   //   state: 'approval',
   //   name: 'Approval',

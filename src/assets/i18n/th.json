@@ -55,5 +55,8 @@
     "State": "สถานะ",
     "Approved": "อนุมัติแล้ว",
     "Detail": "รายละเอียด",
-    "Reject": "ปฏิเสธ"
+    "Reject": "ปฏิเสธ",
+    "Submit": "ส่ง",
+    "Start Date": "วันเริ่ม",
+    "Finish Date": "วันสิ้นสุด"
 }

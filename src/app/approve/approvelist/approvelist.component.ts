@@ -40,16 +40,16 @@ export class ApprovelistComponent implements OnInit {
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
-        //     .subscribe(res => {
-        //         this.listapprove = res.json();
-        //         if (this.translate.currentLang == "th") {
-        //             this.Lang = 'TH'
-        //         }
-        //         else {
-        //             this.Lang = 'EN'
-        //         }
-        //     });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
+            .subscribe(res => {
+                this.listapprove = res.json();
+                if (this.translate.currentLang == "th") {
+                    this.Lang = 'TH'
+                }
+                else {
+                    this.Lang = 'EN'
+                }
+            });
 
         //Programmer
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/490428")
@@ -64,16 +64,16 @@ export class ApprovelistComponent implements OnInit {
         //     });
 
         //Bas//
-        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
-            .subscribe(res => {
-                this.listapprove = res.json()
-                if (this.translate.currentLang == "th") {
-                    this.Lang = 'TH'
-                }
-                else {
-                    this.Lang = 'EN'
-                }
-            });
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
+        //     .subscribe(res => {
+        //         this.listapprove = res.json()
+        //         if (this.translate.currentLang == "th") {
+        //             this.Lang = 'TH'
+        //         }
+        //         else {
+        //             this.Lang = 'EN'
+        //         }
+        //     });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
         //     .subscribe(res => {
         //         this.listapprove = res.json();

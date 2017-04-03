@@ -51,7 +51,7 @@
                     <button *ngIf="row.ApproveState == 0" md-raised-button md-button-sm color="primary"> {{'Approved' | translate}} </button>
                     <button *ngIf="row.ApproveState == -1" md-raised-button md-button-sm color="warn"> Rejected </button>
                     <div>
-                        <md-progress-bar style="width: 90px; height:30px; margin-top: 20%; border-radius: 5px" *ngIf="row.ApproveState == 1" mode="determinate"
+                        <md-progress-bar style="width: 88px; height:30px; margin-top: 20%; border-radius: 3px" *ngIf="row.ApproveState == 1" mode="determinate"
                             [value]="progress[row.$$index]" color="primary" class="mb-1"></md-progress-bar>
                     </div>
                 </div>
@@ -77,9 +77,20 @@
         <ngx-datatable-column [width]="230" [minWidth]="230">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="column" fxLayoutAlign="start">
-                    <span><b>{{'Name' | translate}}</b> {{listhistory[row.$$index]['Name']}}</span>
-                    <span><b>{{'Project Code' | translate}}</b> {{listhistory[row.$$index]['ProjectCode']}}</span>
-                    <span><b>{{'Role' | translate}}</b> {{listhistory[row.$$index]['Role']}}</span>
+                    <span><b>{{'Name' | translate}}</b> {{row['name_language'][Lang]}}</span>
+                    <span><b>{{'Project Code' | translate}}</b> {{row['ProjectCode']}}</span>
+                    <span><b>{{'Role' | translate}}</b> {{row['Role']}}</span>
+                    <div fxLayout="row" fxLayoutAlign="start stretch">
+                        <div class="mr-1">
+                            <span><b>{{'Status' | translate}}</b></span>
+                        </div>
+                        <div>
+                            <button *ngIf="row.ApproveState == 0" md-raised-button md-button-sm color="primary"> {{'Approved' | translate}} </button>
+                            <button *ngIf="row.ApproveState == -1" md-raised-button md-button-sm color="warn"> Rejected </button>
+                            <md-progress-bar style="width: 88px; height:30px; border-radius: 3px" *ngIf="row.ApproveState == 1" mode="determinate" [value]="progress[row.$$index]"
+                                color="primary" class="mb-1"></md-progress-bar>
+                        </div>
+                    </div>
                 </div>
             </template>
         </ngx-datatable-column>

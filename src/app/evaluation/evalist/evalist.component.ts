@@ -59,6 +59,7 @@ export class EvalistComponent implements OnInit {
             }
             if (this.PeriodId != undefined && this.PeriodId != 'all') {
                 this.showPeriod = true;
+                console.log(this.PeriodId)
                 this.currentPeriod = this.PeriodId;
                 this.http.get(GlobalServiceRef.URLService + "/Eva/Eva/" + this.LoginResultJson['EmployeeID'] + "/" + this.PeriodId)
                     .subscribe(res => { this.listeva = res.json(); });
@@ -121,7 +122,7 @@ export class EvalistComponent implements OnInit {
     delete(event, row, value) {
         let dialogRef = this.dialog.open(ConfirmDialog, this.config);
         dialogRef.componentInstance.SetDialogType("deleteEva");
-        dialogRef.componentInstance.SetMessagge(value.EmployeeFirstName + " " + value.EmployeeLastName);
+        dialogRef.componentInstance.SetMessagge(value['name_language'][this.Lang]);
         dialogRef.afterClosed().subscribe(result => {
             if (result === "ok") {
                 this.http.delete(GlobalServiceRef.URLService + "/Eva/Delete/" + value["Eva_ID"])

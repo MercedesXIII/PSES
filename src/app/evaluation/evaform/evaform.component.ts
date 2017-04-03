@@ -7,7 +7,7 @@ import { CustomValidators } from 'ng2-validation';
 import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdInputDirective, MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
 
-import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading } from '../../shared/dialog/dialog.component';
+import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading, TopAddEva } from '../../shared/dialog/dialog.component';
 
 @Component({
 	selector: 'app-evaform',
@@ -198,10 +198,12 @@ export class EvaformComponent implements OnInit {
 	}
 	openDialogHead(HeadId: number, PositionNo: number, Level: number, i: number) {
 		if (Level == 1) {
-			let dialogRef = this.dialog.open(InsertDialog, this.config);
+			let dialogRef = this.dialog.open(TopAddEva, this.config);
+			dialogRef.componentInstance.Insert(this.currentPosition, Level);
 			dialogRef.afterClosed().subscribe(res => {
 				try {
 					if (res != 'cancel') {
+						console.log(res[0] + " " + res[1] + " " + res[2])
 						let TextThai = res[0];
 						let TextEng = res[1];
 						let TextAlias = res[2];
@@ -213,7 +215,8 @@ export class EvaformComponent implements OnInit {
 			});
 		}
 		else if (Level == 2) {
-			let dialogRef = this.dialog.open(InsertDialog2, this.config);
+			let dialogRef = this.dialog.open(TopAddEva, this.config);
+			dialogRef.componentInstance.Insert(this.currentPosition, Level);
 			dialogRef.afterClosed().subscribe(res => {
 				try {
 					if (res != 'cancel') {
@@ -368,6 +371,7 @@ export class EvaformComponent implements OnInit {
 			}
 
 		}
+		console.log(this.PeriodId)
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let body: string = JSON.stringify(this.getScoreAndId);
 		this.http.put(GlobalServiceRef.URLService + "/Header/Update", body, {

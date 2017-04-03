@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MdDialogConfig, MdInputDirective } from '@angular/material';
+import { MdDialog, MdDialogRef, MdDialogConfig, MdInputDirective, MdSelect } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
+import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 
 @Component({
 	selector: 'app-dialog',
@@ -25,16 +27,16 @@ export class DialogComponent implements OnInit {
 	<md-dialog-content><p>{{Message1| translate}} {{Message2| translate}} {{Message3| translate}}</p></md-dialog-content>
 	<hr>
 	<div fxLayout="row" fxLayoutAlign="end end" >
-	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
-	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+	<md-dialog-actions><button md-raised-button md-button-sm  style="color:white" color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
+	<button md-raised-button md-button-sm type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 	</div></div>
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 200px; width: 300px; background-color:white; padding:30px; border-radius:5px" fxShow.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<md-dialog-content><p> {{Message1| translate}} {{Message2| translate}} {{Message3| translate}} </p></md-dialog-content>
 	<hr>
 	<div fxLayout="row" fxLayoutAlign="end end" >
-	<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
-	<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+	<md-dialog-actions><button md-raised-button md-button-sm style="color:white" color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
+	<button md-raised-button md-button-sm type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 	</div></div>`,
 	styles: [`
     /deep/ .md-dialog-container
@@ -95,7 +97,7 @@ export class ConfirmDialog {
 			this.Message3 = "?";
 			this.OkBtnText = "Confirm";
 			this.CancelBtnText = "Cancel";
-			this.OkBtnColor = "primary";
+			this.OkBtnColor = "green";
 		}
 		else if (dialogType === "reject") {
 			this.TitleText = "Confirm Reject";
@@ -170,11 +172,11 @@ export class NormalDialog {
 	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
 		<md-dialog-content>
 				<div class="mb-1">
-					<md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+					<md-input placeholder="TopicThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
 					<small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
 				</div>
 				<div class="mb-1">
-					<md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
+					<md-input placeholder="TopicEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
 					<small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
 				</div>
 				<div class="mb-1">
@@ -223,18 +225,18 @@ export class InsertDialog {
 }
 
 @Component({
-	selector: 'insert-dialog',
+	selector: 'insert-dialog2',
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
 		<md-dialog-content>
 				<div class="mb-1">
-					<md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+					<md-input placeholder="TopicThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
 					<small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
 				</div>
 				<div class="mb-1">
-					<md-input placeholder="TextEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
+					<md-input placeholder="TopicEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
 					<small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
 				</div>
 		</md-dialog-content>
@@ -276,14 +278,14 @@ export class InsertDialog2 {
 }
 
 @Component({
-	selector: 'insert-dialog',
+	selector: 'insert-dialog3',
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
 	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
 		<md-dialog-content>
 				<div class="mb-1">
-					<md-input placeholder="TextThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
+					<md-input placeholder="TopicThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
 					<small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
 				</div>
 		</md-dialog-content>
@@ -340,4 +342,78 @@ export class InsertDialog3 {
 })
 export class Loading {
 	constructor(public dialogRef: MdDialogRef<Loading>, private translate: TranslateService) { }
+}
+
+@Component({
+	selector: 'topaddeva-dialog',
+	template: `
+	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
+	<h5 md-dialog-title>{{TitleText| translate}}</h5>
+	<form (ngSubmit)="onSubmit(Text)">
+		<md-dialog-content>
+				<div class="mb-1">
+					<md-select class="ml-1" [formControl]="form.controls['Text']" placeholder="{{'Add Topic' | translate}}" style="width: 90%;" #Text>
+			            <md-option *ngFor="let data of header" [value]="data">
+			                {{ data['Text_Language'][Lang] }}
+			            </md-option>
+			        </md-select>
+				</div>
+		</md-dialog-content>
+		<div fxLayout="row" fxLayoutAlign="end end" >
+		<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid">{{OkBtnText | translate}}</button>
+		<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+		</div>
+	</form>
+	</div>`,
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+  `]
+
+})
+export class TopAddEva {
+	TitleText: string = "Add Topic";
+	OkBtnText: string = "OK";
+	OkBtnColor: string = "primary";
+	CancelBtnText: string = "Cancel";
+
+	header = [];
+	PassValue = [];
+	Topic;
+	Lang;
+	public form: FormGroup;
+	constructor(public http: Http, public dialogRef: MdDialogRef<InsertDialog3>, private translate: TranslateService, private fb: FormBuilder) {
+		this.form = this.fb.group({
+			Text: [null, Validators.required]
+		})
+	}
+	Insert(Position, Level) {
+		this.http.get(GlobalServiceRef.URLService + "/Header/GetHeader/" + Position)
+			.subscribe(res => {
+				for (let data of res.json()) {
+					if (data.H_Level == Level)
+						this.header.push(data)
+				}
+				if (this.translate.currentLang == "th") {
+					this.Lang = 'TH'
+				}
+				else {
+					this.Lang = 'EN'
+				}
+			});
+	}
+	SetText(Text) {
+		this.TitleText = Text
+	}
+	onSubmit(Text: MdSelect) {
+		console.log(Text.selected.value)
+		this.PassValue.push(Text.selected.value['Text'])
+		this.PassValue.push(Text.selected.value['Text_Eng'])
+		this.PassValue.push(Text.selected.value['Alias'])
+		this.dialogRef.close(this.PassValue)
+		this.form.reset();
+	}
 }

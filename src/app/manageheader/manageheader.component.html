@@ -5,7 +5,7 @@
         <div fxLayout="row" fxLayoutWrap="wrap">
             <div fxFlex.gt-sm="27" fxFlex.gt-xs="30" fxFlex="100" fxLayout="row">
                 <div fxFlex="100">
-                    <div fxLayoutWrap="wrap" fxLayout="row">
+                    <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center">
                         <md-select class="ml-1 mr-1 mt-2" placeholder="{{'Role' | translate}}" [(ngModel)]="currentPosition" style="width: 100%;">
                             <md-option *ngFor="let role of position" [value]="role.Part2ID">
                                 {{ role.Function }}
@@ -14,17 +14,15 @@
                     </div>
                 </div>
             </div>
-            <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" fxLayout="row">
-                <div fxFlex="50">
-                    <div fxLayoutWrap="wrap" fxLayout="row">
-                        <button class="ml-1 mt-2" md-raised-button md-button-sm type="button" color="primary" type="button" (click)="onSubmit(currentPosition) ">{{'OK' | translate}}</button>
+            <div fxFlex.gt-sm="17" fxFlex.gt-xs="17" fxFlex="100" fxLayout="row" class="mr-1">
+                <div fxFlex="100" fxLayout="row">
+                    <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center">
+                        <button class="ml-1 mt-1" md-raised-button md-button-sm type="button" color="primary" type="button" (click)="onSubmit(currentPosition) ">{{'OK' | translate}}</button>
                     </div>
-                </div>
-                <div fxFlex="50" class="mt-1">
-                    <div fxLayoutWrap="wrap" fxLayout="row">
+                    <div fxLayoutWrap="wrap" fxLayout="row" class="mt-1">
                         <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button [md-tooltip]="addtopic " [tooltip-position]="point ">
-                            <md-icon>add</md-icon>
-                        </button>
+                    <md-icon>add</md-icon>
+                </button>
                     </div>
                 </div>
             </div>

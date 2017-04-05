@@ -1,0 +1,44 @@
+<form (ngSubmit)="onSubmit(EmpName,EmpProjectCode,EmpRole,StartDate,FinishDate)">
+    <md-card style="width:55vw;">
+        <md-card-title>
+            <h5><b>{{'Add Employee' | translate}}</b></h5>
+        </md-card-title>
+        <md-card-content>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex.gt-sm=98 fxFlex.gt-xs="100" fxFlex="100" class="mb-1">
+                    <div style="margin-bottom:5px;"><b>{{'Name'|translate}}</b></div>
+                    <ng2-completer class="completer-limit" [formControl]="form.controls['EmpName']" [datasource]="Name" [minSearchLength]="0"
+                        [placeholder]="'Name'" #EmpName></ng2-completer>
+                </div>
+                <div fxFlex.gt-sm="98" fxFlex.gt-xs="100" fxFlex="100" class="mb-1">
+                    <div style="margin-bottom:5px;"><b>ProjectCode</b></div>
+                    <ng2-completer class="completer-limit" [formControl]="form.controls['EmpProjectCode']" [datasource]="ProjectCode" [minSearchLength]="0"
+                        [placeholder]="'ProjectCode'" #EmpProjectCode></ng2-completer>
+                </div>
+                <div fxFlex.gt-sm="98" fxFlex.gt-xs="100" fxFlex="100" class="mb-1">
+                    <div style="margin-bottom:5px;"><b>{{'Role'|translate}}</b></div>
+                    <ng2-completer class="completer-limit" [formControl]="form.controls['EmpRole']" [datasource]="Role" [minSearchLength]="0"
+                        [placeholder]="'Role'" #EmpRole></ng2-completer>
+                </div>
+                <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" class="mb-1" fxLayout="row" fxLayoutAlign="start center">
+                    <div fxLayout="column" fxFlex="100">
+                        <div style="margin-bottom:5px;" fxFlex="100"><b>StartDate</b></div>
+                        <div fxFlex="100"><input style="text-align: center;" type="date" style="width: 88%" [formControl]="form.controls['StartDate']"
+                                #StartDate></div>
+                    </div>
+                </div>
+                <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" class="mb-1" fxLayout="row" fxLayoutAlign="end center">
+                    <div fxLayout="column" fxFlex="100">
+                        <div style="margin-bottom:5px;" fxFlex="100"><b>FinishDate</b></div>
+                        <div fxFlex="100"><input style="text-align: center;" type="date" style="width: 88%" [formControl]="form.controls['FinishDate']"
+                                #FinishDate></div>
+                    </div>
+                </div>
+                <div fxFlex.gt-sm="98" fxFlex.gt-xs="100" fxFlex="100" fxLayoutAlign="end end">
+                    <button md-raised-button md-button-sm color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid" style="margin-right: 2px;">{{OkBtnText | translate}}</button>
+                    <button md-button md-button-sm type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</form>

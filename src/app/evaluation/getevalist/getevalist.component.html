@@ -1,8 +1,20 @@
 <!-- Data Table #Start-->
-<button md-raised-button md-button-sm color="primary" type="submit" class="md-24" (click)=onSubmit()>{{'Submit' | translate}}</button>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <button md-icon-button (click)="backpage() ">
+            <md-icon>arrow_back</md-icon>
+        </button>
+        <button md-raised-button md-button-sm color="primary" type="submit" (click)=onSubmit()>{{'Submit' | translate}}</button>
+    </div>
+    <div>
+        <button md-icon-button (click)="openDialogHead()">
+        <md-icon>add</md-icon>
+    </button>
+    </div>
+</div>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.xs="100" fxHide="false" fxHide.xs>
     <ngx-datatable class="material " [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
-        [scrollbarH]="true " [rows]="listeva" [limit]="10 " [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+        [scrollbarH]="false " [rows]="listeva" [limit]="10 " [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
         <ngx-datatable-column [flexGrow]="1" [checkboxable]="true">
             <template ngx-datatable-header-template>
                 <div style="margin-left:-6px; font-weight: bold ">

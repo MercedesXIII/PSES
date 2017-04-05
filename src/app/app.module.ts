@@ -10,7 +10,7 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { JazzDialog } from './material/dialog/dialog.component';
-import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, NormalDialog, DialogComponent, Loading, TopAddEva } from './shared/dialog/dialog.component';
+import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, NormalDialog, DialogComponent, Loading, TopAddEva, AddEmp } from './shared/dialog/dialog.component';
 
 import { AuthGuard } from '../_guards/auth.guard';
 import { AppRoutes } from './app.routing';
@@ -19,6 +19,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { Ng2CompleterModule } from "ng2-completer";
 import { RequestComponent } from './request/request.component';
 
 export function createTranslateLoader(http: Http) {
@@ -40,6 +41,7 @@ export function createTranslateLoader(http: Http) {
     InsertDialog3,
     Loading,
     TopAddEva,
+    AddEmp,
   ],
   imports: [
     BrowserModule,
@@ -56,9 +58,10 @@ export function createTranslateLoader(http: Http) {
     FlexLayoutModule.forRoot(),
     ReactiveFormsModule,
     Ng2AutoCompleteModule,
+    Ng2CompleterModule
   ],
   providers: [AuthGuard],
-  entryComponents: [JazzDialog, DialogComponent, ConfirmDialog, NormalDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading,TopAddEva],
+  entryComponents: [JazzDialog, DialogComponent, ConfirmDialog, NormalDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading, TopAddEva, AddEmp],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -35,6 +35,8 @@ export class HistorydetailComponent implements OnInit {
     currentScoreId = [];
     curentParent = [];
     getScoreAndId = [];
+    TotalScore = 0;
+    TotalLevel;
     subTotalScore = [];
     finalTotalScore = [];
     activeTabIndex = 0;
@@ -68,6 +70,7 @@ export class HistorydetailComponent implements OnInit {
                             this.flag[data] = false;
                             if (this.header[data].H_Level == 1) {
                                 this.countHeader++;
+                                this.TotalScore += this.header[data].point;
                                 this.finalTotalScore[data] = this.calScore(this.header[data].point)
                             }
                             else if (this.header[data].H_Level == 2) {
@@ -83,6 +86,10 @@ export class HistorydetailComponent implements OnInit {
                                 this.countHead3full++;
                             }
                         }
+                        console.log(this.TotalScore + " " + this.countHeader)
+                        this.TotalScore /= this.countHeader
+                        this.TotalScore = Math.round(this.TotalScore * 100) / 100
+                        this.TotalLevel = this.calFullScore(this.TotalScore)
                     });
                 if (this.translate.currentLang == "th") {
                     this.Lang = 'TH'
@@ -105,6 +112,20 @@ export class HistorydetailComponent implements OnInit {
             this.flag[get] = true;
         else
             this.flag[get] = false;
+    }
+    calFullScore(score: number) {
+        if (score < 1)
+            return "Not Available"
+        else if (score < 3)
+            return "Unacceptable"
+        else if (score < 5)
+            return "Need Improve"
+        else if (score < 7)
+            return "Standard"
+        else if (score < 9)
+            return "Above Standard"
+        else
+            return "Outstanding"
     }
     calScore(score: number) {
         if (score < 1)

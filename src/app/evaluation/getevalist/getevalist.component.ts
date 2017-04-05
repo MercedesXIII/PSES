@@ -6,7 +6,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MdSnackBar, MdSnackBarConfig, TooltipPosition, MdSelect, MdCheckbox, MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
-import { Loading } from '../../shared/dialog/dialog.component';
+
+import { Loading, AddEmp } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-getevalist',
@@ -106,5 +107,14 @@ export class GetevalistComponent implements OnChanges {
                 this.back.emit(this.PeriodId);
             });
         }
+    }
+    backpage() {
+        this.back.emit(this.PeriodId);
+    }
+    openDialogHead() {
+        let dialogRef = this.dialog.open(AddEmp, this.config);
+        dialogRef.afterClosed().subscribe(res => {
+            console.log("OK")
+        });
     }
 }

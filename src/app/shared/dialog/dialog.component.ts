@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MdDialogConfig, MdInputDirective, MdSelect } from '@angular/material';
+import { MdDialog, MdDialogRef, MdDialogConfig, MdInputDirective, MdSelect, MdInput } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
@@ -329,7 +329,7 @@ export class InsertDialog3 {
 	selector: 'loading-dialog',
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
-		<img src="assets/images/giphy.gif" md-list-avatar style="width: 300px; height: 200px;">
+		<img src="assets/images/giphy.gif" md-list-avatar style="width: 100px; height: 100px;">
 	</div>`,
 	styles: [`
     /deep/ .md-dialog-container
@@ -415,5 +415,97 @@ export class TopAddEva {
 		this.PassValue.push(Text.selected.value['Alias'])
 		this.dialogRef.close(this.PassValue)
 		this.form.reset();
+	}
+}
+
+@Component({
+	selector: 'addemp-dialog',
+	templateUrl: './addemp-dialog.html',
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+	.completer-limit /deep/ .completer-dropdown {
+		overflow-y: auto;
+		max-height: 8rem;
+		width:50vw;
+	}
+	.completer-limit /deep/ input{
+		width:100%;
+		display: block;
+		height: 34px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #555;
+		background-color: #fff;
+		background-image: none;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		
+	}
+	input{
+		display: block;
+		height: 20px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #555;
+		background-color: #fff;
+		background-image: none;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	}
+	
+  `]
+
+})
+export class AddEmp {
+	TitleText: string = "Add Topic";
+	OkBtnText: string = "OK";
+	OkBtnColor: string = "primary";
+	CancelBtnText: string = "Cancel";
+	emp = [];
+	Name = [];
+	ProjectCode = [];
+	Role = [];
+	Lang;
+	public form: FormGroup;
+	constructor(public http: Http, public dialogRef: MdDialogRef<AddEmp>, private translate: TranslateService, private fb: FormBuilder) {
+		this.form = this.fb.group({
+			EmpName: [null, Validators.required],
+			EmpProjectCode: [null, Validators.required],
+			EmpRole: [null, Validators.required],
+			StartDate: [null, Validators.required],
+			FinishDate: [null, Validators.required]
+		})
+		this.http.get(GlobalServiceRef.URLService + "/Eva/EvaListData").subscribe(res => {
+			this.emp = res.json();
+			if (this.translate.currentLang == "th") {
+				this.Lang = "TH";
+			}
+			else {
+				this.Lang = "EN";
+			}
+			this.Name = this.emp['Employee']['Employee']
+			this.ProjectCode = this.emp['Project']['Project']
+			this.Role = this.emp['Role']['Role']
+			console.log(JSON.stringify(this.ProjectCode))
+		});
+	}
+	onSubmit(_Name: HTMLInputElement, _ProjectCode: HTMLInputElement, _Role: HTMLInputElement, _StartDate: HTMLInputElement, _FinishDate: HTMLInputElement) {
+		console.log(_Name.value + " " + _ProjectCode.value + " " + _Role.value + " " + _StartDate.value + " " + _FinishDate.value)
 	}
 }

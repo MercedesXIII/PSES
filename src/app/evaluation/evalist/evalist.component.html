@@ -8,7 +8,8 @@
                 {{ data.StartDate }}-{{data.FinishDate}}
             </md-option>
         </md-select>
-        <!-- <input ng2-auto-complete style="font-size: 14px; height: 20px; width: 170px;" placeholder="Period" [source]="Duration" [(ngModel)]="currentPeriod" [value]="Duration" (valueChanged)="getDataPeriod(currentPeriod)" value-property-name="DurationId" /> -->
+        <!--<input ng2-auto-complete style="font-size: 14px; height: 20px; width: 170px;" placeholder="Period" [source]="Duration" [(ngModel)]="currentPeriod"
+            [value]="Duration" (valueChanged)="getDataPeriod(currentPeriod)" value-property-name="DurationId" />-->
         <button md-raised-button md-button-sm type="button" color="primary" type="button" class="ml-1" (click)="getDataPeriod(currentPeriod) ">{{'OK' | translate}}</button>
     </div>
     <button *ngIf="showPeriod == true" (click)="getPeriod(currentPeriod)" md-icon-button [md-tooltip]="add" [tooltip-position]="position">

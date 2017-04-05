@@ -51,12 +51,12 @@ export class EvalistComponent implements OnInit {
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
         this.http.get(GlobalServiceRef.URLService + "/Eva/Period").subscribe(res => {
             this.period = res.json();
-            this.Duration[0] = 'all'
-            this.DurationId[0] = 'all'
-            for (let data in this.period) {
-                this.Duration[data + 1] = this.period[data].StartDate + "-" + this.period[data].FinishDate
-                this.DurationId[data + 1] = this.period[data].Period_Id
-            }
+            // this.Duration[0] = 'all'
+            // this.DurationId[0] = 'all'
+            // for (let data in this.period) {
+            //     this.Duration[data + 1] = this.period[data].StartDate + "-" + this.period[data].FinishDate
+            //     this.DurationId[data + 1] = this.period[data].Period_Id
+            // }
             if (this.PeriodId != undefined && this.PeriodId != 'all') {
                 this.showPeriod = true;
                 console.log(this.PeriodId)

@@ -69,6 +69,7 @@ export class EvaformComponent implements OnInit {
 		this.http.get(GlobalServiceRef.URLService + "/Eva/EvaData/" + this.EvaId)
 			.subscribe(res => {
 				this.getEva = res.json();
+				console.log(this.EvaId)
 				this.currentPosition = this.getEva[0].Part2ID;
 				this.http.get(GlobalServiceRef.URLService + "/Header/All/" + this.currentPosition + "/" + this.EvaId + "/1/EN")
 					.subscribe(res => {
@@ -391,6 +392,9 @@ export class EvaformComponent implements OnInit {
 				this.countHead3++;
 		}
 		//console.log(this.countHead3 + " " + this.countHead3full)
+	}
+	backpage() {
+		this.back.emit(this.PeriodId);
 	}
 	// calculate() {
 	//     for (let data in this.header) {

@@ -23,23 +23,29 @@ export class GetevalistComponent implements OnChanges {
     chb: boolean = true;
     startDate = [];
     finishDate = [];
+    emp = [];
+    Name = [];
+    ProjectCode = [];
+    Role = [];
+    Lang
 
     config: MdDialogConfig = { disableClose: true };
     @Input() PeriodId: number;
     ngOnInit() {
         if (this.translate.currentLang == "th") {
-            console.log("thai")
+            this.Lang = "TH"
         }
         else {
-            console.log("eng")
+            this.Lang = "EN"
         }
         this.translate.onLangChange.subscribe(() => {
             if (this.translate.currentLang == "th") {
-                console.log("thai")
+                this.Lang = "TH"
             }
             else {
-                console.log("eng")
+                this.Lang = "EN"
             }
+
         })
     }
     listeva = [];
@@ -47,7 +53,14 @@ export class GetevalistComponent implements OnChanges {
     @Output() back = new EventEmitter();
     constructor(private router: Router, public http: Http, public translate: TranslateService, public dialog: MdDialog) {
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
+        this.http.get(GlobalServiceRef.URLService + "/Eva/EvaListData").subscribe(res => {
+            this.emp = res.json();
 
+            this.Name = this.emp[this.Lang][this.Lang]
+            this.ProjectCode = this.emp['Project']['Project']
+            this.Role = this.emp['Role']['Role']
+            //console.log(JSON.stringify(this.Name))
+        });
     }
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         for (let propName in changes) {
@@ -113,6 +126,7 @@ export class GetevalistComponent implements OnChanges {
     }
     openDialogHead() {
         let dialogRef = this.dialog.open(AddEmp, this.config);
+        dialogRef.componentInstance.getValue(this.Name, this.ProjectCode, this.Role);
         dialogRef.afterClosed().subscribe(res => {
             console.log("OK")
         });

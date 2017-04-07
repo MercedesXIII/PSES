@@ -187,11 +187,11 @@
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center">
                 <button class="ml-1 mt-1" md-raised-button md-button-sm type="button" color="primary" type="button" (click)="onSubmit(currentPosition) ">{{'OK' | translate}}</button>
             </div>
-            <div fxLayoutWrap="wrap" fxLayout="row" class="mt-1">
+            <!--<div fxLayoutWrap="wrap" fxLayout="row" class="mt-1">
                 <button (click)="openDialogHead(0,currentPosition,1,-1)" md-icon-button [md-tooltip]="addtopic " [tooltip-position]="point ">
                     <md-icon>add</md-icon>
                 </button>
-            </div>
+            </div>-->
         </div>
     </div>
     <div fxFlex.gt-sm="54" fxFlex.gt-xs="51" fxFlex="100" fxLayout="column" fxLayoutAlign.gt-sm="start center" fxLayoutAlign.gt-xs="start center"
@@ -221,17 +221,17 @@
             <div *ngIf="head.H_Level==1">
                 <md-tab>
                     <template md-tab-label>{{head.Alias}}</template>
-                    <div fxLayout="row " fxLayoutAlign="start center" class="ml-2 mt-1">
+                    <div fxLayout="row " fxLayoutAlign="start center" class="ml-2 mt-1 mb-1">
                         <div fxLayout.gt-xs="row" fxLayout.gt-sm="column">
                             <div style="font-size: 19px; ">{{head['Text_Language'][Lang]}}</div>
                             <!-- <div style="font-size: 19px; ">{{"("+head.Text_Eng+")"}}</div> -->
                         </div>
                         <div>
                             <input class="ml-1 mr-1" style="text-align: center; width: 60px; font-size: 19px;" disabled="disabled" [(ngModel)]="finalTotalScore[k]">
-                            <button md-icon-button (click)="openDialogHead(head.H_ID,currentPosition,2,k,head['Text_Language'][Lang])" [md-tooltip]="adddetail "
+                            <!--<button md-icon-button (click)="openDialogHead(head.H_ID,currentPosition,2,k,head['Text_Language'][Lang])" [md-tooltip]="adddetail "
                                 [tooltip-position]="point ">
                                 <md-icon>add</md-icon>
-                            </button>
+                            </button>-->
                             <button *ngIf="head.Status == 2" md-icon-button (click)=" delete(head.H_ID,k,head['Text_Language'][Lang])" [md-tooltip]="remove "
                                 [tooltip-position]="point ">
                                 <md-icon>delete_forever</md-icon>

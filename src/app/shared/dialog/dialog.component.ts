@@ -490,20 +490,13 @@ export class AddEmp {
 			EmpRole: [null, Validators.required],
 			StartDate: [null, Validators.required],
 			FinishDate: [null, Validators.required]
+
 		})
-		this.http.get(GlobalServiceRef.URLService + "/Eva/EvaListData").subscribe(res => {
-			this.emp = res.json();
-			if (this.translate.currentLang == "th") {
-				this.Lang = "TH";
-			}
-			else {
-				this.Lang = "EN";
-			}
-			this.Name = this.emp['Employee']['Employee']
-			this.ProjectCode = this.emp['Project']['Project']
-			this.Role = this.emp['Role']['Role']
-			console.log(JSON.stringify(this.ProjectCode))
-		});
+	}
+	getValue(Name, ProjectCode, Role) {
+		this.Name = Name;
+		this.ProjectCode = ProjectCode;
+		this.Role = Role;
 	}
 	onSubmit(_Name: HTMLInputElement, _ProjectCode: HTMLInputElement, _Role: HTMLInputElement, _StartDate: HTMLInputElement, _FinishDate: HTMLInputElement) {
 		console.log(_Name.value + " " + _ProjectCode.value + " " + _Role.value + " " + _StartDate.value + " " + _FinishDate.value)

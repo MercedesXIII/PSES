@@ -1,8 +1,8 @@
 <!-- Data Table #Start-->
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxHide="false" fxHide.xs>
-    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
+    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
         [scrollbarH]="true " [rows]="listapprove" [limit]="10 ">
-        <ngx-datatable-column [flexGrow]="1">
+        <!--<ngx-datatable-column [flexGrow]="1">
             <template ngx-datatable-header-template>
                 <div class="header">#</div>
             </template>
@@ -11,8 +11,18 @@
                     {{row.$$index+1}}
                 </div>
             </template>
+        </ngx-datatable-column>-->
+        <ngx-datatable-column [width]="110" [minWidth]="110" prop="StartDatePlan">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'EvaluateDate' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    01/Jan/06
+                </div>
+            </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="7">
+        <ngx-datatable-column [width]="205" [minWidth]="205">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
@@ -22,7 +32,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="4" prop="ProjectCode">
+        <ngx-datatable-column [width]="115" [minWidth]="115" prop="ProjectCode">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Project Code' | translate}}</div>
             </template>
@@ -32,7 +42,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="4" prop="Role">
+        <ngx-datatable-column [width]="196" [minWidth]="196" prop="Role">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
             </template>
@@ -52,7 +62,7 @@
                 </div>
             </template>
         </ngx-datatable-column> -->
-        <ngx-datatable-column [flexGrow]="5">
+        <ngx-datatable-column [width]="115" [minWidth]="115">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">{{'Status' | translate}}</div>
             </template>
@@ -89,10 +99,10 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="3">
-            <template ngx-datatable-header-template>
+        <ngx-datatable-column [width]="48" [minWidth]="48">
+            <!--<template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">{{'Detail' | translate}}</div>
-            </template>
+            </template>-->
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
                     <button md-icon-button md-button-sm [md-tooltip]="detail|translate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
@@ -109,6 +119,7 @@
         <ngx-datatable-column [width]="230" [minWidth]="230">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="column" fxLayoutAlign="start">
+                    <span><b>{{'Date' | translate}}</b> 01/Jan/06</span>
                     <span><b>{{'Name' | translate}}</b> {{row['name_language'][Lang]}}</span>
                     <span><b>{{'Project Code' | translate}}</b> {{row['ProjectCode']}}</span>
                     <span><b>{{'Role' | translate}}</b> {{row['ProjectCode']}}</span>

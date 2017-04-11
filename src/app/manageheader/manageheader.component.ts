@@ -110,8 +110,7 @@ export class ManageheaderComponent implements OnInit {
                     if (res != 'cancel') {
                         let TextThai = res[0];
                         let TextEng = res[1];
-                        let TextAlias = res[2];
-                        this.insertHeader1(HeadId, PositionNo, TextThai, TextEng, TextAlias);
+                        this.insertHeader1(HeadId, PositionNo, TextThai, TextEng);
                     }
                 }
                 catch (ee)
@@ -138,7 +137,8 @@ export class ManageheaderComponent implements OnInit {
                 try {
                     if (res != 'cancel') {
                         let TextThai = res[0];
-                        this.insertHeader3(i, HeadId, PositionNo, TextThai);
+                        let TextEng = res[1];
+                        this.insertHeader3(i, HeadId, PositionNo, TextThai, TextEng);
                     }
                 }
                 catch (ee)
@@ -146,10 +146,10 @@ export class ManageheaderComponent implements OnInit {
             });
         }
     }
-    insertHeader1(HeadId: number, PositionNo: number, TextThai: string, TextEng: string, TextAlias: string) {
-        console.log(HeadId + " " + PositionNo + " " + TextThai + " " + TextEng + " " + TextAlias)
+    insertHeader1(HeadId: number, PositionNo: number, TextThai: string, TextEng: string) {
+        console.log(HeadId + " " + PositionNo + " " + TextThai + " " + TextEng)
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Text: TextThai, Text_Eng: TextEng, Alias: TextAlias });
+        let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Text: TextThai, Text_Eng: TextEng, Alias: "-" });
 
         this.http.put(GlobalServiceRef.URLService + "/Header/InsertHeader", body, {
             headers: headers
@@ -168,9 +168,9 @@ export class ManageheaderComponent implements OnInit {
             this.callHeader(PositionNo);
         });
     }
-    insertHeader3(i: number, HeadId: number, PositionNo: number, TextThai: string) {
+    insertHeader3(i: number, HeadId: number, PositionNo: number, TextThai: string, TextEng: string) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Text: TextThai, Text_Eng: "-", Alias: "-" });
+        let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Text: TextThai, Text_Eng: TextEng, Alias: "-" });
         this.http.put(GlobalServiceRef.URLService + "/Header/InsertHeader", body, {
             headers: headers
         }).subscribe((res: Response) => {

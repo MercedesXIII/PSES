@@ -31,6 +31,9 @@ export const AppRoutes: Routes = [{
       path: 'manageheader',
       loadChildren: './manageheader/manageheader.module#ManageheaderModule'
     }, {
+      path: 'report',
+      loadChildren: './report/report.module#ReportModule'
+    }, {
       path: 'request',
       component: RequestComponent
     },]

@@ -53,14 +53,6 @@ export class GetevalistComponent implements OnChanges {
     @Output() back = new EventEmitter();
     constructor(private router: Router, public http: Http, public translate: TranslateService, public dialog: MdDialog) {
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        this.http.get(GlobalServiceRef.URLService + "/Eva/EvaListData").subscribe(res => {
-            this.emp = res.json();
-
-            this.Name = this.emp[this.Lang][this.Lang]
-            this.ProjectCode = this.emp['Project']['Project']
-            this.Role = this.emp['Role']['Role']
-            //console.log(JSON.stringify(this.Name))
-        });
     }
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
         for (let propName in changes) {
@@ -73,6 +65,14 @@ export class GetevalistComponent implements OnChanges {
                             this.startDate[date] = this.listeva[date].PlanStartDate;
                             this.finishDate[date] = this.listeva[date].PlanFinishDate;
                         }
+                        this.http.get(GlobalServiceRef.URLService + "/Eva/EvaListData").subscribe(res => {
+                            this.emp = res.json();
+
+                            this.Name = this.emp[this.Lang][this.Lang]
+                            this.ProjectCode = this.emp['Project']['Project']
+                            this.Role = this.emp['Role']['Role']
+                            //console.log(JSON.stringify(this.Name))
+                        });
                     });
             }
         }

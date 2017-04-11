@@ -220,7 +220,7 @@
         <div *ngFor="let head of header; let k = index">
             <div *ngIf="head.H_Level==1">
                 <md-tab>
-                    <template md-tab-label>{{head.Alias}}</template>
+                    <template md-tab-label>{{head['Text_Language'][Lang]}}</template>
                     <div fxLayout="row " fxLayoutAlign="start center" class="ml-2 mt-1 mb-1">
                         <div fxLayout.gt-xs="row" fxLayout.gt-sm="column">
                             <div style="font-size: 19px; ">{{head['Text_Language'][Lang]}}</div>
@@ -309,7 +309,7 @@
                                                         </select>
                                                     </div>
                                                     <div style="margin-top:-4px;">
-                                                        <button md-icon-button md-button-sm *ngIf="head3.Status == 2" (click)=" delete(head3.H_ID,j,head3['Text_Language'][Lang]) "
+                                                        <button md-icon-button md-button-sm *ngIf="head3.Status == 2 || head3.H_ID < 0" (click)=" delete(head3.H_ID,j,head3['Text_Language'][Lang]) "
                                                             [md-tooltip]="remove " [tooltip-position]="point " tabindex="-1 ">
                                                             <md-icon>delete_forever</md-icon>
                                                             </button>

@@ -19,9 +19,9 @@
 <!-- Period #End-->
 <!-- Data Table #Start-->
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxHide="false" fxHide.xs>
-    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
-        [scrollbarH]="false " [rows]="listeva" [limit]="10 ">
-        <ngx-datatable-column [flexGrow]="1">
+    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
+        [scrollbarH]="true " [rows]="listeva" [limit]="10 ">
+        <ngx-datatable-column [width]="48" [minWidth]="48">
             <template ngx-datatable-header-template>
                 <div class="header">#</div>
             </template>
@@ -31,7 +31,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="6">
+        <ngx-datatable-column [width]="205" [minWidth]="205">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
@@ -41,7 +41,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="4" prop="ProjectCode">
+        <ngx-datatable-column [width]="115" [minWidth]="115" prop="ProjectCode">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Project Code' | translate}}</div>
             </template>
@@ -51,7 +51,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="6" prop="Function">
+        <ngx-datatable-column [width]="196" [minWidth]="196" prop="Function">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
             </template>
@@ -61,7 +61,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="5" prop="StartDatePlan">
+        <ngx-datatable-column [width]="175" [minWidth]="175" prop="StartDatePlan">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Duration' | translate}}</div>
             </template>
@@ -71,7 +71,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="5">
+        <ngx-datatable-column [width]="135" [minWidth]="135">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">{{'Option' | translate}}</div>
             </template>
@@ -91,7 +91,7 @@
                     </button>
                     <button md-icon-button md-button-sm [disabled]="row.EvaStatus==1" [md-tooltip]="evaluate | translate" [tooltip-position]="position"
                         (click)="passEvaId($event, value, row)">
-                        <md-icon>description</md-icon>
+                        <md-icon>rate_review</md-icon>
                     </button>
                     <button md-icon-button md-button-sm (click)=" delete($event, value, row) " [md-tooltip]="remove | translate" [tooltip-position]="position ">
                         <md-icon>delete_forever</md-icon>
@@ -130,7 +130,7 @@
                         <md-icon>radio_button_checked</md-icon>
                     </button>
                     <button md-icon-button [disabled]="row.EvaStatus==1" [md-tooltip]="evaluate|translate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
-                        <md-icon>description</md-icon>
+                        <md-icon>rate_review</md-icon>
                     </button>
                     <button md-icon-button (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove|translate" [tooltip-position]="position ">
                         <md-icon>delete_forever</md-icon>

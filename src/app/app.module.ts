@@ -10,7 +10,9 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { JazzDialog } from './material/dialog/dialog.component';
-import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, NormalDialog, DialogComponent, Loading, TopAddEva, AddEmp } from './shared/dialog/dialog.component';
+import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, NormalDialog, DialogComponent, Loading, TopAddEva, AddEmp, EvaFlow } from './shared/dialog/dialog.component';
+import { PopoverModule } from "ngx-popover";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AuthGuard } from '../_guards/auth.guard';
 import { AppRoutes } from './app.routing';
@@ -42,6 +44,7 @@ export function createTranslateLoader(http: Http) {
     Loading,
     TopAddEva,
     AddEmp,
+    EvaFlow
   ],
   imports: [
     BrowserModule,
@@ -58,10 +61,12 @@ export function createTranslateLoader(http: Http) {
     FlexLayoutModule.forRoot(),
     ReactiveFormsModule,
     Ng2AutoCompleteModule,
-    Ng2CompleterModule
+    Ng2CompleterModule,
+    PopoverModule,
+    NgxDatatableModule
   ],
   providers: [AuthGuard],
-  entryComponents: [JazzDialog, DialogComponent, ConfirmDialog, NormalDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading, TopAddEva, AddEmp],
+  entryComponents: [JazzDialog, DialogComponent, ConfirmDialog, NormalDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading, TopAddEva, AddEmp, EvaFlow],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

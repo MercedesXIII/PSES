@@ -1,0 +1,120 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100">
+    <div fxLayout="column" fxLayoutWrap="wrap">
+      <div fxFlex="100">
+        <md-card class="card-widget md-teal clickhere" (click)="getCriteria(1)">
+          <div md-card-widget>
+            <div md-card-float-icon>
+              <md-icon>local_offer</md-icon>
+            </div>
+            <div class="pl-0">
+              <h4 md-card-widget-title>List of Employee</h4>
+            </div>
+          </div>
+        </md-card>
+      </div>
+      <div fxFlex="100">
+        <md-card class="card-widget md-teal clickhere" (click)="getCriteria(0)">
+          <div md-card-widget>
+            <div md-card-float-icon>
+              <md-icon>local_offer</md-icon>
+            </div>
+            <div class="pl-0">
+              <h4 md-card-widget-title>List of Employee</h4>
+            </div>
+          </div>
+        </md-card>
+      </div>
+      <div fxFlex="100">
+        <md-card class="card-widget md-teal clickhere">
+          <div md-card-widget>
+            <div md-card-float-icon>
+              <md-icon>local_offer</md-icon>
+            </div>
+            <div class="pl-0">
+              <h4 md-card-widget-title>List of Employee</h4>
+            </div>
+          </div>
+        </md-card>
+      </div>
+      <div fxFlex="100">
+        <md-card class="card-widget md-teal clickhere">
+          <div md-card-widget>
+            <div md-card-float-icon>
+              <md-icon>local_offer</md-icon>
+            </div>
+            <div class="pl-0">
+              <h4 md-card-widget-title>List of Employee</h4>
+            </div>
+          </div>
+        </md-card>
+      </div>
+      <div fxFlex="100">
+        <md-card class="card-widget md-teal clickhere">
+          <div md-card-widget>
+            <div md-card-float-icon>
+              <md-icon>local_offer</md-icon>
+            </div>
+            <div class="pl-0">
+              <h4 md-card-widget-title>List of Employee</h4>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+  </div>
+  <!--half-->
+  <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100">
+    <md-card>
+      <md-card-title style="font-size : 18px ">{{'Report Filter' | translate}}</md-card-title>
+      <md-card-content *ngIf="flag == 1">
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutWrap="wrap">
+          <div fxFlex="100">
+            <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+              <md-select class="ml-1" placeholder="{{'Select Period' | translate}}" [(ngModel)]="currentPeriod" style="width: 170px;">
+                <md-option [value]="'all'">
+                  {{'All' | translate }}
+                </md-option>
+                <md-option *ngFor="let data of period" [value]="data.Period_Id">
+                  {{ data.StartDate }}-{{data.FinishDate}}
+                </md-option>
+              </md-select>
+            </div>
+            <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+              <md-select class="ml-1" placeholder="{{'Select Period' | translate}}" [(ngModel)]="currentPeriod" style="width: 170px;">
+                <md-option [value]="'all'">
+                  {{'All' | translate }}
+                </md-option>
+                <md-option *ngFor="let data of period" [value]="data.Period_Id">
+                  {{ data.StartDate }}-{{data.FinishDate}}
+                </md-option>
+              </md-select>
+            </div>
+            <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+              <md-select class="ml-1" placeholder="{{'Select Period' | translate}}" [(ngModel)]="currentPeriod" style="width: 170px;">
+                <md-option [value]="'all'">
+                  {{'All' | translate }}
+                </md-option>
+                <md-option *ngFor="let data of period" [value]="data.Period_Id">
+                  {{ data.StartDate }}-{{data.FinishDate}}
+                </md-option>
+              </md-select>
+            </div>
+          </div>
+        </div>
+        <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="space-between center" class="mb-1 ml-1">
+          <div fxLayoutWrap="wrap" fxLayout="row">
+            <button md-raised-button md-button-sm color="primary">Preview</button>
+          </div>
+          <div fxLayoutWrap="wrap" fxLayout="row">
+            <button md-raised-button md-button-sm color="green">Print</button>
+          </div>
+        </div>
+      </md-card-content>
+      <md-card-content *ngIf="flag == 0">
+        <h5>Not Create Construction</h5>
+      </md-card-content>
+    </md-card>
+  </div>
+  <!--half-->
+</div>

@@ -63,7 +63,9 @@
     "Submit": "ส่ง",
     "Start Date": "วันเริ่ม",
     "Finish Date": "วันสิ้นสุด",
-    "Waitting": "กำลังดำเนินการ",
+    "Waiting": "กำลังดำเนินการ",
     "Add Topic": "เพิ่มหัวข้อ",
-    "Confirm": "ยืนยัน"
+    "Confirm": "ยืนยัน",
+    "Date": "วันที่",
+    "Report": "รายงาน"
 }

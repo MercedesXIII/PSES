@@ -9,7 +9,7 @@ import { TranslateService } from 'ng2-translate';
 import 'rxjs/add/operator/startWith';
 
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
-import { ConfirmDialog } from '../../shared/dialog/dialog.component';
+import { ConfirmDialog, EvaFlow } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-historylist',
@@ -24,6 +24,9 @@ export class HistorylistComponent implements OnInit {
     position: TooltipPosition = 'below';
     detail: string = 'Detail';
     remove: string = 'Delete';
+    wait: string = 'Waiting';
+    approve: string = 'Approved';
+    reject: string = 'Rejected';
     showPeriod: boolean = false;
     listhistory = [];
     progress = [];
@@ -87,6 +90,13 @@ export class HistorylistComponent implements OnInit {
                 this.progress[index] = 0;
             }
         }
+    }
+    Openflow(EvaID) {
+        let dialogRef = this.dialog.open(EvaFlow);
+        dialogRef.componentInstance.evaluationFlow(EvaID);
+        dialogRef.afterClosed().subscribe(res => {
+            console.log("OK")
+        });
     }
 
 }

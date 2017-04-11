@@ -13,9 +13,9 @@
     </div>
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.xs="100" fxHide="false" fxHide.xs>
-    <ngx-datatable class="material " [columnMode]=" 'flex' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
-        [scrollbarH]="false " [rows]="listeva" [limit]="10 " [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
-        <ngx-datatable-column [flexGrow]="1" [checkboxable]="true">
+    <ngx-datatable class="material " [columnMode]=" 'force' " [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
+        [scrollbarH]="true" [rows]="listeva" [limit]="10 " [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+        <ngx-datatable-column [width]="48" [minWidth]="48" [checkboxable]="true">
             <template ngx-datatable-header-template>
                 <div style="margin-left:-6px; font-weight: bold ">
                     <button *ngIf="chb == true" style="font-size: 10px; background: white;color: white;" (click)="all(true)">
@@ -27,7 +27,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="1">
+        <!--<ngx-datatable-column [flexGrow]="1">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">#</div>
             </template>
@@ -36,8 +36,8 @@
                     {{row.$$index+1}}
                 </div>
             </template>
-        </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="4" prop="EmployeeFirstName">
+        </ngx-datatable-column>-->
+        <ngx-datatable-column [width]="207" [minWidth]="207" prop="EmployeeFirstName">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
@@ -47,7 +47,7 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="3 " prop="ProjectCode">
+        <ngx-datatable-column [width]="115" [minWidth]="115" prop="ProjectCode">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Project Code' | translate}}</div>
             </template>
@@ -57,33 +57,35 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="4 " prop="Role">
+        <ngx-datatable-column [width]="196" [minWidth]="196" prop="Role">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
-                <div style="text-align: center; ">
+                <div style="text-align: left; ">
                     {{value}}
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="3" prop="PlanStartDate">
+        <ngx-datatable-column [width]="150" [minWidth]="150" prop="PlanStartDate">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Start Date' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
-                    <md-input type="date" style="width: 100%" [(ngModel)]="startDate[row.$$index]"></md-input>
+                    <md-input type="date" style="width: 100%" [(ngModel)]="startDate[row.$$index]" min="{{listeva[row.$$index]['PlanStartDate']}}"
+                        max="{{finishDate[row.$$index]}}"></md-input>
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [flexGrow]="3" prop="PlanFinishDate">
+        <ngx-datatable-column [width]="150" [minWidth]="150" prop="PlanFinishDate">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Finish Date' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div>
-                    <md-input style="text-align: center;" type="date" style="width: 100%" [(ngModel)]="finishDate[row.$$index]"></md-input>
+                    <md-input style="text-align: center;" type="date" style="width: 100%" [(ngModel)]="finishDate[row.$$index]" min="{{startDate[row.$$index]}}"
+                        max="{{listeva[row.$$index]['PlanFinishDate']}}"></md-input>
                 </div>
             </template>
         </ngx-datatable-column>
@@ -114,8 +116,8 @@
                     <br>
                     <span><b>{{'Project Code' | translate}}</b> {{listeva[row.$$index]['ProjectCode']}}</span>
                     <!-- <span><b>{{'Role' | translate}}</b> {{listeva[row.$$index]['Role']}}</span> -->
-                    <span><b>{{'StartDate' | translate}}</b> <md-input type="date" [(ngModel)]="startDate[row.$$index]"></md-input></span>
-                    <span><b>{{'FinishDate' | translate}}</b> <md-input type="date" [(ngModel)]="finishDate[row.$$index]"></md-input></span>
+                    <span><b>{{'StartDate' | translate}}</b> <md-input type="date" [(ngModel)]="startDate[row.$$index]" min="{{listeva[row.$$index]['PlanStartDate']}}" max="{{finishDate[row.$$index]}}"></md-input></span>
+                    <span><b>{{'FinishDate' | translate}}</b> <md-input type="date" [(ngModel)]="finishDate[row.$$index]" min="{{startDate[row.$$index]}}" max="{{listeva[row.$$index]['PlanFinishDate']}}"></md-input></span>
                 </div>
             </template>
         </ngx-datatable-column>

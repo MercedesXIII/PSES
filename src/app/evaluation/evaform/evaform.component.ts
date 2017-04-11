@@ -118,7 +118,7 @@ export class EvaformComponent implements OnInit {
 		});
 	}
 	callHeader(id, lang: string) {
-		//this.currentScore = [];
+		this.currentScore = [];
 		//this.getScoreAndId = [];
 		this.http.get(GlobalServiceRef.URLService + "/Header/All/" + id + "/" + this.EvaId + "/2/" + lang)
 			.subscribe(res => {
@@ -391,7 +391,7 @@ export class EvaformComponent implements OnInit {
 			if (this.currentScore[data] != 0)
 				this.countHead3++;
 		}
-		//console.log(this.countHead3 + " " + this.countHead3full)
+		console.log(this.countHead3 + " " + this.countHead3full)
 	}
 	backpage() {
 		this.back.emit(this.PeriodId);

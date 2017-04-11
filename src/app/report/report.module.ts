@@ -6,16 +6,19 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from 'ng2-translate';
+import { HttpModule } from '@angular/http';
+import { PopoverModule } from "ngx-popover";
 
-import { HistoryComponent } from './history.component';
-import { HistoryRoutes } from './history.routing';
-import { HistorylistComponent } from './historylist/historylist.component';
-import { HistorydetailComponent } from './historydetail/historydetail.component';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { ReportComponent } from './report.component';
+import { ReportRoutes } from './report.routing';
+import { ReportviewComponent } from './reportview/reportview.component';
+import { ReportcriteriaComponent } from './reportcriteria/reportcriteria.component';
 
 @NgModule({
 
     imports: [CommonModule,
-        RouterModule.forChild(HistoryRoutes),
+        RouterModule.forChild(ReportRoutes),
         MdCardModule,
         MdInputModule,
         FlexLayoutModule,
@@ -23,9 +26,11 @@ import { HistorydetailComponent } from './historydetail/historydetail.component'
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
-        TranslateModule],
+        TranslateModule,
+        Ng2AutoCompleteModule,
+        PopoverModule],
 
-    declarations: [HistoryComponent, HistorylistComponent, HistorydetailComponent]
+    declarations: [ReportComponent, ReportviewComponent, ReportcriteriaComponent]
 })
 
-export class HistoryModule { }
+export class ReportModule { }

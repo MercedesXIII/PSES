@@ -52,6 +52,12 @@ const MENUITEMS = [
     type: 'link',
     icon: 'playlist_add'
   },
+  {
+    state: 'report',
+    name: 'Report',
+    type: 'link',
+    icon: 'chrome_reader_mode'
+  },
 
   // {
   //   state: 'request',

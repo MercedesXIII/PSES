@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MdDialogConfig, MdInputDirective, MdSelect, MdInput } from '@angular/material';
-import { TranslateService } from 'ng2-translate';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
+import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, OnInit, ViewChild, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CustomValidators } from 'ng2-validation';
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { MdSnackBar, MdInputDirective, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
+import { TranslateService } from 'ng2-translate';
+import 'rxjs/add/operator/startWith';
+
+import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
 
 @Component({
 	selector: 'app-dialog',
@@ -169,7 +174,7 @@ export class NormalDialog {
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch"  style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
-	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
+	<form (ngSubmit)="onSubmit(TextThai,TextEng)">
 		<md-dialog-content>
 				<div class="mb-1">
 					<md-input placeholder="TopicThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
@@ -179,13 +184,9 @@ export class NormalDialog {
 					<md-input placeholder="TopicEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
 					<small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
 				</div>
-				<div class="mb-1">
-					<md-input placeholder="TextAlias" [maxlength]="1" [formControl]="form.controls['TextAlias']" style="width: 100%" #TextAlias></md-input>
-					<small *ngIf="form.controls['TextAlias'].hasError('required') && form.controls['TextAlias'].touched" class="md-text-warn">You must include a TextAlias.</small>
-				</div>
 		</md-dialog-content>
 		<div fxLayout="row" fxLayoutAlign="end end" >
-		<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid">{{OkBtnText | translate}}</button>
+		<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid" >{{OkBtnText | translate}}</button>
 		<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 		</div>
 	</form>
@@ -211,14 +212,12 @@ export class InsertDialog {
 	constructor(public dialogRef: MdDialogRef<InsertDialog>, private translate: TranslateService, private fb: FormBuilder) {
 		this.form = this.fb.group({
 			TextThai: [null, Validators.required],
-			TextEng: [null, Validators.required],
-			TextAlias: [null, Validators.required]
+			TextEng: [null, Validators.required]
 		})
 	}
-	onSubmit(TextThai: MdInputDirective, TextEng: MdInputDirective, TextAlias: MdInputDirective) {
+	onSubmit(TextThai: MdInputDirective, TextEng: MdInputDirective) {
 		this.PassValue.push(TextThai.value)
 		this.PassValue.push(TextEng.value)
-		this.PassValue.push(TextAlias.value)
 		this.dialogRef.close(this.PassValue)
 		this.form.reset();
 	}
@@ -229,7 +228,7 @@ export class InsertDialog {
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
-	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
+	<form (ngSubmit)="onSubmit(TextThai,TextEng)">
 		<md-dialog-content>
 				<div class="mb-1">
 					<md-input placeholder="TopicThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
@@ -282,15 +281,19 @@ export class InsertDialog2 {
 	template: `
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" style="width: 70vw; background-color:white; padding:30px; border-radius:5px">
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
-	<form (ngSubmit)="onSubmit(TextThai,TextEng,TextAlias)">
+	<form (ngSubmit)="onSubmit(TextThai,TextEng)">
 		<md-dialog-content>
 				<div class="mb-1">
 					<md-input placeholder="TopicThai" [formControl]="form.controls['TextThai']" style="width: 100%" #TextThai></md-input>
 					<small *ngIf="form.controls['TextThai'].hasError('required') && form.controls['TextThai'].touched" class="md-text-warn">You must include a TextThai.</small>
 				</div>
+				<div class="mb-1">
+					<md-input placeholder="TopicEng" [formControl]="form.controls['TextEng']" style="width: 100%" #TextEng></md-input>
+					<small *ngIf="form.controls['TextEng'].hasError('required') && form.controls['TextEng'].touched" class="md-text-warn">You must include a TextEng.</small>
+				</div>
 		</md-dialog-content>
 		<div fxLayout="row" fxLayoutAlign="end end" >
-		<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid">{{OkBtnText | translate}}</button>
+		<md-dialog-actions><button md-raised-button color="{{OkBtnColor}}" type="submit" [disabled]="!form.valid" >{{OkBtnText | translate}}</button>
 		<button md-button type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 		</div>
 	</form>
@@ -315,11 +318,13 @@ export class InsertDialog3 {
 	public form: FormGroup;
 	constructor(public dialogRef: MdDialogRef<InsertDialog3>, private translate: TranslateService, private fb: FormBuilder) {
 		this.form = this.fb.group({
-			TextThai: [null, Validators.required]
+			TextThai: [],
+			TextEng: []
 		})
 	}
-	onSubmit(TextThai: MdInputDirective) {
+	onSubmit(TextThai: MdInputDirective, TextEng: MdInputDirective) {
 		this.PassValue.push(TextThai.value)
+		this.PassValue.push(TextEng.value)
 		this.dialogRef.close(this.PassValue)
 		this.form.reset();
 	}
@@ -500,5 +505,59 @@ export class AddEmp {
 	}
 	onSubmit(_Name: HTMLInputElement, _ProjectCode: HTMLInputElement, _Role: HTMLInputElement, _StartDate: HTMLInputElement, _FinishDate: HTMLInputElement) {
 		console.log(_Name.value + " " + _ProjectCode.value + " " + _Role.value + " " + _StartDate.value + " " + _FinishDate.value)
+	}
+
+
+}
+
+@Component({
+	selector: 'loading-dialog',
+	templateUrl: './evaflow-dialog.html',
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+  `]
+
+})
+export class EvaFlow {
+	public LoginResultJson: Object;
+
+	//ToolTlip
+	position: TooltipPosition = 'below';
+	detail: string = 'Detail';
+	remove: string = 'Delete';
+	wait: string = 'Waiting';
+	showPeriod: boolean = false;
+	listhistory = [];
+	progress = [];
+	Lang;
+
+	@Input() PeriodId: string;
+	@Output() outEvaId = new EventEmitter();
+	constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public dialogRef: MdDialogRef<AddEmp>, private fb: FormBuilder) { }
+
+	ngOnInit() {
+	}
+	evaluationFlow(EvaID) {
+		this.http.get(GlobalServiceRef.URLService + "/Eva/Approveflow/" + EvaID).subscribe(res => {
+			this.listhistory = res.json();
+			if (this.translate.currentLang == "th") {
+				this.Lang = 'TH'
+			}
+			else {
+				this.Lang = 'EN'
+			}
+		});
+		this.translate.onLangChange.subscribe(() => {
+			if (this.translate.currentLang == "th") {
+				this.Lang = 'TH'
+			}
+			else {
+				this.Lang = 'EN'
+			}
+		});
 	}
 }

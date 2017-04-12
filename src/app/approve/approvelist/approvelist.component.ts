@@ -9,7 +9,7 @@ import { TranslateService } from 'ng2-translate';
 import 'rxjs/add/operator/startWith';
 
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
-import { ConfirmDialog } from '../../shared/dialog/dialog.component';
+import { ConfirmDialog, EvaFlow } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-approvelist',
@@ -37,16 +37,16 @@ export class ApprovelistComponent implements OnInit {
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
-        //     .subscribe(res => {
-        //         this.listapprove = res.json();
-        //         if (this.translate.currentLang == "th") {
-        //             this.Lang = 'TH'
-        //         }
-        //         else {
-        //             this.Lang = 'EN'
-        //         }
-        //     });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
+            .subscribe(res => {
+                this.listapprove = res.json();
+                if (this.translate.currentLang == "th") {
+                    this.Lang = 'TH'
+                }
+                else {
+                    this.Lang = 'EN'
+                }
+            });
 
         //Programmer
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/490428")
@@ -61,19 +61,9 @@ export class ApprovelistComponent implements OnInit {
         //     });
 
         //Bas//
-        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
-            .subscribe(res => {
-                this.listapprove = res.json()
-                if (this.translate.currentLang == "th") {
-                    this.Lang = 'TH'
-                }
-                else {
-                    this.Lang = 'EN'
-                }
-            });
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
         //     .subscribe(res => {
-        //         this.listapprove = res.json();
+        //         this.listapprove = res.json()
         //         if (this.translate.currentLang == "th") {
         //             this.Lang = 'TH'
         //         }
@@ -81,6 +71,16 @@ export class ApprovelistComponent implements OnInit {
         //             this.Lang = 'EN'
         //         }
         //     });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
+            .subscribe(res => {
+                this.listapprove = res.json();
+                if (this.translate.currentLang == "th") {
+                    this.Lang = 'TH'
+                }
+                else {
+                    this.Lang = 'EN'
+                }
+            });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
         //     .subscribe(res => {
         //         this.listapprove = res.json()
@@ -110,6 +110,13 @@ export class ApprovelistComponent implements OnInit {
     }
     passEvaId(event, row, value) {
         this.outEvaId.emit(value["EvaID"]);
+    }
+    Openflow(EvaID) {
+        let dialogRef = this.dialog.open(EvaFlow);
+        dialogRef.componentInstance.evaluationFlow(EvaID);
+        dialogRef.afterClosed().subscribe(res => {
+            console.log("OK")
+        });
     }
 
 }

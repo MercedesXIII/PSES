@@ -511,13 +511,17 @@ export class AddEmp {
 }
 
 @Component({
-	selector: 'loading-dialog',
+	selector: 'evaflow-dialog',
 	templateUrl: './evaflow-dialog.html',
 	styles: [`
     /deep/ .md-dialog-container
 	{
 		background:none;
 		box-shadow:none;
+	}
+	.hand
+	{
+		cursor: pointer;
 	}
   `]
 
@@ -529,7 +533,59 @@ export class EvaFlow {
 	position: TooltipPosition = 'below';
 	detail: string = 'Detail';
 	remove: string = 'Delete';
-	wait: string = 'Waiting';
+	showPeriod: boolean = false;
+	listhistory = [];
+	progress = [];
+	Lang;
+
+	@Input() PeriodId: string;
+	@Output() outEvaId = new EventEmitter();
+	constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public dialogRef: MdDialogRef<AddEmp>, private fb: FormBuilder) { }
+
+	ngOnInit() {
+	}
+	evaluationFlow(EvaID) {
+		this.http.get(GlobalServiceRef.URLService + "/Eva/Approveflow/" + EvaID).subscribe(res => {
+			this.listhistory = res.json();
+			if (this.translate.currentLang == "th") {
+				this.Lang = 'TH'
+			}
+			else {
+				this.Lang = 'EN'
+			}
+		});
+		this.translate.onLangChange.subscribe(() => {
+			if (this.translate.currentLang == "th") {
+				this.Lang = 'TH'
+			}
+			else {
+				this.Lang = 'EN'
+			}
+		});
+	}
+}
+
+@Component({
+	selector: 'changeflow-dialog',
+	templateUrl: './changeflow-dialog.html',
+	styles: [`
+    /deep/ .md-dialog-container
+	{
+		background:none;
+		box-shadow:none;
+	}
+	.hand
+	{
+		cursor: pointer;
+	}
+  `]
+
+})
+export class ChangeFlow {
+	public LoginResultJson: Object;
+
+	//ToolTlip
+	position: TooltipPosition = 'below';
 	showPeriod: boolean = false;
 	listhistory = [];
 	progress = [];

@@ -9,7 +9,7 @@ import { TranslateService } from 'ng2-translate';
 import 'rxjs/add/operator/startWith';
 
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
-import { ConfirmDialog, EvaFlow } from '../../shared/dialog/dialog.component';
+import { ConfirmDialog, EvaFlow, ChangeFlow } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-historylist',
@@ -94,6 +94,12 @@ export class HistorylistComponent implements OnInit {
     Openflow(EvaID) {
         let dialogRef = this.dialog.open(EvaFlow);
         dialogRef.componentInstance.evaluationFlow(EvaID);
+        dialogRef.afterClosed().subscribe(res => {
+            console.log("OK")
+        });
+    }
+    changeflow(EvaID) {
+        let dialogRef = this.dialog.open(ChangeFlow);
         dialogRef.afterClosed().subscribe(res => {
             console.log("OK")
         });

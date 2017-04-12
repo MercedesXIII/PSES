@@ -7,16 +7,6 @@
     </div>
     <ngx-datatable class="material " [columnMode]=" 'force' " [headerHeight]="50 " [footerHeight]="0 " [rowHeight]="43
     " [scrollbarV]="false " [scrollbarH]="true " [rows]="listhistory " [limit]="4 ">
-        <ngx-datatable-column [width]="90 " [minWidth]="90 " prop="StartDatePlan ">
-            <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'Date' | translate}}</div>
-            </template>
-            <template ngx-datatable-cell-template let-row="row " let-value="value ">
-                <div style="text-align: center; ">
-                    {{row['Date']}}
-                </div>
-            </template>
-        </ngx-datatable-column>
         <ngx-datatable-column [width]="205 " [minWidth]="205 ">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
@@ -37,18 +27,28 @@
                 </div>
             </template>
         </ngx-datatable-column>
+        <ngx-datatable-column [width]="90 " [minWidth]="90 " prop="StartDatePlan ">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Date' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row " let-value="value ">
+                <div style="text-align: center; ">
+                    {{row['Date']}}
+                </div>
+            </template>
+        </ngx-datatable-column>
         <ngx-datatable-column [width]="115 " [minWidth]="115 ">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">{{'Status' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
                 <div fxLayout="row " fxLayoutAlign="center center ">
-                    <md-icon *ngIf="row[ 'Status']==1 " style="color:green; " [md-tooltip]=" 'Approved'|translate
+                    <md-icon class="hand" *ngIf="row[ 'Status']==1 " style="color:green; " [md-tooltip]=" 'Approved'|translate
     " [tooltip-position]="position ">done</md-icon>
-                    <md-icon *ngIf="row[ 'Status']==0 " style="color:darkorange; " [md-tooltip]=" 'Approved'|translate
+                    <md-icon class="hand" *ngIf="row[ 'Status']==0 " style="color:darkorange; " [md-tooltip]=" 'Waiting'|translate
     " [tooltip-position]="position ">rotate_right</md-icon>
-                    <md-icon *ngIf="row[ 'Status']==-1" style="color:green; " [md-tooltip]="
-    'Approved'|translate " [tooltip-position]="position ">done</md-icon>
+                    <md-icon class="hand" *ngIf="row[ 'Status']==-1" style="color:red; " [md-tooltip]="
+    'Rejected'|translate " [tooltip-position]="position ">close</md-icon>
                 </div>
             </template>
         </ngx-datatable-column>

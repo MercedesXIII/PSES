@@ -10,7 +10,7 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { JazzDialog } from './material/dialog/dialog.component';
-import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, NormalDialog, DialogComponent, Loading, TopAddEva, AddEmp, EvaFlow } from './shared/dialog/dialog.component';
+import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, NormalDialog, DialogComponent, Loading, TopAddEva, AddEmp, EvaFlow, ChangeFlow } from './shared/dialog/dialog.component';
 import { PopoverModule } from "ngx-popover";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
@@ -44,7 +44,8 @@ export function createTranslateLoader(http: Http) {
     Loading,
     TopAddEva,
     AddEmp,
-    EvaFlow
+    EvaFlow,
+    ChangeFlow
   ],
   imports: [
     BrowserModule,
@@ -66,7 +67,7 @@ export function createTranslateLoader(http: Http) {
     NgxDatatableModule
   ],
   providers: [AuthGuard],
-  entryComponents: [JazzDialog, DialogComponent, ConfirmDialog, NormalDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading, TopAddEva, AddEmp, EvaFlow],
+  entryComponents: [JazzDialog, DialogComponent, ConfirmDialog, NormalDialog, InsertDialog, InsertDialog2, InsertDialog3, Loading, TopAddEva, AddEmp, EvaFlow, ChangeFlow],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

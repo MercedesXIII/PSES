@@ -68,8 +68,9 @@
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: center; ">
-                    <button md-icon-button style="color:darkorange;" [md-tooltip]="wait|translate" [tooltip-position]="position">
-                        <md-icon>rotate_right</md-icon>
+                    <button md-icon-button md-button-sm style="color:darkorange;" [md-tooltip]="wait|translate" [tooltip-position]="position"
+                        (click)="Openflow(row['EvaID'])">
+                                <md-icon>rotate_right</md-icon>
                     </button>
                     <!--<button *ngIf="row.ST == 1" md-icon-button md-button-sm style="color: green" [md-tooltip]="st" [tooltip-position]="position">
                         <md-icon>radio_button_checked</md-icon>
@@ -128,7 +129,8 @@
                             <span><b>{{'Status' | translate}}</b></span>
                         </div>
                         <div>
-                            <button md-icon-button md-button-sm style="color:darkorange;" [md-tooltip]="wait|translate" [tooltip-position]="position">
+                            <button md-icon-button md-button-sm style="color:darkorange;" [md-tooltip]="wait|translate" [tooltip-position]="position"
+                                (click)="Openflow(row['EvaID'])">
                                 <md-icon>rotate_right</md-icon>
                             </button>
                         </div>

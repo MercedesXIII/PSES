@@ -552,8 +552,13 @@ export class EvaFlow {
 		this.EvaID = EvaID;
 		this.http.get(GlobalServiceRef.URLService + "/Eva/Approveflow/" + EvaID).subscribe(res => {
 			this.listhistory = res.json();
+			this.GM = this.listhistory[2]['EmployeeNo']
 			this.http.get(GlobalServiceRef.URLService + "/Eva/GroupManager").subscribe(res => {
-				this.gmlist = res.json();
+				for (let data of res.json()) {
+					if (data['EmployeeNo'] != this.GM) {
+						this.gmlist.push(data)
+					}
+				}
 			});
 			if (this.translate.currentLang == "th") {
 				this.Lang = 'TH'
@@ -572,69 +577,19 @@ export class EvaFlow {
 		});
 	}
 	modeEdit() {
-		console.log("Test")
 		this.Edit = 1;
 	}
 	changeGM() {
-		console.log(this.GM + " " + this.EvaID)
 		let headers = new Headers({ 'Content-Type': 'application/json' });
+		console.log(this.GM)
 		let body: string = JSON.stringify({ EmployeeNo: this.GM, EvaID: this.EvaID });
 		this.http.put(GlobalServiceRef.URLService + "/Eva/UpdateGM", body, {
 			headers: headers
-		}).subscribe(() => { console.log("Complete") });
-	}
-}
-
-@Component({
-	selector: 'changeflow-dialog',
-	templateUrl: './changeflow-dialog.html',
-	styles: [`
-    /deep/ .md-dialog-container
-	{
-		background:none;
-		box-shadow:none;
-	}
-	.hand
-	{
-		cursor: pointer;
-	}
-  `]
-
-})
-export class ChangeFlow {
-	public LoginResultJson: Object;
-
-	//ToolTlip
-	position: TooltipPosition = 'below';
-	showPeriod: boolean = false;
-	listhistory = [];
-	progress = [];
-	Lang;
-	Edit;
-
-	@Input() PeriodId: string;
-	@Output() outEvaId = new EventEmitter();
-	constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public dialogRef: MdDialogRef<AddEmp>, private fb: FormBuilder) { }
-
-	ngOnInit() {
-	}
-	evaluationFlow(EvaID, number) {
-		this.http.get(GlobalServiceRef.URLService + "/Eva/Approveflow/" + EvaID).subscribe(res => {
-			this.listhistory = res.json();
-			if (this.translate.currentLang == "th") {
-				this.Lang = 'TH'
-			}
-			else {
-				this.Lang = 'EN'
-			}
-		});
-		this.translate.onLangChange.subscribe(() => {
-			if (this.translate.currentLang == "th") {
-				this.Lang = 'TH'
-			}
-			else {
-				this.Lang = 'EN'
-			}
+		}).subscribe(() => {
+			this.http.get(GlobalServiceRef.URLService + "/Eva/Approveflow/" + this.EvaID).subscribe(res => {
+				this.listhistory = res.json();
+				this.Edit = 0;
+			});
 		});
 	}
 }

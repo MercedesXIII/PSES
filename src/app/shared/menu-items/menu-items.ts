@@ -58,43 +58,31 @@ const MENUITEMS = [
     type: 'link',
     icon: 'chrome_reader_mode'
   },
+];
 
-  // {
-  //   state: 'request',
-  //   name: 'Request',
-  //   type: 'link',
-  //   icon: 'https'
-  // },
-  // {
-  //   state: 'approval',
-  //   name: 'Approval',
-  //   type: 'link',
-  //   icon: 'assignment'
-  // },
-  // {
-  //   state: 'inprogress',
-  //   name: 'In Progress',
-  //   type: 'link',
-  //   icon: 'queue'
-  // },
-  // {
-  //   state: 'approved',
-  //   name: 'Approved',
-  //   type: 'link',
-  //   icon: 'assignment_turned_in'
-  // },
-  // {
-  //   state: 'rejected',
-  //   name: 'Rejected',
-  //   type: 'link',
-  //   icon: 'assignment_returned'
-  // }
+const MENUITEMSHR = [
+  {
+    state: 'history',
+    name: 'History',
+    type: 'link',
+    icon: 'history'
+  },
+  {
+    state: 'report',
+    name: 'Report',
+    type: 'link',
+    icon: 'chrome_reader_mode'
+  },
 ];
 
 @Injectable()
 export class MenuItems {
+  a = 1;
   getAll(): Menu[] {
-    return MENUITEMS;
+    if (this.a == 1)
+      return MENUITEMS;
+    else if (this.a == 2)
+      return MENUITEMSHR;
   }
 
   add(menu: Menu) {

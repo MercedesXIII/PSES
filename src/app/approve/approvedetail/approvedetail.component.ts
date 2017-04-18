@@ -146,13 +146,13 @@ export class ApprovedetailComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if (result === "ok") {
                 let headers = new Headers({ 'Content-Type': 'application/json' });
-                let body: string = JSON.stringify({ EmpID: this.LoginResultJson['EmployeeID'], EvaID: this.EvaId, Status: status });
+                //let body: string = JSON.stringify({ EmpID: this.LoginResultJson['EmployeeID'], EvaID: this.EvaId, Status: status });
                 //programmer
                 //let body: string = JSON.stringify({ EmpID: 490428, EvaID: this.EvaId, Status: status });
                 //bas
                 // let body: string = JSON.stringify({ EmpID: 890148, EvaID: this.EvaId, Status: status });
-                //let body: string = JSON.stringify({ EmpID: 430045, EvaID: this.EvaId, Status: status });
-                //let body : string = JSON.stringify({EmpID:460143,EvaID:this.EvaId,Status:status});
+                //let body: string = JSON.stringify({ EmpID: 430051, EvaID: this.EvaId, Status: status });
+                let body: string = JSON.stringify({ EmpID: 460143, EvaID: this.EvaId, Status: status });
                 this.http.put(GlobalServiceRef.URLService + "/Eva/ApproveStatus", body, {
                     headers: headers
                 }).subscribe(() => {

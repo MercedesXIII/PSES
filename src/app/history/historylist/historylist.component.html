@@ -85,9 +85,6 @@
             </template>-->
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="text-align: left; ">
-                    <button md-icon-button md-button-sm [md-tooltip]="'ChangeFlow' | translate" [tooltip-position]="position" (click)="changeflow()">
-                        <md-icon>border_color</md-icon>
-                    </button>
                     <button md-icon-button md-button-sm [md-tooltip]="detail|translate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
@@ -123,9 +120,6 @@
         <ngx-datatable-column [width]="50" [minWidth]="50">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="float: left; " fxLayout="column" fxLayoutAlign="end">
-                    <button md-icon-button md-button-sm [md-tooltip]="'ChangeFlow' | translate" [tooltip-position]="position" (click)="changeflow()">
-                        <md-icon>border_color</md-icon>
-                    </button>
                     <button md-icon-button md-button-sm [md-tooltip]="detail | translate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>

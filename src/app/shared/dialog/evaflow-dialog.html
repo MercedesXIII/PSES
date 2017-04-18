@@ -7,7 +7,7 @@
     </div>
     <ngx-datatable class="material " [columnMode]=" 'force' " [headerHeight]="50 " [footerHeight]="0 " [rowHeight]="43
     " [scrollbarV]="false " [scrollbarH]="true " [rows]="listhistory " [limit]="4 ">
-        <ngx-datatable-column [width]="205 " [minWidth]="205 ">
+        <ngx-datatable-column [width]="240" [minWidth]="240">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
@@ -17,18 +17,26 @@
                 </div>
                 <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && (row['Name'][Lang] == '' || Edit==1)" style="text-align: left; ">
                     <div>
-                        <md-select [(ngModel)]="GM" style="width: 190px;" (ngModelChange)=changeGM()>
+                        <md-select [(ngModel)]="GM" style="width: 190px;">
+                            <md-option [value]="row.EmployeeNo">
+                                {{row['Name'][Lang]}}
+                            </md-option>
                             <md-option *ngFor="let data of gmlist" [value]="data.EmployeeNo">
                                 {{data['Name'][Lang]}}
                             </md-option>
                         </md-select>
+                    </div>
+                    <div style="margin-top:5px; color:green">
+                        <button md-icon-button md-button-sm (click)="changeGM()">
+                            <md-icon>done</md-icon>
+                        </button>
                     </div>
                 </div>
                 <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && Edit==0" style="text-align: left; ">
                     <div>
                         {{row['Name'][Lang]}}
                     </div>
-                    <div>
+                    <div style="margin-top:-3px">
                         <button md-icon-button md-button-sm (click)="modeEdit()">
                             <md-icon>edit</md-icon>
                         </button>

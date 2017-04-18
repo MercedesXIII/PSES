@@ -37,16 +37,16 @@ export class ApprovelistComponent implements OnInit {
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
-            .subscribe(res => {
-                this.listapprove = res.json();
-                if (this.translate.currentLang == "th") {
-                    this.Lang = 'TH'
-                }
-                else {
-                    this.Lang = 'EN'
-                }
-            });
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
+        //     .subscribe(res => {
+        //         this.listapprove = res.json();
+        //         if (this.translate.currentLang == "th") {
+        //             this.Lang = 'TH'
+        //         }
+        //         else {
+        //             this.Lang = 'EN'
+        //         }
+        //     });
 
         //Programmer
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/490428")
@@ -71,7 +71,7 @@ export class ApprovelistComponent implements OnInit {
         //             this.Lang = 'EN'
         //         }
         //     });
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430051")
         //     .subscribe(res => {
         //         this.listapprove = res.json();
         //         if (this.translate.currentLang == "th") {
@@ -81,16 +81,16 @@ export class ApprovelistComponent implements OnInit {
         //             this.Lang = 'EN'
         //         }
         //     });
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
-        //     .subscribe(res => {
-        //         this.listapprove = res.json()
-        //         if (this.translate.currentLang == "th") {
-        //             this.Lang = 'TH'
-        //         }
-        //         else {
-        //             this.Lang = 'EN'
-        //         }
-        //     });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
+            .subscribe(res => {
+                this.listapprove = res.json()
+                if (this.translate.currentLang == "th") {
+                    this.Lang = 'TH'
+                }
+                else {
+                    this.Lang = 'EN'
+                }
+            });
         this.translate.onLangChange.subscribe(() => {
             if (this.translate.currentLang == "th") {
                 this.Lang = 'TH'

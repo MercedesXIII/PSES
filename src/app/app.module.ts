@@ -11,7 +11,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { JazzDialog } from './material/dialog/dialog.component';
 import { ConfirmDialog, InsertDialog, InsertDialog2, InsertDialog3, NormalDialog, DialogComponent, Loading, TopAddEva, AddEmp, EvaFlow, ChangeFlow } from './shared/dialog/dialog.component';
-import { PopoverModule } from "ngx-popover";
+//import { PopoverModule } from "ngx-popover";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AuthGuard } from '../_guards/auth.guard';
@@ -63,7 +63,7 @@ export function createTranslateLoader(http: Http) {
     ReactiveFormsModule,
     Ng2AutoCompleteModule,
     Ng2CompleterModule,
-    PopoverModule,
+    //PopoverModule,
     NgxDatatableModule
   ],
   providers: [AuthGuard],

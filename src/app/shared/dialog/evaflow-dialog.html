@@ -12,9 +12,29 @@
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
-                <div style="text-align: left; ">
-                    {{row['Name']}}
+                <div *ngIf="row['Role'] != 'Group Manager'" style="text-align: left; ">
+                    {{row['Name'][Lang]}}
                 </div>
+                <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && (row['Name'][Lang] == '' || Edit==1)" style="text-align: left; ">
+                    <div>
+                        <md-select [(ngModel)]="GM" style="width: 190px;" (ngModelChange)=changeGM()>
+                            <md-option *ngFor="let data of gmlist" [value]="data.EmployeeNo">
+                                {{data['Name'][Lang]}}
+                            </md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && Edit==0" style="text-align: left; ">
+                    <div>
+                        {{row['Name'][Lang]}}
+                    </div>
+                    <div>
+                        <button md-icon-button md-button-sm (click)="modeEdit()">
+                            <md-icon>edit</md-icon>
+                        </button>
+                    </div>
+                </div>
+
             </template>
         </ngx-datatable-column>
         <ngx-datatable-column [width]="194 " [minWidth]="194 ">
@@ -27,9 +47,9 @@
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [width]="90 " [minWidth]="90 " prop="StartDatePlan ">
+        <ngx-datatable-column [width]="120 " [minWidth]="120 " prop="StartDatePlan ">
             <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'Date' | translate}}</div>
+                <div style="text-align: center; font-weight: bold; ">{{'ApproveDate' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
                 <div style="text-align: center; ">

@@ -66,6 +66,7 @@
     "Waiting": "กำลังดำเนินการ",
     "Add Topic": "เพิ่มหัวข้อ",
     "Confirm": "ยืนยัน",
-    "Date": "วันที่",
+    "ApproveDate": "วันอนุมัติ",
+    "CreateDate": "วันสร้าง",
     "Report": "รายงาน"
 }

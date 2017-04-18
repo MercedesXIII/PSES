@@ -537,16 +537,24 @@ export class EvaFlow {
 	listhistory = [];
 	progress = [];
 	Lang;
-
+	Edit = 0;
+	gmlist = [];
+	GM;
+	EvaID;
 	@Input() PeriodId: string;
 	@Output() outEvaId = new EventEmitter();
 	constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public dialogRef: MdDialogRef<AddEmp>, private fb: FormBuilder) { }
 
 	ngOnInit() {
+		this.Edit = 0;
 	}
 	evaluationFlow(EvaID) {
+		this.EvaID = EvaID;
 		this.http.get(GlobalServiceRef.URLService + "/Eva/Approveflow/" + EvaID).subscribe(res => {
 			this.listhistory = res.json();
+			this.http.get(GlobalServiceRef.URLService + "/Eva/GroupManager").subscribe(res => {
+				this.gmlist = res.json();
+			});
 			if (this.translate.currentLang == "th") {
 				this.Lang = 'TH'
 			}
@@ -562,6 +570,18 @@ export class EvaFlow {
 				this.Lang = 'EN'
 			}
 		});
+	}
+	modeEdit() {
+		console.log("Test")
+		this.Edit = 1;
+	}
+	changeGM() {
+		console.log(this.GM + " " + this.EvaID)
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let body: string = JSON.stringify({ EmployeeNo: this.GM, EvaID: this.EvaID });
+		this.http.put(GlobalServiceRef.URLService + "/Eva/UpdateGM", body, {
+			headers: headers
+		}).subscribe(() => { console.log("Complete") });
 	}
 }
 
@@ -590,6 +610,7 @@ export class ChangeFlow {
 	listhistory = [];
 	progress = [];
 	Lang;
+	Edit;
 
 	@Input() PeriodId: string;
 	@Output() outEvaId = new EventEmitter();
@@ -597,7 +618,7 @@ export class ChangeFlow {
 
 	ngOnInit() {
 	}
-	evaluationFlow(EvaID) {
+	evaluationFlow(EvaID, number) {
 		this.http.get(GlobalServiceRef.URLService + "/Eva/Approveflow/" + EvaID).subscribe(res => {
 			this.listhistory = res.json();
 			if (this.translate.currentLang == "th") {

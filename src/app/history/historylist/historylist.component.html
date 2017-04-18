@@ -12,16 +12,6 @@
                 </div>
             </template>
         </ngx-datatable-column>-->
-        <ngx-datatable-column [width]="120" [minWidth]="120" prop="StartDatePlan">
-            <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'Date' | translate}}</div>
-            </template>
-            <template ngx-datatable-cell-template let-row="row" let-value="value">
-                <div style="text-align: center; ">
-                    01/Jan/06
-                </div>
-            </template>
-        </ngx-datatable-column>
         <ngx-datatable-column [width]="205" [minWidth]="205">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
@@ -49,6 +39,16 @@
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
                 <div style="text-align: left; ">
                     {{value}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="120" [minWidth]="120" prop="StartDatePlan">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'CreateDate' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    {{row['Date']}}
                 </div>
             </template>
         </ngx-datatable-column>

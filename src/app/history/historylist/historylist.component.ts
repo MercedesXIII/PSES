@@ -91,7 +91,7 @@ export class HistorylistComponent implements OnInit {
             }
         }
     }
-    Openflow(EvaID) {
+    Openflow(EvaID, number) {
         let dialogRef = this.dialog.open(EvaFlow);
         dialogRef.componentInstance.evaluationFlow(EvaID);
         dialogRef.afterClosed().subscribe(res => {

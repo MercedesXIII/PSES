@@ -71,16 +71,16 @@ export class ApprovelistComponent implements OnInit {
         //             this.Lang = 'EN'
         //         }
         //     });
-        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
-            .subscribe(res => {
-                this.listapprove = res.json();
-                if (this.translate.currentLang == "th") {
-                    this.Lang = 'TH'
-                }
-                else {
-                    this.Lang = 'EN'
-                }
-            });
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/430045")
+        //     .subscribe(res => {
+        //         this.listapprove = res.json();
+        //         if (this.translate.currentLang == "th") {
+        //             this.Lang = 'TH'
+        //         }
+        //         else {
+        //             this.Lang = 'EN'
+        //         }
+        //     });
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
         //     .subscribe(res => {
         //         this.listapprove = res.json()

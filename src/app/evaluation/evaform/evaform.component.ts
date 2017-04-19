@@ -207,8 +207,7 @@ export class EvaformComponent implements OnInit {
 						console.log(res[0] + " " + res[1] + " " + res[2])
 						let TextThai = res[0];
 						let TextEng = res[1];
-						let TextAlias = res[2];
-						this.insertHeader1(HeadId, PositionNo, TextThai, TextEng, TextAlias);
+						this.insertHeader1(HeadId, PositionNo, TextThai, TextEng);
 					}
 				}
 				catch (ee)
@@ -236,7 +235,8 @@ export class EvaformComponent implements OnInit {
 				try {
 					if (res != 'cancel') {
 						let TextThai = res[0];
-						this.insertHeader3(i, HeadId, PositionNo, TextThai);
+						let TextEng = res[1];
+						this.insertHeader3(i, HeadId, PositionNo, TextThai, TextEng);
 					}
 				}
 				catch (ee)
@@ -272,14 +272,14 @@ export class EvaformComponent implements OnInit {
 		else
 			return "OUT"
 	}
-	insertHeader1(HeadId: number, PositionNo: number, TextThai: string, TextEng: string, TextAlias: string) {
+	insertHeader1(HeadId: number, PositionNo: number, TextThai: string, TextEng: string) {
 		//console.log(HeadId + " " + PositionNo + " " + this.EvaId + " " + TextThai + " " + TextEng + " " + TextAlias)
 		let dialogRef = this.dialog.open(Loading, this.config);
 		dialogRef.afterClosed().subscribe(() => {
 			console.log("Loading")
 		});
 		let headers = new Headers({ 'Content-Type': 'application/json' });
-		let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Eva_Id: this.EvaId, Text: TextThai, Text_Eng: TextEng, Alias: TextAlias });
+		let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Eva_Id: this.EvaId, Text: TextThai, Text_Eng: TextEng, Alias: "-" });
 		this.http.put(GlobalServiceRef.URLService + "/Header/Insert", body, {
 			headers: headers
 		}).subscribe((res: Response) => {
@@ -314,7 +314,7 @@ export class EvaformComponent implements OnInit {
 			}
 		});
 	}
-	insertHeader3(i: number, HeadId: number, PositionNo: number, TextThai: string) {
+	insertHeader3(i: number, HeadId: number, PositionNo: number, TextThai: string, TextEng) {
 		//this.currentScore = [];
 		//this.getScoreAndId = [];
 		let dialogRef = this.dialog.open(Loading, this.config);
@@ -322,7 +322,7 @@ export class EvaformComponent implements OnInit {
 			console.log("Loading")
 		});
 		let headers = new Headers({ 'Content-Type': 'application/json' });
-		let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Eva_Id: this.EvaId, Text: TextThai, Text_Eng: "-", Alias: "-" });
+		let body: string = JSON.stringify({ H_ID: HeadId, PositionNo: PositionNo, Eva_Id: this.EvaId, Text: TextThai, Text_Eng: TextEng, Alias: "-" });
 		this.http.put(GlobalServiceRef.URLService + "/Header/Insert", body, {
 			headers: headers
 		}).subscribe((res: Response) => {

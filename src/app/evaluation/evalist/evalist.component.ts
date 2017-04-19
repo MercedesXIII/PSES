@@ -49,6 +49,7 @@ export class EvalistComponent implements OnInit {
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
+        console.log(this.LoginResultJson['positionNo'])
         this.http.get(GlobalServiceRef.URLService + "/Eva/Period").subscribe(res => {
             this.period = res.json();
             // this.Duration[0] = 'all'

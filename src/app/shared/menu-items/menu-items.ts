@@ -60,6 +60,33 @@ const MENUITEMS = [
   },
 ];
 
+const MENUITEMSPM = [
+  {
+    state: 'evaluation',
+    name: 'Evaluation',
+    type: 'link',
+    icon: 'accessibility'
+  },
+  {
+    state: 'history',
+    name: 'History',
+    type: 'link',
+    icon: 'history'
+  },
+  {
+    state: 'approve',
+    name: 'Approve',
+    type: 'link',
+    icon: 'visibility'
+  },
+  {
+    state: 'report',
+    name: 'Report',
+    type: 'link',
+    icon: 'chrome_reader_mode'
+  },
+];
+
 const MENUITEMSHR = [
   {
     state: 'history',
@@ -77,12 +104,15 @@ const MENUITEMSHR = [
 
 @Injectable()
 export class MenuItems {
-  a = 1;
+  LoginResultJson
   getAll(): Menu[] {
-    if (this.a == 1)
-      return MENUITEMS;
-    else if (this.a == 2)
+    this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
+    if (this.LoginResultJson['positionNo'] == 60)
+      return MENUITEMSPM;
+    else if (this.LoginResultJson['positionNo'] == 23)
       return MENUITEMSHR;
+    else
+      return MENUITEMS;
   }
 
   add(menu: Menu) {

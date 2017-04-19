@@ -83,7 +83,7 @@ export class EvaformComponent implements OnInit {
 								this.Comment[data] = this.header[data].Comment;
 								this.countHeader++;
 								this.passFinalTotalScore[data] = this.header[data].point;
-								this.finalTotalScore[data] = this.calScore(this.header[data].point)
+								this.finalTotalScore[data] = this.calScoreFull(this.header[data].point)
 							}
 							else if (this.header[data].H_Level == 2) {
 								//console.log(this.header[data].Comment + " " + this.EvaId + " " + this.currentPosition)
@@ -131,7 +131,7 @@ export class EvaformComponent implements OnInit {
 						this.Comment[data] = this.header[data].Comment;
 						this.countHeader++;
 						this.passFinalTotalScore[data] = this.header[data].point;
-						this.finalTotalScore[data] = this.calScore(this.header[data].point)
+						this.finalTotalScore[data] = this.calScoreFull(this.header[data].point)
 					}
 					else if (this.header[data].H_Level == 2) {
 
@@ -163,7 +163,7 @@ export class EvaformComponent implements OnInit {
 						this.Comment[data] = this.header[data].Comment;
 						this.countHeader++;
 						this.passFinalTotalScore[data] = this.header[data].point;
-						this.finalTotalScore[data] = this.calScore(this.header[data].point)
+						this.finalTotalScore[data] = this.calScoreFull(this.header[data].point)
 					}
 					else if (this.header[data].H_Level == 2) {
 						this.Comment[data] = this.header[data].Comment;
@@ -243,6 +243,20 @@ export class EvaformComponent implements OnInit {
 				{ }
 			});
 		}
+	}
+	calScoreFull(score: number) {
+		if (score < 1)
+			return "Not Available"
+		else if (score < 3)
+			return "Unacceptable"
+		else if (score < 5)
+			return "Need Improve"
+		else if (score < 7)
+			return "Standard"
+		else if (score < 9)
+			return "Above Standard"
+		else
+			return "Outstanding"
 	}
 	calScore(score: number) {
 		if (score < 1)

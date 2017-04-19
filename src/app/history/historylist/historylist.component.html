@@ -64,7 +64,7 @@
                         <md-progress-bar style="width: 88px; height:30px; margin-top: 20%; border-radius: 3px" *ngIf="row.ApproveState == 1" mode="determinate"
                             [value]="progress[row.$$index]" color="primary" class="mb-1"></md-progress-bar>
                     </div>-->
-                    <button *ngIf="row.ApproveState == 0" md-icon-button md-button-sm style="color:green;" [md-tooltip]="approve|translate" [tooltip-position]="position"
+                    <button *ngIf="row.ApproveState == 2" md-icon-button md-button-sm style="color:green;" [md-tooltip]="approve|translate" [tooltip-position]="position"
                         (click)="Openflow(row['EvaID'])">
                         <md-icon>done</md-icon>
                     </button>

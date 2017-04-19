@@ -48,18 +48,6 @@ export class ApprovelistComponent implements OnInit {
         //         }
         //     });
 
-        //Programmer
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/490428")
-        //     .subscribe(res => {
-        //         this.listapprove = res.json()
-        //         if (this.translate.currentLang == "th") {
-        //             this.Lang = 'TH'
-        //         }
-        //         else {
-        //             this.Lang = 'EN'
-        //         }
-        //     });
-
         //Bas//
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
         //     .subscribe(res => {
@@ -113,7 +101,7 @@ export class ApprovelistComponent implements OnInit {
     }
     Openflow(EvaID) {
         let dialogRef = this.dialog.open(EvaFlow);
-        dialogRef.componentInstance.evaluationFlow(EvaID);
+        dialogRef.componentInstance.evaluationFlow(EvaID, 2);
         dialogRef.afterClosed().subscribe(res => {
             console.log("OK")
         });

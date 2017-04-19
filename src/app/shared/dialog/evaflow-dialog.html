@@ -17,8 +17,9 @@
                 </div>
                 <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && (row['Name'][Lang] == '' || Edit==1)" style="text-align: left; ">
                     <div>
-                        <md-select [(ngModel)]="GM" style="width: 190px;">
-                            <md-option [value]="row.EmployeeNo">
+                        <md-select placeholder="{{'Select Group Manager'|translate}}" [(ngModel)]="GM" style="width: 190px;" [formControl]="form.controls['GroupManager']"
+                            #GroupManager>
+                            <md-option *ngIf="row['Name'][Lang] != ''" [value]="row.EmployeeNo">
                                 {{row['Name'][Lang]}}
                             </md-option>
                             <md-option *ngFor="let data of gmlist" [value]="data.EmployeeNo">
@@ -26,13 +27,18 @@
                             </md-option>
                         </md-select>
                     </div>
-                    <div style="margin-top:5px; color:green">
-                        <button md-icon-button md-button-sm (click)="changeGM()">
+                    <div>
+                        <button md-icon-button md-button-sm (click)="changeGM()" style="margin-top:5px; color:green" [disabled]="!form.valid">
                             <md-icon>done</md-icon>
                         </button>
                     </div>
                 </div>
-                <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && Edit==0" style="text-align: left; ">
+                <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && (Edit==2 || row[ 'Status']==1)" style="text-align: left; ">
+                    <div>
+                        {{row['Name'][Lang]}}
+                    </div>
+                </div>
+                <div fxLayout="row" *ngIf="row[ 'Status']!=1 && row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && Edit==0" style="text-align: left; ">
                     <div>
                         {{row['Name'][Lang]}}
                     </div>

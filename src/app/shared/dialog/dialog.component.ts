@@ -33,7 +33,7 @@ export class DialogComponent implements OnInit {
 	<hr>
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions><button md-raised-button md-button-sm  style="color:white" color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
-	<button md-raised-button md-button-sm type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+	<button md-button md-button-sm type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 	</div></div>
 	<div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxShow="false" style="height: 200px; width: 300px; background-color:white; padding:30px; border-radius:5px" fxShow.xs>
 	<h5 md-dialog-title>{{TitleText| translate}}</h5>
@@ -41,7 +41,7 @@ export class DialogComponent implements OnInit {
 	<hr>
 	<div fxLayout="row" fxLayoutAlign="end end" >
 	<md-dialog-actions><button md-raised-button md-button-sm style="color:white" color="{{OkBtnColor}}" type="button" (click)="dialogRef.close('ok')">{{OkBtnText | translate}}</button>
-	<button md-raised-button md-button-sm type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
+	<button md-button md-button-sm type="button" (click)="dialogRef.close('cancel')">{{CancelBtnText | translate}}</button></md-dialog-actions>
 	</div></div>`,
 	styles: [`
     /deep/ .md-dialog-container
@@ -543,12 +543,17 @@ export class EvaFlow {
 	EvaID;
 	@Input() PeriodId: string;
 	@Output() outEvaId = new EventEmitter();
-	constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public dialogRef: MdDialogRef<AddEmp>, private fb: FormBuilder) { }
+	public form: FormGroup;
+	constructor(public translate: TranslateService, private router: Router, public http: Http, public ngzone: NgZone, public dialog: MdDialog, public dialogRef: MdDialogRef<AddEmp>, private fb: FormBuilder) {
+		this.form = this.fb.group({
+			GroupManager: [null, Validators.required]
+		})
+	}
 
 	ngOnInit() {
-		this.Edit = 0;
 	}
-	evaluationFlow(EvaID) {
+	evaluationFlow(EvaID, modeEdit) {
+		this.Edit = modeEdit;
 		this.EvaID = EvaID;
 		this.http.get(GlobalServiceRef.URLService + "/Eva/Approveflow/" + EvaID).subscribe(res => {
 			this.listhistory = res.json();

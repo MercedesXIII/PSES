@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MdSnackBar, MdInputDirective, MdSnackBarConfig, TooltipPosition, MdSelect, MdInput, MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
 import { TranslateService } from 'ng2-translate';
 import 'rxjs/add/operator/startWith';
+import { CompleterCmp, CompleterData, CompleterService, CompleterItem, RemoteData } from "ng2-completer";
 
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
 
@@ -359,7 +360,7 @@ export class Loading {
 				<div class="mb-1">
 					<md-select class="ml-1" [formControl]="form.controls['Text']" placeholder="{{'Add Topic' | translate}}" style="width: 90%;" #Text>
 			            <md-option *ngFor="let data of header" [value]="data">
-			                {{ data['Text_Language'][Lang] }}
+			      	        {{ data['Text_Language'][Lang] }}
 			            </md-option>
 			        </md-select>
 				</div>

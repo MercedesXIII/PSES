@@ -17,13 +17,28 @@ export class ReportcriteriaComponent implements OnInit {
   period = [];
   constructor(public translate: TranslateService, private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ApplicationRef, public snackBar: MdSnackBar) { }
   flag: number = 0;
+  @Output() outPeriodId = new EventEmitter();
+  @Output() outGroup = new EventEmitter();
+  @Output() outSubgroup = new EventEmitter();
+  Period;
+  Group;
+  Subgroup;
   ngOnInit() {
     this.http.get(GlobalServiceRef.URLService + "/Eva/Period").subscribe(res => {
       this.period = res.json();
+      this.Period = 'all';
+      this.Group = 'all';
+      this.Subgroup = 'all';
     });
   }
   getCriteria(param: number) {
     this.flag = param;
+  }
+  PassCriteria() {
+    this.outPeriodId.emit(this.Period);
+    this.outGroup.emit(this.Group);
+    this.outSubgroup.emit(this.Subgroup);
+    console.log(this.Period + " " + this.Group + " " + this.Subgroup)
   }
 
 }

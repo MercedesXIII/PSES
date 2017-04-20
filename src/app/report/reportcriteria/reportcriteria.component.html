@@ -66,12 +66,12 @@
   <!--half-->
   <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100">
     <md-card>
-      <md-card-title style="font-size : 18px ">{{'Report Filter' | translate}}</md-card-title>
+      <md-card-title style="font-size : 18px ">{{'Report Criteria' | translate}}</md-card-title>
       <md-card-content *ngIf="flag == 1">
         <div fxLayout="column" fxLayoutAlign="start start" fxLayoutWrap="wrap">
           <div fxFlex="100">
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
-              <md-select class="ml-1" placeholder="{{'Select Period' | translate}}" [(ngModel)]="currentPeriod" style="width: 170px;">
+              <md-select class="ml-1" placeholder="{{'Select Period' | translate}}" style="width: 170px;" [(ngModel)]="Period">
                 <md-option [value]="'all'">
                   {{'All' | translate }}
                 </md-option>
@@ -81,7 +81,7 @@
               </md-select>
             </div>
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
-              <md-select class="ml-1" placeholder="{{'Select Period' | translate}}" [(ngModel)]="currentPeriod" style="width: 170px;">
+              <md-select class="ml-1" placeholder="{{'Group' | translate}}" style="width: 170px;" [(ngModel)]="Group">
                 <md-option [value]="'all'">
                   {{'All' | translate }}
                 </md-option>
@@ -91,7 +91,7 @@
               </md-select>
             </div>
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
-              <md-select class="ml-1" placeholder="{{'Select Period' | translate}}" [(ngModel)]="currentPeriod" style="width: 170px;">
+              <md-select class="ml-1" placeholder="{{'Sub Group' | translate}}" style="width: 170px;" [(ngModel)]="Subgroup">
                 <md-option [value]="'all'">
                   {{'All' | translate }}
                 </md-option>
@@ -104,7 +104,7 @@
         </div>
         <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="space-between center" class="mb-1 ml-1">
           <div fxLayoutWrap="wrap" fxLayout="row">
-            <button md-raised-button md-button-sm color="primary">Preview</button>
+            <button md-raised-button md-button-sm color="primary" (click)="PassCriteria()">Preview</button>
           </div>
           <div fxLayoutWrap="wrap" fxLayout="row">
             <button md-raised-button md-button-sm color="green">Print</button>

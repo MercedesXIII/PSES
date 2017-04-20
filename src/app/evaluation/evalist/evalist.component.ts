@@ -9,7 +9,7 @@ import { TranslateService } from 'ng2-translate';
 import 'rxjs/add/operator/startWith';
 
 import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
-import { ConfirmDialog } from '../../shared/dialog/dialog.component';
+import { ConfirmDialog, EvaFlow } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-evalist',
@@ -153,6 +153,13 @@ export class EvalistComponent implements OnInit {
                 value["EvaStatus"] = 1
         })
 
+    }
+    Openflow(EvaID) {
+        let dialogRef = this.dialog.open(EvaFlow);
+        dialogRef.componentInstance.evaluationFlow(EvaID, 0);
+        dialogRef.afterClosed().subscribe(res => {
+            console.log("OK")
+        });
     }
 
 }

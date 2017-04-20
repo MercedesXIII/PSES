@@ -81,22 +81,22 @@
               </md-select>
             </div>
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
-              <md-select class="ml-1" placeholder="{{'Group' | translate}}" style="width: 170px;" [(ngModel)]="Group">
-                <md-option [value]="'all'">
+              <md-select class="ml-1" placeholder="{{'Group' | translate}}" style="width: 170px;" [(ngModel)]="Group" (ngModelChange)="getSubgroup()">
+                <md-option [value]="'0'">
                   {{'All' | translate }}
                 </md-option>
-                <md-option *ngFor="let data of period" [value]="data.Period_Id">
-                  {{ data.StartDate }}-{{data.FinishDate}}
+                <md-option *ngFor="let data of group" [value]="data">
+                  {{data}}
                 </md-option>
               </md-select>
             </div>
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
               <md-select class="ml-1" placeholder="{{'Sub Group' | translate}}" style="width: 170px;" [(ngModel)]="Subgroup">
-                <md-option [value]="'all'">
+                <md-option [value]="'0'">
                   {{'All' | translate }}
                 </md-option>
-                <md-option *ngFor="let data of period" [value]="data.Period_Id">
-                  {{ data.StartDate }}-{{data.FinishDate}}
+                <md-option *ngFor="let data of subgroup" [value]="data">
+                  {{data}}
                 </md-option>
               </md-select>
             </div>
@@ -107,7 +107,7 @@
             <button md-raised-button md-button-sm color="primary" (click)="PassCriteria()">Preview</button>
           </div>
           <div fxLayoutWrap="wrap" fxLayout="row">
-            <button md-raised-button md-button-sm color="green">Print</button>
+            <button md-raised-button md-button-sm color="green" (click)="Test()">Print</button>
           </div>
         </div>
       </md-card-content>

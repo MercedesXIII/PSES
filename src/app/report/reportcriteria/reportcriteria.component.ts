@@ -15,6 +15,8 @@ import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
 export class ReportcriteriaComponent implements OnInit {
 
   period = [];
+  group = [];
+  subgroup = [];
   constructor(public translate: TranslateService, private router: Router, public http: Http, private fb: FormBuilder, public dialog: MdDialog, public ref: ApplicationRef, public snackBar: MdSnackBar) { }
   flag: number = 0;
   @Output() outPeriodId = new EventEmitter();
@@ -26,9 +28,18 @@ export class ReportcriteriaComponent implements OnInit {
   ngOnInit() {
     this.http.get(GlobalServiceRef.URLService + "/Eva/Period").subscribe(res => {
       this.period = res.json();
-      this.Period = 'all';
-      this.Group = 'all';
-      this.Subgroup = 'all';
+      this.http.get(GlobalServiceRef.URLService + "/Report/Group/nonsub").subscribe(res => {
+        this.group = res.json();
+        this.Period = 'all';
+        this.Group = '0';
+        this.Subgroup = '0';
+      });
+    });
+  }
+  getSubgroup() {
+    this.subgroup = [];
+    this.http.get(GlobalServiceRef.URLService + "/Report/Group/" + this.Group).subscribe(res => {
+      this.subgroup = res.json();
     });
   }
   getCriteria(param: number) {
@@ -39,6 +50,9 @@ export class ReportcriteriaComponent implements OnInit {
     this.outGroup.emit(this.Group);
     this.outSubgroup.emit(this.Subgroup);
     console.log(this.Period + " " + this.Group + " " + this.Subgroup)
+  }
+  Test() {
+    window.open(GlobalServiceRef.URLService + "/report/Test")
   }
 
 }

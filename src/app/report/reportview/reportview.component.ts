@@ -13,14 +13,15 @@ import { GlobalServiceRef } from '../../shared/GlobalServiceRef'
   styleUrls: ['./reportview.component.scss']
 })
 export class ReportviewComponent implements OnInit {
-  ais = [];
-  constructor() {
-    this.ais = [1, 2, 3, 4, 5]
+  data = [];
+  constructor(public translate: TranslateService, private router: Router, public http: Http) {
   }
   @Input() PeriodId: number;
   @Input() Group: number;
   @Input() Subgroup: number;
   ngOnInit() {
+    this.http.get(GlobalServiceRef.URLService + "/Report/Report1/" + this.Group + "/" + this.Subgroup + "/" + this.PeriodId).subscribe(res => {
+      this.data = res.json();
+    });
   }
-
 }

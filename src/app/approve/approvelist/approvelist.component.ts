@@ -37,16 +37,16 @@ export class ApprovelistComponent implements OnInit {
     ngOnInit() {
         this.ref.detectChanges()
         this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
-        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
-        //     .subscribe(res => {
-        //         this.listapprove = res.json();
-        //         if (this.translate.currentLang == "th") {
-        //             this.Lang = 'TH'
-        //         }
-        //         else {
-        //             this.Lang = 'EN'
-        //         }
-        //     });
+        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/" + this.LoginResultJson['EmployeeID'])
+            .subscribe(res => {
+                this.listapprove = res.json();
+                if (this.translate.currentLang == "th") {
+                    this.Lang = 'TH'
+                }
+                else {
+                    this.Lang = 'EN'
+                }
+            });
 
         //Bas//
         // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/890148")
@@ -69,16 +69,16 @@ export class ApprovelistComponent implements OnInit {
         //             this.Lang = 'EN'
         //         }
         //     });
-        this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
-            .subscribe(res => {
-                this.listapprove = res.json()
-                if (this.translate.currentLang == "th") {
-                    this.Lang = 'TH'
-                }
-                else {
-                    this.Lang = 'EN'
-                }
-            });
+        // this.http.get(GlobalServiceRef.URLService + "/Eva/ApproveList/460143")
+        //     .subscribe(res => {
+        //         this.listapprove = res.json()
+        //         if (this.translate.currentLang == "th") {
+        //             this.Lang = 'TH'
+        //         }
+        //         else {
+        //             this.Lang = 'EN'
+        //         }
+        //     });
         this.translate.onLangChange.subscribe(() => {
             if (this.translate.currentLang == "th") {
                 this.Lang = 'TH'

@@ -52,16 +52,6 @@
                 </div>
             </template>
         </ngx-datatable-column> -->
-        <ngx-datatable-column [width]="115" [minWidth]="115" prop="StartDatePlan">
-            <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'CreateDate' | translate}}</div>
-            </template>
-            <template ngx-datatable-cell-template let-row="row" let-value="value">
-                <div style="text-align: center; ">
-                    {{row['Date']}}
-                </div>
-            </template>
-        </ngx-datatable-column>
         <ngx-datatable-column [width]="115" [minWidth]="115">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">{{'Status' | translate}}</div>
@@ -109,6 +99,16 @@
                     <button md-icon-button md-button-sm [md-tooltip]="detail|translate" [tooltip-position]="position" (click)="passEvaId($event, value, row)">
                         <md-icon>description</md-icon>
                     </button>
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="115" [minWidth]="115" prop="StartDatePlan">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'CreateDate' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    {{row['Date']}}
                 </div>
             </template>
         </ngx-datatable-column>

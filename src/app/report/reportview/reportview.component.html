@@ -1,26 +1,26 @@
 <div *ngFor="let head of data; let i = index" class="ml-1 mt-1">
-  <div>
+  <div *ngIf="head['EmployeeNO'] == null">
     <div fxLayout="row " fxLayoutAlign="start center" class="mb-1" fxFlex="100">
       <div fxFlex="5">
         <div fxLayoutWrap="wrap " fxLayout="row ">
-          <div style="font-size: 19px; ">{{i+1}}</div>
+          <md-icon>send</md-icon>
         </div>
       </div>
       <div fxFlex="65" fxLayout.gt-xs="row" fxLayout.gt-sm="column" style="margin-left: 15px;">
-        <div style="font-size: 19px; ">aaaaaaaaaaaaaaaa</div>
+        <div style="font-size: 19px; ">{{head['EvaluatorName']['TH']}}</div>
       </div>
     </div>
     <div *ngFor="let head2 of data; let j = index">
-      <div>
+      <div *ngIf="head2['EmployeeNO'] != null && head['EvaluatorNO'] != head2['EvaluatorNO']">
         <div fxFlex="100" fxLayout="row" fxLayoutAlign="start start" class="ml-2">
           <div fxFlex="5">
             <div fxLayoutWrap="wrap " fxLayout="row ">
-              {{(i+1)+"."+(j+1)}}
+              <md-icon>keyboard_arrow_right</md-icon>
             </div>
           </div>
           <div fxFlex="64 ">
             <div fxLayoutWrap="wrap " fxLayout="row " style="margin-left: 15px; ">
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              {{head2['EmployeeName']['TH']}}
             </div>
           </div>
         </div>

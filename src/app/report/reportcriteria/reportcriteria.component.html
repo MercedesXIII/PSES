@@ -1,62 +1,44 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutWrap="wrap">
   <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100">
     <div fxLayout="column" fxLayoutWrap="wrap">
-      <div fxFlex="100">
-        <md-card class="card-widget md-pink clickhere" (click)="getCriteria(1)">
+      <div fxFlex="100" *ngFor="let name of topicreport;let i = index">
+        <md-card *ngIf="i%5==0" class="card-widget md-pink clickhere" (click)="getCriteria(name['isCreate'])">
           <div md-card-widget>
             <div md-card-float-icon>
               <md-icon>local_offer</md-icon>
             </div>
             <div class="pl-0">
-              <h5 md-card-widget-title>List of Employee</h5>
+              <h5 md-card-widget-title>{{name['ReportName']}}</h5>
             </div>
           </div>
         </md-card>
-      </div>
-      <div fxFlex="100">
-        <md-card class="card-widget md-purple clickhere" (click)="getCriteria(0)">
+        <md-card *ngIf="i%5==1" class="card-widget md-red clickhere" (click)="getCriteria(name['isCreate'])">
           <div md-card-widget>
             <div md-card-float-icon>
               <md-icon>local_offer</md-icon>
             </div>
             <div class="pl-0">
-              <h5 md-card-widget-title>XXXXXXXXXXXXX</h5>
+              <h5 md-card-widget-title>{{name['ReportName']}}</h5>
             </div>
           </div>
         </md-card>
-      </div>
-      <div fxFlex="100">
-        <md-card class="card-widget md-red clickhere">
+        <md-card *ngIf="i%5==2" class="card-widget md-indigo clickhere" (click)="getCriteria(name['isCreate'])">
           <div md-card-widget>
             <div md-card-float-icon>
               <md-icon>local_offer</md-icon>
             </div>
             <div class="pl-0">
-              <h5 md-card-widget-title>XXXXXXXXXXXXX</h5>
+              <h5 md-card-widget-title>{{name['ReportName']}}</h5>
             </div>
           </div>
         </md-card>
-      </div>
-      <div fxFlex="100">
-        <md-card class="card-widget md-indigo clickhere">
+        <md-card *ngIf="i%5==3" class="card-widget md-purple clickhere" (click)="getCriteria(name['isCreate'])">
           <div md-card-widget>
             <div md-card-float-icon>
               <md-icon>local_offer</md-icon>
             </div>
             <div class="pl-0">
-              <h5 md-card-widget-title>XXXXXXXXXXXXX</h5>
-            </div>
-          </div>
-        </md-card>
-      </div>
-      <div fxFlex="100">
-        <md-card class="card-widget md-blue clickhere">
-          <div md-card-widget>
-            <div md-card-float-icon>
-              <md-icon>local_offer</md-icon>
-            </div>
-            <div class="pl-0">
-              <h5 md-card-widget-title>XXXXXXXXXXXXX</h5>
+              <h5 md-card-widget-title>{{name['ReportName']}}</h5>
             </div>
           </div>
         </md-card>
@@ -72,7 +54,7 @@
           <div fxFlex="100">
             <div fxLayoutWrap="wrap" fxLayout="row" fxLayoutAlign="start center" class="mb-2">
               <md-select class="ml-1" placeholder="{{'Select Period' | translate}}" style="width: 170px;" [(ngModel)]="Period">
-                <md-option [value]="'all'">
+                <md-option [value]="'0'">
                   {{'All' | translate }}
                 </md-option>
                 <md-option *ngFor="let data of period" [value]="data.Period_Id">
@@ -111,8 +93,8 @@
           </div>
         </div>
       </md-card-content>
-      <md-card-content *ngIf="flag == 0">
-        <h5>Not Create Construction</h5>
+      <md-card-content *ngIf="flag == null">
+        <h5>Not Create</h5>
       </md-card-content>
     </md-card>
   </div>

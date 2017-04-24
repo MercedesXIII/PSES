@@ -6,7 +6,7 @@
     </button>
     </div>
     <ngx-datatable class="material " [columnMode]=" 'force' " [headerHeight]="50 " [footerHeight]="0 " [rowHeight]="43
-    " [scrollbarV]="false " [scrollbarH]="true " [rows]="listhistory " [limit]="4 ">
+    " [scrollbarV]="false " [scrollbarH]="true " [rows]="listhistory" [limit]="4 ">
         <ngx-datatable-column [width]="240" [minWidth]="240">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
@@ -88,4 +88,53 @@
         </ngx-datatable-column>
     </ngx-datatable>
 </div>
+<!--<div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxShow="false" fxShow.xs style="width: 400px; background-color:white; padding:30px; border-radius:5px">
+    <ngx-datatable class='material' [columnMode]="'force'" [headerHeight]="0" [footerHeight]="70" [rowHeight]="'auto'" [scrollbarH]="true"
+        [limit]="4" [rows]='listhistory'>
+        <ngx-datatable-column [width]="225" [minWidth]="225">
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div fxLayout="column" fxLayoutAlign="start">
+                    <div *ngIf="row['Role'] != 'Group Manager'" style="text-align: left; ">
+                        {{row['Name'][Lang]}}
+                    </div>
+                    <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && (row['Name'][Lang] == '' || Edit==1)" style="text-align: left; ">
+                        <div>
+                            <md-select placeholder="{{'Select Group Manager'|translate}}" [(ngModel)]="GM" style="width: 190px;" [formControl]="form.controls['GroupManager']"
+                                #GroupManager>
+                                <md-option *ngIf="row['Name'][Lang] != ''" [value]="row.EmployeeNo">
+                                    {{row['Name'][Lang]}}
+                                </md-option>
+                                <md-option *ngFor="let data of gmlist" [value]="data.EmployeeNo">
+                                    {{data['Name'][Lang]}}
+                                </md-option>
+                            </md-select>
+                        </div>
+                        <div>
+                            <button md-icon-button md-button-sm (click)="changeGM()" style="margin-top:5px; color:green" [disabled]="!form.valid">
+                            <md-icon>done</md-icon>
+                        </button>
+                        </div>
+                    </div>
+                    <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && (Edit==2 || row[ 'Status']==1)" style="text-align: left; ">
+                        <div>
+                            {{row['Name'][Lang]}}
+                        </div>
+                    </div>
+                    <div fxLayout="row" *ngIf="row[ 'Status']!=1 && row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && Edit==0" style="text-align: left; ">
+                        <div>
+                            {{row['Name'][Lang]}}
+                        </div>
+                        <div style="margin-top:-3px">
+                            <button md-icon-button md-button-sm (click)="modeEdit()">
+                            <md-icon>edit</md-icon>
+                        </button>
+                        </div>
+                    </div>
+                    <span><b>{{'Role' | translate}}</b> {{row['Role']}}</span>
+                    <span><b>{{'ApproveDate' | translate}}</b> {{row['Date']}}</span>
+                </div>
+            </template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>-->
 <!-- Data Table #End-->

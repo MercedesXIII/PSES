@@ -19,54 +19,24 @@
 <!-- Period #End-->
 <!-- Data Table #Start-->
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxHide="false" fxHide.xs>
-    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
-        [scrollbarH]="true " [rows]="listeva" [limit]="10 ">
-        <ngx-datatable-column [width]="190" [minWidth]="190">
-            <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
-            </template>
-            <template ngx-datatable-cell-template let-row="row " let-value="value ">
-                <div style="text-align: left; ">
-                    {{row['name_language'][Lang]}}
-                </div>
-            </template>
-        </ngx-datatable-column>
-        <ngx-datatable-column [width]="110" [minWidth]="110" prop="ProjectCode">
-            <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'Project Code' | translate}}</div>
-            </template>
-            <template ngx-datatable-cell-template let-row="row" let-value="value">
-                <div style="text-align: center; ">
-                    {{value}}
-                </div>
-            </template>
-        </ngx-datatable-column>
-        <ngx-datatable-column [width]="190" [minWidth]="190" prop="Function">
-            <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
-            </template>
-            <template ngx-datatable-cell-template let-row="row " let-value="value ">
-                <div style="text-align: left; ">
-                    {{value | translate}}
-                </div>
-            </template>
-        </ngx-datatable-column>
-        <ngx-datatable-column [width]="120" [minWidth]="120" prop="StartDatePlan">
-            <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold; ">{{'CreateDate' | translate}}</div>
-            </template>
-            <template ngx-datatable-cell-template let-row="row" let-value="value">
-                <div style="text-align: center; ">
-                    {{row.Date}}
-                </div>
-            </template>
-        </ngx-datatable-column>
-        <ngx-datatable-column [width]="70" [minWidth]="70">
+    <ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
+        [scrollbarH]="true" [rows]="listeva" [limit]="10 ">
+        <!--<ngx-datatable-column>
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">{{'Status' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="row" fxLayoutAlign="center center">
+                    
+                </div>
+            </template>
+        </ngx-datatable-column>-->
+        <ngx-datatable-column>
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold ">{{'Action' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
                     <button *ngIf="row.ApproveStat == 2" md-icon-button md-button-sm style="color:green;" [md-tooltip]="approve|translate" [tooltip-position]="position"
                         (click)="Openflow(row['Eva_ID'])">
                         <md-icon>done</md-icon>
@@ -79,15 +49,6 @@
                         [tooltip-position]="position" (click)="Openflow(row['Eva_ID'])">
                         <md-icon>rotate_right</md-icon>
                     </button>
-                </div>
-            </template>
-        </ngx-datatable-column>
-        <ngx-datatable-column [width]="110" [minWidth]="110">
-            <template ngx-datatable-header-template>
-                <div style="text-align: center; font-weight: bold ">{{'Option' | translate}}</div>
-            </template>
-            <template ngx-datatable-cell-template let-row="row" let-value="value">
-                <div style="text-align: center; ">
                     <button *ngIf="row.EvaStatus==null" [disabled]="row.EvaStatus==null" md-icon-button md-button-sm [md-tooltip]="wait" [tooltip-position]="position">
                         <md-icon>radio_button_checked</md-icon>
                     </button>
@@ -110,6 +71,46 @@
                 </div>
             </template>
         </ngx-datatable-column>
+        <ngx-datatable-column>
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row " let-value="value ">
+                <div style="text-align: left; ">
+                    {{row['name_language'][Lang]}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="ProjectCode">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Project Code' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    {{value}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="Function">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Role' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row " let-value="value ">
+                <div style="text-align: left; ">
+                    {{value | translate}}
+                </div>
+            </template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="StartDatePlan">
+            <template ngx-datatable-header-template>
+                <div style="text-align: center; font-weight: bold; ">{{'Last Update' | translate}}</div>
+            </template>
+            <template ngx-datatable-cell-template let-row="row" let-value="value">
+                <div style="text-align: center; ">
+                    {{row.Date}}
+                </div>
+            </template>
+        </ngx-datatable-column>
     </ngx-datatable>
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxShow="false" fxShow.xs>
@@ -121,11 +122,50 @@
                     <span><b>{{'Name' | translate}}</b> {{listeva[row.$$index]['EmployeeFirstName']+" "+listeva[row.$$index]['EmployeeLastName']}}</span>
                     <span><b>{{'Project Code' | translate}}</b> {{listeva[row.$$index]['ProjectCode']}}</span>
                     <span><b>{{'Role' | translate}}</b> {{listeva[row.$$index]['Function']}}</span>
-                    <span><b>{{'Duration' | translate}}</b> {{listeva[row.$$index]['StartDatePlan']+"-"+listeva[row.$$index]['FinishDatePlan']}}</span>
+                    <span><b>{{'Last Update' | translate}}</b> {{listeva[row.$$index]['Date']}}</span>
+                    <div fxLayout="row" fxLayoutAlign="start stretch">
+                        <div>
+                            <span><b>{{'Action' | translate}}</b></span>
+                        </div>
+                        <div>
+                            <button md-icon-button md-button-sm [disabled]="row.EvaStatus==1" [md-tooltip]="evaluate|translate" [tooltip-position]="position"
+                                (click)="passEvaId($event, value, row)">
+                                <md-icon>rate_review</md-icon>
+                            </button>
+                            <button *ngIf="row.ApproveStat == 2" md-icon-button md-button-sm style="color:green;" [md-tooltip]="approve|translate" [tooltip-position]="position"
+                                (click)="Openflow(row['Eva_ID'])">
+                                <md-icon>done</md-icon>
+                            </button>
+                            <button *ngIf="row.ApproveStat == -1" md-icon-button md-button-sm style="color:red;" [md-tooltip]="reject|translate" [tooltip-position]="position"
+                                (click)="Openflow(row['Eva_ID'])">
+                                <md-icon>close</md-icon>
+                            </button>
+                            <button *ngIf="row.ApproveStat == 1" md-icon-button md-button-sm style="color:darkorange;" [md-tooltip]="wait|translate"
+                                [tooltip-position]="position" (click)="Openflow(row['Eva_ID'])">
+                                <md-icon>rotate_right</md-icon>
+                            </button>
+                            <button *ngIf="row.EvaStatus==null" [disabled]="row.EvaStatus==null" md-icon-button md-button-sm [md-tooltip]="wait" [tooltip-position]="position">
+                                <md-icon>radio_button_checked</md-icon>
+                            </button>
+                            <button *ngIf="row.EvaStatus==1" md-icon-button md-button-sm style="color: green" [md-tooltip]="finished|translate" [tooltip-position]="position"
+                                (click)="changeStatus
+($event, value, row)">
+                                <md-icon>radio_button_checked</md-icon>
+                            </button>
+                            <button *ngIf="row.EvaStatus==2" md-icon-button md-button-sm style="color: red" [md-tooltip]="unfinished|translate" [tooltip-position]="position"
+                                (click)="changeStatus($event, value, row)">
+                                <md-icon>radio_button_checked</md-icon>
+                            </button>
+                            <button md-icon-button md-button-sm (click)=" delete($event, value, row, currentPeriod) " [md-tooltip]="remove|translate"
+                                [tooltip-position]="position ">
+                                <md-icon>delete_forever</md-icon>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </template>
         </ngx-datatable-column>
-        <ngx-datatable-column [width]="50" [minWidth]="50">
+        <!--<ngx-datatable-column [width]="50" [minWidth]="50">
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div style="float: left; " fxLayout="column" fxLayoutAlign="end">
                     <button *ngIf="row.EvaStatus==null" [disabled]="row.EvaStatus==null" md-icon-button [md-tooltip]="wait" [tooltip-position]="position">
@@ -148,7 +188,7 @@
                     </button>
                 </div>
             </template>
-        </ngx-datatable-column>
+        </ngx-datatable-column>-->
     </ngx-datatable>
 </div>
 <!-- Data Table #End-->

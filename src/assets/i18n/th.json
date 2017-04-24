@@ -69,5 +69,7 @@
     "ApproveDate": "วันอนุมัติ",
     "CreateDate": "วันสร้าง",
     "Report": "รายงาน",
-    "Select Group Manager": "เลือกผู้จัดการกลุ่ม"
+    "Select Group Manager": "เลือกผู้จัดการกลุ่ม",
+    "Last Update": "อัพเดตล่าสุด",
+    "Action": "แอคชั่น"
 }

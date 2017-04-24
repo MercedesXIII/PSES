@@ -27,7 +27,10 @@ export class GetevalistComponent implements OnChanges {
     Name = [];
     ProjectCode = [];
     Role = [];
-    Lang
+    Lang;
+    period;
+    start;
+    end;
 
     config: MdDialogConfig = { disableClose: true };
     @Input() PeriodId: number;
@@ -61,7 +64,7 @@ export class GetevalistComponent implements OnChanges {
                     + "/" + this.PeriodId).subscribe(res => {
                         this.listeva = res.json();
                         for (let date in this.listeva) {
-                            console.log(this.listeva[date].PlanStartDate + " " + this.listeva[date].PlanFinishDate)
+                            // console.log(this.listeva[date].PlanStartDate + " " + this.listeva[date].PlanFinishDate)
                             this.startDate[date] = this.listeva[date].PlanStartDate;
                             this.finishDate[date] = this.listeva[date].PlanFinishDate;
                         }
@@ -72,6 +75,15 @@ export class GetevalistComponent implements OnChanges {
                             this.ProjectCode = this.emp['Project']['Project']
                             this.Role = this.emp['Role']['Role']
                             //console.log(JSON.stringify(this.Name))
+                            this.http.get(GlobalServiceRef.URLService + "/Eva/Period").subscribe(res => {
+                                for (let getperiod of res.json()) {
+                                    if (getperiod['Period_Id'] == this.PeriodId) {
+                                        this.period = getperiod['StartDate'] + "-" + getperiod['FinishDate']
+                                        this.start = getperiod['StartDate'];
+                                        this.end = getperiod['FinishDate'];
+                                    }
+                                }
+                            });
                         });
                     });
             }
@@ -126,7 +138,7 @@ export class GetevalistComponent implements OnChanges {
     }
     openDialogHead() {
         let dialogRef = this.dialog.open(AddEmp, this.config);
-        dialogRef.componentInstance.getValue(this.Name, this.ProjectCode, this.Role);
+        dialogRef.componentInstance.getValue(this.Name, this.ProjectCode, this.Role, this.PeriodId, this.start, this.end);
         dialogRef.afterClosed().subscribe(res => {
             console.log("OK")
         });

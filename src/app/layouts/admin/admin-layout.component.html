@@ -5,7 +5,8 @@
     </button>
     <img src="assets/images/csi.png" md-list-avatar style="width: 75px; height: 70%;" class="ml-1">
     <div class="branding">
-      <div class="ml-1">{{'Project Staff Evaluation System' | translate}}</div>
+      <div fxFlex.lg="100" fxHide="false" fxHide.xs>{{'Project Staff Evaluation System' | translate}}</div>
+      <div fxFlex.lg="100" fxShow="false" fxShow.xs>{{'PSES' | translate}}</div>
     </div>
     <div fxFlex>
     </div>
@@ -18,9 +19,9 @@
     <button appToggleFullscreen md-icon-button>
       <md-icon>fullscreen</md-icon>
     </button>
-    <button md-icon-button class="ml-xs overflow-visible">
+    <!--<button md-icon-button class="ml-xs overflow-visible">
       <md-icon>notifications</md-icon>
-    </button>
+    </button>-->
     <button [md-menu-trigger-for]="user" md-icon-button class="ml-xs">
       <md-icon>person</md-icon>
     </button>

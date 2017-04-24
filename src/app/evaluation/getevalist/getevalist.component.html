@@ -4,7 +4,8 @@
         <button md-icon-button (click)="backpage() ">
             <md-icon>arrow_back</md-icon>
         </button>
-        <button md-raised-button md-button-sm color="primary" type="submit" (click)=onSubmit()>{{'Submit' | translate}}</button>
+        <button class="mr-1" md-raised-button md-button-sm color="primary" type="submit" (click)=onSubmit()>{{'Submit' | translate}}</button>
+        <span><b>{{period}}</b></span>
     </div>
     <div>
         <button md-icon-button (click)="openDialogHead()">
@@ -113,11 +114,10 @@
             <template ngx-datatable-cell-template let-row="row" let-value="value">
                 <div fxLayout="column" fxLayoutAlign="start">
                     <span><b>{{'Name' | translate}}</b> {{listeva[row.$$index]['EmployeeFirstName']+" "+listeva[row.$$index]['EmployeeLastName']}}</span>
-                    <br>
                     <span><b>{{'Project Code' | translate}}</b> {{listeva[row.$$index]['ProjectCode']}}</span>
-                    <!-- <span><b>{{'Role' | translate}}</b> {{listeva[row.$$index]['Role']}}</span> -->
-                    <span><b>{{'StartDate' | translate}}</b> <md-input type="date" [(ngModel)]="startDate[row.$$index]" min="{{listeva[row.$$index]['PlanStartDate']}}" max="{{finishDate[row.$$index]}}"></md-input></span>
-                    <span><b>{{'FinishDate' | translate}}</b> <md-input type="date" [(ngModel)]="finishDate[row.$$index]" min="{{startDate[row.$$index]}}" max="{{listeva[row.$$index]['PlanFinishDate']}}"></md-input></span>
+                    <span><b>{{'Role' | translate}}</b> {{listeva[row.$$index]['Role']}}</span>
+                    <span style="margin-top: -18px;"><b>{{'StartDate' | translate}}</b> <md-input type="date" [(ngModel)]="startDate[row.$$index]" min="{{listeva[row.$$index]['PlanStartDate']}}" max="{{finishDate[row.$$index]}}"></md-input></span>
+                    <span style="margin-top: -25px;"><b>{{'FinishDate' | translate}}</b> <md-input type="date" [(ngModel)]="finishDate[row.$$index]" min="{{startDate[row.$$index]}}" max="{{listeva[row.$$index]['PlanFinishDate']}}"></md-input></span>
                 </div>
             </template>
         </ngx-datatable-column>

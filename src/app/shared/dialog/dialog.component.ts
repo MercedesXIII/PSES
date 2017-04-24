@@ -486,10 +486,17 @@ export class AddEmp {
 	emp = [];
 	Name = [];
 	ProjectCode = [];
+	Period = [];
 	Role = [];
 	Lang;
+	start;
+	end;
+	finishDate;
+	startDate;
 	public form: FormGroup;
+	public LoginResultJson: Object;
 	constructor(public http: Http, public dialogRef: MdDialogRef<AddEmp>, private translate: TranslateService, private fb: FormBuilder) {
+		this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
 		this.form = this.fb.group({
 			EmpName: [null, Validators.required],
 			EmpProjectCode: [null, Validators.required],
@@ -499,16 +506,31 @@ export class AddEmp {
 
 		})
 	}
-	getValue(Name, ProjectCode, Role) {
+	getValue(Name, ProjectCode, Role, Period, Start, End) {
 		this.Name = Name;
 		this.ProjectCode = ProjectCode;
 		this.Role = Role;
+		this.Period = Period;
+		this.start = Start;
+		this.end = End;
+		this.finishDate = End;
+		this.startDate = Start;
 	}
 	onSubmit(_Name: HTMLInputElement, _ProjectCode: HTMLInputElement, _Role: HTMLInputElement, _StartDate: HTMLInputElement, _FinishDate: HTMLInputElement) {
+
 		console.log(_Name.value + " " + _ProjectCode.value + " " + _Role.value + " " + _StartDate.value + " " + _FinishDate.value)
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let body: string = JSON.stringify({
+			EvaluatorNO: this.LoginResultJson['EmployeeID'],
+			EmployeeNO: _Name.value, Position: _Role.value, ProjectNO: _ProjectCode.value, PeriodID: this.Period
+			, StartDate: _StartDate.value, FinishDate: _FinishDate.value
+		});
+		this.http.put(GlobalServiceRef.URLService + "/Eva/InsertEva", body, {
+			headers: headers
+		}).subscribe((res: Response) => {
+			console.log("Complete")
+		});
 	}
-
-
 }
 
 @Component({

@@ -493,9 +493,10 @@ export class AddEmp {
 	end;
 	finishDate;
 	startDate;
+	config: MdDialogConfig = { disableClose: true };
 	public form: FormGroup;
 	public LoginResultJson: Object;
-	constructor(public http: Http, public dialogRef: MdDialogRef<AddEmp>, private translate: TranslateService, private fb: FormBuilder) {
+	constructor(public http: Http, public dialogRef: MdDialogRef<AddEmp>, private translate: TranslateService, private fb: FormBuilder, public dialog: MdDialog) {
 		this.LoginResultJson = JSON.parse(sessionStorage.getItem('currentUser'))
 		this.form = this.fb.group({
 			EmpName: [null, Validators.required],
@@ -517,7 +518,10 @@ export class AddEmp {
 		this.startDate = Start;
 	}
 	onSubmit(_Name: HTMLInputElement, _ProjectCode: HTMLInputElement, _Role: HTMLInputElement, _StartDate: HTMLInputElement, _FinishDate: HTMLInputElement) {
-
+		let gg = this.dialog.open(Loading, this.config);
+		gg.afterClosed().subscribe(() => {
+			console.log("Loading")
+		});
 		console.log(_Name.value + " " + _ProjectCode.value + " " + _Role.value + " " + _StartDate.value + " " + _FinishDate.value)
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let body: string = JSON.stringify({
@@ -529,6 +533,8 @@ export class AddEmp {
 			headers: headers
 		}).subscribe((res: Response) => {
 			console.log("Complete")
+			gg.close();
+			this.dialogRef.close();
 		});
 	}
 }

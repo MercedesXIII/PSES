@@ -140,7 +140,8 @@ export class GetevalistComponent implements OnChanges {
         let dialogRef = this.dialog.open(AddEmp, this.config);
         dialogRef.componentInstance.getValue(this.Name, this.ProjectCode, this.Role, this.PeriodId, this.start, this.end);
         dialogRef.afterClosed().subscribe(res => {
-            console.log("OK")
+            if (res !== "cancel")
+                this.back.emit(this.PeriodId);
         });
     }
 }

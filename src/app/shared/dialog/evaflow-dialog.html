@@ -12,10 +12,10 @@
                 <div style="text-align: center; font-weight: bold; ">{{'Name' | translate}}</div>
             </template>
             <template ngx-datatable-cell-template let-row="row " let-value="value ">
-                <div *ngIf="row['Role'] != 'Group Manager'" style="text-align: left; ">
+                <div *ngIf="row['Role'] != positionGM" style="text-align: left; ">
                     {{row['Name'][Lang]}}
                 </div>
-                <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && (row['Name'][Lang] == '' || Edit==1)" style="text-align: left; ">
+                <div fxLayout="row" *ngIf="row['Role'] == positionGM && ((row['Name'][Lang] == '' && Edit != 2) || Edit==1)" style="text-align: left; ">
                     <div>
                         <md-select placeholder="{{'Select Group Manager'|translate}}" [(ngModel)]="GM" style="width: 190px;" [formControl]="form.controls['GroupManager']"
                             #GroupManager>
@@ -33,12 +33,15 @@
                         </button>
                     </div>
                 </div>
-                <div fxLayout="row" *ngIf="row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && (Edit==2 || row[ 'Status']==1)" style="text-align: left; ">
-                    <div>
+                <div fxLayout="row" *ngIf="row['Role'] == positionGM && (Edit==2 || row['Status']==1)" style="text-align: left; ">
+                    <div *ngIf="row['Name'][Lang] != ''">
                         {{row['Name'][Lang]}}
                     </div>
+                    <div *ngIf="row['Name'][Lang] == ''" style="color:red">
+                        {{'No Group Manager' | translate}}
+                    </div>
                 </div>
-                <div fxLayout="row" *ngIf="row[ 'Status']!=1 && row['Role'] == 'Group Manager' && row['Name'][Lang] != '' && Edit==0" style="text-align: left; ">
+                <div fxLayout="row" *ngIf="row['Status']!=1 && row['Role'] == positionGM && row['Name'][Lang] != '' && Edit==0" style="text-align: left; ">
                     <div>
                         {{row['Name'][Lang]}}
                     </div>

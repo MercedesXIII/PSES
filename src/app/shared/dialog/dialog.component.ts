@@ -570,6 +570,7 @@ export class EvaFlow {
 	gmlist = [];
 	GM;
 	EvaID;
+	positionGM = '(3)Group Manager'
 	@Input() PeriodId: string;
 	@Output() outEvaId = new EventEmitter();
 	public form: FormGroup;

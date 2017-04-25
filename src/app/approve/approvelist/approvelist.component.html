@@ -2,7 +2,7 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex.lg="100" fxHide="false" fxHide.xs>
     <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50 " [footerHeight]="50 " [rowHeight]="43" [scrollbarV]="false "
         [scrollbarH]="true " [rows]="listapprove" [limit]="10 ">
-        <ngx-datatable-column [width]="50" [minWidth]="50">
+        <ngx-datatable-column [width]="100" [minWidth]="100">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold ">{{'Action' | translate}}</div>
             </template>
@@ -70,7 +70,7 @@
                 </div>
             </template>
         </ngx-datatable-column> -->
-        <ngx-datatable-column [width]="115" [minWidth]="115" prop="StartDatePlan">
+        <ngx-datatable-column [width]="125" [minWidth]="125" prop="StartDatePlan">
             <template ngx-datatable-header-template>
                 <div style="text-align: center; font-weight: bold; ">{{'CreateDate' | translate}}</div>
             </template>

@@ -31,7 +31,7 @@ const MENUITEMS = [
     state: 'evaluation',
     name: 'Evaluation',
     type: 'link',
-    icon: 'accessibility'
+    icon: 'assignment'
   },
   {
     state: 'history',
@@ -43,7 +43,7 @@ const MENUITEMS = [
     state: 'approve',
     name: 'Approve',
     type: 'link',
-    icon: 'visibility'
+    icon: 'assignment_turned_in'
   },
 
   {
